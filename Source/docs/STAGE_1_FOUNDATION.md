@@ -42,12 +42,13 @@ Migration `0002_master_data` now defines the reviewed first master-data slice:
 - `items`; and
 - `item_suppliers`.
 
-The migration has been generated and validated as offline Microsoft SQL Server
-SQL only. It has not been applied and no database has been created. Streaming
-importers now inspect the supplied MYOB item, customer, supplier, sales and
-purchase exports, calculate source and row hashes, preserve multiline fields,
-and quarantine malformed rows or incomplete natural keys for review.
+The migration has been generated, validated, and applied to the isolated
+Microsoft SQL Server database `WindsorWidgetV2_DEV`. Streaming importers inspect
+the supplied MYOB item, customer, supplier, sales, cover-order and purchase
+exports, calculate source and row hashes, preserve multiline fields, and
+quarantine malformed rows or incomplete natural keys for review.
 
 The measured source assessment and exact field mappings are recorded in
-`docs/SOURCE_CONTRACTS.md`. Database creation remains blocked until that
-assessment and the six master entities are explicitly approved.
+`docs/SOURCE_CONTRACTS.md`. The controlled staging command defaults to a dry
+run. With explicit `--commit`, it writes only immutable source evidence and
+review issues; it does not promote staged rows into master-data tables.

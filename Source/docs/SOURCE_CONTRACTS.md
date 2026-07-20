@@ -1,10 +1,12 @@
 # Source-data assessment and proposed business entities
 
-Status: **ready for business review; database creation remains blocked**.
+Status: **business rules approved; development foundation applied**.
 
-No development or production database is created by this work. The migration
-files are an offline proposal only. They may be applied only after the source
-assessment and proposed entities have been reviewed and approved.
+The approved foundation migrations `0001_stage1_foundation` and
+`0002_master_data` have been applied to the isolated
+`WindsorWidgetV2_DEV` database. The controlled MYOB staging workflow is ready
+for dry-run validation and review-first staging. No production database or
+production data is changed by this work.
 
 ## System-of-record boundary
 
@@ -164,7 +166,7 @@ must be entered, derived with review, or supplied by later documents:
 - inventory snapshot as-at timestamp; and
 - arrival confirmation and MYOB stock-import completion evidence.
 
-## Proposed master entities in migration `0002_master_data`
+## Approved master entities in migration `0002_master_data`
 
 - `customer_groups`
 - `customer_accounts`
@@ -173,14 +175,13 @@ must be entered, derived with review, or supplied by later documents:
 - `items`
 - `item_suppliers`
 
-This migration intentionally does **not** create sales, forecast,
+This applied migration intentionally does **not** create sales, forecast,
 manufacturing-order, allocation, shipment, document or inventory-snapshot
-tables. Those transaction entities will follow after the master-data review is
-approved.
+tables. Those transaction entities will follow in later reviewed migrations.
 
-## Review decision requested
+## Current implementation status
 
-Approve, amend, or reject:
+The following decisions are approved and reflected in the current contracts:
 
 1. the system-of-record boundary;
 2. the six proposed master entities;
@@ -189,5 +190,8 @@ Approve, amend, or reject:
 5. the review gates for customer grouping, price files, item suppliers and
    make-to-order inference.
 
-Only after approval should `0001_stage1_foundation` and `0002_master_data` be
-applied to a new isolated development database.
+Both approved migrations are now installed in `WindsorWidgetV2_DEV`. The next
+controlled step is to dry-run the six supplied MYOB exports, inspect the
+quarantined rows, and then stage accepted source evidence. Staging does not
+promote rows into customer, supplier or item master tables; promotion remains
+a separate reviewed action.

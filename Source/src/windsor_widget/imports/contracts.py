@@ -44,6 +44,15 @@ SOURCE_CONTRACTS = {
         description="MYOB item sales and cover-order export",
         optional_natural_key_fields=frozenset({"Item Number"}),
     ),
+    "cover_order_snapshot": SourceContract(
+        source_type="cover_order_snapshot",
+        required_headers=frozenset(
+            {"Co./Last Name", "Invoice No.", "Date", "Item Number", "Quantity", "Record ID"}
+        ),
+        natural_key_fields=("Record ID", "Invoice No.", "Item Number"),
+        description="MYOB open sales-order snapshot used to identify cover-order commitments",
+        optional_natural_key_fields=frozenset({"Item Number"}),
+    ),
     "purchase_transactions": SourceContract(
         source_type="purchase_transactions",
         required_headers=frozenset(

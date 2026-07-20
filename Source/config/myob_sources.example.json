@@ -1,0 +1,33 @@
+{
+  "sources": [
+    {
+      "source_type": "item_master",
+      "path": "C:\\WindsorWidget2\\DEV\\Watched\\ITEMMasterData.TXT"
+    },
+    {
+      "source_type": "customer_master",
+      "path": "C:\\WindsorWidget2\\DEV\\Watched\\CUSTOMERDATA.TXT"
+    },
+    {
+      "source_type": "supplier_master",
+      "path": "C:\\WindsorWidget2\\DEV\\Watched\\SUPPLIERS.TXT"
+    },
+    {
+      "source_type": "sales_transactions",
+      "path": "C:\\WindsorWidget2\\DEV\\Watched\\salesdata.TXT",
+      "source_period_start": "2024-07-01",
+      "source_period_end": "2026-06-30"
+    },
+    {
+      "source_type": "cover_order_snapshot",
+      "path": "C:\\WindsorWidget2\\DEV\\Watched\\SALESORDERSFORCOVERORDER.TXT",
+      "notes": "Open sales-order snapshot; cover commitments are identified from Journal Memo."
+    },
+    {
+      "source_type": "purchase_transactions",
+      "path": "C:\\WindsorWidget2\\DEV\\Watched\\ITEMPUR.TXT",
+      "source_period_start": "2024-07-01",
+      "source_period_end": "2026-06-30"
+    }
+  ]
+}

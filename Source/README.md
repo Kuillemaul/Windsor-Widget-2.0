@@ -25,6 +25,10 @@ The application refuses to start if its development configuration points at a di
    `WindsorWidgetV2_DEV`, applies the migrations and verifies the result.
 8. Run `pytest`.
 
+After the database is ready, use the two-gate MYOB staging workflow in
+`docs/MYOB_STAGING_RUNBOOK.md`: inspect the declared exports without a database
+connection, then add `-Commit` only when the files and counts are correct.
+
 Work and home can use different local server and folder values in their uncommitted
 `development.local.json` files. Both environments use the same migrations and application
 code from Git.
@@ -44,6 +48,12 @@ files, suppliers, items and item-supplier relationships. The complete migration
 chain has been validated offline. The supplied MYOB text exports can be parsed in a
 bounded-memory review-first workflow; malformed rows are quarantined rather
 than silently accepted.
+
+The manifest-driven `stage-myob-exports` command now supports the item,
+customer, supplier, sales-history, open-cover-order and purchase-history feeds.
+It is dry-run by default, requires an explicit commit to write staging rows,
+protects exact duplicate files, produces a hash-and-count report, and never
+promotes staged rows into master or transaction tables.
 
 Manufacturing orders, FIFO allocations, forecasts, shipments and operational
 documents remain later transaction slices. The source contracts, measured

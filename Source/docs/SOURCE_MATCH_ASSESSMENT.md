@@ -1,6 +1,6 @@
 # Source matching assessment
 
-Status: **generated for business review; no database was created**.
+Status: **generated, reviewed and retained as source evidence**.
 
 This assessment runs only against the supplied reference exports. It creates
 deterministic proposals and approval queues under `reports/source_assessment`.
@@ -61,9 +61,10 @@ be inspected rather than padded, shifted, or silently trusted.
 Two consecutive runs over the same source files produced byte-identical
 outputs. The source SHA-256 hashes are stored in `source_match_summary.json`.
 
-## Approval gate
+## Approval outcome
 
-Before any database is created, review and approve or amend:
+The following areas were reviewed before the isolated development migrations
+were applied:
 
 1. the entity and field contracts in `SOURCE_CONTRACTS.md`;
 2. the 29 multi-account customer-group proposals;
@@ -72,4 +73,7 @@ Before any database is created, review and approve or amend:
 4. the rule that 2,667 planning items remain without a supplier until evidence
    or a manual assignment exists.
 
-Applying migrations remains blocked until that review is explicitly recorded.
+The foundation decisions were approved and migrations
+`0001_stage1_foundation` and `0002_master_data` are now installed in
+`WindsorWidgetV2_DEV`. The generated queues remain unapproved row-level
+proposals until an operator explicitly resolves them.

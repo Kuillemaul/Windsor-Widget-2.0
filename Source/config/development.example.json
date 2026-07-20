@@ -12,10 +12,10 @@
     "trust_server_certificate": true
   },
   "folders": {
-    "root": "C:\\WindsorWidget2\\DEV",
-    "watched": "C:\\WindsorWidget2\\DEV\\watched",
-    "archive": "C:\\WindsorWidget2\\DEV\\archive",
-    "failed": "C:\\WindsorWidget2\\DEV\\failed",
-    "exports": "C:\\WindsorWidget2\\DEV\\exports"
+    "root": "C:\\python\\Widget 2.0\\Windsor-Widget-2.0\\DEV",
+    "watched": "C:\\python\\Widget 2.0\\Windsor-Widget-2.0\\watched",
+    "archive": "C:\\python\\Widget 2.0\\Windsor-Widget-2.0\\DEV\\archive",
+    "failed": "C:\\python\\Widget 2.0\\Windsor-Widget-2.0\\DEV\\failed",
+    "exports": "C:\\python\\Widget 2.0\\Windsor-Widget-2.0\\DEV\\exports"
   }
 }
