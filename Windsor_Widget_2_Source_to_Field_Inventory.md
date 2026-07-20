@@ -1,7 +1,7 @@
 # Windsor Widget 2.0 — Source-to-Field Inventory and Architecture Gate
 
 **Assessment date:** 20 July 2026  
-**Status:** Ready for business review; database creation is deliberately not started  
+**Status:** Approved to begin the Stage 1 foundation; database and application code are not yet created  
 **Scope:** Windsor Widget 2.0 only. Windsor Widget v1 source is reference material, not a schema or code base to copy.
 
 ## 1. Outcome
@@ -16,7 +16,7 @@ The key architectural decision is:
 - **Arriving a shipment closes it in the Widget.** Office staff handle discrepancies and the actual MYOB stock change using the existing MYOB stock-import process.
 - **Every import is staged, validated, reviewed and auditable.** Ambiguous item, customer, supplier, order, control-number or shipment matches are never guessed.
 
-No SQL schema or production code should be created until this document is reviewed and the open mapping decisions in section 12 are approved.
+The supplied files and confirmed business rules are now sufficient to define the entities, import boundaries and review queues. The Stage 1 architecture gate is passed. The remaining operational setup items in section 12 do not block creation of the isolated development schema.
 
 ## 2. Module status
 
@@ -24,11 +24,14 @@ The two statuses below avoid confusing a settled workflow with completed softwar
 
 | Module | Definition status | Implementation status | Current position |
 |---|---|---|---|
-| Source assessment and import boundary | **Finished for Stage 1 review** | Not started | All current examples inventoried; quality risks and ownership identified |
+| Source assessment and import boundary | **Finished for Stage 1** | Not started | All current examples inventoried; quality risks, ownership and review rules identified |
 | Customer enquiry | **Started** | Not started | Search/autocomplete, group accounts, sales history, monthly graphs, last price, invoice drill-down, account/prepay and freight-payer toggles, and price-file link agreed |
+| Cover-order classification | **Finished at rule level** | Not started | Normalized Journal Memo ending `- COVER ORDER` is the deterministic rule; raw evidence is retained |
+| Customer grouping and price-file matching | **Finished at rule level** | Not started | MYOB accounts remain separate; Widget groups link state/site accounts and shared price files through reviewed evidence |
 | Item enquiry | **Started** | Not started | Stock, on order, planned, shipped, sales/customer history, forecast, trend, seasonality and Christmas-arrival view agreed |
 | Demand and forecasting | **Started** | Not started | Hybrid history/cover/manual model agreed; exact model and confidence rules await historical testing |
 | Made-to-order handling | **Finished at rule level** | Not started | Non-stocked bespoke items require an actual customer order; supplier MOQ becomes the customer order quantity |
+| Item-to-supplier matching | **Finished at rule level** | Not started | Exact bill/purchase history proposes suppliers, most recent first; non-exact matches require approval |
 | Supplier enquiry | **Started** | Not started | Reverse-customer view agreed; supplier defaults and item-specific lead-time overrides required |
 | Manufacture/factory orders | **Finished at rule level** | Not started | Widget order/control number, multi-item orders, remaining quantity and cancellation history agreed |
 | FIFO allocation | **Finished at rule level** | Not started | Container quantities consume the oldest eligible supplier-order line first; allocations remain traceable |
@@ -39,7 +42,7 @@ The two statuses below avoid confusing a settled workflow with completed softwar
 | MYOB running PO replacement | **Started** | Not started | Exact 42-field import example inspected; preview, delete/re-import, reconciliation and audit controls still to build |
 | Security, users and audit | Not started | Not started | Required in Stage 1 foundation |
 | Environment isolation/configuration | **Started** | Not started | Separate repo/database/folders/executable agreed; runtime configuration and start-up protection not built |
-| Database and migrations | Not started | Not started | Intentionally blocked until this assessment is approved |
+| Database and migrations | **Approved to begin** | Not started | The design gate is passed; implementation remains isolated to the v2 development database |
 | PySide6 navigation shell and UI | Not started | Not started | Build after workflow/entities and source contracts are accepted |
 
 ## 3. Source catalogue
@@ -48,6 +51,7 @@ The two statuses below avoid confusing a settled workflow with completed softwar
 |---|---|---|---|
 | `ITEMMasterData.TXT` | Master-data export | MYOB item identity and accounting attributes | Replace/upsert current item attributes; preserve Widget-managed planning settings |
 | `CUSTOMERDATA.TXT` | Master-data export | MYOB customer account/site identity and contact details | Replace/upsert accounts; map accounts to Widget customer groups |
+| `Cust File Path.xlsx` | Reference index | Customer/site list and customer price-file paths | Stage both sheets; propose account groups and shared price-file links; prefer current `.xlsx` files outside `old` folders; review ambiguous matches |
 | `SUPPLIERS.TXT` | Master-data export | MYOB supplier identity and contact details | Replace/upsert suppliers; retain Widget lead-time settings |
 | `salesdata.TXT` | Transaction export | Historical invoiced sales | Append/idempotently reload transaction lines for enquiry and forecasting |
 | `SALESORDERSFORCOVERORDER.TXT` | Open transaction/snapshot export | Current MYOB sales orders, including cover orders | Snapshot current open orders; classify cover orders from approved memo/comment rules |
@@ -70,6 +74,7 @@ The two statuses below avoid confusing a settled workflow with completed softwar
 | `salesdata.TXT` | 52 | 160,102 | 53,349 invoice numbers and about 4,920 items; history spans 2017-11-16 to 2026-07-17 |
 | `ITEMPUR.TXT` | 42 | 27,158 | 1,851 purchase numbers and about 5,365 items; repeated item lines are common |
 | `CUSTOMERDATA.TXT` | 124 | 2,928 | `Record ID` and customer name are unique in well-formed rows; 28 malformed/continuation rows |
+| `Cust File Path.xlsx` | 10 customer columns plus one path column | Customer sheet uses `A1:J3535`; path sheet uses `A1:A7002` | The path list includes current and legacy files but no stable customer ID; normalized filename matches are candidates, not identity |
 | `SUPPLIERS.TXT` | 125 | 520 | `Record ID` and supplier name are unique in the example |
 | `zinvs1.xlsx` | 6 operational fields | 4,152 lines | Includes normal items and pseudo/non-stock rows; snapshot has no reliable export timestamp inside the data |
 | MYOB PO import example | 42 | 28 | 28 unique items; quantity 237,800; value 17,636; line totals reconcile exactly |
@@ -77,6 +82,10 @@ The two statuses below avoid confusing a settled workflow with completed softwar
 ### Import quality rule
 
 The TXT exports contain physical line anomalies consistent with embedded or unquoted line breaks. Production imports must use a robust MYOB-aware parser, retain the raw bytes, assign a raw row sequence, and send malformed rows to an issue queue. They must not silently drop, truncate or shift fields.
+
+### Confirmed cover-order example
+
+The supplied Comfort Sleep row maps `Invoice No.` `26002580`, Customer PO `BO00098`, item `MTYC70775CB`, quantity `600`, and Card Record ID `150`. Its Journal Memo is `Sale; Comfort Sleep Bedding Company - COVER ORDER`, which establishes the approved classifier. `CRL 250306` appears inside the item description and remains a control/batch reference; it is not cover-order evidence.
 
 ## 5. Proposed business entities
 
@@ -110,6 +119,7 @@ These are conceptual entities, not SQL table definitions.
 ### Planning and operational truth
 
 - `demand_classifications`
+- `planning_classification_evidence`
 - `demand_forecasts`
 - `demand_forecast_components`
 - `demand_overrides`
@@ -150,10 +160,14 @@ These are conceptual entities, not SQL table definitions.
 | Customer/Supplier Record ID | External card identifier | Store as source-system ID; never use as the Widget primary key |
 | Address blocks, contacts, terms, tax and account fields | Customer/supplier master details | Upsert per MYOB account; sensitive payment fields should be excluded from normal UI/import if not required |
 | Invoice No., Date, customer, item, quantity, price, discount, total | Sales document and line | Historical sales fact; retain document header and line sequence |
-| Journal Memo and Comment on sales orders | Cover-order evidence | Classify only with approved rules; preserve raw text and classification reason |
+| Journal Memo and Comment on sales orders | Cover-order evidence | Normalize Journal Memo and classify when it ends with `- COVER ORDER`, case-insensitively; preserve raw text, classifier version and reason; near-matches become review issues |
 | Purchase No., supplier, item, quantity/order/received/billed, price | MYOB purchase snapshot | Reconciliation/projection source; Widget supplier-order lines remain authoritative |
 | On Hand, Committed, On Order, Available | Inventory snapshot line | Store raw values and import timestamp; compute Widget projected availability separately |
 | Customer price workbook prices/sites/notes | Customer group reference | Link the document to a customer group; optional reviewed extraction into price-version rows |
+| Customer list, state/site suffix and price-file basename | Customer group and price-file matching evidence | Keep MYOB accounts separate; propose Widget group membership and one shared current workbook; ambiguous candidates require approval |
+| Purchase/bill item, supplier and date | Item-supplier candidate | Prefer the most recent valid supplier for an exact item; accept automatically only when the match is unique and 100% exact; preserve alternates and evidence |
+| Closely timed purchase and sale for the same item | Planning-classification evidence | Propose `made_to_order` using a configurable time/quantity comparison; an audited manual toggle is authoritative |
+| Item number beginning `/` | Transaction-only detail | Retain on invoices, bills and document drill-down; exclude from Item enquiry, planning and forecasting |
 | Supplier packing `WT O/No` | Manufacture control number | Match against Widget control number; may be numeric or alphanumeric |
 | Supplier packing `Labelled As` / future Windsor part number | Item identity | Require exact Windsor item number in future supplier files; ambiguous historical labels require review |
 | Packing quantities/packages/net/gross/CBM | Final packed and logistics facts | Preserve split package rows and aggregate only through explicit line relationships |
@@ -206,8 +220,10 @@ Every permanent entity receives an immutable Widget ID. Human references such as
 
 1. Exact immutable external ID when available.
 2. Exact approved alternate key within the correct source and entity type.
-3. Candidate match shown to a user with evidence.
+3. Candidate match using normalized company name, state/site suffix, shared price-file basename, transaction proximity or filename pattern, shown to a user with evidence.
 4. If still ambiguous, create an import issue and do not commit the business change.
+
+Every automatic classification stores the rule version and the evidence that produced it. Approved manual mappings persist and override future fuzzy candidates.
 
 ## 9. Approved workflow and quantity states
 
@@ -275,6 +291,17 @@ Recommended treatment:
 - open the original from the Customer screen;
 - optionally add a reviewed price-extraction tool later.
 
+### Customer file-path index
+
+`Cust File Path.xlsx` contains a customer/site sheet and a one-column list of absolute customer price-file paths. It confirms that multiple state accounts can share one group workbook, but it does not contain a stable key joining a path to a MYOB customer.
+
+Recommended treatment:
+
+- create Widget-owned customer groups while preserving each MYOB account/site;
+- use normalized company names, state/site suffixes and shared workbook basenames as matching evidence;
+- prefer the current non-`old` `.xlsx` over legacy `.xls` paths while retaining older paths as evidence;
+- allow only a unique exact match to commit automatically; send collisions, near-matches and special-status accounts for approval.
+
 ### MYOB PO import example
 
 The example uses the same 42-field contract as the purchase export. It contains one supplier, PO `260716`, 28 items, 237,800 total quantity and 17,636 total value. `Order` equals `Quantity`; `Received` and `Billed` are zero. Currency and exchange-rate fields are blank. This is a sound concrete template, but export defaults must be configuration rather than copied constants.
@@ -306,24 +333,24 @@ Initial v2 email scope should therefore be:
 - permit manual import/attachment of saved `.msg` files;
 - add Microsoft 365 integration only later if access is available and worthwhile.
 
-## 12. Remaining business mappings before database approval
+## 12. Confirmed mappings and remaining operational setup
 
-These do not prevent entity design, but they affect import rules or forecast behaviour and must be confirmed before implementation is considered complete.
+| # | Mapping | Status | Approved rule or remaining setup |
+|---|---|---|---|
+| 1 | Cover-order identification | **Confirmed** | Classify an open sales order as cover demand when normalized Journal Memo ends with `- COVER ORDER`, case-insensitively. Preserve the raw memo and classifier evidence. Do not infer cover status from Customer PO, control number or description. |
+| 2 | Customer grouping and price-file matching | **Confirmed design** | Preserve every MYOB account/site. Create Widget groups using customer-export fields, normalized state/site suffixes and a shared price-file basename as evidence. Prefer current non-`old` `.xlsx` paths. Ambiguous matches require approval and approved mappings persist. |
+| 3 | Item-to-supplier mapping | **Confirmed design** | Use exact purchase/bill history to propose suppliers and prefer the most recent valid supplier. Automatically accept only a unique 100% exact match; route every other candidate for approval. Preserve supplier history and alternatives. |
+| 4 | Made-to-order classification | **Confirmed design** | Compare exact-item purchases and sales occurring in close proximity to propose `made_to_order`. Provide an audited manual planning-class toggle for missed or incorrect candidates; the manual value is authoritative. |
+| 5 | Forecast policy | **Confirmed architecture** | Forecast from invoiced sales history, seasonality and approved cover demand without double-counting cover releases. Display evidence and allow audited overrides. Exact windows and thresholds are calibration settings after history is loaded, not schema blockers. |
+| 6 | Lead-time policy | **Confirmed architecture** | Store supplier manufacture defaults, item-supplier overrides, route/transit time and planning buffer separately. Learn actual durations from orders and shipments while retaining approved manual values. |
+| 7 | Item-view exclusions | **Confirmed** | Exclude item numbers beginning `/` from Item enquiry, forecasting and planning. Retain them on invoice, bill and document drill-down screens. |
+| 8 | Running-PO conventions | **Operational setup remains** | Define the supplier-specific PO-number pattern, MYOB delete/re-import checklist and post-import verification report. This does not block the schema. |
+| 9 | Future supplier document contract | **Operational setup remains** | Require Windsor item number, supplier part number, quantity, UOM, price, currency, control reference and document number when the supplier format is updated. This does not block the schema. |
+| 10 | Import cadence | **Operational setup remains** | Define the frequency, watched folder, filename convention, archive/failed handling and responsible owner for each export. This does not block the schema. |
 
-1. **Cover-order rule:** supply representative Journal Memo/Comment values and approve the exact classification tokens and exceptions.
-2. **Customer grouping:** approve the mapping of MYOB state/site accounts to commercial customer groups.
-3. **Item-supplier mapping:** approve an initial primary/alternate supplier list; purchase history can suggest candidates but cannot decide automatically.
-4. **Planning classification:** confirm which item attributes or managed settings distinguish stocked, non-stocked/made-to-order, phase-out, obsolete and excluded items.
-5. **Forecast policy:** choose the historical window, treatment of one-off/project sales, cover-order contribution, safety buffer, seasonality threshold, Christmas required-arrival date and manual override workflow.
-6. **Lead-time policy:** approve supplier default manufacture time, item-specific override, route/transit time and buffer ownership.
-7. **Inventory exclusions:** approve pseudo/non-stock rows that may appear in `zinvs1.xlsx`.
-8. **Running-PO conventions:** approve MYOB PO number format, comment/journal memo content, tax code, location, delivery status and replacement verification step per supplier.
-9. **Future supplier document contract:** obtain example packing/invoice files containing exact Windsor part numbers and define mandatory columns.
-10. **Import cadence:** set how often each MYOB export is produced and how the Widget shows data age/staleness.
+## 13. Stage 1 start recommendation
 
-## 13. Approval recommendation
-
-Approve the architecture now, subject to the mappings above. The next implementation step should be the Stage 1 foundation—not a screen copied from v1:
+The source architecture and business-rule gate are approved. The next implementation step should be the isolated Stage 1 foundation—not a screen copied from v1:
 
 1. Create the isolated development configuration and environment guard.
 2. Create the new SQL Server database through versioned migrations.
