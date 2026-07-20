@@ -10,6 +10,7 @@ build/
 dist/
 .env
 config/development.json
+config/development.local.json
 config/testing.json
 config/production.json
 *.log

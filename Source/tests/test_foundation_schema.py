@@ -46,3 +46,13 @@ def test_match_candidates_require_explicit_resolution_fields() -> None:
     assert table.c.candidate_entity_id.nullable is False
     assert table.c.decided_by_user_id.nullable is True
     assert table.c.decided_at.nullable is True
+
+
+def test_import_issue_foreign_keys_have_one_sql_server_cascade_path() -> None:
+    """A batch may delete issues directly, never through a second row cascade path."""
+
+    table = Base.metadata.tables["import_issues"]
+    foreign_keys = {foreign_key.parent.name: foreign_key for foreign_key in table.foreign_keys}
+
+    assert foreign_keys["import_batch_id"].ondelete == "CASCADE"
+    assert foreign_keys["import_row_id"].ondelete is None

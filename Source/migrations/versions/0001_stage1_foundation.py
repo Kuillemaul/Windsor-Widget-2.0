@@ -166,7 +166,6 @@ def upgrade() -> None:
             ["import_row_id"],
             ["import_rows.import_row_id"],
             name=op.f("fk_import_issues_import_row_id_import_rows"),
-            ondelete="CASCADE",
         ),
         sa.ForeignKeyConstraint(
             ["resolved_by_user_id"],

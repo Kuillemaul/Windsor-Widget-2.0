@@ -87,7 +87,7 @@ class ImportRow(Base):
 
     batch: Mapped[ImportBatch] = relationship(back_populates="rows")
     issues: Mapped[list[ImportIssue]] = relationship(
-        back_populates="row", cascade="all, delete-orphan", passive_deletes=True
+        back_populates="row", cascade="all, delete-orphan"
     )
     match_candidates: Mapped[list[MatchCandidate]] = relationship(
         back_populates="row", cascade="all, delete-orphan", passive_deletes=True
@@ -110,7 +110,7 @@ class ImportIssue(Base):
         ForeignKey("import_batches.import_batch_id", ondelete="CASCADE"), nullable=False
     )
     import_row_id: Mapped[int | None] = mapped_column(
-        ForeignKey("import_rows.import_row_id", ondelete="CASCADE")
+        ForeignKey("import_rows.import_row_id")
     )
     severity: Mapped[str] = mapped_column(String(20), nullable=False)
     issue_code: Mapped[str] = mapped_column(String(100), nullable=False)
