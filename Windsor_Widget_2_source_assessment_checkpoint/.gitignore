@@ -1,0 +1,28 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+.env
+config/development.json
+config/testing.json
+config/production.json
+*.log
+
+# Local operational data must never be committed.
+/data/
+/imports/
+/exports/
+/archive/
+/failed/
+
+# IDE and operating-system files.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

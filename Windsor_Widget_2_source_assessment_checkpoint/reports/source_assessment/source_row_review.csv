@@ -1,0 +1,64 @@
+﻿source_type,source_file,row_number,natural_key,issue_code,field_name,message
+item_master,10-ITEMMasterData.TXT,403,ISB15105S,column_count_mismatch,,Row has 69 columns but the header has 68; the row requires review before commit.
+item_master,10-ITEMMasterData.TXT,2036,ISB10101S,column_count_mismatch,,Row has 69 columns but the header has 68; the row requires review before commit.
+item_master,10-ITEMMasterData.TXT,5395,YJ5P30442,column_count_mismatch,,Row has 70 columns but the header has 68; the row requires review before commit.
+item_master,10-ITEMMasterData.TXT,5504,YJ5206025,column_count_mismatch,,Row has 71 columns but the header has 68; the row requires review before commit.
+item_master,10-ITEMMasterData.TXT,5505,YJ5P79037,column_count_mismatch,,Row has 69 columns but the header has 68; the row requires review before commit.
+item_master,10-ITEMMasterData.TXT,5737,YJ413192719,column_count_mismatch,,Row has 69 columns but the header has 68; the row requires review before commit.
+item_master,10-ITEMMasterData.TXT,6158,YJ5258015700,column_count_mismatch,,Row has 69 columns but the header has 68; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,13,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,28,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,40,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,45,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,60,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,76,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,102,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,105,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,116,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,120,,column_count_mismatch,,Row has 126 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,120,,natural_key_missing,,No usable natural key could be built for this row.
+customer_master,14-CUSTOMERDATA.TXT,131,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,145,,column_count_mismatch,,Row has 126 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,145,,natural_key_missing,,No usable natural key could be built for this row.
+customer_master,14-CUSTOMERDATA.TXT,146,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,152,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,156,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,158,,column_count_mismatch,,Row has 126 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,158,,natural_key_missing,,No usable natural key could be built for this row.
+customer_master,14-CUSTOMERDATA.TXT,168,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,228,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,360,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,369,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,376,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,380,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,416,,column_count_mismatch,,Row has 126 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,416,,natural_key_missing,,No usable natural key could be built for this row.
+customer_master,14-CUSTOMERDATA.TXT,426,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,526,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,594,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,595,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+customer_master,14-CUSTOMERDATA.TXT,3531,P,column_count_mismatch,,Row has 125 columns but the header has 124; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,970,|00299585|YJ5P30442,column_count_mismatch,,Row has 43 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,970,|00299585|YJ5P30442,natural_key_incomplete,Record ID,The natural key is incomplete; missing required key fields: Record ID.
+purchase_transactions,13-ITEMPUR.TXT,972,Location1|00299585|YJ5206025,column_count_mismatch,,Row has 44 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,1323,Location1|299977#|YJ5P30442,column_count_mismatch,,Row has 44 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,3232,|1730844#|YJ5258015700,column_count_mismatch,,Row has 43 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,3232,|1730844#|YJ5258015700,natural_key_incomplete,Record ID,The natural key is incomplete; missing required key fields: Record ID.
+purchase_transactions,13-ITEMPUR.TXT,6380,Location1|1907559 #|YJ5P30442,column_count_mismatch,,Row has 44 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,9094,|2106960 61|YJ5P79037,column_count_mismatch,,Row has 43 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,9094,|2106960 61|YJ5P79037,natural_key_incomplete,Record ID,The natural key is incomplete; missing required key fields: Record ID.
+purchase_transactions,13-ITEMPUR.TXT,11488,|2334266  67|YJ5P30442,column_count_mismatch,,Row has 43 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,11488,|2334266  67|YJ5P30442,natural_key_incomplete,Record ID,The natural key is incomplete; missing required key fields: Record ID.
+purchase_transactions,13-ITEMPUR.TXT,12020,|311316 322|YJ5P79037,column_count_mismatch,,Row has 43 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,12020,|311316 322|YJ5P79037,natural_key_incomplete,Record ID,The natural key is incomplete; missing required key fields: Record ID.
+purchase_transactions,13-ITEMPUR.TXT,12024,|311316 322|YJ5P30442,column_count_mismatch,,Row has 40 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,12024,|311316 322|YJ5P30442,natural_key_incomplete,Record ID,The natural key is incomplete; missing required key fields: Record ID.
+purchase_transactions,13-ITEMPUR.TXT,13328,|00313028|YJ5P79037,column_count_mismatch,,Row has 43 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,13328,|00313028|YJ5P79037,natural_key_incomplete,Record ID,The natural key is incomplete; missing required key fields: Record ID.
+purchase_transactions,13-ITEMPUR.TXT,14032,|02624274|YJ5P30442,column_count_mismatch,,Row has 40 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,14032,|02624274|YJ5P30442,natural_key_incomplete,Record ID,The natural key is incomplete; missing required key fields: Record ID.
+purchase_transactions,13-ITEMPUR.TXT,17772,|02969834|YJ5206025,column_count_mismatch,,Row has 43 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,17772,|02969834|YJ5206025,natural_key_incomplete,Record ID,The natural key is incomplete; missing required key fields: Record ID.
+purchase_transactions,13-ITEMPUR.TXT,20515,Location1|3133520 #|YJ5P30442,column_count_mismatch,,Row has 44 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,24870,|03442380|YJ5P30442,column_count_mismatch,,Row has 43 columns but the header has 42; the row requires review before commit.
+purchase_transactions,13-ITEMPUR.TXT,24870,|03442380|YJ5P30442,natural_key_incomplete,Record ID,The natural key is incomplete; missing required key fields: Record ID.

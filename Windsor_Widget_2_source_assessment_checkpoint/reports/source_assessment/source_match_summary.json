@@ -1,0 +1,89 @@
+{
+  "assessment_mode": "review_only",
+  "customer_groups": {
+    "accounts_in_multi_account_groups": 82,
+    "multi_account_groups": 29,
+    "proposals": 3484,
+    "requires_review": 0
+  },
+  "customer_price_files": {
+    "ambiguous": 299,
+    "exact_unique": 1935,
+    "non_exact_unique": 926,
+    "proposals": 3833,
+    "requires_review": 1898,
+    "unmatched": 673
+  },
+  "database_created": false,
+  "item_suppliers": {
+    "exact_unique": 5340,
+    "planning_items_without_source_supplier": 2667,
+    "proposals": 5340,
+    "requires_review": 0,
+    "unmatched_or_ambiguous": 0
+  },
+  "master_candidates": {
+    "customers": 3537,
+    "hidden_control_items": 56,
+    "items": 8063,
+    "mapping_review_rows": 0,
+    "planning_items": 8007,
+    "suppliers": 520
+  },
+  "review_files": {
+    "customer_price_files": "customer_price_file_review.csv",
+    "item_suppliers": "item_supplier_review.csv",
+    "multi_account_groups": "customer_group_multi_account.csv",
+    "source_rows": "source_row_review.csv"
+  },
+  "sources": {
+    "customer_master": {
+      "encoding": "utf-8-sig",
+      "file_issue_count": 0,
+      "file_sha256": "31cf57fa2f71813c77b7cdba578690859dcf2fc3e73ba10b6825976f6ddc5fe5",
+      "header_row_number": 2,
+      "rows_requiring_review": 28,
+      "rows_seen": 3565,
+      "rows_usable": 3537,
+      "source_file": "14-CUSTOMERDATA.TXT",
+      "source_type": "customer_master"
+    },
+    "customer_price_paths": {
+      "current_excel_paths": 3833,
+      "source_file": "Cust File Path.xlsx"
+    },
+    "item_master": {
+      "encoding": "utf-8-sig",
+      "file_issue_count": 0,
+      "file_sha256": "fd99d3dc28d2dc74c523a13036dba7440dd0eb1fe88ddaa8f69595bb66d61fd7",
+      "header_row_number": 2,
+      "rows_requiring_review": 7,
+      "rows_seen": 8070,
+      "rows_usable": 8063,
+      "source_file": "10-ITEMMasterData.TXT",
+      "source_type": "item_master"
+    },
+    "purchase_transactions": {
+      "encoding": "utf-8-sig",
+      "file_issue_count": 0,
+      "file_sha256": "d42ceac946a9bcabba5ae092a1361520f4ee2c7ad1c7845720c91c6f4f176d83",
+      "header_row_number": 2,
+      "rows_requiring_review": 14,
+      "rows_seen": 27172,
+      "rows_usable": 27158,
+      "source_file": "13-ITEMPUR.TXT",
+      "source_type": "purchase_transactions"
+    },
+    "supplier_master": {
+      "encoding": "utf-8-sig",
+      "file_issue_count": 0,
+      "file_sha256": "554d76012500416e2af3ae4216b9d8ecf293e1024af07e969ba18faf98eb8ef2",
+      "header_row_number": 2,
+      "rows_requiring_review": 0,
+      "rows_seen": 520,
+      "rows_usable": 520,
+      "source_file": "15-SUPPLIERS.TXT",
+      "source_type": "supplier_master"
+    }
+  }
+}

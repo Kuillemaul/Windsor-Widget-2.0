@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "windsor-widget-2"
+version = "0.1.0"
+description = "Isolated Windsor Widget 2.0 operational planning application"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "alembic>=1.13,<2",
+    "openpyxl>=3.1,<4",
+    "pyodbc>=5.1,<6",
+    "PySide6>=6.7,<7",
+    "SQLAlchemy>=2.0,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2,<9",
+    "ruff>=0.6,<1",
+]
+
+[project.scripts]
+windsor-widget = "windsor_widget.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/windsor_widget"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

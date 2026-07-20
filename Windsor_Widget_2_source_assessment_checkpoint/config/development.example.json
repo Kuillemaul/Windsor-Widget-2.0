@@ -1,0 +1,21 @@
+{
+  "environment": "development",
+  "application_name": "Windsor Widget 2.0 DEV",
+  "database": {
+    "server": "localhost\\SQLEXPRESS",
+    "database": "WindsorWidgetV2_DEV",
+    "driver": "ODBC Driver 18 for SQL Server",
+    "authentication": "windows",
+    "username_env": "WINDSOR_WIDGET_V2_DB_USERNAME",
+    "password_env": "WINDSOR_WIDGET_V2_DB_PASSWORD",
+    "encrypt": true,
+    "trust_server_certificate": true
+  },
+  "folders": {
+    "root": "C:\\WindsorWidget2\\DEV",
+    "watched": "C:\\WindsorWidget2\\DEV\\watched",
+    "archive": "C:\\WindsorWidget2\\DEV\\archive",
+    "failed": "C:\\WindsorWidget2\\DEV\\failed",
+    "exports": "C:\\WindsorWidget2\\DEV\\exports"
+  }
+}
