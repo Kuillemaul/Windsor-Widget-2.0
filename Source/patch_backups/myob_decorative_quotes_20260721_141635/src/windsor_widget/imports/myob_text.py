@@ -89,64 +89,6 @@ class _RepairState:
 _MAX_REPAIR_STATES = 50_000
 _MAX_MULTILINE_PHYSICAL_LINES = 20
 
-_DECORATIVE_QUOTE_SENTINEL = "\x1e"
-_EMBEDDED_NEWLINE_SENTINEL = "\x1d"
-_DECORATIVE_QUOTE_PATTERN = re.compile(r'(?<!")"([^",\r\n]+)"(?=[ \t]+\S)')
-
-
-def _repair_decorative_quotes(
-    raw_text: str,
-    *,
-    headers: tuple[str, ...],
-    contract: SourceContract,
-) -> tuple[list[str], tuple[str, ...]] | None:
-    """Treat MYOB's decorative quoted words as literal text, not CSV syntax.
-
-    Examples include ``"KELMATT" POLYESTER...`` and ``"Yarra" East Street``.
-    A repair is accepted only when at least one such pair is found, the resulting
-    record has the exact declared column count and all stable anchors validate.
-    Valid CSV-quoted values such as ``"$1,560.00"`` are left untouched.
-    """
-
-    body = raw_text.rstrip("\r\n")
-    terminal = raw_text[len(body):]
-    replaced_count = 0
-
-    def replace_pair(match: re.Match[str]) -> str:
-        nonlocal replaced_count
-        replaced_count += 1
-        return (
-            _DECORATIVE_QUOTE_SENTINEL
-            + match.group(1)
-            + _DECORATIVE_QUOTE_SENTINEL
-        )
-
-    neutralized = _DECORATIVE_QUOTE_PATTERN.sub(replace_pair, body)
-    if replaced_count == 0:
-        return None
-
-    # Once decorative quotes are neutralised, any line break in this already
-    # assembled logical record belongs to a text field rather than ending a row.
-    neutralized = neutralized.replace("\r\n", _EMBEDDED_NEWLINE_SENTINEL)
-    neutralized = neutralized.replace("\r", _EMBEDDED_NEWLINE_SENTINEL)
-    neutralized = neutralized.replace("\n", _EMBEDDED_NEWLINE_SENTINEL)
-
-    parsed, error = _parse_single_csv_record(neutralized + terminal, strict=True)
-    if error is not None or parsed is None or len(parsed) != len(headers):
-        return None
-
-    restored = [
-        value.replace(_DECORATIVE_QUOTE_SENTINEL, '"').replace(
-            _EMBEDDED_NEWLINE_SENTINEL, "\n"
-        )
-        for value in parsed
-    ]
-    fields = tuple(restored)
-    if not _candidate_is_plausible(fields, headers, contract):
-        return None
-
-    return restored, ("treated decorative quote pairs as literal text",)
-
 
 def _file_identity(path: Path) -> tuple[str, str]:
     """Hash the file and choose a lossless encoding using bounded memory."""
@@ -745,31 +687,19 @@ def _iter_data_records(
             yield row_number, line, strict_values, (), None
             continue
 
-        decorative_repair = _repair_decorative_quotes(
-            line, headers=headers, contract=contract
-        )
-        if decorative_repair is not None:
-            repaired_values, repairs = decorative_repair
-            yield row_number, line, repaired_values, repairs, None
-            continue
-
         repaired = _repair_malformed_record(line, headers=headers, contract=contract)
         if repaired is not None:
             repaired_values, repairs = repaired
             yield row_number, line, repaired_values, repairs, None
             continue
 
-        possible_decorative_multiline = bool(
-            _DECORATIVE_QUOTE_PATTERN.search(line.rstrip("\r\n"))
-        )
-        if strict_error != "unexpected end of data" and not possible_decorative_multiline:
+        if strict_error != "unexpected end of data":
             fallback = strict_values if strict_values is not None else _fallback_values(line)
             issue = "column_count_mismatch" if strict_error is None else "malformed_csv_record"
             yield row_number, line, fallback, (), issue
             continue
 
-        # A valid quoted field, or a field containing MYOB decorative quotes, may
-        # span physical lines. Accumulate only while the following physical line
+        # A valid quoted field may span physical lines.  Accumulate only while the
         # following physical line cannot stand alone as a complete source record.
         pending = [line]
         completed = False
@@ -782,9 +712,6 @@ def _iter_data_records(
             standalone, standalone_error = _parse_single_csv_record(
                 following_line, strict=True
             )
-            standalone_decorative_repair = _repair_decorative_quotes(
-                following_line, headers=headers, contract=contract
-            )
             standalone_repair = _repair_malformed_record(
                 following_line, headers=headers, contract=contract
             )
@@ -792,7 +719,7 @@ def _iter_data_records(
                 standalone_error is None
                 and standalone is not None
                 and len(standalone) == len(headers)
-            ) or standalone_decorative_repair is not None or standalone_repair is not None:
+            ) or standalone_repair is not None:
                 pushed_back.appendleft((following_number, following_line))
                 break
 
@@ -809,16 +736,6 @@ def _iter_data_records(
                 yield row_number, combined, combined_values, (), None
                 completed = True
                 break
-
-            combined_decorative_repair = _repair_decorative_quotes(
-                combined, headers=headers, contract=contract
-            )
-            if combined_decorative_repair is not None:
-                repaired_values, repairs = combined_decorative_repair
-                yield row_number, combined, repaired_values, repairs, None
-                completed = True
-                break
-
             if combined_error != "unexpected end of data":
                 break
 

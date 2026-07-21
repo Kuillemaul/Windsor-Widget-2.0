@@ -76,7 +76,6 @@ def _raw_json(row: ParsedRow) -> str:
         {
             "raw_values": row.raw_values,
             "values": row.values,
-            "repairs": row.repairs,
         },
         ensure_ascii=False,
         separators=(",", ":"),
@@ -87,10 +86,9 @@ def _row_model(row: ParsedRow, *, import_batch_id: uuid.UUID) -> ImportRow:
     staged_row = ImportRow(
         import_batch_id=import_batch_id,
         row_number=row.row_number,
-        # Preserve the decoded source record with line endings normalised to LF;
-        # exact source-file identity remains protected by the batch SHA-256. Repaired
-        # values and repair notes remain separately inspectable in raw_json.
-        raw_text=row.raw_text or "\x1f".join(row.raw_values),
+        # Unit Separator is also used by the parser's stable semantic row hash.
+        # raw_json retains the unambiguous positional and named source values.
+        raw_text="\x1f".join(row.raw_values),
         raw_json=_raw_json(row),
         natural_key=row.natural_key,
         row_sha256=row.row_sha256,

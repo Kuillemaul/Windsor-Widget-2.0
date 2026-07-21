@@ -87,9 +87,8 @@ def _row_model(row: ParsedRow, *, import_batch_id: uuid.UUID) -> ImportRow:
     staged_row = ImportRow(
         import_batch_id=import_batch_id,
         row_number=row.row_number,
-        # Preserve the decoded source record with line endings normalised to LF;
-        # exact source-file identity remains protected by the batch SHA-256. Repaired
-        # values and repair notes remain separately inspectable in raw_json.
+        # Preserve the exact source record; repaired values and repair notes remain
+        # separately inspectable in raw_json.
         raw_text=row.raw_text or "\x1f".join(row.raw_values),
         raw_json=_raw_json(row),
         natural_key=row.natural_key,
