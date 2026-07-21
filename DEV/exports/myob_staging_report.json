@@ -1,11 +1,11 @@
 {
-  "mode": "dry_run",
-  "started_at_utc": "2026-07-20T23:17:19.313206+00:00",
-  "completed_at_utc": "2026-07-20T23:17:22.642719+00:00",
+  "mode": "staging",
+  "started_at_utc": "2026-07-21T02:13:45.667889+00:00",
+  "completed_at_utc": "2026-07-21T02:15:37.617380+00:00",
   "totals": {
     "file_count": 6,
-    "ready_count": 1,
-    "staged_count": 0,
+    "ready_count": 0,
+    "staged_count": 6,
     "duplicate_count": 0,
     "review_file_count": 5,
     "row_count": 227112,
@@ -21,7 +21,7 @@
       "parsed_row_count": 8063,
       "review_row_count": 7,
       "issue_count": 7,
-      "import_batch_id": null,
+      "import_batch_id": "5a14e09a-ef97-49ed-a123-6263feae10be",
       "existing_batch_id": null
     },
     {
@@ -33,19 +33,19 @@
       "parsed_row_count": 3537,
       "review_row_count": 28,
       "issue_count": 32,
-      "import_batch_id": null,
+      "import_batch_id": "b45a4763-1e04-4ff7-9133-4e0645c9ace8",
       "existing_batch_id": null
     },
     {
       "source_type": "supplier_master",
       "source_path": "C:\\python\\Widget 2.0\\Windsor-Widget-2.0\\DEV\\watched\\SUPPLIERS.TXT",
-      "status": "ready",
+      "status": "staged",
       "file_sha256": "554d76012500416e2af3ae4216b9d8ecf293e1024af07e969ba18faf98eb8ef2",
       "row_count": 520,
       "parsed_row_count": 520,
       "review_row_count": 0,
       "issue_count": 0,
-      "import_batch_id": null,
+      "import_batch_id": "003ae592-37f1-4cff-99e7-7969e9283d25",
       "existing_batch_id": null
     },
     {
@@ -57,7 +57,7 @@
       "parsed_row_count": 160102,
       "review_row_count": 109,
       "issue_count": 207,
-      "import_batch_id": null,
+      "import_batch_id": "920776bb-4cfc-4478-ae4c-36c5178a12f1",
       "existing_batch_id": null
     },
     {
@@ -69,7 +69,7 @@
       "parsed_row_count": 27568,
       "review_row_count": 6,
       "issue_count": 12,
-      "import_batch_id": null,
+      "import_batch_id": "f2920f75-9d37-4702-8739-c3a10f454f75",
       "existing_batch_id": null
     },
     {
@@ -81,7 +81,7 @@
       "parsed_row_count": 27158,
       "review_row_count": 14,
       "issue_count": 24,
-      "import_batch_id": null,
+      "import_batch_id": "0ba80229-7821-443b-b700-46d47502df2d",
       "existing_batch_id": null
     }
   ]
