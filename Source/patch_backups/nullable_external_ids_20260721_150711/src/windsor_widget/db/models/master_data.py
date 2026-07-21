@@ -17,7 +17,6 @@ from sqlalchemy import (
     Numeric,
     String,
     Unicode,
-    text,
     UnicodeText,
     UniqueConstraint,
     Uuid,
@@ -73,18 +72,6 @@ class CustomerAccount(Base):
         ),
         Index("ix_customer_accounts_name", "normalized_name", "is_active"),
         Index("ix_customer_accounts_group", "customer_group_id", "is_active"),
-        Index(
-            "ux_customer_accounts_myob_record_id_not_null",
-            "myob_record_id",
-            unique=True,
-            mssql_where=text("[myob_record_id] IS NOT NULL"),
-        ),
-        Index(
-            "ux_customer_accounts_myob_card_id_not_null",
-            "myob_card_id",
-            unique=True,
-            mssql_where=text("[myob_card_id] IS NOT NULL"),
-        ),
     )
 
     customer_account_id: Mapped[uuid.UUID] = mapped_column(
@@ -93,8 +80,8 @@ class CustomerAccount(Base):
     customer_group_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("customer_groups.customer_group_id", ondelete="SET NULL")
     )
-    myob_record_id: Mapped[str | None] = mapped_column(String(100))
-    myob_card_id: Mapped[str | None] = mapped_column(String(100))
+    myob_record_id: Mapped[str | None] = mapped_column(String(100), unique=True)
+    myob_card_id: Mapped[str | None] = mapped_column(String(100), unique=True)
     display_name: Mapped[str] = mapped_column(Unicode(250), nullable=False)
     normalized_name: Mapped[str] = mapped_column(Unicode(250), nullable=False)
     card_status: Mapped[str | None] = mapped_column(Unicode(50))
@@ -181,23 +168,11 @@ class Supplier(Base):
             name="buffer_days_nonnegative",
         ),
         Index("ix_suppliers_name", "normalized_name", "is_active"),
-        Index(
-            "ux_suppliers_myob_record_id_not_null",
-            "myob_record_id",
-            unique=True,
-            mssql_where=text("[myob_record_id] IS NOT NULL"),
-        ),
-        Index(
-            "ux_suppliers_myob_card_id_not_null",
-            "myob_card_id",
-            unique=True,
-            mssql_where=text("[myob_card_id] IS NOT NULL"),
-        ),
     )
 
     supplier_id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=new_uuid)
-    myob_record_id: Mapped[str | None] = mapped_column(String(100))
-    myob_card_id: Mapped[str | None] = mapped_column(String(100))
+    myob_record_id: Mapped[str | None] = mapped_column(String(100), unique=True)
+    myob_card_id: Mapped[str | None] = mapped_column(String(100), unique=True)
     display_name: Mapped[str] = mapped_column(Unicode(250), nullable=False)
     normalized_name: Mapped[str] = mapped_column(Unicode(250), nullable=False)
     card_status: Mapped[str | None] = mapped_column(Unicode(50))

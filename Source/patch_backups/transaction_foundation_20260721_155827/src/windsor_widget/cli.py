@@ -24,12 +24,6 @@ from windsor_widget.imports.promotion import (
     promote_master_batches,
     review_master_batches,
 )
-from windsor_widget.imports.transaction_promotion import (
-    TransactionImportError,
-    approve_transaction_batches,
-    promote_transaction_batches,
-    review_transaction_batches,
-)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -103,33 +97,6 @@ def build_parser() -> argparse.ArgumentParser:
     )
     promote.add_argument("--username")
     promote.add_argument("--display-name")
-
-    transaction_review = subcommands.add_parser(
-        "review-transaction-imports",
-        help="list uncommitted MYOB sales, cover-order and purchase batches",
-    )
-    transaction_review.add_argument("config", type=Path)
-
-    transaction_approve = subcommands.add_parser(
-        "approve-transaction-imports",
-        help="explicitly approve exactly one clean batch for each transaction source",
-    )
-    transaction_approve.add_argument("config", type=Path)
-    transaction_approve.add_argument("--username", required=True)
-    transaction_approve.add_argument("--display-name", required=True)
-
-    transaction_promote = subcommands.add_parser(
-        "promote-transaction-imports",
-        help="preview or commit exact-key transaction promotion",
-    )
-    transaction_promote.add_argument("config", type=Path)
-    transaction_promote.add_argument(
-        "--commit",
-        action="store_true",
-        help="write transaction records and audit lineage; otherwise preview only",
-    )
-    transaction_promote.add_argument("--username")
-    transaction_promote.add_argument("--display-name")
     return parser
 
 
@@ -143,29 +110,6 @@ def _print_promotion(summary) -> None:
     print(
         f"Totals: total={summary.total}; created={summary.created}; "
         f"updated={summary.updated}; unchanged={summary.unchanged}"
-    )
-
-
-def _print_transaction_promotion(summary) -> None:
-    print(f"Transaction promotion mode: {summary.mode}")
-    for change in summary.changes:
-        snapshot_text = (
-            f"; snapshots_created={change.snapshots_created}"
-            if change.snapshots_created
-            else ""
-        )
-        print(
-            f"{change.source_type}: documents={change.document_total} "
-            f"(created={change.documents_created}, updated={change.documents_updated}, "
-            f"unchanged={change.documents_unchanged}); lines={change.line_total} "
-            f"(created={change.lines_created}, updated={change.lines_updated}, "
-            f"unchanged={change.lines_unchanged}, retired={change.lines_retired})"
-            f"{snapshot_text}"
-        )
-    print(
-        f"Totals: documents={summary.document_total}; lines={summary.line_total}; "
-        f"created={summary.lines_created}; updated={summary.lines_updated}; "
-        f"unchanged={summary.lines_unchanged}"
     )
 
 
@@ -304,88 +248,6 @@ def main() -> int:
                 except MasterImportError as exc:
                     session.rollback()
                     print(f"Master import stopped safely: {exc}")
-                    return 1
-        finally:
-            engine.dispose()
-
-    if args.command in {
-        "review-transaction-imports",
-        "approve-transaction-imports",
-        "promote-transaction-imports",
-    }:
-        settings = load_settings(args.config)
-        engine = create_database_engine(settings)
-        session_factory = create_session_factory(engine)
-        try:
-            with session_factory() as session:
-                try:
-                    if args.command == "review-transaction-imports":
-                        reviews = review_transaction_batches(session)
-                        if not reviews:
-                            print("No staged or approved transaction import batches were found.")
-                            return 0
-                        for review in reviews:
-                            print(
-                                f"{review.source_type}: batch={review.import_batch_id}; "
-                                f"status={review.status}; declared_rows={review.row_count}; "
-                                f"stored_rows={review.stored_row_count}; issues={review.issue_count}; "
-                                f"file={review.source_file_name}"
-                            )
-                        return 0
-
-                    if args.command == "approve-transaction-imports":
-                        actor = ensure_app_user(
-                            session,
-                            username=args.username,
-                            display_name=args.display_name,
-                        )
-                        summary = approve_transaction_batches(session, actor=actor)
-                        session.commit()
-                        print(
-                            f"Approved batches: {len(summary.approved_batch_ids)}; "
-                            f"already approved: {len(summary.already_approved_batch_ids)}; "
-                            f"accepted rows: {summary.accepted_row_count}"
-                        )
-                        for batch_id in summary.approved_batch_ids:
-                            print(f"approved: {batch_id}")
-                        for batch_id in summary.already_approved_batch_ids:
-                            print(f"already approved: {batch_id}")
-                        print("No transaction data was promoted during approval.")
-                        return 0
-
-                    if args.commit and (not args.username or not args.display_name):
-                        parser.error(
-                            "promote-transaction-imports --commit requires "
-                            "--username and --display-name"
-                        )
-                    actor = None
-                    if args.commit:
-                        actor = ensure_app_user(
-                            session,
-                            username=args.username,
-                            display_name=args.display_name,
-                        )
-                    summary = promote_transaction_batches(
-                        session,
-                        commit=args.commit,
-                        actor=actor,
-                    )
-                    if args.commit:
-                        session.commit()
-                    _print_transaction_promotion(summary)
-                    if args.commit:
-                        print(
-                            "Approved transaction batches were committed with "
-                            "batch audit events and row lineage."
-                        )
-                    else:
-                        print(
-                            "Preview only; no transaction data or batch status was changed."
-                        )
-                    return 0
-                except TransactionImportError as exc:
-                    session.rollback()
-                    print(f"Transaction import stopped safely: {exc}")
                     return 1
         finally:
             engine.dispose()

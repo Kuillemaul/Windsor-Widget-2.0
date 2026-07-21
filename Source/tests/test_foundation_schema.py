@@ -25,6 +25,14 @@ EXPECTED_TABLES = {
     "items",
     "item_suppliers",
     "suppliers",
+    "sales_documents",
+    "sales_lines",
+    "purchase_documents",
+    "purchase_lines",
+    "cover_order_snapshots",
+    "cover_order_documents",
+    "cover_order_lines",
+    "transaction_line_observations",
 }
 
 

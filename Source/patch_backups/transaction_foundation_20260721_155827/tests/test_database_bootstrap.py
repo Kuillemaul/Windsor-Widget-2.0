@@ -141,7 +141,7 @@ def test_verification_checks_name_revision_and_every_expected_table() -> None:
     connection = FakeConnection(
         [
             FakeResult(scalar=APPROVED_DEVELOPMENT_DATABASE),
-            FakeResult(scalar="0004_transaction_foundation"),
+            FakeResult(scalar="0003_nullable_external_ids"),
             FakeResult(rows=[(name,) for name in tables]),
         ]
     )
@@ -152,6 +152,6 @@ def test_verification_checks_name_revision_and_every_expected_table() -> None:
     )
 
     assert report.database == APPROVED_DEVELOPMENT_DATABASE
-    assert report.alembic_revision == "0004_transaction_foundation"
+    assert report.alembic_revision == "0003_nullable_external_ids"
     assert set(report.tables) == set(tables)
     assert engine.disposed is True

@@ -13,7 +13,6 @@ def create_database_engine(settings: RuntimeSettings, *, echo: bool = False) -> 
         echo=echo,
         pool_pre_ping=True,
         future=True,
-        fast_executemany=True,
     )
 
 

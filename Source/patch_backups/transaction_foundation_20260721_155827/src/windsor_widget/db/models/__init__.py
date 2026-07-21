@@ -1,4 +1,4 @@
-"""Windsor Widget v2 database models."""
+"""Stage 1 database models."""
 
 from windsor_widget.db.models.audit import AppUser, AuditEvent
 from windsor_widget.db.models.imports import (
@@ -15,16 +15,6 @@ from windsor_widget.db.models.master_data import (
     ItemSupplier,
     Supplier,
 )
-from windsor_widget.db.models.transactions import (
-    CoverOrderDocument,
-    CoverOrderLine,
-    CoverOrderSnapshot,
-    PurchaseDocument,
-    PurchaseLine,
-    SalesDocument,
-    SalesLine,
-    TransactionLineObservation,
-)
 
 __all__ = [
     "AppUser",
@@ -39,12 +29,4 @@ __all__ = [
     "Item",
     "ItemSupplier",
     "Supplier",
-    "CoverOrderDocument",
-    "CoverOrderLine",
-    "CoverOrderSnapshot",
-    "PurchaseDocument",
-    "PurchaseLine",
-    "SalesDocument",
-    "SalesLine",
-    "TransactionLineObservation",
 ]
