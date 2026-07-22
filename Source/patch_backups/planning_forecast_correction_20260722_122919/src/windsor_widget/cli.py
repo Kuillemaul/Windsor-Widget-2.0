@@ -363,17 +363,17 @@ def _print_item_planning(analysis) -> None:
     print(f"Item: {analysis.item_number} — {analysis.item_name}")
     print(
         f"Analysis: {analysis.analysis_start} to {analysis.analysis_end}; "
-        f"months={analysis.analysis_months}; sales={analysis.sales_quantity:.3f}; "
-        f"baseline_average={analysis.average_monthly_sales:.3f}"
+        f"months={analysis.analysis_months}; sales={analysis.sales_quantity}; "
+        f"average_monthly={analysis.average_monthly_sales}"
     )
     if analysis.inventory is None:
         print("Inventory: missing from current snapshot")
     else:
         position = analysis.inventory
         print(
-            f"Inventory ({position.captured_at}): on_hand={position.on_hand:.3f}; "
-            f"myob_committed={position.committed:.3f}; on_order={position.on_order:.3f}; "
-            f"myob_available={position.available:.3f}"
+            f"Inventory ({position.captured_at}): on_hand={position.on_hand}; "
+            f"myob_committed={position.committed}; on_order={position.on_order}; "
+            f"myob_available={position.available}"
         )
     if analysis.commitments is None:
         print("Pools: unavailable")
@@ -381,47 +381,41 @@ def _print_item_planning(analysis) -> None:
         commitments = analysis.commitments
         print(
             f"Sales-order commitments: cutoff={commitments.cutoff_date}; "
-            f"recent_non_cover={commitments.recent_non_cover:.3f}; "
-            f"stale_non_cover_ignored={commitments.stale_non_cover_ignored:.3f}"
+            f"recent_non_cover={commitments.recent_non_cover}; "
+            f"stale_non_cover_ignored={commitments.stale_non_cover_ignored}"
         )
         print(
-            f"Coverage reference: customer_cover={analysis.current_cover_quantity:.3f}; "
-            f"supplier_on_order={analysis.inventory.on_order if analysis.inventory else 0}; "
-            f"cover_gap={commitments.uncovered_cover:.3f}; "
-            f"unclassified_myob_committed={commitments.other_current_committed:.3f}"
+            f"References: customer_cover={analysis.current_cover_quantity}; "
+            f"unclassified_myob_committed={commitments.other_current_committed}"
         )
         print(
-            f"Pools: physical={commitments.physical_pool:.3f}; "
-            f"projected={commitments.projected_pool:.3f}; "
-            f"immediate_shortage={commitments.immediate_shortage:.3f}"
+            f"Pools: physical={commitments.physical_pool}; "
+            f"inbound={analysis.inventory.on_order if analysis.inventory else 0}; "
+            f"projected={commitments.projected_pool}; "
+            f"immediate_shortage={commitments.immediate_shortage}"
         )
     print(
         f"Lead time: {analysis.lead_days} days ({analysis.lead_time_source}); "
-        f"lead_demand={analysis.lead_demand:.3f}; minimum={analysis.minimum_level:.3f}; "
-        f"base_target={analysis.target_stock:.3f}; "
-        f"adjusted_target={analysis.adjusted_target_stock:.3f}"
+        f"lead_demand={analysis.lead_demand}; minimum={analysis.minimum_level}; "
+        f"base_target={analysis.target_stock}; "
+        f"adjusted_target={analysis.adjusted_target_stock}"
     )
     print(
-        f"Forecast: comparison_current={analysis.trend.current_average:.3f}/month; "
-        f"baseline={analysis.trend.baseline_average:.3f}/month; "
-        f"forecast={analysis.trend.forecast_average:.3f}/month; "
-        f"lead_uplift={analysis.trend.lead_adjustment_raw:.3f}"
+        f"Order: base_raw={analysis.suggested_order_raw}; "
+        f"base_rounded={analysis.suggested_order}; "
+        f"trend_adjustment={analysis.trend.lead_adjustment_rounded}; "
+        f"suggested={analysis.adjusted_suggested_order}; status={analysis.status}"
     )
     print(
-        f"Order: base_raw={analysis.suggested_order_raw:.3f}; "
-        f"base_rounded={analysis.suggested_order:.3f}; "
-        f"suggested={analysis.adjusted_suggested_order:.3f}; status={analysis.status}"
-    )
-    print(
-        f"Trend {analysis.trend.mode}: current={analysis.trend.current_total:.3f}; "
-        f"previous={analysis.trend.previous_total:.3f}; delta={analysis.trend.delta:.3f}; "
+        f"Trend {analysis.trend.mode}: current={analysis.trend.current_total}; "
+        f"previous={analysis.trend.previous_total}; delta={analysis.trend.delta}; "
         f"percent={analysis.trend.percent_change}; significant={analysis.trend.significant}"
     )
     if analysis.latest_purchase is not None:
         purchase = analysis.latest_purchase
         print(
             f"Latest purchase: {purchase.transaction_date}; supplier={purchase.supplier_name}; "
-            f"purchase={purchase.purchase_no}; qty={purchase.quantity:.3f}; "
+            f"purchase={purchase.purchase_no}; qty={purchase.quantity}; "
             f"unit_price={purchase.unit_price}; currency={purchase.currency_code or '-'}"
         )
     print("Reasons:")
@@ -622,25 +616,23 @@ def main() -> int:
                         f"shown={len(analysis.rows)}"
                     )
                     print(
-                        "Status\tItem\tSales\tBase Avg\tRecent Avg\tForecast Avg\t"
-                        "SOH\tRecent Std\tStale Ignored\tOn Order\tCustomer Cover\t"
-                        "Cover Gap\tPhysical Pool\tProjected Pool\tMYOB Committed\t"
-                        "Unclassified Ref\tMYOB Available\tBase Target\tTrend Uplift\t"
-                        "Adjusted Target\tBase Suggested\tSuggested\tReason"
+                        "Status\tItem\tSales\tAvg/Month\tSOH\tRecent Std\t"
+                        "Stale Ignored\tMYOB Committed\tUnclassified Ref\tOn Order\t"
+                        "Customer Cover\tPhysical Pool\tPool\tMYOB Available\t"
+                        "Base Target\tTrend Adj\tAdjusted Target\tBase Suggested\t"
+                        "Suggested\tReason"
                     )
                     for row in analysis.rows:
                         print(
-                            f"{row.status}\t{row.item_number}\t{row.sales_quantity:.3f}\t"
-                            f"{row.average_monthly_sales:.3f}\t"
-                            f"{row.trend_current_average:.3f}\t{row.forecast_average:.3f}\t"
-                            f"{row.on_hand:.3f}\t{row.recent_non_cover_commitments:.3f}\t"
-                            f"{row.stale_non_cover_ignored:.3f}\t{row.on_order:.3f}\t"
-                            f"{row.current_cover_quantity:.3f}\t{row.cover_gap:.3f}\t"
-                            f"{row.physical_pool:.3f}\t{row.projected_pool:.3f}\t"
-                            f"{row.committed:.3f}\t{row.other_current_committed:.3f}\t"
-                            f"{row.available:.3f}\t{row.target_stock:.3f}\t"
-                            f"{row.trend_adjustment:.3f}\t{row.adjusted_target_stock:.3f}\t"
-                            f"{row.suggested_order:.3f}\t{row.adjusted_suggested_order:.3f}\t"
+                            f"{row.status}\t{row.item_number}\t{row.sales_quantity}\t"
+                            f"{row.average_monthly_sales}\t{row.on_hand}\t"
+                            f"{row.recent_non_cover_commitments}\t"
+                            f"{row.stale_non_cover_ignored}\t{row.committed}\t"
+                            f"{row.other_current_committed}\t{row.on_order}\t"
+                            f"{row.current_cover_quantity}\t{row.physical_pool}\t"
+                            f"{row.projected_pool}\t{row.available}\t{row.target_stock}\t"
+                            f"{row.trend_adjustment}\t{row.adjusted_target_stock}\t"
+                            f"{row.suggested_order}\t{row.adjusted_suggested_order}\t"
                             f"{row.reason}"
                         )
                     return 0

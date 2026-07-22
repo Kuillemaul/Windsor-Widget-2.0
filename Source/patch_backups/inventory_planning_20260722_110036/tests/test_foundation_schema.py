@@ -33,8 +33,6 @@ EXPECTED_TABLES = {
     "cover_order_documents",
     "cover_order_lines",
     "transaction_line_observations",
-    "inventory_snapshots",
-    "inventory_snapshot_lines",
 }
 
 

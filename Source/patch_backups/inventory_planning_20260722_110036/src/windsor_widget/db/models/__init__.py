@@ -25,10 +25,6 @@ from windsor_widget.db.models.transactions import (
     SalesLine,
     TransactionLineObservation,
 )
-from windsor_widget.db.models.inventory import (
-    InventorySnapshot,
-    InventorySnapshotLine,
-)
 
 __all__ = [
     "AppUser",
@@ -51,6 +47,4 @@ __all__ = [
     "SalesDocument",
     "SalesLine",
     "TransactionLineObservation",
-    "InventorySnapshot",
-    "InventorySnapshotLine",
 ]
