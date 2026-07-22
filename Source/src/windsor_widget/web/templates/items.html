@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Items · Windsor Widget 2.0{% endblock %}
+{% block content %}
+<section class="page-heading compact-heading">
+  <div>
+    <p class="eyebrow">Item control</p>
+    <h1>Items and purchasing policy</h1>
+    <p>COVER is automatic from explicit COVER ORDER rows. MTO, STOCKED and RUN OUT are approved policies. Ordinary sales orders are currently ignored.</p>
+  </div>
+</section>
+
+<form class="filter-bar" method="get" action="/items">
+  <label class="filter-search"><span>Search</span><input type="search" name="q" value="{{ query }}" placeholder="Item number or description"></label>
+  <label><span>Tag</span><select name="tag">
+    {% for value, label in [("", "All"), ("cover", "Cover"), ("mto", "Made to Order"), ("runout", "Run Out / Manual"), ("stocked", "Stocked"), ("review", "Needs Review"), ("unclassified", "Unclassified")] %}
+    <option value="{{ value }}" {% if selected_tag == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select></label>
+  <button class="button button-primary" type="submit">Apply</button>
+</form>
+
+<section class="policy-key">
+  <span class="tag tag-cover">COVER</span><span>active explicit cover commitment</span>
+  <span class="tag tag-mto">MTO</span><span>forecast disabled</span>
+  <span class="tag tag-runout">RUN OUT</span><span>manual / run-out purchasing</span>
+  <span class="tag tag-stocked">STOCKED</span><span>normal forecast</span>
+  <span class="tag tag-review">REVIEW</span><span>possible MTO; approval required</span>
+</section>
+
+<section class="table-panel">
+  <div class="table-toolbar"><div><strong>Item policy register</strong><span>Policy changes are audited.</span></div></div>
+  <div class="table-scroll">
+    <table class="data-table item-policy-table" data-sortable-table>
+      <thead><tr>
+        <th data-sort="text">Item</th><th data-sort="text">Description</th><th>Tags</th>
+        <th data-sort="number" class="number">SOH</th><th data-sort="number" class="number">On Order</th>
+        <th data-sort="number" class="number cover-start">Customer Cover</th><th data-sort="number" class="number">Pool</th>
+        <th data-sort="number" class="number">Cover Gap</th><th data-sort="text">MTO Evidence</th><th>Policy decision</th>
+      </tr></thead>
+      <tbody>
+      {% for row in rows %}
+      <tr>
+        <td data-value="{{ row.item_number }}"><strong>{{ row.item_number }}</strong></td>
+        <td data-value="{{ row.item_name }}" class="description-cell">{{ row.item_name }}</td>
+        <td><div class="tag-stack">{% for item_tag in row.tags %}<span class="tag tag-{{ item_tag|lower|replace(' ', '') }}">{{ item_tag }}</span>{% else %}<span class="muted">—</span>{% endfor %}</div></td>
+        <td data-value="{{ row.on_hand }}" class="number">{{ row.on_hand | qty }}</td>
+        <td data-value="{{ row.on_order }}" class="number">{{ row.on_order | qty }}</td>
+        <td data-value="{{ row.outstanding_cover }}" class="number cover-start">{{ row.outstanding_cover | qty }}</td>
+        <td data-value="{{ row.projected_pool }}" class="number strong-number">{{ row.projected_pool | qty }}</td>
+        <td data-value="{{ row.cover_gap }}" class="number {% if row.cover_gap > 0 %}cover-warning{% endif %}">
+          {% if row.outstanding_cover > 0 %}{{ row.cover_gap | qty }}{% if row.cover_gap == 0 %}<small class="compact muted">Surplus {{ row.cover_surplus | qty }}</small>{% endif %}{% else %}—{% endif %}
+        </td>
+        <td data-value="{{ row.review_confidence or '' }}">{% if row.review_confidence %}<strong>{{ row.review_confidence }}</strong><small class="compact muted">{{ row.evidence }}</small>{% elif row.replenishment_policy == 'make_to_order' %}Forecast disabled by approved policy.{% else %}<span class="muted">{{ row.evidence or '—' }}</span>{% endif %}</td>
+        <td>
+          {% if principal.can_change_operations %}
+          <form method="post" action="/items/{{ row.item_id }}/policy" class="policy-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="q" value="{{ query }}"><input type="hidden" name="tag" value="{{ selected_tag }}">
+            <select name="policy" aria-label="Policy for {{ row.item_number }}">
+              <option value="unknown" {% if row.replenishment_policy == 'unknown' %}selected{% endif %}>Unclassified</option>
+              <option value="stocked" {% if row.replenishment_policy == 'stocked' %}selected{% endif %}>Stocked</option>
+              <option value="make_to_order" {% if row.replenishment_policy == 'make_to_order' %}selected{% endif %}>Made to Order</option>
+              <option value="manual" {% if row.replenishment_policy == 'manual' %}selected{% endif %}>Run Out / Manual</option>
+            </select><button class="button button-small" type="submit">Save</button>
+          </form>
+          {% else %}<span class="muted">{{ row.policy_label }}</span>{% endif %}
+        </td>
+      </tr>
+      {% else %}<tr><td colspan="10" class="empty-state">No matching items were returned.</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

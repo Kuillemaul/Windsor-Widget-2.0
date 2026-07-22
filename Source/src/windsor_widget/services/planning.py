@@ -15,8 +15,8 @@ Planning separates demand, immediate commitments, inbound supply and cover refer
 * MYOB Committed is retained for reconciliation only; it is not subtracted a second time
 
 Customer cover orders and supplier/YU on-order quantities are standing coverage positions.
-They are drawn down through actual invoiced sales. Non-cover sales orders older than three
-calendar months are reported and ignored.
+Only rows explicitly marked as cover orders are trusted from the current open-sales-order export.
+Ordinary sales-order rows are ignored until that source has been cleaned and refreshed.
 """
 
 from __future__ import annotations
@@ -391,6 +391,7 @@ def _current_inventory(
 
 
 def _current_cover_quantity(session: Session, item_id: uuid.UUID) -> Decimal:
+    """Return only explicit current COVER ORDER quantity for an item."""
     value = session.scalar(
         select(func.coalesce(func.sum(CoverOrderLine.quantity), 0))
         .select_from(CoverOrderLine)
@@ -412,7 +413,6 @@ def _current_cover_quantity(session: Session, item_id: uuid.UUID) -> Decimal:
     )
     return _decimal(value)
 
-
 def _non_cover_order_quantities(
     session: Session,
     item_id: uuid.UUID,
@@ -420,28 +420,14 @@ def _non_cover_order_quantities(
     as_of_date: date,
     age_months: int = 3,
 ) -> tuple[date, Decimal, Decimal]:
-    cutoff = _subtract_calendar_months(as_of_date, age_months)
-    base_filters = (
-        SalesLine.item_id == item_id,
-        SalesLine.is_active == true(),
-        SalesLine.is_cover_order != true(),
-        func.upper(func.coalesce(SalesLine.sale_status, "")) == "O",
-        SalesLine.transaction_date <= as_of_date,
-    )
-    recent = session.scalar(
-        select(func.coalesce(func.sum(SalesLine.quantity), 0)).where(
-            *base_filters,
-            SalesLine.transaction_date >= cutoff,
-        )
-    )
-    stale = session.scalar(
-        select(func.coalesce(func.sum(SalesLine.quantity), 0)).where(
-            *base_filters,
-            SalesLine.transaction_date < cutoff,
-        )
-    )
-    return cutoff, _decimal(recent), _decimal(stale)
+    """Ignore ordinary sales orders until the source has been cleaned.
 
+    The current open-sales-order export contains old ordinary orders. They must
+    not reduce SOH, create forecast demand, or trigger Made-to-Order purchasing.
+    """
+    del session, item_id
+    cutoff = _subtract_calendar_months(as_of_date, age_months)
+    return cutoff, _ZERO, _ZERO
 
 def _commitment_position(
     inventory: InventoryPosition,
@@ -451,10 +437,8 @@ def _commitment_position(
     stale_non_cover_ignored: Decimal,
     current_cover: Decimal,
 ) -> CommitmentPosition:
-    # MYOB Committed can contain cover orders and old open sales orders.  It is therefore
-    # retained as a reconciliation reference only and is not subtracted from stock again.
-    # The transaction export provides the one commitment bucket we can safely classify:
-    # recent, non-cover sales orders.
+    # Ordinary sales-order rows are currently untrusted and supplied as zero.
+    # MYOB Committed remains a reconciliation reference only.
     reconciliation_delta = (
         inventory.committed - recent_non_cover - stale_non_cover_ignored
     )
@@ -469,14 +453,12 @@ def _commitment_position(
         other_current_committed=unclassified_reference,
         committed_reconciliation_delta=reconciliation_delta,
         physical_pool=physical_pool,
-        # Cover backing is an informational control only. It never changes the pool,
-        # demand forecast or suggested replenishment quantity.
-        cover_inbound_balance=inventory.on_order - current_cover,
+        # Positive means cover surplus; negative means a cover shortfall.
+        cover_inbound_balance=projected_pool - current_cover,
         projected_pool=projected_pool,
         immediate_shortage=max(_ZERO, -physical_pool),
-        uncovered_cover=max(_ZERO, current_cover - inventory.on_order),
+        uncovered_cover=max(_ZERO, current_cover - projected_pool),
     )
-
 
 def _preferred_supplier(
     session: Session, item_id: uuid.UUID
@@ -659,6 +641,7 @@ def get_item_planning_analysis(
     lead_demand = average_monthly_sales * Decimal(lead_days) / _DAYS_PER_MONTH
     minimum_level = max(_ZERO, _decimal(item.minimum_level))
     target_stock = max(lead_demand, minimum_level)
+    policy = item.replenishment_policy or "unknown"
 
     reasons: list[str] = []
     gaps: list[str] = [
@@ -687,69 +670,92 @@ def get_item_planning_analysis(
             _ZERO,
             lead_demand + effective_trend_adjustment,
         )
-        suggested_raw = max(_ZERO, target_stock - commitments.projected_pool)
-        suggested_order = _round_up_positive(
-            suggested_raw,
-            multiple=reorder_multiple,
-            minimum_order_quantity=minimum_order_quantity,
-        )
-        adjusted_raw = max(
-            _ZERO, adjusted_target_stock - commitments.projected_pool
-        )
-        adjusted = _round_up_positive(
-            adjusted_raw,
-            multiple=reorder_multiple,
-            minimum_order_quantity=minimum_order_quantity,
-        )
-        if commitments.immediate_shortage > 0:
+
+        if policy == "make_to_order":
+            suggested_raw = _ZERO
+            suggested_order = _ZERO
+            adjusted = _ZERO
+            status = "ok"
             reasons.append(
-                f"Physical stock is short by {commitments.immediate_shortage:,.2f} against "
-                "recent non-cover commitments."
+                "Made to Order: forecast replenishment is disabled. Purchase only "
+                "against a trusted actual customer order; ordinary sales-order data "
+                "is currently ignored."
             )
-        if adjusted > 0:
-            reasons.append(
-                f"Projected pool {commitments.projected_pool:,.2f} is below the adjusted "
-                f"sales-demand target {adjusted_target_stock:.2f}."
+        elif policy == "manual":
+            suggested_raw = max(_ZERO, current_cover - commitments.projected_pool)
+            suggested_order = _round_up_positive(
+                suggested_raw,
+                multiple=reorder_multiple,
+                minimum_order_quantity=minimum_order_quantity,
             )
-        if commitments.stale_non_cover_ignored != 0:
-            reasons.append(
-                f"Ignored {commitments.stale_non_cover_ignored:,.2f} units on non-cover sales "
-                f"orders older than {commitments.cutoff_date}."
-            )
-        if commitments.uncovered_cover > 0:
-            reasons.append(
-                f"Coverage reference only: customer cover exceeds supplier/YU on-order "
-                f"by {commitments.uncovered_cover:,.2f}; this does not change demand or the "
-                "suggested order."
-            )
-        if trend.significant and trend.delta > 0:
-            percent_text = (
-                "new demand"
-                if trend.percent_change is None
-                else f"{trend.percent_change:.1f}%"
-            )
-            if trend.lead_adjustment_raw > 0:
+            adjusted = suggested_order
+            status = "order" if adjusted > 0 else "ok"
+            if current_cover > 0:
                 reasons.append(
-                    f"{trend.mode} invoiced demand increased by {trend.delta:,.2f} units "
-                    f"({percent_text}); forecast uses the current run rate "
-                    f"{trend.current_average:.2f}/month instead of the baseline "
-                    f"{trend.baseline_average:.2f}/month."
+                    f"Run Out / Manual: projected pool {commitments.projected_pool:,.2f}; "
+                    f"outstanding cover {current_cover:,.2f}; additional requirement "
+                    f"{adjusted:,.2f}."
                 )
             else:
                 reasons.append(
-                    f"{trend.mode} demand increased versus the prior window but the "
-                    "current run rate is not above the baseline, so no uplift was applied."
+                    "Run Out / Manual: no speculative forecast replenishment."
                 )
-
-        if commitments.immediate_shortage > 0:
-            status = "critical"
-        elif adjusted > 0:
-            status = "order"
-        elif trend.significant and trend.delta > 0:
-            status = "watch"
         else:
-            status = "ok"
-            reasons.append("Projected pool meets the adjusted sales-demand target.")
+            suggested_raw = max(_ZERO, target_stock - commitments.projected_pool)
+            suggested_order = _round_up_positive(
+                suggested_raw,
+                multiple=reorder_multiple,
+                minimum_order_quantity=minimum_order_quantity,
+            )
+            adjusted_raw = max(
+                _ZERO, adjusted_target_stock - commitments.projected_pool
+            )
+            adjusted = _round_up_positive(
+                adjusted_raw,
+                multiple=reorder_multiple,
+                minimum_order_quantity=minimum_order_quantity,
+            )
+
+            if adjusted > 0:
+                reasons.append(
+                    f"Projected pool {commitments.projected_pool:,.2f} is below the "
+                    f"adjusted sales-demand target {adjusted_target_stock:,.2f}."
+                )
+            if commitments.uncovered_cover > 0:
+                reasons.append(
+                    f"Cover timing review: outstanding cover exceeds SOH plus existing "
+                    f"supplier/YU On Order by {commitments.uncovered_cover:,.2f}."
+                )
+            if trend.significant and trend.delta > 0:
+                percent_text = (
+                    "new demand"
+                    if trend.percent_change is None
+                    else f"{trend.percent_change:.1f}%"
+                )
+                if trend.lead_adjustment_raw > 0:
+                    reasons.append(
+                        f"{trend.mode} invoiced demand increased by {trend.delta:,.2f} units "
+                        f"({percent_text}); forecast uses the current run rate "
+                        f"{trend.current_average:,.2f}/month instead of the baseline "
+                        f"{trend.baseline_average:,.2f}/month."
+                    )
+                else:
+                    reasons.append(
+                        f"{trend.mode} demand increased versus the prior window but the "
+                        "current run rate is not above the baseline, so no uplift was applied."
+                    )
+
+            if commitments.immediate_shortage > 0:
+                status = "critical"
+            elif adjusted > 0:
+                status = "order"
+            elif commitments.uncovered_cover > 0:
+                status = "watch"
+            elif trend.significant and trend.delta > 0:
+                status = "watch"
+            else:
+                status = "ok"
+                reasons.append("Projected pool meets the adjusted sales-demand target.")
 
         snapshot_age = max(0, (as_of - inventory.captured_at.date()).days)
         if snapshot_age > 7:
@@ -787,7 +793,6 @@ def get_item_planning_analysis(
         latest_purchase=latest_purchase,
     )
 
-
 def _bulk_monthly_sales(
     session: Session,
     *,
@@ -821,6 +826,7 @@ def _bulk_monthly_sales(
 
 
 def _bulk_cover_quantities(session: Session) -> dict[uuid.UUID, Decimal]:
+    """Return explicit current COVER ORDER quantities by item."""
     rows = session.execute(
         select(
             CoverOrderLine.item_id,
@@ -846,50 +852,16 @@ def _bulk_cover_quantities(session: Session) -> dict[uuid.UUID, Decimal]:
     )
     return {item_id: _decimal(quantity) for item_id, quantity in rows}
 
-
 def _bulk_non_cover_orders(
     session: Session,
     *,
     as_of_date: date,
     age_months: int = 3,
 ) -> tuple[date, dict[uuid.UUID, Decimal], dict[uuid.UUID, Decimal]]:
+    """Ignore ordinary sales orders until the source has been cleaned."""
+    del session
     cutoff = _subtract_calendar_months(as_of_date, age_months)
-    recent_expr = func.coalesce(
-        func.sum(
-            case(
-                (SalesLine.transaction_date >= cutoff, SalesLine.quantity),
-                else_=0,
-            )
-        ),
-        0,
-    )
-    stale_expr = func.coalesce(
-        func.sum(
-            case(
-                (SalesLine.transaction_date < cutoff, SalesLine.quantity),
-                else_=0,
-            )
-        ),
-        0,
-    )
-    rows = session.execute(
-        select(SalesLine.item_id, recent_expr, stale_expr)
-        .where(
-            SalesLine.item_id.is_not(None),
-            SalesLine.is_active == true(),
-            SalesLine.is_cover_order != true(),
-            func.upper(func.coalesce(SalesLine.sale_status, "")) == "O",
-            SalesLine.transaction_date <= as_of_date,
-        )
-        .group_by(SalesLine.item_id)
-    )
-    recent: dict[uuid.UUID, Decimal] = {}
-    stale: dict[uuid.UUID, Decimal] = {}
-    for item_id, recent_quantity, stale_quantity in rows:
-        recent[item_id] = _decimal(recent_quantity)
-        stale[item_id] = _decimal(stale_quantity)
-    return cutoff, recent, stale
-
+    return cutoff, {}, {}
 
 def get_order_analysis(
     session: Session,
@@ -901,7 +873,7 @@ def get_order_analysis(
     limit: int = 100,
     include_ok: bool = False,
 ) -> OrderAnalysisResult:
-    """Return the first all-item Order Analysis read model for the future UI."""
+    """Return policy-aware all-item Order Analysis."""
 
     if trend_mode not in {"3v3", "6v6", "yoy"}:
         raise ValueError("trend mode must be 3v3, 6v6 or yoy")
@@ -995,50 +967,82 @@ def get_order_analysis(
             lead_demand + effective_trend_adjustment,
         )
         suggested_raw = max(_ZERO, target - commitments.projected_pool)
-        suggested = _round_up_positive(
-            suggested_raw, multiple=reorder_multiple
-        )
+        suggested = _round_up_positive(suggested_raw, multiple=reorder_multiple)
         adjusted = _round_up_positive(
             max(_ZERO, adjusted_target - commitments.projected_pool),
             multiple=reorder_multiple,
         )
 
+        policy = item.replenishment_policy or "unknown"
         reason_parts: list[str] = []
-        if commitments.immediate_shortage > 0:
+
+        if policy == "make_to_order":
+            suggested = _ZERO
+            adjusted = _ZERO
+            status: PlanningStatus = "ok"
             reason_parts.append(
-                f"physical shortage {commitments.immediate_shortage:,.2f}"
+                "MTO: forecast disabled; purchase only against a trusted actual "
+                "customer order. Ordinary sales-order data is currently ignored."
             )
-        if adjusted > 0:
-            reason_parts.append(
-                f"pool {commitments.projected_pool:,.2f} is below adjusted target "
-                f"{adjusted_target:.2f}"
+        elif policy == "manual":
+            manual_requirement = max(
+                _ZERO,
+                current_cover - commitments.projected_pool,
             )
-        if stale_non_cover != 0:
-            reason_parts.append(f"ignored stale non-cover {stale_non_cover:,.2f}")
-        if trend.significant and trend.delta > 0:
-            if trend.lead_adjustment_raw > 0:
+            suggested = _round_up_positive(
+                manual_requirement,
+                multiple=reorder_multiple,
+            )
+            adjusted = suggested
+            status = "order" if adjusted > 0 else "ok"
+            if current_cover > 0:
                 reason_parts.append(
-                    f"{trend_mode} current run rate {trend.current_average:.2f}/month "
-                    f"replaces baseline {trend.baseline_average:.2f}/month"
+                    f"Run Out / Manual: pool {commitments.projected_pool:,.2f}; "
+                    f"outstanding cover {current_cover:,.2f}; additional requirement "
+                    f"{adjusted:,.2f}."
                 )
             else:
                 reason_parts.append(
-                    f"{trend_mode} increased versus prior window; no uplift above baseline"
+                    "Run Out / Manual: no speculative forecast replenishment."
                 )
-        if commitments.uncovered_cover > 0:
-            reason_parts.append(
-                f"cover backing gap {commitments.uncovered_cover:,.2f} (informational only)"
-            )
-        if commitments.immediate_shortage > 0:
-            status: PlanningStatus = "critical"
-        elif adjusted > 0:
-            status = "order"
-        elif trend.significant and trend.delta > 0:
-            status = "watch"
         else:
-            status = "ok"
-        if not reason_parts:
-            reason_parts.append("projected pool meets the adjusted sales-demand target")
+            if adjusted > 0:
+                reason_parts.append(
+                    f"pool {commitments.projected_pool:,.2f} is below adjusted target "
+                    f"{adjusted_target:,.2f}"
+                )
+            if trend.significant and trend.delta > 0:
+                if trend.lead_adjustment_raw > 0:
+                    reason_parts.append(
+                        f"{trend_mode} current run rate {trend.current_average:,.2f}/month "
+                        f"replaces baseline {trend.baseline_average:,.2f}/month"
+                    )
+                else:
+                    reason_parts.append(
+                        f"{trend_mode} increased versus prior window; "
+                        "no uplift above baseline"
+                    )
+            if commitments.uncovered_cover > 0:
+                reason_parts.append(
+                    f"cover timing gap {commitments.uncovered_cover:,.2f} after SOH and "
+                    "existing supplier/YU On Order"
+                )
+
+            if commitments.immediate_shortage > 0:
+                status = "critical"
+            elif adjusted > 0:
+                status = "order"
+            elif commitments.uncovered_cover > 0:
+                status = "watch"
+            elif trend.significant and trend.delta > 0:
+                status = "watch"
+            else:
+                status = "ok"
+
+            if not reason_parts:
+                reason_parts.append(
+                    "projected pool meets the adjusted sales-demand target"
+                )
 
         if include_ok or status != "ok":
             rows.append(
@@ -1093,7 +1097,6 @@ def get_order_analysis(
         flagged_items=flagged_items,
         rows=tuple(rows[:limit]),
     )
-
 
 def get_planning_readiness(session: Session) -> PlanningReadiness:
     """Return the remaining data gaps before Order Analysis UI construction."""

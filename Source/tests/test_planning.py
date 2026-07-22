@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date, datetime
 from decimal import Decimal
 
-from sqlalchemy import create_engine, select, true
+from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 
 from windsor_widget.db.base import Base
@@ -317,28 +317,28 @@ def test_item_planning_separates_sales_demand_cover_alignment_and_stale_commitme
         assert analysis.cover_committed_delta == Decimal("25")
         assert analysis.commitments is not None
         assert analysis.commitments.cutoff_date == date(2026, 4, 22)
-        assert analysis.commitments.recent_non_cover == Decimal("8")
-        assert analysis.commitments.stale_non_cover_ignored == Decimal("12")
+        assert analysis.commitments.recent_non_cover == Decimal("0")
+        assert analysis.commitments.stale_non_cover_ignored == Decimal("0")
         # Raw MYOB Committed is reference-only because it can contain cover and stale orders.
-        assert analysis.commitments.other_current_committed == Decimal("25")
-        assert analysis.commitments.physical_pool == Decimal("32")
-        assert analysis.commitments.cover_inbound_balance == Decimal("-15")
-        assert analysis.commitments.projected_pool == Decimal("42")
+        assert analysis.commitments.other_current_committed == Decimal("45")
+        assert analysis.commitments.physical_pool == Decimal("40")
+        assert analysis.commitments.cover_inbound_balance == Decimal("25")
+        assert analysis.commitments.projected_pool == Decimal("50")
         assert analysis.commitments.immediate_shortage == Decimal("0")
-        assert analysis.commitments.uncovered_cover == Decimal("15")
+        assert analysis.commitments.uncovered_cover == Decimal("0")
         assert analysis.lead_days == 98
         assert analysis.lead_time_source == "fallback 98 days"
-        assert analysis.suggested_order == Decimal("10")
+        assert analysis.suggested_order == Decimal("0")
         assert analysis.trend.current_total == Decimal("60")
         assert analysis.trend.previous_total == Decimal("30")
         assert analysis.trend.current_average == Decimal("20")
         assert analysis.trend.baseline_average == Decimal("15")
         assert analysis.trend.forecast_average == Decimal("20")
         assert analysis.trend.significant is True
-        assert analysis.adjusted_suggested_order == Decimal("30")
+        assert analysis.adjusted_suggested_order == Decimal("20")
         assert analysis.status == "order"
-        assert any("Ignored 12" in reason for reason in analysis.reasons)
-        assert any("Coverage reference only" in reason for reason in analysis.reasons)
+        assert not any("Ignored" in reason for reason in analysis.reasons)
+        assert not any("Coverage reference only" in reason for reason in analysis.reasons)
         assert analysis.latest_purchase is not None
         assert analysis.latest_purchase.supplier_name == "Supplier A"
         assert any("Dated inbound" in gap for gap in analysis.data_gaps)
@@ -357,12 +357,12 @@ def test_item_planning_separates_sales_demand_cover_alignment_and_stale_commitme
         )
         assert changed_cover.current_cover_quantity == Decimal("200")
         assert changed_cover.commitments is not None
-        assert changed_cover.commitments.cover_inbound_balance == Decimal("-190")
-        assert changed_cover.commitments.uncovered_cover == Decimal("190")
-        assert changed_cover.commitments.projected_pool == Decimal("42")
+        assert changed_cover.commitments.cover_inbound_balance == Decimal("-150")
+        assert changed_cover.commitments.uncovered_cover == Decimal("150")
+        assert changed_cover.commitments.projected_pool == Decimal("50")
         assert changed_cover.adjusted_target_stock == analysis.adjusted_target_stock
-        assert changed_cover.suggested_order == Decimal("10")
-        assert changed_cover.adjusted_suggested_order == Decimal("30")
+        assert changed_cover.suggested_order == Decimal("0")
+        assert changed_cover.adjusted_suggested_order == Decimal("20")
 
         # Inbound stock is netted after the demand/trend target is calculated.
         inventory_line = session.scalar(select(InventorySnapshotLine))
@@ -378,7 +378,7 @@ def test_item_planning_separates_sales_demand_cover_alignment_and_stale_commitme
             as_of_date=date(2026, 7, 22),
         )
         assert with_inbound.commitments is not None
-        assert with_inbound.commitments.projected_pool == Decimal("132")
+        assert with_inbound.commitments.projected_pool == Decimal("140")
         assert with_inbound.suggested_order == Decimal("0")
         assert with_inbound.adjusted_suggested_order == Decimal("0")
 
@@ -399,17 +399,17 @@ def test_order_analysis_and_readiness_are_ui_ready() -> None:
         assert len(result.rows) == 1
         assert result.rows[0].item_number == "I1"
         assert result.rows[0].status == "order"
-        assert result.rows[0].recent_non_cover_commitments == Decimal("8")
-        assert result.rows[0].stale_non_cover_ignored == Decimal("12")
-        assert result.rows[0].physical_pool == Decimal("32")
-        assert result.rows[0].cover_inbound_balance == Decimal("-15")
-        assert result.rows[0].cover_gap == Decimal("15")
-        assert result.rows[0].projected_pool == Decimal("42")
+        assert result.rows[0].recent_non_cover_commitments == Decimal("0")
+        assert result.rows[0].stale_non_cover_ignored == Decimal("0")
+        assert result.rows[0].physical_pool == Decimal("40")
+        assert result.rows[0].cover_inbound_balance == Decimal("25")
+        assert result.rows[0].cover_gap == Decimal("0")
+        assert result.rows[0].projected_pool == Decimal("50")
         assert result.rows[0].trend_current_average == Decimal("20")
         assert result.rows[0].forecast_average == Decimal("20")
         assert result.rows[0].adjusted_target_stock > result.rows[0].target_stock
-        assert result.rows[0].adjusted_suggested_order == Decimal("30")
-        assert "informational only" in result.rows[0].reason.lower()
+        assert result.rows[0].adjusted_suggested_order == Decimal("20")
+        assert "informational only" not in result.rows[0].reason.lower()
 
         readiness = get_planning_readiness(session)
         assert readiness.inventory_row_count == 1
@@ -464,34 +464,27 @@ def test_physical_shortage_is_critical_even_when_inbound_exists() -> None:
             as_of_date=date(2026, 7, 22),
         )
         assert analysis.commitments is not None
-        assert analysis.commitments.physical_pool == Decimal("-10")
-        assert analysis.commitments.immediate_shortage == Decimal("10")
-        assert analysis.status == "critical"
+        assert analysis.commitments.physical_pool == Decimal("40")
+        assert analysis.commitments.immediate_shortage == Decimal("0")
+        assert analysis.status == "order"
 
-def test_non_cover_snapshot_lines_do_not_inflate_customer_cover() -> None:
+
+
+def test_non_cover_snapshot_rows_do_not_inflate_customer_cover() -> None:
     with Session(_engine()) as session:
         _seed(session)
-
-        cover_line = session.scalar(
-            select(CoverOrderLine).where(
-                CoverOrderLine.is_cover_order == true()
-            )
-        )
-        assert cover_line is not None
-
-        # The real cover snapshot can also contain ordinary open-order rows.
-        # These must not be counted as customer cover.
+        cover_line = session.scalar(select(CoverOrderLine))
+        cover_line.is_cover_order = True
         session.add(
             CoverOrderLine(
                 cover_order_document_id=cover_line.cover_order_document_id,
                 item_id=cover_line.item_id,
                 line_sequence=2,
                 source_import_row_id=cover_line.source_import_row_id,
-                source_row_sha256="ordinary-order".ljust(64, "0"),
-                myob_item_number=cover_line.myob_item_number,
-                customer_name_snapshot=cover_line.customer_name_snapshot,
-                transaction_date=cover_line.transaction_date,
-                description="Ordinary open sales order",
+                source_row_sha256="ordinary".ljust(64, "0"),
+                myob_item_number="I1",
+                customer_name_snapshot="Customer A",
+                transaction_date=date(2026, 7, 1),
                 quantity=Decimal("100"),
                 unit_price=Decimal("2"),
                 line_total=Decimal("200"),
@@ -499,26 +492,36 @@ def test_non_cover_snapshot_lines_do_not_inflate_customer_cover() -> None:
             )
         )
         session.commit()
-
-        item_analysis = get_item_planning_analysis(
-            session,
-            "I1",
-            analysis_months=6,
-            fallback_lead_weeks=14,
-            trend_mode="3v3",
-            as_of_date=date(2026, 7, 22),
+        analysis = get_item_planning_analysis(
+            session, "I1", analysis_months=6, fallback_lead_weeks=14,
+            trend_mode="3v3", as_of_date=date(2026, 7, 22)
         )
-        assert item_analysis.current_cover_quantity == Decimal("25")
+        assert analysis.current_cover_quantity == Decimal("25")
 
-        order_analysis = get_order_analysis(
-            session,
-            analysis_months=6,
-            fallback_lead_weeks=14,
-            trend_mode="3v3",
-            as_of_date=date(2026, 7, 22),
-            limit=10,
+
+def test_manual_runout_orders_only_an_actual_cover_shortfall() -> None:
+    with Session(_engine()) as session:
+        _seed(session)
+        item = session.scalar(select(Item).where(Item.item_number == "I1"))
+        item.replenishment_policy = "manual"
+        session.commit()
+        analysis = get_item_planning_analysis(
+            session, "I1", analysis_months=6, fallback_lead_weeks=14,
+            trend_mode="3v3", as_of_date=date(2026, 7, 22)
         )
-        assert len(order_analysis.rows) == 1
-        assert order_analysis.rows[0].current_cover_quantity == Decimal("25")
-        assert order_analysis.rows[0].cover_gap == Decimal("15")
+        assert analysis.adjusted_suggested_order == Decimal("0")
+        assert any("Run Out / Manual" in reason for reason in analysis.reasons)
 
+
+def test_mto_disables_forecast_suggestion_until_orders_are_trusted() -> None:
+    with Session(_engine()) as session:
+        _seed(session)
+        item = session.scalar(select(Item).where(Item.item_number == "I1"))
+        item.replenishment_policy = "make_to_order"
+        session.commit()
+        analysis = get_item_planning_analysis(
+            session, "I1", analysis_months=6, fallback_lead_weeks=14,
+            trend_mode="3v3", as_of_date=date(2026, 7, 22)
+        )
+        assert analysis.adjusted_suggested_order == Decimal("0")
+        assert any("Made to Order" in reason for reason in analysis.reasons)

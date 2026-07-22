@@ -28,6 +28,7 @@ from windsor_widget.services.planning import (
     get_planning_readiness,
 )
 from windsor_widget.web.auth import WebPrincipal, authenticate_user, get_principal
+from windsor_widget.web.items import build_items_router
 
 _WEB_ROOT = Path(__file__).resolve().parent
 _TEMPLATES = Jinja2Templates(directory=str(_WEB_ROOT / "templates"))
@@ -333,5 +334,15 @@ def create_app(
                 active_page="order-analysis",
             ),
         )
+
+    app.include_router(
+        build_items_router(
+            _session,
+            _TEMPLATES,
+            _require_principal,
+            _template_context,
+            _validate_csrf,
+        )
+    )
 
     return app
