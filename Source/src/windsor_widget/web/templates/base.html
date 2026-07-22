@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-theme="windsor">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>{% block title %}Windsor Widget 2.0{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', path='img/windsor-logo.jpg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/app.css') }}">
+  <script src="{{ url_for('static', path='js/theme.js') }}" defer></script>
+  <script src="{{ url_for('static', path='js/table.js') }}" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="/dashboard" aria-label="Windsor Widget dashboard">
+      <span class="brand-logo-shell"><img src="{{ url_for('static', path='img/windsor-logo.jpg') }}" alt="Windsor"></span>
+      <span class="brand-copy">
+        <strong>Windsor Widget</strong>
+        <small>Procurement &amp; Inventory</small>
+      </span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="/dashboard" class="{% if active_page == 'dashboard' %}active{% endif %}">Dashboard</a>
+      <a href="/order-analysis" class="{% if active_page == 'order-analysis' %}active{% endif %}">Order Analysis</a>
+      <span class="nav-future" title="Coming in the next phase">Items</span>
+      <span class="nav-future" title="Coming in the next phase">Customers</span>
+      <span class="nav-future" title="Coming in the next phase">Imports</span>
+    </nav>
+    <div class="header-actions">
+      <label class="theme-picker">
+        <span>Theme</span>
+        <select data-theme-picker aria-label="Visual theme">
+          <option value="windsor">Windsor</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
+      {% if principal %}
+      <div class="user-chip">
+        <span class="user-avatar">{{ principal.display_name[:1] | upper }}</span>
+        <span><strong>{{ principal.display_name }}</strong><small>{{ principal.role | replace('_', ' ') | title }}</small></span>
+      </div>
+      <form method="post" action="/logout" class="logout-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button class="button button-quiet" type="submit">Sign out</button>
+      </form>
+      {% endif %}
+    </div>
+  </header>
+
+  <main class="app-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="app-footer">
+    <span>Windsor Widget 2.0</span>
+    <span>Private network application</span>
+  </footer>
+</body>
+</html>

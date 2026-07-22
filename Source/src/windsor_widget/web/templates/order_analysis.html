@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Order Analysis · Windsor Widget 2.0{% endblock %}
+{% block content %}
+<section class="page-heading compact-heading">
+  <div>
+    <p class="eyebrow">Procurement</p>
+    <h1>Order Analysis</h1>
+    <p>Demand is driven by invoiced sales. Customer cover is shown separately and never inflates suggested replenishment.</p>
+  </div>
+</section>
+
+<form class="filter-bar" method="get" action="/order-analysis">
+  <label class="filter-search"><span>Search</span><input name="q" value="{{ query }}" placeholder="Item number or description"></label>
+  <label><span>Sales window</span><select name="months">
+    {% for option in (3, 6, 12, 18, 24) %}<option value="{{ option }}" {% if months == option %}selected{% endif %}>{{ option }} months</option>{% endfor %}
+  </select></label>
+  <label><span>Trend method</span><select name="trend">
+    <option value="3v3" {% if trend == '3v3' %}selected{% endif %}>Last 3 vs previous 3</option>
+    <option value="6v6" {% if trend == '6v6' %}selected{% endif %}>Last 6 vs previous 6</option>
+    <option value="yoy" {% if trend == 'yoy' %}selected{% endif %}>Year on year</option>
+  </select></label>
+  <label><span>Fallback lead</span><input type="number" min="1" max="104" name="lead_weeks" value="{{ lead_weeks }}"><small>weeks</small></label>
+  <label><span>As at</span><input type="date" name="as_of" value="{{ as_of }}"></label>
+  <label><span>Rows</span><select name="limit">
+    {% for option in (50, 100, 250, 500) %}<option value="{{ option }}" {% if limit == option %}selected{% endif %}>{{ option }}</option>{% endfor %}
+  </select></label>
+  <label class="check-label"><input type="checkbox" name="include_ok" value="true" {% if include_ok %}checked{% endif %}><span>Include OK</span></label>
+  <button class="button button-primary" type="submit">Apply</button>
+</form>
+
+{% if error %}<div class="alert alert-error">{{ error }}</div>{% endif %}
+
+{% if analysis %}
+<section class="summary-strip">
+  <div><span>Period</span><strong>{{ analysis.analysis_start }} – {{ analysis.analysis_end }}</strong></div>
+  <div><span>Inventory captured</span><strong>{{ analysis.inventory_captured_at }}</strong></div>
+  <div><span>Items considered</span><strong>{{ analysis.considered_items | integer }}</strong></div>
+  <div><span>Items flagged</span><strong>{{ analysis.flagged_items | integer }}</strong></div>
+  <div><span>Rows shown</span><strong>{{ rows | length }}</strong></div>
+</section>
+
+<section class="table-panel">
+  <div class="table-toolbar">
+    <div><strong>Planning recommendations</strong><span>Click a column heading to sort.</span></div>
+    <div class="legend"><span class="badge badge-critical">Critical</span><span class="badge badge-order">Order</span><span class="badge badge-watch">Watch</span><span class="badge badge-ok">OK</span></div>
+  </div>
+  <div class="table-scroll">
+    <table class="data-table" data-sortable-table>
+      <thead>
+        <tr>
+          <th data-sort="text">Status</th>
+          <th data-sort="text">Item</th>
+          <th data-sort="text">Description</th>
+          <th data-sort="number" class="number">12m Sales</th>
+          <th data-sort="number" class="number">Base Avg</th>
+          <th data-sort="number" class="number">Recent Avg</th>
+          <th data-sort="number" class="number">Forecast Avg</th>
+          <th data-sort="number" class="number supply-start">SOH</th>
+          <th data-sort="number" class="number">On Order</th>
+          <th data-sort="number" class="number">Projected Pool</th>
+          <th data-sort="number" class="number demand-start">Target</th>
+          <th data-sort="number" class="number emphasis">Suggested</th>
+          <th data-sort="number" class="number cover-start">Customer Cover</th>
+          <th data-sort="number" class="number">Cover Gap</th>
+          <th data-sort="text">Reason</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr class="status-row-{{ row.status }}">
+          <td data-value="{{ row.status }}"><span class="badge badge-{{ row.status }}">{{ row.status | title }}</span></td>
+          <td data-value="{{ row.item_number }}"><a class="item-link" href="/order-analysis?q={{ row.item_number }}">{{ row.item_number }}</a></td>
+          <td data-value="{{ row.item_name }}" class="description-cell">{{ row.item_name }}</td>
+          <td data-value="{{ row.sales_quantity }}" class="number">{{ row.sales_quantity | qty }}</td>
+          <td data-value="{{ row.average_monthly_sales }}" class="number">{{ row.average_monthly_sales | qty }}</td>
+          <td data-value="{{ row.trend_current_average }}" class="number">{{ row.trend_current_average | qty }}</td>
+          <td data-value="{{ row.forecast_average }}" class="number strong-number">{{ row.forecast_average | qty }}</td>
+          <td data-value="{{ row.on_hand }}" class="number supply-start">{{ row.on_hand | qty }}</td>
+          <td data-value="{{ row.on_order }}" class="number">{{ row.on_order | qty }}</td>
+          <td data-value="{{ row.projected_pool }}" class="number strong-number">{{ row.projected_pool | qty }}</td>
+          <td data-value="{{ row.adjusted_target_stock }}" class="number demand-start">{{ row.adjusted_target_stock | qty }}</td>
+          <td data-value="{{ row.adjusted_suggested_order }}" class="number emphasis">{{ row.adjusted_suggested_order | qty }}</td>
+          <td data-value="{{ row.current_cover_quantity }}" class="number cover-start">{{ row.current_cover_quantity | qty }}</td>
+          <td data-value="{{ row.cover_gap }}" class="number {% if row.cover_gap > 0 %}cover-warning{% endif %}">{{ row.cover_gap | qty }}</td>
+          <td class="reason-cell" data-value="{{ row.reason }}">{{ row.reason }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="15" class="empty-state">No matching items were returned.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

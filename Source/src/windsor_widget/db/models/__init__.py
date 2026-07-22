@@ -1,6 +1,7 @@
 """Windsor Widget v2 database models."""
 
 from windsor_widget.db.models.audit import AppUser, AuditEvent
+from windsor_widget.db.models.web_auth import WebUserAccount
 from windsor_widget.db.models.imports import (
     ImportBatch,
     ImportIssue,
@@ -33,6 +34,7 @@ from windsor_widget.db.models.inventory import (
 __all__ = [
     "AppUser",
     "AuditEvent",
+    "WebUserAccount",
     "ImportBatch",
     "ImportIssue",
     "ImportRow",

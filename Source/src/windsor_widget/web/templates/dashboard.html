@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · Windsor Widget 2.0{% endblock %}
+{% block content %}
+<section class="page-heading">
+  <div>
+    <p class="eyebrow">Overview</p>
+    <h1>Welcome, {{ principal.display_name.split()[0] }}</h1>
+    <p>Current data readiness and the fastest route into procurement analysis.</p>
+  </div>
+  <a class="button button-primary" href="/order-analysis">Open Order Analysis</a>
+</section>
+
+{% if readiness_error %}
+<div class="alert alert-error">Planning readiness could not be loaded: {{ readiness_error }}</div>
+{% endif %}
+
+<section class="metric-grid">
+  <article class="metric-card accent-card">
+    <span class="metric-label">Inventory items</span>
+    <strong>{{ item_count | integer }}</strong>
+    <small>Active inventoried items</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Web users</span>
+    <strong>{{ user_count | integer }}</strong>
+    <small>Active user accounts</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Inventory snapshot</span>
+    <strong>{% if readiness and readiness.inventory_captured_at %}Current{% else %}Missing{% endif %}</strong>
+    <small>{% if readiness and readiness.inventory_captured_at %}{{ readiness.inventory_captured_at }}{% else %}Import required{% endif %}</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Cover snapshot</span>
+    <strong>{% if readiness %}{{ readiness.current_cover_order_snapshots }}{% else %}—{% endif %}</strong>
+    <small>Current outstanding cover sets</small>
+  </article>
+</section>
+
+<section class="dashboard-grid">
+  <article class="panel">
+    <div class="panel-heading">
+      <div><p class="eyebrow">Planning readiness</p><h2>Data foundation</h2></div>
+      <span class="status-dot {% if readiness and not readiness.gaps %}good{% else %}warning{% endif %}"></span>
+    </div>
+    {% if readiness %}
+    <dl class="readiness-list">
+      <div><dt>Inventory rows</dt><dd>{{ readiness.inventory_row_count | integer }}</dd></div>
+      <div><dt>Items covered by snapshot</dt><dd>{{ readiness.active_inventoried_items_with_snapshot | integer }}</dd></div>
+      <div><dt>Items missing from snapshot</dt><dd>{{ readiness.active_inventoried_items_missing_snapshot | integer }}</dd></div>
+      <div><dt>Preferred supplier links</dt><dd>{{ readiness.preferred_supplier_links | integer }}</dd></div>
+      <div><dt>Configured lead times</dt><dd>{{ readiness.configured_supplier_lead_times | integer }}</dd></div>
+    </dl>
+    {% if readiness.gaps %}
+    <div class="gap-list">
+      {% for gap in readiness.gaps %}<div class="gap-item">{{ gap }}</div>{% endfor %}
+    </div>
+    {% else %}<div class="alert alert-success">Core planning data is ready.</div>{% endif %}
+    {% else %}<p class="muted">Readiness data is unavailable.</p>{% endif %}
+  </article>
+
+  <article class="panel action-panel">
+    <p class="eyebrow">Start here</p>
+    <h2>Demand-led Order Analysis</h2>
+    <p>Forecast demand from invoiced sales, compare it with physical and inbound supply, and keep customer cover as a separate backing control.</p>
+    <ul class="feature-list">
+      <li>3v3, 6v6 and year-on-year run rates</li>
+      <li>SOH plus YU/supplier on-order stock</li>
+      <li>Outstanding customer cover gap</li>
+      <li>Explainable suggested quantities</li>
+    </ul>
+    <a class="button button-primary" href="/order-analysis">Review items</a>
+  </article>
+</section>
+{% endblock %}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-theme="windsor">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Sign in · Windsor Widget 2.0</title>
+  <link rel="icon" href="{{ url_for('static', path='img/windsor-logo.jpg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/app.css') }}">
+  <script src="{{ url_for('static', path='js/theme.js') }}" defer></script>
+</head>
+<body class="login-body">
+  <div class="login-theme">
+    <label class="theme-picker">
+      <span>Theme</span>
+      <select data-theme-picker aria-label="Visual theme">
+        <option value="windsor">Windsor</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </label>
+  </div>
+  <main class="login-layout">
+    <section class="login-brand-panel">
+      <div class="login-logo-shell"><img src="{{ url_for('static', path='img/windsor-logo.jpg') }}" alt="Windsor Trading"></div>
+      <div>
+        <p class="eyebrow">Windsor Trading</p>
+        <h1>Procurement intelligence, shared across the office.</h1>
+        <p>One central view of stock, supplier cover, sales patterns and suggested replenishment.</p>
+      </div>
+      <div class="login-feature-grid">
+        <div><strong>Live</strong><span>Shared SQL data</span></div>
+        <div><strong>Traceable</strong><span>User audit history</span></div>
+        <div><strong>Explainable</strong><span>Every recommendation</span></div>
+      </div>
+    </section>
+    <section class="login-card" aria-labelledby="login-title">
+      <p class="eyebrow">Windsor Widget 2.0</p>
+      <h2 id="login-title">Sign in</h2>
+      <p class="muted">Use your individual Windsor Widget account.</p>
+      {% if error %}<div class="alert alert-error" role="alert">{{ error }}</div>{% endif %}
+      <form method="post" action="/login" class="form-stack">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <input type="hidden" name="next_path" value="{{ next_path }}">
+        <label>
+          <span>Username</span>
+          <input name="username" autocomplete="username" required autofocus>
+        </label>
+        <label>
+          <span>Password</span>
+          <input type="password" name="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit" class="button button-primary button-large">Sign in</button>
+      </form>
+      <p class="login-help">Private office network only. Contact an administrator for access.</p>
+    </section>
+  </main>
+</body>
+</html>

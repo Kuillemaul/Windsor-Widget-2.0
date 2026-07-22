@@ -14,6 +14,7 @@ from windsor_widget.db.models import (  # noqa: F401
 
 EXPECTED_TABLES = {
     "app_users",
+    "web_user_accounts",
     "audit_events",
     "import_batches",
     "import_issues",

@@ -28,3 +28,7 @@ config/production.json
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Windsor Widget local web/runtime files
+config/web_secret.local.txt
+patch_backups/
