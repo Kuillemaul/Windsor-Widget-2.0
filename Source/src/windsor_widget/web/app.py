@@ -14,7 +14,7 @@ from fastapi import Depends, FastAPI, Form, HTTPException, Query, Request, statu
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from jinja2 import Environment
-from sqlalchemy import func, select
+from sqlalchemy import func, select, true
 from sqlalchemy.orm import Session
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.templating import Jinja2Templates
@@ -38,7 +38,7 @@ _ALLOWED_THEMES = ("windsor", "light", "dark")
 def _quantity(value: object) -> str:
     if value is None:
         return "—"
-    return f"{Decimal(str(value)):,.3f}"
+    return f"{Decimal(str(value)):,.2f}"
 
 
 def _integer(value: object) -> str:
@@ -184,8 +184,9 @@ def create_app(
         if _current_principal(request, session) is not None:
             return RedirectResponse("/dashboard", status_code=status.HTTP_303_SEE_OTHER)
         return _TEMPLATES.TemplateResponse(
-            "login.html",
-            _template_context(request, next_path=_safe_next(next), error=None),
+            request=request,
+            name="login.html",
+            context=_template_context(request, next_path=_safe_next(next), error=None),
         )
 
     @app.post("/login", response_class=HTMLResponse)
@@ -202,8 +203,9 @@ def create_app(
         if principal is None:
             session.commit()
             return _TEMPLATES.TemplateResponse(
-                "login.html",
-                _template_context(
+                request=request,
+                name="login.html",
+                context=_template_context(
                     request,
                     next_path=_safe_next(next_path),
                     error="The username or password was not accepted.",
@@ -240,23 +242,24 @@ def create_app(
             session.scalar(
                 select(func.count(WebUserAccount.user_id))
                 .join(AppUser, AppUser.user_id == WebUserAccount.user_id)
-                .where(AppUser.is_active.is_(True))
+                .where(AppUser.is_active== true())
             )
             or 0
         )
         item_count = int(
             session.scalar(
                 select(func.count(Item.item_id)).where(
-                    Item.is_active.is_(True),
-                    Item.is_inventoried.is_(True),
-                    Item.excluded_from_item_view.is_not(True),
+                    Item.is_active== true(),
+                    Item.is_inventoried== true(),
+                    Item.excluded_from_item_view != true(),
                 )
             )
             or 0
         )
         return _TEMPLATES.TemplateResponse(
-            "dashboard.html",
-            _template_context(
+            request=request,
+            name="dashboard.html",
+            context=_template_context(
                 request,
                 principal=principal,
                 readiness=readiness,
@@ -312,8 +315,9 @@ def create_app(
             error = str(exc)
 
         return _TEMPLATES.TemplateResponse(
-            "order_analysis.html",
-            _template_context(
+            request=request,
+            name="order_analysis.html",
+            context=_template_context(
                 request,
                 principal=principal,
                 analysis=analysis,

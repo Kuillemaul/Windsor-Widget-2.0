@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 
 from argon2 import PasswordHasher
 from argon2.exceptions import InvalidHashError, VerificationError, VerifyMismatchError
-from sqlalchemy import func, select
+from sqlalchemy import func, select, true
 from sqlalchemy.orm import Session
 
 from windsor_widget.db.models import AppUser, AuditEvent, WebUserAccount
@@ -80,7 +80,7 @@ def get_principal(session: Session, user_id: str | uuid.UUID | None) -> WebPrinc
     row = session.execute(
         select(AppUser, WebUserAccount)
         .join(WebUserAccount, WebUserAccount.user_id == AppUser.user_id)
-        .where(AppUser.user_id == resolved, AppUser.is_active.is_(True))
+        .where(AppUser.user_id == resolved, AppUser.is_active== true())
     ).one_or_none()
     if row is None:
         return None

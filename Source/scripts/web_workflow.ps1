@@ -58,12 +58,12 @@ function Ensure-WebSecret {
 try {
     switch ($Action) {
         "Install" {
-            Invoke-Python -m pip install -e ".[dev]"
+            Invoke-Python -Arguments @("-m", "pip", "install", "-e", ".[dev]")
             Write-Host "Web dependencies installed."
         }
         "Migrate" {
             Ensure-DatabaseCredentials
-            Invoke-Python -m windsor_widget.cli setup-dev-database $Config
+            Invoke-Python -Arguments @("-m", "windsor_widget.cli", "setup-dev-database", $Config)
         }
         "CreateAdmin" {
             Ensure-DatabaseCredentials
@@ -81,7 +81,7 @@ try {
                     "--role", "admin"
                 )
                 if ($Email) { $pythonArgs += @("--email", $Email) }
-                Invoke-Python @pythonArgs
+                Invoke-Python -Arguments $pythonArgs
             }
             finally {
                 Remove-Item Env:WINDSOR_WIDGET_INITIAL_PASSWORD -ErrorAction SilentlyContinue
@@ -103,7 +103,7 @@ try {
                     "--role", $Role
                 )
                 if ($Email) { $pythonArgs += @("--email", $Email) }
-                Invoke-Python @pythonArgs
+                Invoke-Python -Arguments $pythonArgs
             }
             finally {
                 Remove-Item Env:WINDSOR_WIDGET_INITIAL_PASSWORD -ErrorAction SilentlyContinue
@@ -111,7 +111,7 @@ try {
         }
         "ListUsers" {
             Ensure-DatabaseCredentials
-            Invoke-Python -m windsor_widget.web.manage list-users --config $Config
+            Invoke-Python -Arguments @("-m", "windsor_widget.web.manage", "list-users", "--config", $Config)
         }
         "Run" {
             Ensure-DatabaseCredentials
@@ -123,10 +123,13 @@ try {
             Write-Host "Office PCs: http://$computerName`:$Port"
             Write-Host "Press Ctrl+C to stop the development server."
             Write-Host ""
-            Invoke-Python -m windsor_widget.web.server `
-                --config $Config `
-                --host $BindAddress `
-                --port $Port
+            $pythonArgs = @(
+                "-m", "windsor_widget.web.server",
+                "--config", $Config,
+                "--host", $BindAddress,
+                "--port", "$Port"
+            )
+            Invoke-Python -Arguments $pythonArgs
         }
     }
 }

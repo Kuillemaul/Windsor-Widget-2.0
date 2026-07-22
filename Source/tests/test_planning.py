@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date, datetime
 from decimal import Decimal
 
-from sqlalchemy import create_engine, select
+from sqlalchemy import create_engine, select, true
 from sqlalchemy.orm import Session
 
 from windsor_widget.db.base import Base
@@ -265,6 +265,7 @@ def _seed(session: Session) -> None:
             quantity=Decimal("25"),
             unit_price=Decimal("2"),
             line_total=Decimal("50"),
+            is_cover_order=True,
         )
     )
 
@@ -466,3 +467,58 @@ def test_physical_shortage_is_critical_even_when_inbound_exists() -> None:
         assert analysis.commitments.physical_pool == Decimal("-10")
         assert analysis.commitments.immediate_shortage == Decimal("10")
         assert analysis.status == "critical"
+
+def test_non_cover_snapshot_lines_do_not_inflate_customer_cover() -> None:
+    with Session(_engine()) as session:
+        _seed(session)
+
+        cover_line = session.scalar(
+            select(CoverOrderLine).where(
+                CoverOrderLine.is_cover_order == true()
+            )
+        )
+        assert cover_line is not None
+
+        # The real cover snapshot can also contain ordinary open-order rows.
+        # These must not be counted as customer cover.
+        session.add(
+            CoverOrderLine(
+                cover_order_document_id=cover_line.cover_order_document_id,
+                item_id=cover_line.item_id,
+                line_sequence=2,
+                source_import_row_id=cover_line.source_import_row_id,
+                source_row_sha256="ordinary-order".ljust(64, "0"),
+                myob_item_number=cover_line.myob_item_number,
+                customer_name_snapshot=cover_line.customer_name_snapshot,
+                transaction_date=cover_line.transaction_date,
+                description="Ordinary open sales order",
+                quantity=Decimal("100"),
+                unit_price=Decimal("2"),
+                line_total=Decimal("200"),
+                is_cover_order=False,
+            )
+        )
+        session.commit()
+
+        item_analysis = get_item_planning_analysis(
+            session,
+            "I1",
+            analysis_months=6,
+            fallback_lead_weeks=14,
+            trend_mode="3v3",
+            as_of_date=date(2026, 7, 22),
+        )
+        assert item_analysis.current_cover_quantity == Decimal("25")
+
+        order_analysis = get_order_analysis(
+            session,
+            analysis_months=6,
+            fallback_lead_weeks=14,
+            trend_mode="3v3",
+            as_of_date=date(2026, 7, 22),
+            limit=10,
+        )
+        assert len(order_analysis.rows) == 1
+        assert order_analysis.rows[0].current_cover_quantity == Decimal("25")
+        assert order_analysis.rows[0].cover_gap == Decimal("15")
+

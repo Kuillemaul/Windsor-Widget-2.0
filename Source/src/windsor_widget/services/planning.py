@@ -407,6 +407,7 @@ def _current_cover_quantity(session: Session, item_id: uuid.UUID) -> Decimal:
         .where(
             CoverOrderSnapshot.is_current == true(),
             CoverOrderLine.item_id == item_id,
+            CoverOrderLine.is_cover_order == true(),
         )
     )
     return _decimal(value)
@@ -702,23 +703,23 @@ def get_item_planning_analysis(
         )
         if commitments.immediate_shortage > 0:
             reasons.append(
-                f"Physical stock is short by {commitments.immediate_shortage} against "
+                f"Physical stock is short by {commitments.immediate_shortage:,.2f} against "
                 "recent non-cover commitments."
             )
         if adjusted > 0:
             reasons.append(
-                f"Projected pool {commitments.projected_pool} is below the adjusted "
+                f"Projected pool {commitments.projected_pool:,.2f} is below the adjusted "
                 f"sales-demand target {adjusted_target_stock:.2f}."
             )
         if commitments.stale_non_cover_ignored != 0:
             reasons.append(
-                f"Ignored {commitments.stale_non_cover_ignored} units on non-cover sales "
+                f"Ignored {commitments.stale_non_cover_ignored:,.2f} units on non-cover sales "
                 f"orders older than {commitments.cutoff_date}."
             )
         if commitments.uncovered_cover > 0:
             reasons.append(
                 f"Coverage reference only: customer cover exceeds supplier/YU on-order "
-                f"by {commitments.uncovered_cover}; this does not change demand or the "
+                f"by {commitments.uncovered_cover:,.2f}; this does not change demand or the "
                 "suggested order."
             )
         if trend.significant and trend.delta > 0:
@@ -729,7 +730,7 @@ def get_item_planning_analysis(
             )
             if trend.lead_adjustment_raw > 0:
                 reasons.append(
-                    f"{trend.mode} invoiced demand increased by {trend.delta} units "
+                    f"{trend.mode} invoiced demand increased by {trend.delta:,.2f} units "
                     f"({percent_text}); forecast uses the current run rate "
                     f"{trend.current_average:.2f}/month instead of the baseline "
                     f"{trend.baseline_average:.2f}/month."
@@ -839,6 +840,7 @@ def _bulk_cover_quantities(session: Session) -> dict[uuid.UUID, Decimal]:
         .where(
             CoverOrderSnapshot.is_current == true(),
             CoverOrderLine.item_id.is_not(None),
+            CoverOrderLine.is_cover_order == true(),
         )
         .group_by(CoverOrderLine.item_id)
     )
@@ -1004,15 +1006,15 @@ def get_order_analysis(
         reason_parts: list[str] = []
         if commitments.immediate_shortage > 0:
             reason_parts.append(
-                f"physical shortage {commitments.immediate_shortage}"
+                f"physical shortage {commitments.immediate_shortage:,.2f}"
             )
         if adjusted > 0:
             reason_parts.append(
-                f"pool {commitments.projected_pool} is below adjusted target "
+                f"pool {commitments.projected_pool:,.2f} is below adjusted target "
                 f"{adjusted_target:.2f}"
             )
         if stale_non_cover != 0:
-            reason_parts.append(f"ignored stale non-cover {stale_non_cover}")
+            reason_parts.append(f"ignored stale non-cover {stale_non_cover:,.2f}")
         if trend.significant and trend.delta > 0:
             if trend.lead_adjustment_raw > 0:
                 reason_parts.append(
@@ -1025,7 +1027,7 @@ def get_order_analysis(
                 )
         if commitments.uncovered_cover > 0:
             reason_parts.append(
-                f"cover backing gap {commitments.uncovered_cover} (informational only)"
+                f"cover backing gap {commitments.uncovered_cover:,.2f} (informational only)"
             )
         if commitments.immediate_shortage > 0:
             status: PlanningStatus = "critical"
