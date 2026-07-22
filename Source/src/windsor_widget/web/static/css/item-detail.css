@@ -86,3 +86,8 @@
   .sales-chart-stats { grid-template-columns: 1fr; }
   .sales-chart-legend { justify-content: flex-start; flex-wrap: wrap; }
 }
+
+/* Customer last invoiced price */
+.customer-sales-table .price-start { border-left: 3px solid var(--success); }
+.last-price-cell strong { display: block; color: var(--text-strong); font-size: 13px; }
+.last-price-cell small { display: block; margin-top: 2px; color: var(--muted); font-size: 10px; white-space: nowrap; }

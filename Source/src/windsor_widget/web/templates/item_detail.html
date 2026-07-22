@@ -213,6 +213,7 @@
             <th data-sort="number" class="number">Period Value</th>
             <th data-sort="number" class="number supply-start">All-Time Qty</th>
             <th data-sort="number" class="number">All-Time Invoices</th>
+            <th data-sort="number" class="number price-start">Last Unit Price</th>
             <th data-sort="date">First Bought</th>
             <th data-sort="date">Last Bought</th>
           </tr>
@@ -228,11 +229,16 @@
             <td data-value="{{ customer.period_value }}" class="number">{{ customer.period_value | qty }}</td>
             <td data-value="{{ customer.all_time_quantity }}" class="number supply-start strong-number">{{ customer.all_time_quantity | qty }}</td>
             <td data-value="{{ customer.all_time_invoice_count }}" class="number">{{ customer.all_time_invoice_count | integer }}</td>
+            <td data-value="{{ customer.last_net_unit_price }}" class="number price-start last-price-cell">
+              <strong>{% if customer.last_currency_code %}{{ customer.last_currency_code }} {% endif %}{{ customer.last_net_unit_price | qty }}</strong>
+              <small>Invoice {{ customer.last_invoice_no or "—" }} · Qty {{ customer.last_purchase_quantity | qty }}</small>
+              {% if customer.last_discount_percent != 0 %}<small>MYOB unit {{ customer.last_unit_price | qty }} less {{ customer.last_discount_percent | qty }}%</small>{% endif %}
+            </td>
             <td data-value="{{ customer.first_purchase_date or '' }}">{{ customer.first_purchase_date or "—" }}</td>
             <td data-value="{{ customer.last_purchase_date or '' }}">{{ customer.last_purchase_date or "—" }}</td>
           </tr>
           {% else %}
-          <tr><td colspan="10" class="empty-state">No invoiced customers were found for this item.</td></tr>
+          <tr><td colspan="11" class="empty-state">No invoiced customers were found for this item.</td></tr>
           {% endfor %}
         </tbody>
       </table>

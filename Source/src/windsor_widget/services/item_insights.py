@@ -78,6 +78,12 @@ class ItemCustomerSalesRow:
     all_time_value: Decimal
     first_purchase_date: date | None
     last_purchase_date: date | None
+    last_invoice_no: str | None
+    last_purchase_quantity: Decimal
+    last_unit_price: Decimal
+    last_discount_percent: Decimal
+    last_net_unit_price: Decimal
+    last_currency_code: str | None
 
 
 def _decimal(value: object) -> Decimal:
@@ -289,6 +295,76 @@ def _sales_aggregate_statement(
     )
 
 
+def _latest_customer_price_by_customer(
+    session: Session,
+    *,
+    item_id: uuid.UUID,
+    as_of_date: date,
+) -> dict[
+    uuid.UUID,
+    tuple[date, str, Decimal, Decimal, Decimal, Decimal, str | None],
+]:
+    """Return the latest invoiced line price for each customer."""
+
+    rows = session.execute(
+        select(
+            SalesDocument.customer_account_id,
+            SalesLine.transaction_date,
+            SalesDocument.invoice_no,
+            SalesLine.quantity,
+            SalesLine.unit_price,
+            SalesLine.discount_percent,
+            SalesLine.currency_code,
+        )
+        .select_from(SalesLine)
+        .join(
+            SalesDocument,
+            SalesDocument.sales_document_id == SalesLine.sales_document_id,
+        )
+        .where(
+            SalesLine.item_id == item_id,
+            SalesLine.is_active == true(),
+            func.upper(func.coalesce(SalesLine.sale_status, "")) == "I",
+            SalesLine.transaction_date <= as_of_date,
+        )
+        .order_by(
+            SalesDocument.customer_account_id,
+            SalesLine.transaction_date.desc(),
+            SalesDocument.invoice_no.desc(),
+            SalesLine.line_sequence.desc(),
+        )
+    )
+
+    latest: dict[
+        uuid.UUID,
+        tuple[date, str, Decimal, Decimal, Decimal, Decimal, str | None],
+    ] = {}
+    for (
+        customer_account_id,
+        transaction_date,
+        invoice_no,
+        quantity,
+        unit_price,
+        discount_percent,
+        currency_code,
+    ) in rows:
+        if customer_account_id in latest:
+            continue
+        unit = _decimal(unit_price)
+        discount = _decimal(discount_percent)
+        net_unit = unit * (Decimal("1") - (discount / Decimal("100")))
+        latest[customer_account_id] = (
+            transaction_date,
+            invoice_no,
+            _decimal(quantity),
+            unit,
+            discount,
+            net_unit,
+            currency_code,
+        )
+    return latest
+
+
 def get_item_customer_sales(
     session: Session,
     item_number: str,
@@ -321,6 +397,11 @@ def get_item_customer_sales(
             end_date=as_of_date,
         )
     ).all()
+    latest_price_by_customer = _latest_customer_price_by_customer(
+        session,
+        item_id=item.item_id,
+        as_of_date=as_of_date,
+    )
 
     period_by_customer = {
         row[0]: (
@@ -337,6 +418,9 @@ def get_item_customer_sales(
         period_invoice_count, period_line_count, period_quantity, period_value = (
             period_by_customer.get(row[0], (0, 0, _ZERO, _ZERO))
         )
+        latest_price = latest_price_by_customer.get(row[0])
+        if latest_price is None:
+            latest_price = (row[11], "", _ZERO, _ZERO, _ZERO, _ZERO, None)
         result.append(
             ItemCustomerSalesRow(
                 customer_account_id=row[0],
@@ -355,6 +439,12 @@ def get_item_customer_sales(
                 all_time_value=_decimal(row[9]),
                 first_purchase_date=row[10],
                 last_purchase_date=row[11],
+                last_invoice_no=latest_price[1] or None,
+                last_purchase_quantity=latest_price[2],
+                last_unit_price=latest_price[3],
+                last_discount_percent=latest_price[4],
+                last_net_unit_price=latest_price[5],
+                last_currency_code=latest_price[6],
             )
         )
 
