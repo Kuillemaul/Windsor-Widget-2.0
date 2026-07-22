@@ -373,6 +373,7 @@ def _customer_sales_totals(
     conditions = [
         SalesDocument.customer_account_id == customer_account_id,
         SalesLine.is_active == true(),
+        func.upper(func.coalesce(SalesLine.sale_status, "")) == "I",
     ]
     if start_date is not None:
         conditions.append(SalesLine.transaction_date >= start_date)
@@ -441,6 +442,7 @@ def _customer_cover_totals(
         .where(
             CoverOrderDocument.customer_account_id == customer_account_id,
             CoverOrderSnapshot.is_current == true(),
+            CoverOrderLine.is_cover_order == true(),
         )
     ).one()
     return ActivityTotals(
@@ -477,6 +479,9 @@ def get_item_summary(
         document_id_column=SalesLine.sales_document_id,
         active_column=SalesLine.is_active,
         end_date=as_of,
+        extra_conditions=(
+            func.upper(func.coalesce(SalesLine.sale_status, "")) == "I",
+        ),
     )
     sales_period = _item_line_totals(
         session,
@@ -487,6 +492,9 @@ def get_item_summary(
         active_column=SalesLine.is_active,
         start_date=period_start,
         end_date=as_of,
+        extra_conditions=(
+            func.upper(func.coalesce(SalesLine.sale_status, "")) == "I",
+        ),
     )
     cover = _item_line_totals(
         session,
@@ -506,7 +514,10 @@ def get_item_summary(
                 == CoverOrderDocument.cover_order_snapshot_id,
             ),
         ),
-        extra_conditions=(CoverOrderSnapshot.is_current == true(),),
+        extra_conditions=(
+            CoverOrderSnapshot.is_current == true(),
+            CoverOrderLine.is_cover_order == true(),
+        ),
     )
     purchases_all = _item_line_totals(
         session,
@@ -649,6 +660,7 @@ def _monthly_sales(
         .select_from(from_clause)
         .where(
             SalesLine.is_active == true(),
+            func.upper(func.coalesce(SalesLine.sale_status, "")) == "I",
             SalesLine.transaction_date >= start_date,
             SalesLine.transaction_date <= end_date,
             *conditions,

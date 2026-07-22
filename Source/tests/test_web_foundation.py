@@ -64,3 +64,17 @@ def test_templates_do_not_use_external_cdn_assets() -> None:
     )
     assert "https://" not in combined
     assert "http://" not in combined
+
+
+
+def test_item_summary_assets_and_drilldown_links_are_packaged() -> None:
+    templates = WEB_ROOT / "templates"
+    detail = (templates / "item_detail.html").read_text(encoding="utf-8")
+    items = (templates / "items.html").read_text(encoding="utf-8")
+    order_analysis = (templates / "order_analysis.html").read_text(encoding="utf-8")
+    assert "Explicit Customer Cover" in detail
+    assert "Suggested Order" in detail
+    assert "Monthly invoiced sales" in detail
+    assert "item_detail" in items
+    assert "item_detail" in order_analysis
+    assert (WEB_ROOT / "static" / "css" / "item-detail.css").is_file()

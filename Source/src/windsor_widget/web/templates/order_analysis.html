@@ -69,7 +69,7 @@
         {% for row in rows %}
         <tr class="status-row-{{ row.status }}">
           <td data-value="{{ row.status }}"><span class="badge badge-{{ row.status }}">{{ row.status | title }}</span></td>
-          <td data-value="{{ row.item_number }}"><a class="item-link" href="/order-analysis?q={{ row.item_number }}">{{ row.item_number }}</a></td>
+          <td data-value="{{ row.item_number }}"><a class="item-link" href="{{ request.url_for('item_detail', item_number=row.item_number) }}">{{ row.item_number }}</a></td>
           <td data-value="{{ row.item_name }}" class="description-cell">{{ row.item_name }}</td>
           <td data-value="{{ row.sales_quantity }}" class="number">{{ row.sales_quantity | qty }}</td>
           <td data-value="{{ row.average_monthly_sales }}" class="number">{{ row.average_monthly_sales | qty }}</td>

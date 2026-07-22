@@ -183,6 +183,7 @@ def _seed(session: Session) -> None:
             last_import_batch_id=sales_batch.import_batch_id,
             myob_item_number="I1",
             customer_name_snapshot="Customer A",
+            sale_status="I",
             transaction_date=date(2026, 5, 10),
             quantity=Decimal("2"),
             unit_price=Decimal("5"),
@@ -198,6 +199,7 @@ def _seed(session: Session) -> None:
             last_import_batch_id=sales_batch.import_batch_id,
             myob_item_number="I1",
             customer_name_snapshot="Customer A",
+            sale_status="I",
             transaction_date=date(2026, 7, 10),
             quantity=Decimal("3"),
             unit_price=Decimal("5"),
@@ -300,6 +302,7 @@ def _seed(session: Session) -> None:
         quantity=Decimal("99"),
         unit_price=Decimal("5"),
         line_total=Decimal("495"),
+        is_cover_order=True,
     )
     current_cover_line = CoverOrderLine(
         cover_order_document_id=current_document.cover_order_document_id,
@@ -313,6 +316,7 @@ def _seed(session: Session) -> None:
         quantity=Decimal("4"),
         unit_price=Decimal("5"),
         line_total=Decimal("20"),
+        is_cover_order=True,
     )
     session.add_all([old_cover_line, current_cover_line])
     session.flush()

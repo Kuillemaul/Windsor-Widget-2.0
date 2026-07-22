@@ -40,7 +40,7 @@
       <tbody>
       {% for row in rows %}
       <tr>
-        <td data-value="{{ row.item_number }}"><strong>{{ row.item_number }}</strong></td>
+        <td data-value="{{ row.item_number }}"><a class="item-link" href="{{ request.url_for('item_detail', item_number=row.item_number) }}">{{ row.item_number }}</a></td>
         <td data-value="{{ row.item_name }}" class="description-cell">{{ row.item_name }}</td>
         <td><div class="tag-stack">{% for item_tag in row.tags %}<span class="tag tag-{{ item_tag|lower|replace(' ', '') }}">{{ item_tag }}</span>{% else %}<span class="muted">—</span>{% endfor %}</div></td>
         <td data-value="{{ row.on_hand }}" class="number">{{ row.on_hand | qty }}</td>

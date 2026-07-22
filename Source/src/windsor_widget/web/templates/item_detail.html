@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% block title %}{{ summary.item_number }} · Item Summary · Windsor Widget 2.0{% endblock %}
+{% block content %}
+<section class="page-heading item-detail-heading">
+  <div>
+    <p class="eyebrow">Item Summary</p>
+    <h1>{{ summary.item_number }}</h1>
+    <p class="item-detail-name">{{ summary.item_name }}</p>
+    {% if summary.description and summary.description != summary.item_name %}
+    <p>{{ summary.description }}</p>
+    {% endif %}
+    <div class="tag-stack item-detail-tags">
+      {% for item_tag in policy_row.tags %}
+      <span class="tag tag-{{ item_tag|lower|replace(' ', '') }}">{{ item_tag }}</span>
+      {% else %}
+      <span class="tag">UNCLASSIFIED</span>
+      {% endfor %}
+      <span class="badge badge-{{ planning.status }}">{{ planning.status | replace('_', ' ') | title }}</span>
+    </div>
+  </div>
+  <div class="heading-actions">
+    <a class="button" href="/items">Back to Items</a>
+    <a class="button" href="/order-analysis?q={{ summary.item_number }}">Find in Order Analysis</a>
+  </div>
+</section>
+
+<form class="filter-bar item-detail-filters" method="get" action="{{ request.url.path }}">
+  <label><span>Sales window</span><select name="months">
+    {% for option in (3, 6, 12, 18, 24) %}
+    <option value="{{ option }}" {% if months == option %}selected{% endif %}>{{ option }} months</option>
+    {% endfor %}
+  </select></label>
+  <label><span>Trend method</span><select name="trend">
+    <option value="3v3" {% if trend == '3v3' %}selected{% endif %}>Last 3 vs previous 3</option>
+    <option value="6v6" {% if trend == '6v6' %}selected{% endif %}>Last 6 vs previous 6</option>
+    <option value="yoy" {% if trend == 'yoy' %}selected{% endif %}>Year on year</option>
+  </select></label>
+  <label><span>Fallback lead</span><input type="number" min="1" max="104" name="lead_weeks" value="{{ lead_weeks }}"></label>
+  <label><span>As at</span><input type="date" name="as_of" value="{{ as_of }}"></label>
+  <button class="button button-primary" type="submit">Recalculate</button>
+</form>
+
+<section class="summary-strip">
+  <div><span>Policy</span><strong>{{ policy_row.policy_label }}</strong></div>
+  <div><span>Policy source</span><strong>{{ summary.policy_source | replace('_', ' ') | title }}</strong></div>
+  <div><span>Period</span><strong>{{ summary.period_start }} – {{ summary.as_of_date }}</strong></div>
+  <div><span>Lead time</span><strong>{{ planning.lead_days }} days</strong></div>
+  <div><span>Lead source</span><strong>{{ planning.lead_time_source }}</strong></div>
+  <div><span>Snapshot</span><strong>{% if planning.inventory %}{{ planning.inventory.captured_at }}{% else %}Missing{% endif %}</strong></div>
+</section>
+
+<div class="item-detail-grid">
+  <section class="panel detail-panel">
+    <div class="panel-heading">
+      <div><p class="eyebrow">Control</p><h2>Item and policy</h2></div>
+    </div>
+    <dl class="detail-list">
+      <div><dt>Active</dt><dd>{{ "Yes" if summary.is_active else "No" }}</dd></div>
+      <div><dt>Bought</dt><dd>{{ "Yes" if summary.is_bought else "No" }}</dd></div>
+      <div><dt>Sold</dt><dd>{{ "Yes" if summary.is_sold else "No" }}</dd></div>
+      <div><dt>Inventoried</dt><dd>{{ "Yes" if summary.is_inventoried else "No" }}</dd></div>
+      <div><dt>Buy unit</dt><dd>{{ summary.buy_unit_measure or "—" }}</dd></div>
+      <div><dt>Sell unit</dt><dd>{{ summary.sell_unit_measure or "—" }}</dd></div>
+      <div><dt>Standard cost</dt><dd>{{ summary.standard_cost | qty }}</dd></div>
+      <div><dt>Reorder quantity</dt><dd>{{ summary.reorder_quantity | qty }}</dd></div>
+      <div><dt>Minimum level</dt><dd>{{ summary.minimum_level | qty }}</dd></div>
+    </dl>
+
+    {% if principal.can_change_operations %}
+    <form method="post" action="/items/{{ summary.item_id }}/policy" class="detail-policy-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="return_to" value="{{ request.url.path }}?months={{ months }}&amp;lead_weeks={{ lead_weeks }}&amp;trend={{ trend }}&amp;as_of={{ as_of }}">
+      <label><span>Policy decision</span>
+        <select name="policy">
+          <option value="unknown" {% if summary.replenishment_policy == 'unknown' %}selected{% endif %}>Unclassified</option>
+          <option value="stocked" {% if summary.replenishment_policy == 'stocked' %}selected{% endif %}>Stocked</option>
+          <option value="make_to_order" {% if summary.replenishment_policy == 'make_to_order' %}selected{% endif %}>Made to Order</option>
+          <option value="manual" {% if summary.replenishment_policy == 'manual' %}selected{% endif %}>Run Out / Manual</option>
+        </select>
+      </label>
+      <button class="button button-primary" type="submit">Save policy</button>
+      <small>Policy changes retain user, date/time, old value and new value in the audit log.</small>
+    </form>
+    {% endif %}
+  </section>
+
+  <section class="panel detail-panel">
+    <p class="eyebrow">Supply</p>
+    <h2>Current inventory position</h2>
+    {% if planning.inventory and planning.commitments %}
+    <div class="detail-metrics">
+      <div><span>SOH</span><strong>{{ planning.inventory.on_hand | qty }}</strong></div>
+      <div><span>MYOB Committed</span><strong>{{ planning.inventory.committed | qty }}</strong></div>
+      <div><span>Supplier On Order</span><strong>{{ planning.inventory.on_order | qty }}</strong></div>
+      <div><span>MYOB Available</span><strong>{{ planning.inventory.available | qty }}</strong></div>
+      <div><span>Physical Pool</span><strong>{{ planning.commitments.physical_pool | qty }}</strong></div>
+      <div><span>Projected Pool</span><strong>{{ planning.commitments.projected_pool | qty }}</strong></div>
+    </div>
+    <p class="detail-note">Ordinary sales-order rows are ignored. MYOB Committed and Available are reconciliation references only.</p>
+    {% else %}
+    <div class="alert alert-error">This item is missing from the current inventory snapshot.</div>
+    {% endif %}
+  </section>
+
+  <section class="panel detail-panel cover-panel">
+    <p class="eyebrow">Customer cover</p>
+    <h2>Explicit cover position</h2>
+    <div class="detail-metrics">
+      <div><span>Explicit Customer Cover</span><strong>{{ policy_row.outstanding_cover | qty }}</strong></div>
+      <div><span>SOH + Supplier On Order</span><strong>{{ policy_row.projected_pool | qty }}</strong></div>
+      <div class="{% if policy_row.cover_gap > 0 %}warning-metric{% endif %}"><span>Cover Gap</span><strong>{{ policy_row.cover_gap | qty }}</strong></div>
+      <div><span>Cover Surplus</span><strong>{{ policy_row.cover_surplus | qty }}</strong></div>
+    </div>
+    <p class="detail-note">Only current rows explicitly marked COVER ORDER are included.</p>
+  </section>
+
+  <section class="panel detail-panel demand-panel">
+    <p class="eyebrow">Planning</p>
+    <h2>Demand and recommendation</h2>
+    <div class="detail-metrics">
+      <div><span>Period Sales</span><strong>{{ planning.sales_quantity | qty }}</strong></div>
+      <div><span>Baseline Monthly Avg</span><strong>{{ planning.average_monthly_sales | qty }}</strong></div>
+      <div><span>Recent Monthly Avg</span><strong>{{ planning.trend.current_average | qty }}</strong></div>
+      <div><span>Forecast Monthly Avg</span><strong>{{ planning.trend.forecast_average | qty }}</strong></div>
+      <div><span>Lead Demand</span><strong>{{ planning.lead_demand | qty }}</strong></div>
+      <div><span>Base Target</span><strong>{{ planning.target_stock | qty }}</strong></div>
+      <div><span>Adjusted Target</span><strong>{{ planning.adjusted_target_stock | qty }}</strong></div>
+      <div><span>Base Suggested</span><strong>{{ planning.suggested_order | qty }}</strong></div>
+      <div class="recommendation-metric"><span>Suggested Order</span><strong>{{ planning.adjusted_suggested_order | qty }}</strong></div>
+    </div>
+    <div class="reason-list">
+      {% for reason in planning.reasons %}<div>{{ reason }}</div>{% endfor %}
+    </div>
+  </section>
+</div>
+
+<div class="item-detail-lower-grid">
+  <section class="table-panel detail-table-panel">
+    <div class="table-toolbar">
+      <div><strong>Monthly invoiced sales</strong><span>Zero-sales months remain visible.</span></div>
+    </div>
+    <div class="table-scroll detail-table-scroll">
+      <table class="data-table detail-table">
+        <thead><tr><th>Month</th><th class="number">Quantity</th><th class="number">Value</th></tr></thead>
+        <tbody>
+          {% for point in monthly_sales %}
+          <tr><td>{{ point.month_start }}</td><td class="number">{{ point.quantity | qty }}</td><td class="number">{{ point.value | qty }}</td></tr>
+          {% else %}
+          <tr><td colspan="3" class="empty-state">No sales history was returned.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel detail-panel">
+    <p class="eyebrow">Activity</p>
+    <h2>Transaction history</h2>
+    <dl class="detail-list activity-list">
+      <div><dt>Invoiced sales — selected period</dt><dd>{{ summary.sales_period.quantity | qty }} / {{ summary.sales_period.value | qty }}</dd></div>
+      <div><dt>Invoiced sales — all time</dt><dd>{{ summary.sales_all_time.quantity | qty }} / {{ summary.sales_all_time.value | qty }}</dd></div>
+      <div><dt>Explicit customer cover</dt><dd>{{ summary.current_cover_orders.quantity | qty }} / {{ summary.current_cover_orders.value | qty }}</dd></div>
+      <div><dt>Purchases — selected period</dt><dd>{{ summary.purchases_period.quantity | qty }} / {{ summary.purchases_period.value | qty }}</dd></div>
+      <div><dt>Purchases — all time</dt><dd>{{ summary.purchases_all_time.quantity | qty }} / {{ summary.purchases_all_time.value | qty }}</dd></div>
+    </dl>
+
+    {% if planning.latest_purchase %}
+    <div class="latest-purchase">
+      <strong>Latest purchase</strong>
+      <span>{{ planning.latest_purchase.purchase_no }} · {{ planning.latest_purchase.supplier_name }}</span>
+      <span>{{ planning.latest_purchase.transaction_date }} · {{ planning.latest_purchase.quantity | qty }} at {{ planning.latest_purchase.unit_price | qty }}</span>
+    </div>
+    {% endif %}
+
+    {% if planning.data_gaps %}
+    <div class="gap-list">
+      {% for gap in planning.data_gaps %}<div class="gap-item">{{ gap }}</div>{% endfor %}
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
