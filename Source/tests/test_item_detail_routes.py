@@ -15,6 +15,8 @@ class _Templates:
                 "item_number": getattr(context.get("summary"), "item_number", None),
                 "months": context.get("months"),
                 "trend": context.get("trend"),
+                "customer_count": len(context.get("customer_sales", ())),
+                "chart_points": len(getattr(context.get("sales_chart"), "points", ())),
             },
             status_code=status_code,
         )
@@ -39,14 +41,17 @@ def _validate_csrf(request, supplied):
     assert supplied == "token"
 
 
-def test_item_detail_route_assembles_summary_planning_and_monthly_sales(monkeypatch):
+def test_item_detail_route_assembles_sales_chart_and_customer_list(monkeypatch):
     summary = SimpleNamespace(
         item_id="00000000-0000-0000-0000-000000000010",
         item_number="I1",
+        period_start="2026-02-01",
     )
     planning = SimpleNamespace(item_number="I1")
     policy = SimpleNamespace(item_number="I1")
-    points = (SimpleNamespace(month_start="2026-07-01"),)
+    points = (SimpleNamespace(month_start="2026-07-01", quantity=10),)
+    chart = SimpleNamespace(points=(SimpleNamespace(),))
+    customers = (SimpleNamespace(display_name="Customer A"),)
 
     monkeypatch.setattr(item_routes, "get_item_summary", lambda *args, **kwargs: summary)
     monkeypatch.setattr(
@@ -58,6 +63,16 @@ def test_item_detail_route_assembles_summary_planning_and_monthly_sales(monkeypa
         item_routes,
         "get_item_monthly_sales",
         lambda *args, **kwargs: points,
+    )
+    monkeypatch.setattr(
+        item_routes,
+        "build_monthly_sales_chart",
+        lambda *args, **kwargs: chart,
+    )
+    monkeypatch.setattr(
+        item_routes,
+        "get_item_customer_sales",
+        lambda *args, **kwargs: customers,
     )
     monkeypatch.setattr(
         item_routes,
@@ -85,6 +100,8 @@ def test_item_detail_route_assembles_summary_planning_and_monthly_sales(monkeypa
         "item_number": "I1",
         "months": 6,
         "trend": "6v6",
+        "customer_count": 1,
+        "chart_points": 1,
     }
 
 

@@ -13,6 +13,10 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
 from windsor_widget.services.item_policy import list_item_policy_rows, set_item_policy
+from windsor_widget.services.item_insights import (
+    build_monthly_sales_chart,
+    get_item_customer_sales,
+)
 from windsor_widget.services.planning import PlanningLookupError, get_item_planning_analysis
 from windsor_widget.services.reporting import (
     ReportingLookupError,
@@ -99,6 +103,13 @@ def build_items_router(
                 months=months,
                 as_of_date=as_of_date,
             )
+            sales_chart = build_monthly_sales_chart(monthly_sales)
+            customer_sales = get_item_customer_sales(
+                session,
+                summary.item_number,
+                period_start=summary.period_start,
+                as_of_date=as_of_date,
+            )
             policy_rows = list_item_policy_rows(
                 session,
                 query=summary.item_number,
@@ -126,6 +137,8 @@ def build_items_router(
                 summary=summary,
                 planning=planning,
                 monthly_sales=monthly_sales,
+                sales_chart=sales_chart,
+                customer_sales=customer_sales,
                 policy_row=policy_row,
                 months=months,
                 lead_weeks=lead_weeks,
