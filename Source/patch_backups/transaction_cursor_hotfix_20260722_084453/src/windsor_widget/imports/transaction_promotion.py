@@ -9,7 +9,7 @@ from datetime import date, datetime
 from decimal import Decimal
 from typing import Any, Callable, Iterable, Iterator, TypeVar
 
-from sqlalchemy import and_, func, insert, or_, select, true, update
+from sqlalchemy import func, insert, select, update
 from sqlalchemy.orm import Session
 
 from windsor_widget.db.models import (
@@ -134,7 +134,6 @@ class _StagedRow:
 class _DocumentPlan:
     entity_id: uuid.UUID
     master_entity_id: uuid.UUID
-    document_number: str
     first_date: date
     last_date: date
     line_count: int = 0
@@ -388,52 +387,27 @@ def _approved_batches(session: Session) -> dict[str, ImportBatch]:
 
 
 def _rows(session: Session, batch: ImportBatch) -> Iterator[_StagedRow]:
-    """Yield accepted rows in fully buffered pages.
-
-    SQL Server/pyodbc cannot execute promotion writes while a streaming SELECT cursor is
-    still active on the same connection unless MARS is enabled. Keyset paging keeps the
-    workflow independent of MARS: every page is consumed with ``all()`` before its rows
-    are yielded to code that may insert or update operational records.
-    """
-
-    page_size = 2_000
-    last_key: tuple[int, int] | None = None
-    while True:
-        statement = select(
+    statement = (
+        select(
             ImportRow.import_row_id,
             ImportRow.row_number,
             ImportRow.row_sha256,
             ImportRow.raw_json,
-        ).where(
+        )
+        .where(
             ImportRow.import_batch_id == batch.import_batch_id,
             ImportRow.status == "accepted",
         )
-        if last_key is not None:
-            last_row_number, last_import_row_id = last_key
-            statement = statement.where(
-                or_(
-                    ImportRow.row_number > last_row_number,
-                    and_(
-                        ImportRow.row_number == last_row_number,
-                        ImportRow.import_row_id > last_import_row_id,
-                    ),
-                )
-            )
-        page = session.execute(
-            statement.order_by(ImportRow.row_number, ImportRow.import_row_id).limit(page_size)
-        ).all()
-        if not page:
-            return
-
-        for import_row_id, row_number, row_sha256, raw_json in page:
-            yield _StagedRow(
-                import_row_id=import_row_id,
-                row_number=row_number,
-                row_sha256=row_sha256,
-                raw_json=raw_json,
-            )
-        last_import_row_id, last_row_number, _, _ = page[-1]
-        last_key = (last_row_number, last_import_row_id)
+        .order_by(ImportRow.row_number)
+        .execution_options(yield_per=2_000)
+    )
+    for import_row_id, row_number, row_sha256, raw_json in session.execute(statement):
+        yield _StagedRow(
+            import_row_id=import_row_id,
+            row_number=row_number,
+            row_sha256=row_sha256,
+            raw_json=raw_json,
+        )
 
 
 def _master_maps(session: Session) -> tuple[dict[str, uuid.UUID], dict[str, uuid.UUID], dict[str, uuid.UUID]]:
@@ -464,16 +438,6 @@ def _map_row(
         ) from exc
 
 
-
-def _normalise_document_key(key: tuple[str, str]) -> tuple[str, str]:
-    """Match SQL Server's case-insensitive document-number identity."""
-
-    # SQL Server compares document numbers case-insensitively under the DEV
-    # database collation. Python dictionary keys must use the same rule or a
-    # case-only MYOB variant (for example STOCK / stock) becomes two inserts.
-    return key[0], key[1].casefold()
-
-
 def _plan_documents(
     session: Session,
     *,
@@ -485,17 +449,13 @@ def _plan_documents(
     key_of_entity: Callable[[SalesDocument | PurchaseDocument], tuple[str, str]],
     id_of_entity: Callable[[SalesDocument | PurchaseDocument], uuid.UUID],
 ) -> dict[tuple[str, str], _DocumentPlan]:
-    existing = {
-        _normalise_document_key(key_of_entity(entity)): entity
-        for entity in existing_entities
-    }
+    existing = {key_of_entity(entity): entity for entity in existing_entities}
     plans: dict[tuple[str, str], _DocumentPlan] = {}
 
     for row in _rows(session, batch):
         candidate = _map_row(row, mapper, source_type)
-        raw_key = candidate.document_key
-        key = _normalise_document_key(raw_key)
-        record_id = raw_key[0]
+        key = candidate.document_key
+        record_id = key[0]
         master_id = master_ids.get(record_id)
         if master_id is None:
             raise TransactionImportError(
@@ -506,24 +466,16 @@ def _plan_documents(
         if plan is None:
             entity = existing.get(key)
             if entity is None:
-                document_number = raw_key[1]
                 plan = _DocumentPlan(
                     entity_id=uuid.uuid4(),
                     master_entity_id=master_id,
-                    document_number=document_number,
                     first_date=candidate.transaction_date,
                     last_date=candidate.transaction_date,
                 )
             else:
-                document_number = (
-                    entity.invoice_no
-                    if isinstance(entity, SalesDocument)
-                    else entity.purchase_no
-                )
                 plan = _DocumentPlan(
                     entity_id=id_of_entity(entity),
                     master_entity_id=master_id,
-                    document_number=document_number,
                     first_date=candidate.transaction_date,
                     last_date=candidate.transaction_date,
                     exists=True,
@@ -552,6 +504,7 @@ def _plan_documents(
                 entity.line_count != plan.line_count,
             )
     return plans
+
 
 def _sales_business_mapping(
     candidate: SalesLineCandidate,
@@ -630,14 +583,14 @@ def _promote_documents_and_lines(
                     "sales_document_id": plan.entity_id,
                     "customer_account_id": plan.master_entity_id,
                     "myob_customer_record_id": key[0],
-                    "invoice_no": plan.document_number,
+                    "invoice_no": key[1],
                 }
             else:
                 mapping = {
                     "purchase_document_id": plan.entity_id,
                     "supplier_id": plan.master_entity_id,
                     "myob_supplier_record_id": key[0],
-                    "purchase_no": plan.document_number,
+                    "purchase_no": key[1],
                 }
             mapping.update(
                 {
@@ -698,7 +651,7 @@ def _promote_documents_and_lines(
 
     for row in _rows(session, batch):
         candidate = _map_row(row, mapper, source_type)
-        key = _normalise_document_key(candidate.document_key)
+        key = candidate.document_key
         sequences[key] = sequences.get(key, 0) + 1
         sequence = sequences[key]
         plan = plans[key]
@@ -828,17 +781,15 @@ def _promote_cover_snapshot(
                 f"cover_order_snapshot row {row.row_number} references MYOB Record ID "
                 f"{candidate.myob_customer_record_id!r}, which has no customer account."
             )
-        key = _normalise_document_key(candidate.document_key)
-        plan = plans.get(key)
+        plan = plans.get(candidate.document_key)
         if plan is None:
             plan = _DocumentPlan(
                 entity_id=uuid.uuid4(),
                 master_entity_id=customer_id,
-                document_number=candidate.invoice_no,
                 first_date=candidate.transaction_date,
                 last_date=candidate.transaction_date,
             )
-            plans[key] = plan
+            plans[candidate.document_key] = plan
         plan.first_date = min(plan.first_date, candidate.transaction_date)
         plan.last_date = max(plan.last_date, candidate.transaction_date)
         plan.line_count += 1
@@ -849,7 +800,7 @@ def _promote_cover_snapshot(
             raise TransactionImportError("A user is required to commit a cover snapshot.")
         session.execute(
             update(CoverOrderSnapshot)
-            .where(CoverOrderSnapshot.is_current == true())
+            .where(CoverOrderSnapshot.is_current.is_(True))
             .values(is_current=False)
         )
         session.add(
@@ -865,11 +816,6 @@ def _promote_cover_snapshot(
                 committed_by_user_id=actor.user_id,
             )
         )
-
-        # The snapshot parent must exist in SQL Server before bulk inserting
-        # cover-order documents that reference it.
-        session.flush()
-
         documents = []
         for key, plan in plans.items():
             documents.append(
@@ -878,7 +824,7 @@ def _promote_cover_snapshot(
                     "cover_order_snapshot_id": snapshot_id,
                     "customer_account_id": plan.master_entity_id,
                     "myob_customer_record_id": key[0],
-                    "invoice_no": plan.document_number,
+                    "invoice_no": key[1],
                     "first_transaction_date": plan.first_date,
                     "last_transaction_date": plan.last_date,
                     "line_count": plan.line_count,
@@ -901,7 +847,7 @@ def _promote_cover_snapshot(
 
     for row in _rows(session, batch):
         candidate = _map_row(row, map_sales_line, "cover_order_snapshot")
-        key = _normalise_document_key(candidate.document_key)
+        key = candidate.document_key
         sequences[key] = sequences.get(key, 0) + 1
         item_number = candidate.myob_item_number
         item_id = item_ids.get(item_number) if item_number is not None else None

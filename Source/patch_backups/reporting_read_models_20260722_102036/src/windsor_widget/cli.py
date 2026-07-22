@@ -30,16 +30,6 @@ from windsor_widget.imports.transaction_promotion import (
     promote_transaction_batches,
     review_transaction_batches,
 )
-from windsor_widget.services.reporting import (
-    ReportingLookupError,
-    get_customer_summary,
-    get_foundation_counts,
-    get_item_summary,
-    parse_iso_date,
-    search_customers,
-    search_items,
-    validate_foundation_counts,
-)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -140,46 +130,6 @@ def build_parser() -> argparse.ArgumentParser:
     )
     transaction_promote.add_argument("--username")
     transaction_promote.add_argument("--display-name")
-
-    reporting_verify = subcommands.add_parser(
-        "verify-reporting-data",
-        help="verify committed reporting counts and transaction lineage",
-    )
-    reporting_verify.add_argument("config", type=Path)
-
-    find_items = subcommands.add_parser(
-        "find-items",
-        help="search active planning items by number or name",
-    )
-    find_items.add_argument("config", type=Path)
-    find_items.add_argument("query")
-    find_items.add_argument("--limit", type=int, default=20)
-
-    find_customers = subcommands.add_parser(
-        "find-customers",
-        help="search active customers by name, card ID or record ID",
-    )
-    find_customers.add_argument("config", type=Path)
-    find_customers.add_argument("query")
-    find_customers.add_argument("--limit", type=int, default=20)
-
-    item_summary = subcommands.add_parser(
-        "item-summary",
-        help="show a read-only Item Summary for one exact MYOB item number",
-    )
-    item_summary.add_argument("config", type=Path)
-    item_summary.add_argument("item_number")
-    item_summary.add_argument("--months", type=int, default=12)
-    item_summary.add_argument("--as-of", type=parse_iso_date)
-
-    customer_summary = subcommands.add_parser(
-        "customer-summary",
-        help="show a read-only Customer Summary for one MYOB record ID",
-    )
-    customer_summary.add_argument("config", type=Path)
-    customer_summary.add_argument("myob_record_id")
-    customer_summary.add_argument("--months", type=int, default=12)
-    customer_summary.add_argument("--as-of", type=parse_iso_date)
     return parser
 
 
@@ -217,56 +167,6 @@ def _print_transaction_promotion(summary) -> None:
         f"created={summary.lines_created}; updated={summary.lines_updated}; "
         f"unchanged={summary.lines_unchanged}"
     )
-
-
-def _print_activity(label, totals) -> None:
-    print(
-        f"{label}: documents={totals.document_count}; lines={totals.line_count}; "
-        f"quantity={totals.quantity}; value={totals.value}; "
-        f"first={totals.first_date or '-'}; last={totals.last_date or '-'}"
-    )
-
-
-def _print_item_summary(summary) -> None:
-    print(f"Item: {summary.item_number} — {summary.item_name}")
-    print(
-        f"Status: active={summary.is_active}; bought={summary.is_bought}; "
-        f"sold={summary.is_sold}; inventoried={summary.is_inventoried}; "
-        f"excluded={summary.excluded_from_item_view}"
-    )
-    print(
-        f"Planning: policy={summary.replenishment_policy}; source={summary.policy_source}; "
-        f"reorder_quantity={summary.reorder_quantity}; minimum_level={summary.minimum_level}; "
-        f"standard_cost={summary.standard_cost}"
-    )
-    print(f"Period: {summary.period_start} to {summary.as_of_date}")
-    print(f"Current cover snapshot: {summary.cover_snapshot_captured_at or '-'}")
-    _print_activity("Sales all time", summary.sales_all_time)
-    _print_activity("Sales period", summary.sales_period)
-    _print_activity("Current cover orders", summary.current_cover_orders)
-    _print_activity("Purchases all time", summary.purchases_all_time)
-    _print_activity("Purchases period", summary.purchases_period)
-
-
-def _print_customer_summary(summary) -> None:
-    print(
-        f"Customer: {summary.display_name} "
-        f"(record={summary.myob_record_id or '-'}; card={summary.myob_card_id or '-'})"
-    )
-    print(
-        f"Location: {summary.address_line_1 or '-'}, {summary.city or '-'}, "
-        f"{summary.state or '-'} {summary.postcode or '-'}"
-    )
-    print(
-        f"Commercial: active={summary.is_active}; payment_basis={summary.payment_basis}; "
-        f"freight_payer={summary.freight_payer}; price_level={summary.price_level or '-'}; "
-        f"shipping_method={summary.shipping_method or '-'}"
-    )
-    print(f"Period: {summary.period_start} to {summary.as_of_date}")
-    print(f"Current cover snapshot: {summary.cover_snapshot_captured_at or '-'}")
-    _print_activity("Sales all time", summary.sales_all_time)
-    _print_activity("Sales period", summary.sales_period)
-    _print_activity("Current cover orders", summary.current_cover_orders)
 
 
 def main() -> int:
@@ -330,81 +230,6 @@ def main() -> int:
         else:
             print("Dry run only; no database connection or write was performed.")
         return 0
-
-    if args.command in {
-        "verify-reporting-data",
-        "find-items",
-        "find-customers",
-        "item-summary",
-        "customer-summary",
-    }:
-        settings = load_settings(args.config)
-        engine = create_database_engine(settings)
-        session_factory = create_session_factory(engine)
-        try:
-            with session_factory() as session:
-                try:
-                    if args.command == "verify-reporting-data":
-                        counts = get_foundation_counts(session)
-                        for field_name in counts.__dataclass_fields__:
-                            print(f"{field_name}: {getattr(counts, field_name)}")
-                        issues = validate_foundation_counts(counts)
-                        if issues:
-                            print("Reporting verification failed:")
-                            for issue in issues:
-                                print(f"- {issue}")
-                            return 1
-                        print("Reporting data verification passed.")
-                        return 0
-
-                    if args.command == "find-items":
-                        results = search_items(session, args.query, limit=args.limit)
-                        if not results:
-                            print("No matching active planning items were found.")
-                            return 0
-                        for item in results:
-                            print(f"{item.item_number}\t{item.item_name}")
-                        return 0
-
-                    if args.command == "find-customers":
-                        results = search_customers(
-                            session, args.query, limit=args.limit
-                        )
-                        if not results:
-                            print("No matching active customers were found.")
-                            return 0
-                        for customer in results:
-                            print(
-                                f"{customer.myob_record_id or '-'}\t"
-                                f"{customer.myob_card_id or '-'}\t"
-                                f"{customer.display_name}\t"
-                                f"{customer.city or '-'} {customer.state or '-'}"
-                            )
-                        return 0
-
-                    if args.command == "item-summary":
-                        summary = get_item_summary(
-                            session,
-                            args.item_number,
-                            months=args.months,
-                            as_of_date=args.as_of,
-                        )
-                        _print_item_summary(summary)
-                        return 0
-
-                    summary = get_customer_summary(
-                        session,
-                        args.myob_record_id,
-                        months=args.months,
-                        as_of_date=args.as_of,
-                    )
-                    _print_customer_summary(summary)
-                    return 0
-                except (ReportingLookupError, ValueError) as exc:
-                    print(f"Reporting query stopped safely: {exc}")
-                    return 1
-        finally:
-            engine.dispose()
 
     if args.command in {
         "review-master-imports",
