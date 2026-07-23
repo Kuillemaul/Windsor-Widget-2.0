@@ -59,9 +59,9 @@
     <small>{{ dashboard.purchase_period.document_count | integer }} documents</small>
   </article>
   <article class="metric-card">
-    <span class="metric-label">Open purchase quantity</span>
-    <strong>{{ dashboard.purchase_all_time.open_quantity | qty }}</strong>
-    <small>MYOB order quantity less received quantity</small>
+    <span class="metric-label">All-time bill quantity</span>
+    <strong>{{ dashboard.purchase_all_time.transaction_quantity | qty }}</strong>
+    <small>Only status B lines from ITEMPURbills.TXT</small>
   </article>
   <article class="metric-card">
     <span class="metric-label">Linked items</span>
@@ -94,13 +94,13 @@
       <div><span>Buffer</span><strong>{{ dashboard.default_buffer_days or 0 }} days</strong></div>
       <div class="supplier-lead-total"><span>Total default lead</span><strong>{{ dashboard.default_total_lead_days }} days</strong></div>
     </div>
-    <p class="muted">Item overrides are shown below. Shipment and container milestones will join this view during the On Order stage.</p>
+    <p class="muted">Item overrides are shown below. Open orders and shipment milestones will be added from a separate order source during the On Order stage.</p>
   </section>
 </div>
 
 <section class="table-panel supplier-items-panel">
   <div class="table-toolbar">
-    <div><strong>Supplier items</strong><span>Purchase history, current inventory position, open MYOB quantities and effective lead times.</span></div>
+    <div><strong>Supplier items</strong><span>Bill quantities, current inventory position, last billed costs and effective lead times.</span></div>
     <div class="buyer-count"><strong>{{ dashboard.items | length }}</strong><span>items</span></div>
   </div>
   <div class="table-scroll supplier-items-scroll">
@@ -115,9 +115,8 @@
         <th data-sort="number" class="number">Inventory On Order</th>
         <th data-sort="number" class="number demand-start">Period Qty</th>
         <th data-sort="number" class="number">All-Time Qty</th>
-        <th data-sort="number" class="number supply-start">Received</th>
-        <th data-sort="number" class="number">Open PO Qty</th>
-        <th data-sort="number" class="number price-start">Last Unit Price</th>
+        <th data-sort="number" class="number supply-start">All-Time Bill Value</th>
+        <th data-sort="number" class="number price-start">Last Billed Unit Cost</th>
         <th data-sort="date">Last Purchase</th>
         {% if edit_mode %}<th>Settings</th>{% endif %}
       </tr></thead>
@@ -141,8 +140,7 @@
           <td data-value="{{ item.inventory_on_order }}" class="number">{{ item.inventory_on_order | qty }}</td>
           <td data-value="{{ item.period_quantity }}" class="number demand-start">{{ item.period_quantity | qty }}</td>
           <td data-value="{{ item.all_time_quantity }}" class="number">{{ item.all_time_quantity | qty }}</td>
-          <td data-value="{{ item.received_quantity }}" class="number supply-start">{{ item.received_quantity | qty }}</td>
-          <td data-value="{{ item.open_quantity }}" class="number {% if item.open_quantity > 0 %}strong-number{% endif %}">{{ item.open_quantity | qty }}</td>
+          <td data-value="{{ item.all_time_value }}" class="number supply-start">{{ item.all_time_value | qty }}</td>
           <td data-value="{{ item.last_purchase_price or 0 }}" class="number price-start">
             {% if item.last_purchase_price is not none %}<strong>{% if item.last_purchase_currency %}{{ item.last_purchase_currency }} {% endif %}{{ item.last_purchase_price | qty }}</strong>{% else %}—{% endif %}
           </td>
@@ -171,7 +169,7 @@
           {% endif %}
         </tr>
         {% else %}
-        <tr><td colspan="{{ 14 if edit_mode else 13 }}" class="empty-state">No purchased or linked items were found.</td></tr>
+        <tr><td colspan="{{ 13 if edit_mode else 12 }}" class="empty-state">No purchased or linked items were found.</td></tr>
         {% endfor %}
       </tbody>
     </table>
@@ -180,7 +178,7 @@
 
 <section class="table-panel supplier-documents-panel">
   <div class="table-toolbar">
-    <div><strong>Recent purchase documents</strong><span>Quantities come directly from the active MYOB purchase lines.</span></div>
+    <div><strong>Recent purchase bills</strong><span>Quantity and cost come only from status B lines imported from ITEMPURbills.TXT.</span></div>
   </div>
   <div class="table-scroll supplier-documents-scroll">
     <table class="data-table supplier-documents-table" data-sortable-table>
@@ -190,12 +188,8 @@
         <th data-sort="text">Supplier Invoice</th>
         <th data-sort="text">Status</th>
         <th data-sort="number" class="number">Lines</th>
-        <th data-sort="number" class="number demand-start">Transaction Qty</th>
-        <th data-sort="number" class="number">Order Qty</th>
-        <th data-sort="number" class="number supply-start">Received</th>
-        <th data-sort="number" class="number">Billed</th>
-        <th data-sort="number" class="number">Open Qty</th>
-        <th data-sort="number" class="number price-start">Value</th>
+        <th data-sort="number" class="number demand-start">Bill Qty</th>
+        <th data-sort="number" class="number price-start">Bill Value</th>
         <th data-sort="date">Shipping Date</th>
       </tr></thead>
       <tbody>
@@ -207,15 +201,11 @@
           <td data-value="{{ document.status_summary }}">{{ document.status_summary }}</td>
           <td data-value="{{ document.line_count }}" class="number">{{ document.line_count | integer }}</td>
           <td data-value="{{ document.transaction_quantity }}" class="number demand-start">{{ document.transaction_quantity | qty }}</td>
-          <td data-value="{{ document.order_quantity }}" class="number">{{ document.order_quantity | qty }}</td>
-          <td data-value="{{ document.received_quantity }}" class="number supply-start">{{ document.received_quantity | qty }}</td>
-          <td data-value="{{ document.billed_quantity }}" class="number">{{ document.billed_quantity | qty }}</td>
-          <td data-value="{{ document.open_quantity }}" class="number {% if document.open_quantity > 0 %}strong-number{% endif %}">{{ document.open_quantity | qty }}</td>
           <td data-value="{{ document.value }}" class="number price-start">{% if document.currency_code %}{{ document.currency_code }} {% endif %}{{ document.value | qty }}</td>
           <td data-value="{{ document.latest_shipping_date or '' }}">{{ document.latest_shipping_date or "—" }}</td>
         </tr>
         {% else %}
-        <tr><td colspan="12" class="empty-state">No purchase documents were found.</td></tr>
+        <tr><td colspan="8" class="empty-state">No purchase documents were found.</td></tr>
         {% endfor %}
       </tbody>
     </table>

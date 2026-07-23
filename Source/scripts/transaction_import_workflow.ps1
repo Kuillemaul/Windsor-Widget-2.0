@@ -3,7 +3,9 @@ param(
     [ValidateSet("Review", "Approve", "Preview", "Commit")]
     [string]$Action = "Review",
     [string]$Username = "",
-    [string]$DisplayName = ""
+    [string]$DisplayName = "",
+    [ValidateSet("sales_transactions", "cover_order_snapshot", "purchase_transactions")]
+    [string[]]$SourceType = @()
 )
 
 $ErrorActionPreference = "Stop"
@@ -39,22 +41,34 @@ try {
             if (-not $Username -or -not $DisplayName) {
                 throw "Approve requires -Username and -DisplayName."
             }
-            Invoke-CheckedPython @(
+            $Arguments = @(
                 "-m", "windsor_widget.cli", "approve-transaction-imports", $Config,
                 "--username", $Username, "--display-name", $DisplayName
             )
+            foreach ($SelectedSource in $SourceType) {
+                $Arguments += @("--source-type", $SelectedSource)
+            }
+            Invoke-CheckedPython $Arguments
         }
         "Preview" {
-            Invoke-CheckedPython @("-m", "windsor_widget.cli", "promote-transaction-imports", $Config)
+            $Arguments = @("-m", "windsor_widget.cli", "promote-transaction-imports", $Config)
+            foreach ($SelectedSource in $SourceType) {
+                $Arguments += @("--source-type", $SelectedSource)
+            }
+            Invoke-CheckedPython $Arguments
         }
         "Commit" {
             if (-not $Username -or -not $DisplayName) {
                 throw "Commit requires -Username and -DisplayName."
             }
-            Invoke-CheckedPython @(
+            $Arguments = @(
                 "-m", "windsor_widget.cli", "promote-transaction-imports", $Config,
                 "--commit", "--username", $Username, "--display-name", $DisplayName
             )
+            foreach ($SelectedSource in $SourceType) {
+                $Arguments += @("--source-type", $SelectedSource)
+            }
+            Invoke-CheckedPython $Arguments
         }
     }
 }

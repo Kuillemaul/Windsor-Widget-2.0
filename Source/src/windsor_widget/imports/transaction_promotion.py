@@ -252,18 +252,31 @@ def review_transaction_batches(session: Session) -> tuple[TransactionBatchReview
 
 
 def _require_one_batch(
-    reviews: Iterable[TransactionBatchReview], *, allowed_statuses: set[str]
+    reviews: Iterable[TransactionBatchReview],
+    *,
+    allowed_statuses: set[str],
+    source_types: Iterable[str] = TRANSACTION_SOURCE_TYPES,
 ) -> dict[str, TransactionBatchReview]:
+    requested = tuple(dict.fromkeys(source_types))
+    if not requested:
+        raise TransactionImportError("At least one transaction source type is required.")
+
+    invalid = [source_type for source_type in requested if source_type not in TRANSACTION_SOURCE_TYPES]
+    if invalid:
+        raise TransactionImportError(
+            "Unsupported transaction source type(s): " + ", ".join(invalid) + "."
+        )
+
     grouped: dict[str, list[TransactionBatchReview]] = {
-        source_type: [] for source_type in TRANSACTION_SOURCE_TYPES
+        source_type: [] for source_type in requested
     }
     for review in reviews:
-        if review.status in allowed_statuses:
+        if review.source_type in grouped and review.status in allowed_statuses:
             grouped[review.source_type].append(review)
 
     selected: dict[str, TransactionBatchReview] = {}
     problems: list[str] = []
-    for source_type in TRANSACTION_SOURCE_TYPES:
+    for source_type in requested:
         candidates = grouped[source_type]
         if not candidates:
             problems.append(f"no eligible {source_type} batch")
@@ -295,17 +308,23 @@ def _validate_clean_batch(review: TransactionBatchReview) -> None:
 
 
 def approve_transaction_batches(
-    session: Session, *, actor: AppUser
+    session: Session,
+    *,
+    actor: AppUser,
+    source_types: Iterable[str] = TRANSACTION_SOURCE_TYPES,
 ) -> TransactionApprovalSummary:
+    requested = tuple(dict.fromkeys(source_types))
     selected = _require_one_batch(
-        review_transaction_batches(session), allowed_statuses={"staged", "approved"}
+        review_transaction_batches(session),
+        allowed_statuses={"staged", "approved"},
+        source_types=requested,
     )
     correlation_id = uuid.uuid4()
     approved: list[uuid.UUID] = []
     already: list[uuid.UUID] = []
     accepted_rows = 0
 
-    for source_type in TRANSACTION_SOURCE_TYPES:
+    for source_type in requested:
         review = selected[source_type]
         _validate_clean_batch(review)
         batch = session.get(ImportBatch, review.import_batch_id)
@@ -362,9 +381,16 @@ def approve_transaction_batches(
     return TransactionApprovalSummary(tuple(approved), tuple(already), accepted_rows)
 
 
-def _approved_batches(session: Session) -> dict[str, ImportBatch]:
+def _approved_batches(
+    session: Session,
+    *,
+    source_types: Iterable[str] = TRANSACTION_SOURCE_TYPES,
+) -> dict[str, ImportBatch]:
+    requested = tuple(dict.fromkeys(source_types))
     selected = _require_one_batch(
-        review_transaction_batches(session), allowed_statuses={"approved"}
+        review_transaction_batches(session),
+        allowed_statuses={"approved"},
+        source_types=requested,
     )
     batches: dict[str, ImportBatch] = {}
     for source_type, review in selected.items():
@@ -542,14 +568,16 @@ def _plan_documents(
         if entity is not None:
             plan.changed = any(
                 (
-                    entity.customer_account_id
-                    if isinstance(entity, SalesDocument)
-                    else entity.supplier_id
+                    (
+                        entity.customer_account_id
+                        if isinstance(entity, SalesDocument)
+                        else entity.supplier_id
+                    )
+                    != plan.master_entity_id,
+                    entity.first_transaction_date != plan.first_date,
+                    entity.last_transaction_date != plan.last_date,
+                    entity.line_count != plan.line_count,
                 )
-                != plan.master_entity_id,
-                entity.first_transaction_date != plan.first_date,
-                entity.last_transaction_date != plan.last_date,
-                entity.line_count != plan.line_count,
             )
     return plans
 
@@ -955,59 +983,74 @@ def promote_transaction_batches(
     *,
     commit: bool,
     actor: AppUser | None = None,
+    source_types: Iterable[str] = TRANSACTION_SOURCE_TYPES,
 ) -> TransactionPromotionSummary:
     if commit and actor is None:
         raise TransactionImportError("An application user is required for committed promotion.")
 
-    batches = _approved_batches(session)
+    requested = tuple(dict.fromkeys(source_types))
+    batches = _approved_batches(session, source_types=requested)
     customer_ids, supplier_ids, item_ids = _master_maps(session)
-    changes = (
-        _promote_documents_and_lines(
-            session,
-            batch=batches["sales_transactions"],
-            source_type="sales_transactions",
-            commit=commit,
-            mapper=map_sales_line,
-            document_model=SalesDocument,
-            line_model=SalesLine,
-            document_primary_key="sales_document_id",
-            line_primary_key="sales_line_id",
-            document_foreign_key="sales_document_id",
-            master_ids=customer_ids,
-            item_ids=item_ids,
-            entity_type="sales_line",
-        ),
-        _promote_cover_snapshot(
-            session,
-            batch=batches["cover_order_snapshot"],
-            actor=actor,
-            commit=commit,
-            customer_ids=customer_ids,
-            item_ids=item_ids,
-        ),
-        _promote_documents_and_lines(
-            session,
-            batch=batches["purchase_transactions"],
-            source_type="purchase_transactions",
-            commit=commit,
-            mapper=map_purchase_line,
-            document_model=PurchaseDocument,
-            line_model=PurchaseLine,
-            document_primary_key="purchase_document_id",
-            line_primary_key="purchase_line_id",
-            document_foreign_key="purchase_document_id",
-            master_ids=supplier_ids,
-            item_ids=item_ids,
-            entity_type="purchase_line",
-        ),
-    )
+    changes_list: list[TransactionChangeCounts] = []
 
+    for source_type in requested:
+        if source_type == "sales_transactions":
+            changes_list.append(
+                _promote_documents_and_lines(
+                    session,
+                    batch=batches[source_type],
+                    source_type=source_type,
+                    commit=commit,
+                    mapper=map_sales_line,
+                    document_model=SalesDocument,
+                    line_model=SalesLine,
+                    document_primary_key="sales_document_id",
+                    line_primary_key="sales_line_id",
+                    document_foreign_key="sales_document_id",
+                    master_ids=customer_ids,
+                    item_ids=item_ids,
+                    entity_type="sales_line",
+                )
+            )
+        elif source_type == "cover_order_snapshot":
+            changes_list.append(
+                _promote_cover_snapshot(
+                    session,
+                    batch=batches[source_type],
+                    actor=actor,
+                    commit=commit,
+                    customer_ids=customer_ids,
+                    item_ids=item_ids,
+                )
+            )
+        elif source_type == "purchase_transactions":
+            changes_list.append(
+                _promote_documents_and_lines(
+                    session,
+                    batch=batches[source_type],
+                    source_type=source_type,
+                    commit=commit,
+                    mapper=map_purchase_line,
+                    document_model=PurchaseDocument,
+                    line_model=PurchaseLine,
+                    document_primary_key="purchase_document_id",
+                    line_primary_key="purchase_line_id",
+                    document_foreign_key="purchase_document_id",
+                    master_ids=supplier_ids,
+                    item_ids=item_ids,
+                    entity_type="purchase_line",
+                )
+            )
+        else:
+            raise TransactionImportError(f"Unsupported transaction source type: {source_type}.")
+
+    changes = tuple(changes_list)
     committed_ids: list[uuid.UUID] = []
     if commit:
         correlation_id = uuid.uuid4()
         now = utc_now()
         by_source = {change.source_type: change for change in changes}
-        for source_type in TRANSACTION_SOURCE_TYPES:
+        for source_type in requested:
             batch = batches[source_type]
             session.execute(
                 update(ImportRow)

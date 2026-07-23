@@ -1,5 +1,5 @@
 /* Supplier register and Supplier Summary */
-.supplier-register-table { min-width: 1450px; }
+.supplier-register-table { min-width: 1320px; }
 .supplier-register-scroll { max-height: 720px; }
 .supplier-detail-heading { align-items: flex-start; }
 .supplier-detail-filters { margin-bottom: 16px; }
@@ -57,9 +57,9 @@
 .supplier-lead-form small { grid-column: 1 / -1; color: var(--muted); }
 .supplier-items-panel,
 .supplier-documents-panel { margin-bottom: 16px; }
-.supplier-items-table { min-width: 1900px; }
+.supplier-items-table { min-width: 1650px; }
 .supplier-items-scroll { max-height: 720px; }
-.supplier-documents-table { min-width: 1500px; }
+.supplier-documents-table { min-width: 1180px; }
 .supplier-documents-scroll { max-height: 600px; }
 .supplier-lead-cell small { display: block; color: var(--muted); white-space: nowrap; }
 .inventory-start { border-left: 2px solid var(--info); }

@@ -5,7 +5,7 @@
   <div>
     <p class="eyebrow">Supplier control</p>
     <h1>Suppliers</h1>
-    <p>Purchase history, open MYOB quantities, item ownership and operational lead times.</p>
+    <p>Bill-only purchase history, preferred suppliers, item ownership and operational lead times.</p>
   </div>
 </section>
 
@@ -21,7 +21,7 @@
 
 <section class="table-panel supplier-register-panel">
   <div class="table-toolbar">
-    <div><strong>Supplier register</strong><span>Open a supplier for linked items, pricing, purchase orders and lead-time settings.</span></div>
+    <div><strong>Supplier register</strong><span>Open a supplier for linked items, bill quantities, last costs and lead-time settings.</span></div>
     <div class="buyer-count"><strong>{{ rows | length }}</strong><span>suppliers</span></div>
   </div>
   <div class="table-scroll supplier-register-scroll">
@@ -34,8 +34,7 @@
         <th data-sort="number" class="number demand-start">Purchase Docs</th>
         <th data-sort="number" class="number">Purchase Qty</th>
         <th data-sort="number" class="number">Purchase Value</th>
-        <th data-sort="number" class="number supply-start">Open Qty</th>
-        <th data-sort="number" class="number">Default Lead</th>
+        <th data-sort="number" class="number supply-start">Default Lead</th>
         <th data-sort="date">Last Purchase</th>
       </tr></thead>
       <tbody>
@@ -54,12 +53,11 @@
           <td data-value="{{ row.purchase_document_count }}" class="number demand-start">{{ row.purchase_document_count | integer }}</td>
           <td data-value="{{ row.purchase_quantity }}" class="number">{{ row.purchase_quantity | qty }}</td>
           <td data-value="{{ row.purchase_value }}" class="number">{{ row.purchase_value | qty }}</td>
-          <td data-value="{{ row.open_quantity }}" class="number supply-start {% if row.open_quantity > 0 %}strong-number{% endif %}">{{ row.open_quantity | qty }}</td>
-          <td data-value="{{ row.default_total_lead_days }}" class="number">{{ row.default_total_lead_days }} days</td>
+          <td data-value="{{ row.default_total_lead_days }}" class="number supply-start">{{ row.default_total_lead_days }} days</td>
           <td data-value="{{ row.last_purchase_date or '' }}">{{ row.last_purchase_date or "—" }}</td>
         </tr>
         {% else %}
-        <tr><td colspan="10" class="empty-state">No matching suppliers were returned.</td></tr>
+        <tr><td colspan="9" class="empty-state">No matching suppliers were returned.</td></tr>
         {% endfor %}
       </tbody>
     </table>

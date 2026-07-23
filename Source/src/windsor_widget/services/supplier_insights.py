@@ -15,6 +15,7 @@ from windsor_widget.db.models import (
     AuditEvent,
     InventorySnapshot,
     InventorySnapshotLine,
+    ImportBatch,
     Item,
     ItemSupplier,
     PurchaseDocument,
@@ -22,6 +23,10 @@ from windsor_widget.db.models import (
     Supplier,
 )
 from windsor_widget.db.models.audit import utc_now
+from windsor_widget.services.purchase_bill_rules import (
+    purchase_bill_conditions,
+    real_supplier_condition,
+)
 
 _ZERO = Decimal("0")
 _MAX_LEAD_DAYS = 3650
@@ -207,23 +212,6 @@ def _optional_nonnegative_decimal(value: Decimal | str | None, label: str) -> De
     return parsed
 
 
-def _order_quantity_expression():
-    return func.coalesce(PurchaseLine.order_quantity, 0)
-
-
-def _received_quantity_expression():
-    return func.coalesce(PurchaseLine.received_quantity, 0)
-
-
-def _billed_quantity_expression():
-    return func.coalesce(PurchaseLine.billed_quantity, 0)
-
-
-def _open_quantity_expression():
-    difference = _order_quantity_expression() - _received_quantity_expression()
-    return case((difference > 0, difference), else_=0)
-
-
 def _activity_totals(
     session: Session,
     supplier_id: uuid.UUID,
@@ -233,8 +221,8 @@ def _activity_totals(
 ) -> SupplierActivityTotals:
     conditions = [
         PurchaseDocument.supplier_id == supplier_id,
-        PurchaseLine.is_active == true(),
         PurchaseLine.transaction_date <= as_of_date,
+        *purchase_bill_conditions(as_of_date=as_of_date),
     ]
     if start_date is not None:
         conditions.append(PurchaseLine.transaction_date >= start_date)
@@ -245,10 +233,6 @@ def _activity_totals(
             func.count(PurchaseLine.purchase_line_id),
             func.coalesce(func.sum(PurchaseLine.quantity), 0),
             func.coalesce(func.sum(PurchaseLine.line_total), 0),
-            func.coalesce(func.sum(_order_quantity_expression()), 0),
-            func.coalesce(func.sum(_received_quantity_expression()), 0),
-            func.coalesce(func.sum(_billed_quantity_expression()), 0),
-            func.coalesce(func.sum(_open_quantity_expression()), 0),
             func.min(PurchaseLine.transaction_date),
             func.max(PurchaseLine.transaction_date),
         )
@@ -257,22 +241,30 @@ def _activity_totals(
             PurchaseDocument,
             PurchaseDocument.purchase_document_id == PurchaseLine.purchase_document_id,
         )
-        .where(*conditions)
+        .join(
+            ImportBatch,
+            ImportBatch.import_batch_id == PurchaseLine.last_import_batch_id,
+        )
+        .join(
+            Supplier,
+            Supplier.supplier_id == PurchaseDocument.supplier_id,
+        )
+        .where(*conditions, real_supplier_condition())
     ).one()
 
+    transaction_quantity = _decimal(row[2])
     return SupplierActivityTotals(
         document_count=int(row[0] or 0),
         line_count=int(row[1] or 0),
-        transaction_quantity=_decimal(row[2]),
+        transaction_quantity=transaction_quantity,
         transaction_value=_decimal(row[3]),
-        ordered_quantity=_decimal(row[4]),
-        received_quantity=_decimal(row[5]),
-        billed_quantity=_decimal(row[6]),
-        open_quantity=_decimal(row[7]),
-        first_date=row[8],
-        last_date=row[9],
+        ordered_quantity=_ZERO,
+        received_quantity=_ZERO,
+        billed_quantity=transaction_quantity,
+        open_quantity=_ZERO,
+        first_date=row[4],
+        last_date=row[5],
     )
-
 
 def list_suppliers(
     session: Session,
@@ -290,7 +282,6 @@ def list_suppliers(
             func.count(PurchaseLine.purchase_line_id).label("line_count"),
             func.coalesce(func.sum(PurchaseLine.quantity), 0).label("quantity"),
             func.coalesce(func.sum(PurchaseLine.line_total), 0).label("value"),
-            func.coalesce(func.sum(_open_quantity_expression()), 0).label("open_quantity"),
             func.max(PurchaseLine.transaction_date).label("last_purchase_date"),
         )
         .select_from(PurchaseLine)
@@ -298,7 +289,18 @@ def list_suppliers(
             PurchaseDocument,
             PurchaseDocument.purchase_document_id == PurchaseLine.purchase_document_id,
         )
-        .where(PurchaseLine.is_active == true())
+        .join(
+            ImportBatch,
+            ImportBatch.import_batch_id == PurchaseLine.last_import_batch_id,
+        )
+        .join(
+            Supplier,
+            Supplier.supplier_id == PurchaseDocument.supplier_id,
+        )
+        .where(
+            *purchase_bill_conditions(),
+            real_supplier_condition(),
+        )
         .group_by(PurchaseDocument.supplier_id)
         .subquery()
     )
@@ -320,7 +322,6 @@ def list_suppliers(
             purchase_aggregate.c.line_count,
             purchase_aggregate.c.quantity,
             purchase_aggregate.c.value,
-            purchase_aggregate.c.open_quantity,
             purchase_aggregate.c.last_purchase_date,
             linked_items.c.linked_item_count,
         )
@@ -332,6 +333,7 @@ def list_suppliers(
             linked_items,
             linked_items.c.supplier_id == Supplier.supplier_id,
         )
+        .where(real_supplier_condition())
         .order_by(Supplier.display_name)
         .limit(limit)
     )
@@ -374,17 +376,16 @@ def list_suppliers(
                 default_manufacturing_lead_days=supplier.default_manufacturing_lead_days,
                 default_transit_lead_days=supplier.default_transit_lead_days,
                 default_buffer_days=supplier.default_buffer_days,
-                linked_item_count=int(row[-1] or 0),
+                linked_item_count=int(row[6] or 0),
                 purchase_document_count=int(row[1] or 0),
                 purchase_line_count=int(row[2] or 0),
                 purchase_quantity=_decimal(row[3]),
                 purchase_value=_decimal(row[4]),
-                open_quantity=_decimal(row[5]),
-                last_purchase_date=row[6],
+                open_quantity=_ZERO,
+                last_purchase_date=row[5],
             )
         )
     return tuple(rows)
-
 
 def _supplier_item_rows(
     session: Session,
@@ -397,8 +398,8 @@ def _supplier_item_rows(
         conditions = [
             PurchaseDocument.supplier_id == supplier.supplier_id,
             PurchaseLine.item_id.is_not(None),
-            PurchaseLine.is_active == true(),
             PurchaseLine.transaction_date <= as_of_date,
+            *purchase_bill_conditions(as_of_date=as_of_date),
         ]
         if start_date is not None:
             conditions.append(PurchaseLine.transaction_date >= start_date)
@@ -407,18 +408,6 @@ def _supplier_item_rows(
                 PurchaseLine.item_id.label("item_id"),
                 func.coalesce(func.sum(PurchaseLine.quantity), 0).label("quantity"),
                 func.coalesce(func.sum(PurchaseLine.line_total), 0).label("value"),
-                func.coalesce(func.sum(_order_quantity_expression()), 0).label(
-                    "ordered_quantity"
-                ),
-                func.coalesce(func.sum(_received_quantity_expression()), 0).label(
-                    "received_quantity"
-                ),
-                func.coalesce(func.sum(_billed_quantity_expression()), 0).label(
-                    "billed_quantity"
-                ),
-                func.coalesce(func.sum(_open_quantity_expression()), 0).label(
-                    "open_quantity"
-                ),
                 func.max(PurchaseLine.transaction_date).label("last_purchase_date"),
             )
             .select_from(PurchaseLine)
@@ -427,7 +416,15 @@ def _supplier_item_rows(
                 PurchaseDocument.purchase_document_id
                 == PurchaseLine.purchase_document_id,
             )
-            .where(*conditions)
+            .join(
+                ImportBatch,
+                ImportBatch.import_batch_id == PurchaseLine.last_import_batch_id,
+            )
+            .join(
+                Supplier,
+                Supplier.supplier_id == PurchaseDocument.supplier_id,
+            )
+            .where(*conditions, real_supplier_condition())
             .group_by(PurchaseLine.item_id)
             .subquery()
         )
@@ -457,11 +454,22 @@ def _supplier_item_rows(
             PurchaseDocument,
             PurchaseDocument.purchase_document_id == PurchaseLine.purchase_document_id,
         )
+        .join(
+            ImportBatch,
+            ImportBatch.import_batch_id == PurchaseLine.last_import_batch_id,
+        )
+        .join(
+            Supplier,
+            Supplier.supplier_id == PurchaseDocument.supplier_id,
+        )
         .where(
             PurchaseDocument.supplier_id == supplier.supplier_id,
             PurchaseLine.item_id.is_not(None),
-            PurchaseLine.is_active == true(),
-            PurchaseLine.transaction_date <= as_of_date,
+            *purchase_bill_conditions(
+                as_of_date=as_of_date,
+                positive_quantity_only=True,
+            ),
+            real_supplier_condition(),
         )
         .subquery()
     )
@@ -501,10 +509,6 @@ def _supplier_item_rows(
             period.c.value,
             all_time.c.quantity,
             all_time.c.value,
-            all_time.c.ordered_quantity,
-            all_time.c.received_quantity,
-            all_time.c.billed_quantity,
-            all_time.c.open_quantity,
             all_time.c.last_purchase_date,
             latest_price.c.unit_price,
             latest_price.c.currency_code,
@@ -533,8 +537,8 @@ def _supplier_item_rows(
             )
         )
         .order_by(
-            func.coalesce(all_time.c.open_quantity, 0).desc(),
             func.coalesce(period.c.quantity, 0).desc(),
+            func.coalesce(all_time.c.quantity, 0).desc(),
             Item.item_number,
         )
     )
@@ -559,6 +563,7 @@ def _supplier_item_rows(
             else supplier.default_buffer_days
         )
         linked = link is not None and link.match_status != "rejected"
+        all_time_quantity = _decimal(row[4])
         result.append(
             SupplierItemRow(
                 item_id=item.item_id,
@@ -583,24 +588,23 @@ def _supplier_item_rows(
                 effective_buffer_days=int(buffer or 0),
                 period_quantity=_decimal(row[2]),
                 period_value=_decimal(row[3]),
-                all_time_quantity=_decimal(row[4]),
+                all_time_quantity=all_time_quantity,
                 all_time_value=_decimal(row[5]),
-                ordered_quantity=_decimal(row[6]),
-                received_quantity=_decimal(row[7]),
-                billed_quantity=_decimal(row[8]),
-                open_quantity=_decimal(row[9]),
-                last_purchase_date=row[10],
+                ordered_quantity=_ZERO,
+                received_quantity=_ZERO,
+                billed_quantity=all_time_quantity,
+                open_quantity=_ZERO,
+                last_purchase_date=row[6],
                 last_purchase_price=(
-                    _decimal(row[11]) if row[11] is not None else None
+                    _decimal(row[7]) if row[7] is not None else None
                 ),
-                last_purchase_currency=row[12],
-                on_hand=_decimal(row[13]),
-                inventory_on_order=_decimal(row[14]),
-                available=_decimal(row[15]),
+                last_purchase_currency=row[8],
+                on_hand=_decimal(row[9]),
+                inventory_on_order=_decimal(row[10]),
+                available=_decimal(row[11]),
             )
         )
     return tuple(result)
-
 
 def _supplier_documents(
     session: Session,
@@ -617,14 +621,8 @@ def _supplier_documents(
             PurchaseDocument.last_transaction_date,
             func.count(PurchaseLine.purchase_line_id),
             func.coalesce(func.sum(PurchaseLine.quantity), 0),
-            func.coalesce(func.sum(_order_quantity_expression()), 0),
-            func.coalesce(func.sum(_received_quantity_expression()), 0),
-            func.coalesce(func.sum(_billed_quantity_expression()), 0),
-            func.coalesce(func.sum(_open_quantity_expression()), 0),
             func.coalesce(func.sum(PurchaseLine.line_total), 0),
             func.min(PurchaseLine.currency_code),
-            func.min(PurchaseLine.purchase_status),
-            func.max(PurchaseLine.purchase_status),
             func.max(PurchaseLine.shipping_date),
             func.max(PurchaseLine.supplier_invoice_no),
         )
@@ -633,10 +631,18 @@ def _supplier_documents(
             PurchaseLine,
             PurchaseLine.purchase_document_id == PurchaseDocument.purchase_document_id,
         )
+        .join(
+            ImportBatch,
+            ImportBatch.import_batch_id == PurchaseLine.last_import_batch_id,
+        )
+        .join(
+            Supplier,
+            Supplier.supplier_id == PurchaseDocument.supplier_id,
+        )
         .where(
             PurchaseDocument.supplier_id == supplier_id,
-            PurchaseLine.is_active == true(),
-            PurchaseLine.transaction_date <= as_of_date,
+            *purchase_bill_conditions(as_of_date=as_of_date),
+            real_supplier_condition(),
         )
         .group_by(
             PurchaseDocument.purchase_document_id,
@@ -653,15 +659,7 @@ def _supplier_documents(
 
     result: list[SupplierPurchaseDocumentRow] = []
     for row in rows:
-        minimum_status = row[12]
-        maximum_status = row[13]
-        status_summary = (
-            minimum_status
-            if minimum_status == maximum_status
-            else "Mixed"
-            if minimum_status or maximum_status
-            else "—"
-        )
+        transaction_quantity = _decimal(row[5])
         result.append(
             SupplierPurchaseDocumentRow(
                 purchase_document_id=row[0],
@@ -669,20 +667,19 @@ def _supplier_documents(
                 first_transaction_date=row[2],
                 last_transaction_date=row[3],
                 line_count=int(row[4] or 0),
-                transaction_quantity=_decimal(row[5]),
-                order_quantity=_decimal(row[6]),
-                received_quantity=_decimal(row[7]),
-                billed_quantity=_decimal(row[8]),
-                open_quantity=_decimal(row[9]),
-                value=_decimal(row[10]),
-                currency_code=row[11],
-                status_summary=status_summary or "—",
-                latest_shipping_date=row[14],
-                supplier_invoice_no=row[15],
+                transaction_quantity=transaction_quantity,
+                order_quantity=_ZERO,
+                received_quantity=_ZERO,
+                billed_quantity=transaction_quantity,
+                open_quantity=_ZERO,
+                value=_decimal(row[6]),
+                currency_code=row[7],
+                status_summary="Bill",
+                latest_shipping_date=row[8],
+                supplier_invoice_no=row[9],
             )
         )
     return tuple(result)
-
 
 def get_supplier_dashboard(
     session: Session,
@@ -911,10 +908,19 @@ def set_supplier_item_settings(
                 PurchaseDocument.purchase_document_id
                 == PurchaseLine.purchase_document_id,
             )
+            .join(
+                ImportBatch,
+                ImportBatch.import_batch_id == PurchaseLine.last_import_batch_id,
+            )
+            .join(
+                Supplier,
+                Supplier.supplier_id == PurchaseDocument.supplier_id,
+            )
             .where(
                 PurchaseDocument.supplier_id == supplier_id,
                 PurchaseLine.item_id == item_id,
-                PurchaseLine.is_active == true(),
+                *purchase_bill_conditions(positive_quantity_only=True),
+                real_supplier_condition(),
             )
             .order_by(
                 PurchaseLine.transaction_date.desc(),

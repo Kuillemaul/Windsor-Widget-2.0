@@ -285,3 +285,66 @@ def test_cover_order_flag_is_retained() -> None:
         line = session.scalar(select(CoverOrderLine))
         assert line is not None
         assert line.is_cover_order is True
+
+
+def test_purchase_only_batch_can_be_approved_and_promoted() -> None:
+    with Session(_engine()) as session:
+        _masters(session)
+        batch = _add_batch(
+            session,
+            "purchase_transactions",
+            [_purchase_values()],
+            status="staged",
+        )
+        actor = ensure_app_user(session, username="brad", display_name="Brad")
+
+        approval = approve_transaction_batches(
+            session,
+            actor=actor,
+            source_types=("purchase_transactions",),
+        )
+        assert approval.approved_batch_ids == (batch.import_batch_id,)
+        assert batch.status == "approved"
+
+        preview = promote_transaction_batches(
+            session,
+            commit=False,
+            source_types=("purchase_transactions",),
+        )
+        assert tuple(change.source_type for change in preview.changes) == (
+            "purchase_transactions",
+        )
+        assert preview.lines_created == 1
+        assert session.scalar(select(func.count(PurchaseLine.purchase_line_id))) == 0
+
+        committed = promote_transaction_batches(
+            session,
+            commit=True,
+            actor=actor,
+            source_types=("purchase_transactions",),
+        )
+        assert committed.committed_batch_ids == (batch.import_batch_id,)
+        assert session.scalar(select(func.count(PurchaseLine.purchase_line_id))) == 1
+        assert session.scalar(select(func.count(SalesLine.sales_line_id))) == 0
+        assert session.scalar(select(func.count(CoverOrderLine.cover_order_line_id))) == 0
+        assert batch.status == "committed"
+
+
+def test_subset_rejects_missing_requested_source() -> None:
+    with Session(_engine()) as session:
+        _masters(session)
+        _add_batch(
+            session,
+            "purchase_transactions",
+            [_purchase_values()],
+            status="staged",
+        )
+        actor = ensure_app_user(session, username="brad", display_name="Brad")
+
+        with pytest.raises(TransactionImportError, match="no eligible sales_transactions"):
+            approve_transaction_batches(
+                session,
+                actor=actor,
+                source_types=("sales_transactions",),
+            )
+

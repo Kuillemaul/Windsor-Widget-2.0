@@ -25,6 +25,7 @@ from windsor_widget.imports.promotion import (
     review_master_batches,
 )
 from windsor_widget.imports.transaction_promotion import (
+    TRANSACTION_SOURCE_TYPES,
     TransactionImportError,
     approve_transaction_batches,
     promote_transaction_batches,
@@ -141,6 +142,13 @@ def build_parser() -> argparse.ArgumentParser:
     transaction_approve.add_argument("config", type=Path)
     transaction_approve.add_argument("--username", required=True)
     transaction_approve.add_argument("--display-name", required=True)
+    transaction_approve.add_argument(
+        "--source-type",
+        action="append",
+        choices=TRANSACTION_SOURCE_TYPES,
+        dest="source_types",
+        help="approve only the selected transaction source; repeat for multiple sources",
+    )
 
     transaction_promote = subcommands.add_parser(
         "promote-transaction-imports",
@@ -154,6 +162,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     transaction_promote.add_argument("--username")
     transaction_promote.add_argument("--display-name")
+    transaction_promote.add_argument(
+        "--source-type",
+        action="append",
+        choices=TRANSACTION_SOURCE_TYPES,
+        dest="source_types",
+        help="promote only the selected transaction source; repeat for multiple sources",
+    )
 
     reporting_verify = subcommands.add_parser(
         "verify-reporting-data",
@@ -833,7 +848,11 @@ def main() -> int:
                             username=args.username,
                             display_name=args.display_name,
                         )
-                        summary = approve_transaction_batches(session, actor=actor)
+                        summary = approve_transaction_batches(
+                            session,
+                            actor=actor,
+                            source_types=args.source_types or TRANSACTION_SOURCE_TYPES,
+                        )
                         session.commit()
                         print(
                             f"Approved batches: {len(summary.approved_batch_ids)}; "
@@ -863,6 +882,7 @@ def main() -> int:
                         session,
                         commit=args.commit,
                         actor=actor,
+                        source_types=args.source_types or TRANSACTION_SOURCE_TYPES,
                     )
                     if args.commit:
                         session.commit()
