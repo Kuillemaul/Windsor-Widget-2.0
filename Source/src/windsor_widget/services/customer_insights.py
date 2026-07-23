@@ -72,6 +72,7 @@ class CustomerInvoiceRow:
     line_count: int
     quantity: Decimal
     value: Decimal
+    freight_amount: Decimal
 
 
 @dataclass(frozen=True, slots=True)
@@ -97,6 +98,7 @@ class CustomerInvoiceDetail:
     transaction_date: date
     quantity: Decimal
     value: Decimal
+    freight_amount: Decimal
     lines: tuple[CustomerInvoiceLine, ...]
 
 
@@ -389,6 +391,7 @@ def get_customer_invoices(
             func.count(SalesLine.sales_line_id),
             func.coalesce(func.sum(SalesLine.quantity), 0),
             func.coalesce(func.sum(SalesLine.line_total), 0),
+            func.max(func.abs(func.coalesce(SalesLine.freight_amount, 0))),
         )
         .select_from(SalesDocument)
         .join(
@@ -422,6 +425,7 @@ def get_customer_invoices(
             line_count=int(row[4] or 0),
             quantity=_decimal(row[5]),
             value=_decimal(row[6]),
+            freight_amount=_decimal(row[7]),
         )
         for row in rows
     )
@@ -481,6 +485,10 @@ def get_customer_invoice_detail(
         transaction_date=document.last_transaction_date,
         quantity=sum((line.quantity for line in lines), _ZERO),
         value=sum((line.line_total for line in lines), _ZERO),
+        freight_amount=max(
+            (abs(_decimal(line.freight_amount)) for line, _item in rows),
+            default=_ZERO,
+        ),
         lines=tuple(lines),
     )
 

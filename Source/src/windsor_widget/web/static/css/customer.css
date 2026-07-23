@@ -48,3 +48,14 @@ tr[data-row-href]:focus td { outline: 2px solid var(--focus); outline-offset: -2
   .commercial-form { grid-template-columns: 1fr; }
   .commercial-form .button, .commercial-form small { grid-column: 1; }
 }
+
+/* Freight inference evidence */
+.freight-setting-cell .customer-setting { display: inline-flex; }
+.freight-setting-cell small { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; line-height: 1.25; white-space: nowrap; }
+.customer-setting-customer { color: var(--success); background: var(--success-soft); }
+.customer-setting-windsor { color: var(--info); background: var(--info-soft); }
+.freight-evidence-card { margin-top: 12px; padding: 12px 14px; border: 1px solid var(--border); border-left: 4px solid var(--info); border-radius: 7px; background: var(--info-soft); }
+.freight-evidence-card strong, .freight-evidence-card span { display: block; }
+.freight-evidence-card strong { color: var(--text-strong); }
+.freight-evidence-card span { margin-top: 4px; color: var(--text); font-size: 12px; }
+.freight-evidence-card small { display: block; margin-top: 4px; color: var(--muted); }

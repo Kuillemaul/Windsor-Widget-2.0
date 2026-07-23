@@ -49,8 +49,9 @@ def _csrf(request, supplied):
 
 def test_customer_register_and_detail_routes(monkeypatch):
     customer_id = "00000000-0000-0000-0000-000000000010"
-    monkeypatch.setattr(customer_routes, "list_customers", lambda *a, **k: (SimpleNamespace(),))
+    monkeypatch.setattr(customer_routes, "list_customers", lambda *a, **k: (SimpleNamespace(customer_account_id=customer_id),))
     monkeypatch.setattr(customer_routes, "list_customer_states", lambda *a, **k: ("VIC",))
+    monkeypatch.setattr(customer_routes, "get_customer_freight_evidence", lambda *a, **k: {})
     monkeypatch.setattr(
         customer_routes,
         "get_customer_summary",

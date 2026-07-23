@@ -74,6 +74,16 @@
       <div><span>Group match</span><strong>{{ summary.group_match_status | title }}</strong></div>
     </div>
 
+    {% if freight_evidence %}
+    <div class="freight-evidence-card">
+      <strong>Invoice freight evidence: {{ freight_evidence.suggested_payer | title }}{% if freight_evidence.confidence %} · {{ freight_evidence.confidence }} confidence{% endif %}</strong>
+      <span>{{ freight_evidence.explanation }}</span>
+      <small>{{ freight_evidence.charged_invoice_count }} charged / {{ freight_evidence.zero_invoice_count }} zero · deduplicated freight total {{ freight_evidence.total_invoice_freight | qty }}</small>
+    </div>
+    {% else %}
+    <div class="freight-evidence-card"><strong>No invoiced freight evidence</strong><span>The freight payer remains a manual decision.</span></div>
+    {% endif %}
+
     {% if principal.can_change_operations %}
     <form method="post" action="/customers/{{ summary.customer_account_id }}/commercial-terms" class="commercial-form">
       <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
@@ -192,6 +202,7 @@
         <th data-sort="date">Date</th><th data-sort="text">Invoice</th>
         <th data-sort="number" class="number">Lines</th>
         <th data-sort="number" class="number">Quantity</th>
+        <th data-sort="number" class="number">Freight</th>
         <th data-sort="number" class="number">Value</th>
       </tr></thead>
       <tbody>
@@ -201,9 +212,10 @@
           <td data-value="{{ invoice.invoice_no }}"><a class="item-link" href="{{ request.url_for('customer_invoice', customer_id=summary.customer_account_id, sales_document_id=invoice.sales_document_id) }}">{{ invoice.invoice_no }}</a></td>
           <td data-value="{{ invoice.line_count }}" class="number">{{ invoice.line_count | integer }}</td>
           <td data-value="{{ invoice.quantity }}" class="number">{{ invoice.quantity | qty }}</td>
+          <td data-value="{{ invoice.freight_amount }}" class="number">{{ invoice.freight_amount | qty }}</td>
           <td data-value="{{ invoice.value }}" class="number">{{ invoice.value | qty }}</td>
         </tr>
-        {% else %}<tr><td colspan="5" class="empty-state">No invoices were found.</td></tr>{% endfor %}
+        {% else %}<tr><td colspan="6" class="empty-state">No invoices were found.</td></tr>{% endfor %}
       </tbody>
     </table>
   </div>

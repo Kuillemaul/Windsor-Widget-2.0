@@ -24,6 +24,9 @@ from windsor_widget.services.customer_insights import (
     set_customer_commercial_terms,
 )
 from windsor_widget.services.item_insights import build_monthly_sales_chart
+from windsor_widget.services.freight_inference import (
+    get_customer_freight_evidence,
+)
 from windsor_widget.services.reporting import (
     ReportingLookupError,
     get_customer_monthly_sales,
@@ -71,6 +74,10 @@ def build_customers_router(
             freight_payer=freight,
             limit=1_000,
         )
+        freight_evidence_by_customer = get_customer_freight_evidence(
+            session,
+            customer_ids=tuple(row.customer_account_id for row in rows),
+        )
         return templates.TemplateResponse(
             request=request,
             name="customers.html",
@@ -78,6 +85,7 @@ def build_customers_router(
                 request,
                 principal=principal,
                 rows=rows,
+                freight_evidence_by_customer=freight_evidence_by_customer,
                 states=list_customer_states(session),
                 query=q,
                 selected_state=state,
@@ -137,6 +145,11 @@ def build_customers_router(
                 limit=100,
             )
             price_files = get_customer_price_files(session, resolved_id)
+            freight_evidence = get_customer_freight_evidence(
+                session,
+                customer_ids=(resolved_id,),
+                as_of_date=as_of_date,
+            ).get(resolved_id)
         except (ReportingLookupError, LookupError) as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         except ValueError as exc:
@@ -155,6 +168,7 @@ def build_customers_router(
                 item_sales=item_sales,
                 invoices=invoices,
                 price_files=price_files,
+                freight_evidence=freight_evidence,
                 months=months,
                 as_of=as_of_date.isoformat(),
                 active_page="customers",

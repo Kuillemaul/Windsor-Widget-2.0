@@ -17,6 +17,7 @@
   <div><span>Invoice</span><strong>{{ invoice.invoice_no }}</strong></div>
   <div><span>Date</span><strong>{{ invoice.transaction_date }}</strong></div>
   <div><span>Total quantity</span><strong>{{ invoice.quantity | qty }}</strong></div>
+  <div><span>Freight</span><strong>{{ invoice.freight_amount | qty }}</strong></div>
   <div><span>Total value</span><strong>{{ invoice.value | qty }}</strong></div>
 </section>
 
