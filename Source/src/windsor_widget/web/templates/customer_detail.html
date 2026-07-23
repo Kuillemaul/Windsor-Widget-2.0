@@ -25,6 +25,27 @@
   <button class="button button-primary" type="submit">Recalculate</button>
 </form>
 
+{% if customer_group %}
+<section class="customer-group-card">
+  <div>
+    <p class="eyebrow">Commercial group</p>
+    <h2>{{ customer_group.display_name }}</h2>
+    <p>View this MYOB account separately or combine it with the other state accounts.</p>
+    <div class="customer-group-members">
+      {% for member in group_accounts %}
+      <a class="customer-group-member {% if member.customer_account_id == summary.customer_account_id %}current{% endif %}" href="{{ request.url_for('customer_detail', customer_id=member.customer_account_id) }}">{{ member.state or member.city or member.display_name }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="heading-actions">
+    <a class="button button-primary" href="{{ request.url_for('customer_group_detail', group_id=customer_group.customer_group_id) }}">View combined group</a>
+    {% for price_file in price_files %}
+    <a class="button" href="{{ request.url_for('customer_price_file', customer_id=summary.customer_account_id, price_file_id=price_file.customer_price_file_id) }}">Open price file</a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
 <section class="metric-grid customer-metric-grid">
   <article class="metric-card accent-card">
     <span class="metric-label">Period sales quantity</span>
@@ -106,10 +127,11 @@
     <div class="price-file-list">
       <h3>Customer price files</h3>
       {% for price_file in price_files %}
-      <a class="price-file-row" href="{{ request.url_for('customer_price_file', customer_id=summary.customer_account_id, price_file_id=price_file.customer_price_file_id) }}">
+      <div class="price-file-row">
         <strong>{{ price_file.file_name }}</strong>
         <span>{{ price_file.group_name }} · {{ price_file.match_status | title }}{% if price_file.confidence is not none %} · {{ price_file.confidence }}%{% endif %}</span>
-      </a>
+        <div class="price-file-actions"><a class="button button-primary" href="{{ request.url_for('customer_price_file', customer_id=summary.customer_account_id, price_file_id=price_file.customer_price_file_id) }}">Open price file</a></div>
+      </div>
       {% else %}
       <p class="muted">No active customer price workbook is linked to this customer group.</p>
       {% endfor %}

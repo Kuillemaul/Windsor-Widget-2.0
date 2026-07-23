@@ -42,6 +42,7 @@
           <th data-sort="text">Record ID</th>
           <th data-sort="text">City</th>
           <th data-sort="text">State</th>
+          <th data-sort="text">Group</th>
           <th data-sort="text">Payment</th>
           <th data-sort="text">Freight</th>
           <th data-sort="text">Status</th>
@@ -55,6 +56,8 @@
           <td data-value="{{ row.myob_record_id or '' }}">{{ row.myob_record_id or "—" }}</td>
           <td data-value="{{ row.city or '' }}">{{ row.city or "—" }}</td>
           <td data-value="{{ row.state or '' }}">{{ row.state or "—" }}</td>
+          {% set group = group_by_customer.get(row.customer_account_id) %}
+          <td data-value="{{ group.display_name if group else '' }}">{% if group %}<a class="group-link" href="{{ request.url_for('customer_group_detail', group_id=group.customer_group_id) }}">{{ group.display_name }}</a>{% else %}—{% endif %}</td>
           <td data-value="{{ row.payment_basis }}"><span class="customer-setting customer-setting-{{ row.payment_basis }}">{{ row.payment_basis | title }}</span></td>
           {% set freight_evidence = freight_evidence_by_customer.get(row.customer_account_id) %}
           <td data-value="{{ row.freight_payer }}" class="freight-setting-cell">
@@ -64,7 +67,7 @@
           <td data-value="{{ row.card_status or '' }}">{{ row.card_status or ("Active" if row.is_active else "Inactive") }}</td>
         </tr>
         {% else %}
-        <tr><td colspan="8" class="empty-state">No matching customers were returned.</td></tr>
+        <tr><td colspan="9" class="empty-state">No matching customers were returned.</td></tr>
         {% endfor %}
       </tbody>
     </table>

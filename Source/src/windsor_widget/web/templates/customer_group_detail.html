@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}{{ dashboard.display_name }} · Customer Group · Windsor Widget 2.0{% endblock %}
+{% block content %}
+<section class="page-heading customer-detail-heading">
+  <div>
+    <p class="eyebrow">Combined customer group</p>
+    <h1>{{ dashboard.display_name }}</h1>
+    <p>{{ dashboard.accounts | length }} active MYOB accounts viewed together.</p>
+  </div>
+  <div class="heading-actions">
+    <a class="button" href="/customers">Back to Customers</a>
+    {% for price_file in dashboard.price_files %}
+    <a class="button button-primary" href="{{ request.url_for('customer_group_price_file', group_id=dashboard.customer_group_id, price_file_id=price_file.customer_price_file_id) }}">Open price file</a>
+    {% endfor %}
+  </div>
+</section>
+
+<form class="filter-bar customer-detail-filters" method="get" action="{{ request.url.path }}">
+  <label><span>Sales window</span><select name="months">
+    {% for option in (3, 6, 12, 18, 24, 36) %}
+    <option value="{{ option }}" {% if months == option %}selected{% endif %}>{{ option }} months</option>
+    {% endfor %}
+  </select></label>
+  <label><span>As at</span><input type="date" name="as_of" value="{{ as_of }}"></label>
+  <button class="button button-primary" type="submit">Recalculate</button>
+</form>
+
+<section class="metric-grid customer-metric-grid">
+  <article class="metric-card accent-card"><span class="metric-label">Combined period quantity</span><strong>{{ dashboard.sales_period.quantity | qty }}</strong><small>{{ dashboard.period_start }} – {{ dashboard.as_of_date }}</small></article>
+  <article class="metric-card"><span class="metric-label">Combined period value</span><strong>{{ dashboard.sales_period.value | qty }}</strong><small>{{ dashboard.sales_period.document_count | integer }} invoices</small></article>
+  <article class="metric-card"><span class="metric-label">Combined all-time quantity</span><strong>{{ dashboard.sales_all_time.quantity | qty }}</strong><small>{{ dashboard.sales_all_time.document_count | integer }} invoices</small></article>
+  <article class="metric-card"><span class="metric-label">Active accounts</span><strong>{{ dashboard.accounts | length }}</strong><small>Each remains separately accessible.</small></article>
+</section>
+
+<section class="table-panel group-accounts-panel">
+  <div class="table-toolbar"><div><strong>Group accounts</strong><span>Open a state account to view it separately.</span></div></div>
+  <div class="table-scroll group-accounts-scroll">
+    <table class="data-table group-accounts-table" data-sortable-table>
+      <thead><tr><th data-sort="text">Account</th><th data-sort="text">State</th><th data-sort="text">City</th><th data-sort="number" class="number demand-start">Period Qty</th><th data-sort="number" class="number">Period Invoices</th><th data-sort="number" class="number">Period Value</th><th data-sort="number" class="number supply-start">All-Time Qty</th><th data-sort="number" class="number">All-Time Invoices</th><th data-sort="text">Freight</th></tr></thead>
+      <tbody>
+        {% for account in dashboard.accounts %}
+        <tr tabindex="0" data-row-href="{{ request.url_for('customer_detail', customer_id=account.customer_account_id) }}">
+          <td><a class="item-link" href="{{ request.url_for('customer_detail', customer_id=account.customer_account_id) }}">{{ account.display_name }}</a></td>
+          <td>{{ account.state or "—" }}</td><td>{{ account.city or "—" }}</td>
+          <td class="number demand-start" data-value="{{ account.period_quantity }}">{{ account.period_quantity | qty }}</td>
+          <td class="number" data-value="{{ account.period_invoices }}">{{ account.period_invoices | integer }}</td>
+          <td class="number" data-value="{{ account.period_value }}">{{ account.period_value | qty }}</td>
+          <td class="number supply-start strong-number" data-value="{{ account.all_time_quantity }}">{{ account.all_time_quantity | qty }}</td>
+          <td class="number" data-value="{{ account.all_time_invoices }}">{{ account.all_time_invoices | integer }}</td>
+          <td><span class="customer-setting customer-setting-{{ account.freight_payer }}">{{ "Customer pays" if account.freight_payer == "customer" else "Windsor pays" if account.freight_payer == "windsor" else "Unknown" }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="panel sales-chart-panel">
+  <div class="sales-chart-heading">
+    <div><p class="eyebrow">Combined sales history</p><h2>Monthly group sales quantity</h2><p>Invoiced quantity across every active group account.</p></div>
+    <div class="sales-chart-stats"><div><span>Total quantity</span><strong>{{ sales_chart.total_quantity | qty }}</strong></div><div><span>Monthly average</span><strong>{{ sales_chart.average_quantity | qty }}</strong></div><div><span>Trend per month</span><strong class="{% if sales_chart.monthly_slope > 0 %}trend-up{% elif sales_chart.monthly_slope < 0 %}trend-down{% else %}trend-flat{% endif %}">{{ sales_chart.monthly_slope | qty }}</strong></div></div>
+  </div>
+  {% if sales_chart.points %}
+  <div class="sales-chart-shell"><svg class="sales-quantity-chart" viewBox="0 0 {{ sales_chart.width }} {{ sales_chart.height }}" preserveAspectRatio="xMidYMid meet">
+    {% for tick in sales_chart.ticks %}<line class="sales-chart-grid-line" x1="{{ sales_chart.plot_left }}" y1="{{ tick.y }}" x2="{{ sales_chart.plot_right }}" y2="{{ tick.y }}"></line><text class="sales-chart-y-label" x="{{ sales_chart.plot_left - 10 }}" y="{{ tick.y + 4 }}" text-anchor="end">{{ tick.label }}</text>{% endfor %}
+    <line class="sales-chart-zero-line" x1="{{ sales_chart.plot_left }}" y1="{{ sales_chart.zero_y }}" x2="{{ sales_chart.plot_right }}" y2="{{ sales_chart.zero_y }}"></line>
+    {% for point in sales_chart.points %}<rect class="sales-chart-bar" x="{{ point.bar_x }}" y="{{ point.bar_y }}" width="{{ point.bar_width }}" height="{{ point.bar_height }}"><title>{{ point.label }}: {{ point.quantity_label }}</title></rect>{% endfor %}
+    <polyline class="sales-chart-trend-line" points="{{ sales_chart.trend_points }}"></polyline>
+    {% for point in sales_chart.points %}<circle class="sales-chart-trend-point" cx="{{ point.x }}" cy="{{ point.trend_y }}" r="3.5"></circle>{% if point.show_label %}<text class="sales-chart-x-label" x="{{ point.x }}" y="{{ sales_chart.plot_bottom + 24 }}" text-anchor="middle">{{ point.label }}</text>{% endif %}{% endfor %}
+  </svg></div>
+  {% endif %}
+</section>
+
+<section class="table-panel group-items-panel">
+  <div class="table-toolbar"><div><strong>Items purchased by the group</strong><span>Combined quantities across all state accounts.</span></div><div class="buyer-count"><strong>{{ dashboard.items | length }}</strong><span>items</span></div></div>
+  <div class="table-scroll group-items-scroll">
+    <table class="data-table group-items-table" data-sortable-table>
+      <thead><tr><th data-sort="text">Item</th><th data-sort="text">Description</th><th data-sort="number" class="number">Buying Accounts</th><th data-sort="number" class="number demand-start">Period Qty</th><th data-sort="number" class="number">Period Value</th><th data-sort="number" class="number supply-start">All-Time Qty</th><th data-sort="number" class="number">All-Time Value</th><th data-sort="date">Last Bought</th></tr></thead>
+      <tbody>{% for item in dashboard.items %}<tr tabindex="0" data-row-href="{{ request.url_for('item_detail', item_number=item.item_number) }}"><td><a class="item-link" href="{{ request.url_for('item_detail', item_number=item.item_number) }}">{{ item.item_number }}</a></td><td>{{ item.item_name }}</td><td class="number">{{ item.account_count | integer }}</td><td class="number demand-start">{{ item.period_quantity | qty }}</td><td class="number">{{ item.period_value | qty }}</td><td class="number supply-start strong-number">{{ item.all_time_quantity | qty }}</td><td class="number">{{ item.all_time_value | qty }}</td><td>{{ item.last_date or "—" }}</td></tr>{% else %}<tr><td colspan="8" class="empty-state">No invoiced item history was found.</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+</section>
+
+<section class="table-panel group-invoices-panel">
+  <div class="table-toolbar"><div><strong>Recent group invoices</strong><span>The originating account and state are retained.</span></div></div>
+  <div class="table-scroll group-invoices-scroll">
+    <table class="data-table group-invoices-table" data-sortable-table>
+      <thead><tr><th data-sort="date">Date</th><th data-sort="text">Account</th><th data-sort="text">State</th><th data-sort="text">Invoice</th><th data-sort="number" class="number">Quantity</th><th data-sort="number" class="number">Freight</th><th data-sort="number" class="number">Value</th></tr></thead>
+      <tbody>{% for invoice in dashboard.invoices %}<tr tabindex="0" data-row-href="{{ request.url_for('customer_invoice', customer_id=invoice.customer_account_id, sales_document_id=invoice.sales_document_id) }}"><td>{{ invoice.transaction_date }}</td><td>{{ invoice.customer_name }}</td><td>{{ invoice.state or "—" }}</td><td><a class="item-link" href="{{ request.url_for('customer_invoice', customer_id=invoice.customer_account_id, sales_document_id=invoice.sales_document_id) }}">{{ invoice.invoice_no }}</a></td><td class="number">{{ invoice.quantity | qty }}</td><td class="number">{{ invoice.freight | qty }}</td><td class="number">{{ invoice.value | qty }}</td></tr>{% else %}<tr><td colspan="7" class="empty-state">No invoices were found.</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

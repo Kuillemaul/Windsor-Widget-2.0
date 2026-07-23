@@ -52,6 +52,7 @@ def test_customer_register_and_detail_routes(monkeypatch):
     monkeypatch.setattr(customer_routes, "list_customers", lambda *a, **k: (SimpleNamespace(customer_account_id=customer_id),))
     monkeypatch.setattr(customer_routes, "list_customer_states", lambda *a, **k: ("VIC",))
     monkeypatch.setattr(customer_routes, "get_customer_freight_evidence", lambda *a, **k: {})
+    monkeypatch.setattr(customer_routes, "get_group_labels", lambda *a, **k: {})
     monkeypatch.setattr(
         customer_routes,
         "get_customer_summary",

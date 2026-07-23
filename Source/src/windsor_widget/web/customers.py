@@ -11,9 +11,10 @@ from urllib.parse import urlencode
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Query, Request
 from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from windsor_widget.db.models import CustomerAccount, CustomerPriceFile
+from windsor_widget.db.models import CustomerAccount, CustomerGroup, CustomerPriceFile
 from windsor_widget.services.customer_insights import (
     get_customer_invoice_detail,
     get_customer_invoices,
@@ -24,6 +25,7 @@ from windsor_widget.services.customer_insights import (
     set_customer_commercial_terms,
 )
 from windsor_widget.services.item_insights import build_monthly_sales_chart
+from windsor_widget.services.customer_group_insights import get_group_dashboard, get_group_labels
 from windsor_widget.services.freight_inference import (
     get_customer_freight_evidence,
 )
@@ -74,10 +76,12 @@ def build_customers_router(
             freight_payer=freight,
             limit=1_000,
         )
+        customer_ids = tuple(row.customer_account_id for row in rows)
         freight_evidence_by_customer = get_customer_freight_evidence(
             session,
-            customer_ids=tuple(row.customer_account_id for row in rows),
+            customer_ids=customer_ids,
         )
+        group_by_customer = get_group_labels(session, customer_ids)
         return templates.TemplateResponse(
             request=request,
             name="customers.html",
@@ -86,6 +90,7 @@ def build_customers_router(
                 principal=principal,
                 rows=rows,
                 freight_evidence_by_customer=freight_evidence_by_customer,
+                group_by_customer=group_by_customer,
                 states=list_customer_states(session),
                 query=q,
                 selected_state=state,
@@ -150,6 +155,23 @@ def build_customers_router(
                 customer_ids=(resolved_id,),
                 as_of_date=as_of_date,
             ).get(resolved_id)
+            customer_group = (
+                session.get(CustomerGroup, customer.customer_group_id)
+                if getattr(customer, "customer_group_id", None) is not None
+                else None
+            )
+            group_accounts = (
+                tuple(session.scalars(
+                    select(CustomerAccount)
+                    .where(
+                        CustomerAccount.customer_group_id == customer.customer_group_id,
+                        CustomerAccount.is_active == True,
+                    )
+                    .order_by(CustomerAccount.state, CustomerAccount.display_name)
+                ))
+                if customer_group is not None
+                else ()
+            )
         except (ReportingLookupError, LookupError) as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         except ValueError as exc:
@@ -169,6 +191,8 @@ def build_customers_router(
                 invoices=invoices,
                 price_files=price_files,
                 freight_evidence=freight_evidence,
+                customer_group=customer_group,
+                group_accounts=group_accounts,
                 months=months,
                 as_of=as_of_date.isoformat(),
                 active_page="customers",
@@ -267,6 +291,86 @@ def build_customers_router(
             or price_file is None
             or customer.customer_group_id is None
             or price_file.customer_group_id != customer.customer_group_id
+            or not price_file.is_active
+        ):
+            raise HTTPException(status_code=404, detail="Price file not found.")
+
+        path = Path(price_file.file_path)
+        if not path.is_file():
+            raise HTTPException(
+                status_code=404,
+                detail=f"The linked price file is unavailable: {price_file.file_name}",
+            )
+        return FileResponse(path, filename=price_file.file_name)
+
+
+    @router.get(
+        "/customer-groups/{group_id}",
+        response_class=HTMLResponse,
+        name="customer_group_detail",
+    )
+    def customer_group_detail(
+        request: Request,
+        group_id: str,
+        months: int = Query(default=12, ge=1, le=120),
+        as_of: str = Query(default=""),
+        session: Session = Depends(session_dependency),
+    ):
+        principal = require_principal(request, session)
+        try:
+            resolved_group_id = uuid.UUID(group_id)
+        except ValueError as exc:
+            raise HTTPException(status_code=404, detail="Customer group not found.") from exc
+        try:
+            as_of_date = date.fromisoformat(as_of) if as_of else date.today()
+        except ValueError:
+            as_of_date = date.today()
+
+        try:
+            dashboard = get_group_dashboard(
+                session,
+                resolved_group_id,
+                months=months,
+                as_of_date=as_of_date,
+            )
+        except LookupError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+        return templates.TemplateResponse(
+            request=request,
+            name="customer_group_detail.html",
+            context=template_context(
+                request,
+                principal=principal,
+                dashboard=dashboard,
+                sales_chart=build_monthly_sales_chart(dashboard.monthly_sales),
+                months=months,
+                as_of=as_of_date.isoformat(),
+                active_page="customers",
+            ),
+        )
+
+    @router.get(
+        "/customer-groups/{group_id}/price-files/{price_file_id}",
+        name="customer_group_price_file",
+    )
+    def customer_group_price_file(
+        request: Request,
+        group_id: str,
+        price_file_id: str,
+        session: Session = Depends(session_dependency),
+    ):
+        require_principal(request, session)
+        try:
+            resolved_group_id = uuid.UUID(group_id)
+            resolved_file_id = uuid.UUID(price_file_id)
+        except ValueError as exc:
+            raise HTTPException(status_code=404, detail="Price file not found.") from exc
+
+        price_file = session.get(CustomerPriceFile, resolved_file_id)
+        if (
+            price_file is None
+            or price_file.customer_group_id != resolved_group_id
             or not price_file.is_active
         ):
             raise HTTPException(status_code=404, detail="Price file not found.")
