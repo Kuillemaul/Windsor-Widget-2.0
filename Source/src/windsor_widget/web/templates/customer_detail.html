@@ -12,6 +12,9 @@
   </div>
   <div class="heading-actions">
     <a class="button" href="/customers">Back to Customers</a>
+    <button class="button" type="button" data-price-root-settings>This PC folder</button>
+    {% if principal.can_change_operations and not edit_mode %}<a class="button button-primary" href="{{ request.url.path }}?months={{ months }}&amp;as_of={{ as_of }}&amp;edit=true">Edit</a>{% endif %}
+    {% if edit_mode %}<a class="button" href="{{ request.url.path }}?months={{ months }}&amp;as_of={{ as_of }}">Cancel edit</a>{% endif %}
   </div>
 </section>
 
@@ -40,9 +43,36 @@
   <div class="heading-actions">
     <a class="button button-primary" href="{{ request.url_for('customer_group_detail', group_id=customer_group.customer_group_id) }}">View combined group</a>
     {% for price_file in price_files %}
-    <a class="button" href="{{ request.url_for('customer_price_file', customer_id=summary.customer_account_id, price_file_id=price_file.customer_price_file_id) }}">Open price file</a>
+    <button class="button button-primary" type="button" data-open-price-file data-price-relative-path="{{ price_file.relative_path }}">Open in Excel</button><button class="button" type="button" data-copy-price-path data-price-relative-path="{{ price_file.relative_path }}">Copy path</button>
     {% endfor %}
   </div>
+</section>
+{% endif %}
+
+{% if edit_mode %}
+<section class="panel edit-mode-panel customer-group-edit-panel">
+  <p class="eyebrow">Edit mode</p>
+  <h2>Correct customer group</h2>
+  <p>Move this MYOB account, remove it from a group, or create a new group.</p>
+  <form method="post" action="/customers/{{ summary.customer_account_id }}/group-link" class="edit-form-grid">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="months" value="{{ months }}">
+    <input type="hidden" name="as_of" value="{{ as_of }}">
+    <label><span>Existing group</span>
+      <select name="group_id">
+        <option value="">No group</option>
+        {% for group in available_groups %}
+        <option value="{{ group.customer_group_id }}" {% if customer_group and group.customer_group_id == customer_group.customer_group_id %}selected{% endif %}>{{ group.display_name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label><span>Create a new group instead</span><input type="text" name="new_group_name" placeholder="Leave blank to use the selected group"></label>
+    <div class="edit-form-actions">
+      <button class="button button-primary" type="submit">Save group link</button>
+      <a class="button" href="{{ request.url.path }}?months={{ months }}&amp;as_of={{ as_of }}">Cancel</a>
+      <small>Every correction is audit logged.</small>
+    </div>
+  </form>
 </section>
 {% endif %}
 
@@ -105,7 +135,7 @@
     <div class="freight-evidence-card"><strong>No invoiced freight evidence</strong><span>The freight payer remains a manual decision.</span></div>
     {% endif %}
 
-    {% if principal.can_change_operations %}
+    {% if edit_mode and principal.can_change_operations %}
     <form method="post" action="/customers/{{ summary.customer_account_id }}/commercial-terms" class="commercial-form">
       <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
       <input type="hidden" name="return_to" value="{{ request.url.path }}?months={{ months }}&amp;as_of={{ as_of }}">
@@ -130,7 +160,7 @@
       <div class="price-file-row">
         <strong>{{ price_file.file_name }}</strong>
         <span>{{ price_file.group_name }} · {{ price_file.match_status | title }}{% if price_file.confidence is not none %} · {{ price_file.confidence }}%{% endif %}</span>
-        <div class="price-file-actions"><a class="button button-primary" href="{{ request.url_for('customer_price_file', customer_id=summary.customer_account_id, price_file_id=price_file.customer_price_file_id) }}">Open price file</a></div>
+        <div class="price-file-actions"><button class="button button-primary" type="button" data-open-price-file data-price-relative-path="{{ price_file.relative_path }}">Open in Excel</button><button class="button" type="button" data-copy-price-path data-price-relative-path="{{ price_file.relative_path }}">Copy path</button></div>
       </div>
       {% else %}
       <p class="muted">No active customer price workbook is linked to this customer group.</p>

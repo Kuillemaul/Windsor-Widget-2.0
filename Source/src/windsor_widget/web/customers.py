@@ -25,6 +25,12 @@ from windsor_widget.services.customer_insights import (
     set_customer_commercial_terms,
 )
 from windsor_widget.services.item_insights import build_monthly_sales_chart
+from windsor_widget.services.customer_link_admin import (
+    list_active_customer_groups,
+    scan_server_price_files,
+    set_customer_group_membership,
+    update_customer_group,
+)
 from windsor_widget.services.customer_group_insights import get_group_dashboard, get_group_labels
 from windsor_widget.services.freight_inference import (
     get_customer_freight_evidence,
@@ -110,9 +116,11 @@ def build_customers_router(
         customer_id: str,
         months: int = Query(default=12, ge=1, le=120),
         as_of: str = Query(default=""),
+        edit: bool = Query(default=False),
         session: Session = Depends(session_dependency),
     ):
         principal = require_principal(request, session)
+        edit_mode = bool(edit and getattr(principal, "can_change_operations", False))
         resolved_id = _customer_id(customer_id)
         customer = session.get(CustomerAccount, resolved_id)
         if customer is None or not customer.myob_record_id:
@@ -172,6 +180,9 @@ def build_customers_router(
                 if customer_group is not None
                 else ()
             )
+            available_groups = (
+                list_active_customer_groups(session) if edit_mode else ()
+            )
         except (ReportingLookupError, LookupError) as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         except ValueError as exc:
@@ -193,6 +204,8 @@ def build_customers_router(
                 freight_evidence=freight_evidence,
                 customer_group=customer_group,
                 group_accounts=group_accounts,
+                available_groups=available_groups,
+                edit_mode=edit_mode,
                 months=months,
                 as_of=as_of_date.isoformat(),
                 active_page="customers",
@@ -235,6 +248,75 @@ def build_customers_router(
         if destination is None:
             destination = f"/customers/{resolved_id}"
         return RedirectResponse(destination, status_code=303)
+
+
+    @router.post("/customers/{customer_id}/group-link")
+    def update_customer_group_link(
+        request: Request,
+        customer_id: str,
+        group_id: str = Form(default=""),
+        new_group_name: str = Form(default=""),
+        csrf_token: str = Form(...),
+        months: int = Form(default=12),
+        as_of: str = Form(default=""),
+        session: Session = Depends(session_dependency),
+    ):
+        principal = require_principal(request, session)
+        validate_csrf(request, csrf_token)
+        if not bool(getattr(principal, "can_change_operations", False)):
+            raise HTTPException(status_code=403, detail="Operational edit permission is required.")
+        resolved_id = _customer_id(customer_id)
+        try:
+            set_customer_group_membership(
+                session,
+                customer_account_id=resolved_id,
+                selected_group_id=group_id,
+                new_group_name=new_group_name,
+                actor_user_id=uuid.UUID(str(principal.user_id)),
+            )
+            session.commit()
+        except (ValueError, LookupError) as exc:
+            session.rollback()
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        return RedirectResponse(
+            f"/customers/{resolved_id}?months={months}&as_of={as_of}",
+            status_code=303,
+        )
+
+    @router.post("/customer-groups/{group_id}/settings")
+    def update_customer_group_settings(
+        request: Request,
+        group_id: str,
+        display_name: str = Form(...),
+        price_relative_path: str = Form(default=""),
+        unlink_price_file: bool = Form(default=False),
+        csrf_token: str = Form(...),
+        months: int = Form(default=12),
+        as_of: str = Form(default=""),
+        session: Session = Depends(session_dependency),
+    ):
+        principal = require_principal(request, session)
+        validate_csrf(request, csrf_token)
+        if not bool(getattr(principal, "can_change_operations", False)):
+            raise HTTPException(status_code=403, detail="Operational edit permission is required.")
+        try:
+            resolved_group_id = uuid.UUID(group_id)
+            update_customer_group(
+                session,
+                customer_group_id=resolved_group_id,
+                display_name=display_name,
+                relative_price_path=price_relative_path,
+                unlink_price_file=unlink_price_file,
+                actor_user_id=uuid.UUID(str(principal.user_id)),
+            )
+            session.commit()
+        except (ValueError, LookupError) as exc:
+            session.rollback()
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        return RedirectResponse(
+            f"/customer-groups/{resolved_group_id}?months={months}&as_of={as_of}",
+            status_code=303,
+        )
 
     @router.get(
         "/customers/{customer_id}/invoices/{sales_document_id}",
@@ -314,9 +396,11 @@ def build_customers_router(
         group_id: str,
         months: int = Query(default=12, ge=1, le=120),
         as_of: str = Query(default=""),
+        edit: bool = Query(default=False),
         session: Session = Depends(session_dependency),
     ):
         principal = require_principal(request, session)
+        edit_mode = bool(edit and getattr(principal, "can_change_operations", False))
         try:
             resolved_group_id = uuid.UUID(group_id)
         except ValueError as exc:
@@ -336,6 +420,7 @@ def build_customers_router(
         except LookupError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
+        price_scan = scan_server_price_files() if edit_mode else None
         return templates.TemplateResponse(
             request=request,
             name="customer_group_detail.html",
@@ -344,6 +429,8 @@ def build_customers_router(
                 principal=principal,
                 dashboard=dashboard,
                 sales_chart=build_monthly_sales_chart(dashboard.monthly_sales),
+                edit_mode=edit_mode,
+                price_scan=price_scan,
                 months=months,
                 as_of=as_of_date.isoformat(),
                 active_page="customers",

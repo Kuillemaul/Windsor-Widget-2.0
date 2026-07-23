@@ -11,6 +11,7 @@ from decimal import Decimal
 from sqlalchemy import func, or_, select, true
 from sqlalchemy.orm import Session
 
+from windsor_widget.services.customer_link_admin import price_file_relative_path
 from windsor_widget.db.models import (
     AuditEvent,
     CustomerAccount,
@@ -108,6 +109,7 @@ class CustomerPriceFileRow:
     group_name: str
     file_name: str
     file_path: str
+    relative_path: str
     match_status: str
     confidence: int | None
 
@@ -519,6 +521,7 @@ def get_customer_price_files(
             group_name=group.display_name,
             file_name=price_file.file_name,
             file_path=price_file.file_path,
+            relative_path=price_file_relative_path(price_file.file_path),
             match_status=price_file.match_status,
             confidence=price_file.confidence,
         )

@@ -23,6 +23,7 @@ from windsor_widget.db.models import (
 )
 from windsor_widget.db.models.audit import utc_now
 from windsor_widget.imports.normalization import normalize_name
+from windsor_widget.services.customer_link_admin import price_file_relative_path
 
 _ALLOWED_EXTENSIONS = {".xlsx", ".xlsm", ".xls"}
 _IGNORED_FILE_KEYS = {"template", "1 template"}
@@ -177,7 +178,7 @@ def _read_workbook(source: Path) -> tuple[tuple[WorkbookCustomer, ...], tuple[Pr
         seen.add(path_key)
         files.append(
             PriceCandidate(
-                path=path,
+                path=price_file_relative_path(path),
                 file_name=file_name,
                 key=canonical_group_key(stem),
             )

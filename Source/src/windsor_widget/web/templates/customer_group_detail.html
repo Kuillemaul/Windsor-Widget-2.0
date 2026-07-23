@@ -9,9 +9,13 @@
   </div>
   <div class="heading-actions">
     <a class="button" href="/customers">Back to Customers</a>
+    <button class="button" type="button" data-price-root-settings>This PC folder</button>
     {% for price_file in dashboard.price_files %}
-    <a class="button button-primary" href="{{ request.url_for('customer_group_price_file', group_id=dashboard.customer_group_id, price_file_id=price_file.customer_price_file_id) }}">Open price file</a>
+    <button class="button button-primary" type="button" data-open-price-file data-price-relative-path="{{ price_file.relative_path }}">Open in Excel</button>
+    <button class="button" type="button" data-copy-price-path data-price-relative-path="{{ price_file.relative_path }}">Copy path</button>
     {% endfor %}
+    {% if principal.can_change_operations and not edit_mode %}<a class="button button-primary" href="{{ request.url.path }}?months={{ months }}&amp;as_of={{ as_of }}&amp;edit=true">Edit</a>{% endif %}
+    {% if edit_mode %}<a class="button" href="{{ request.url.path }}?months={{ months }}&amp;as_of={{ as_of }}">Cancel edit</a>{% endif %}
   </div>
 </section>
 
@@ -24,6 +28,33 @@
   <label><span>As at</span><input type="date" name="as_of" value="{{ as_of }}"></label>
   <button class="button button-primary" type="submit">Recalculate</button>
 </form>
+
+{% if edit_mode %}
+<section class="panel edit-mode-panel group-settings-edit-panel">
+  <p class="eyebrow">Edit mode</p>
+  <h2>Correct group and price-file link</h2>
+  <p>Rename the group, select a scanned workbook, enter a relative path, or unlink the workbook.</p>
+  <form method="post" action="/customer-groups/{{ dashboard.customer_group_id }}/settings" class="edit-form-grid">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="months" value="{{ months }}">
+    <input type="hidden" name="as_of" value="{{ as_of }}">
+    <label><span>Group name</span><input type="text" name="display_name" value="{{ dashboard.display_name }}" required></label>
+    <label><span>Relative price-file path</span>
+      <input type="text" name="price_relative_path" list="price-file-options" value="{% if dashboard.price_files %}{{ dashboard.price_files[0].relative_path }}{% endif %}" placeholder="sealy of australia.xlsx">
+      <datalist id="price-file-options">
+        {% if price_scan %}{% for candidate in price_scan.files %}<option value="{{ candidate.relative_path }}">{{ candidate.file_name }}</option>{% endfor %}{% endif %}
+      </datalist>
+    </label>
+    <label class="edit-danger"><input type="checkbox" name="unlink_price_file" value="true"> Unlink current price file</label>
+    <div class="server-scan-note">{% if price_scan and price_scan.root %}Server scan root: {{ price_scan.root }} · {{ price_scan.files | length }} current workbooks found.{% elif price_scan %}{{ price_scan.warning }}{% endif %}</div>
+    <div class="edit-form-actions">
+      <button class="button button-primary" type="submit">Save group settings</button>
+      <a class="button" href="{{ request.url.path }}?months={{ months }}&amp;as_of={{ as_of }}">Cancel</a>
+      <small>Every correction is audit logged.</small>
+    </div>
+  </form>
+</section>
+{% endif %}
 
 <section class="metric-grid customer-metric-grid">
   <article class="metric-card accent-card"><span class="metric-label">Combined period quantity</span><strong>{{ dashboard.sales_period.quantity | qty }}</strong><small>{{ dashboard.period_start }} – {{ dashboard.as_of_date }}</small></article>

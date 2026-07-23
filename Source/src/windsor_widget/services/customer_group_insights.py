@@ -19,6 +19,7 @@ from windsor_widget.db.models import (
     SalesLine,
 )
 from windsor_widget.services.reporting import ActivityTotals, MonthlySalesPoint, period_start_for_months
+from windsor_widget.services.customer_link_admin import price_file_relative_path
 
 _ZERO = Decimal("0")
 
@@ -73,6 +74,7 @@ class GroupInvoiceRow:
 class GroupPriceFileRow:
     customer_price_file_id: uuid.UUID
     file_name: str
+    relative_path: str
     confidence: int | None
 
 
@@ -341,7 +343,12 @@ def get_group_dashboard(
     account_ids = tuple(account.customer_account_id for account in accounts)
     start = period_start_for_months(as_of_date, months)
     price_files = tuple(
-        GroupPriceFileRow(p.customer_price_file_id, p.file_name, p.confidence)
+        GroupPriceFileRow(
+            p.customer_price_file_id,
+            p.file_name,
+            price_file_relative_path(p.file_path),
+            p.confidence,
+        )
         for p in session.scalars(
             select(CustomerPriceFile)
             .where(

@@ -78,3 +78,67 @@ tr[data-row-href]:focus td { outline: 2px solid var(--focus); outline-offset: -2
 .group-invoices-table { min-width: 1100px; }
 .group-invoices-scroll { max-height: 560px; }
 @media (max-width: 760px) { .customer-group-card { flex-direction: column; } }
+
+/* Customer edit mode and local Excel launch */
+.edit-mode-panel {
+  margin-bottom: 16px;
+  border: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent-soft), var(--surface) 35%);
+}
+.edit-mode-panel h2 { margin: 0 0 5px; }
+.edit-mode-panel > p { margin: 0 0 14px; color: var(--muted); }
+.edit-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 12px;
+}
+.edit-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 760;
+}
+.edit-form-grid input,
+.edit-form-grid select {
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+.edit-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  grid-column: 1 / -1;
+  padding-top: 4px;
+}
+.edit-danger { display: inline-flex !important; flex-direction: row !important; align-items: center; color: var(--danger); }
+.server-scan-note { grid-column: 1 / -1; padding: 9px 11px; border-radius: 7px; background: var(--info-soft); font-size: 11px; }
+.price-file-button-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.price-root-dialog {
+  width: min(700px, calc(100vw - 32px));
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+.price-root-dialog::backdrop { background: rgba(0, 0, 0, .65); }
+.price-root-form { display: grid; gap: 14px; padding: 22px; }
+.price-root-form h2 { margin: 0; }
+.price-root-help { margin: 5px 0 0; color: var(--muted); }
+.price-root-form label { display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: 11px; font-weight: 760; }
+.price-root-form input { min-height: 43px; padding: 9px 11px; border: 1px solid var(--border-strong); border-radius: 7px; background: var(--bg-elevated); color: var(--text); }
+.price-root-examples { display: grid; gap: 5px; }
+.price-root-examples code { padding: 7px 9px; border-radius: 6px; background: var(--surface-2); color: var(--muted); white-space: normal; overflow-wrap: anywhere; }
+.price-root-status { min-height: 18px; margin: 0; color: var(--warning); }
+.price-root-actions { display: flex; justify-content: flex-end; gap: 8px; }
+@media (max-width: 760px) {
+  .edit-form-grid { grid-template-columns: 1fr; }
+  .edit-form-actions, .server-scan-note { grid-column: 1; flex-wrap: wrap; }
+}
