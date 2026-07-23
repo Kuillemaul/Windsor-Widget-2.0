@@ -1,0 +1,1511 @@
+﻿customer,card_id,current_freight_payer,suggested_freight_payer,confidence,invoice_count,charged_invoices,zero_freight_invoices,charged_percent,deduplicated_total_freight,evidence_start,evidence_end,will_apply,explanation
+3D Embroidery,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+A & A Sportswear,,customer,customer,Medium,4,4,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+A & B Canvas Australia,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+A & M Farms ( Booreeyamma ),,customer,customer,Low,2,2,0,100.00,105.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+A Grade Upholstery,,customer,customer,High,18,16,2,88.89,235.000000,,2026-07-23,no,Freight was charged on 16 of 18 invoices (89%).
+A J Classic Upholstery,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+A Man and A Couch P/L,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+A Star Sports Industries,,customer,customer,Medium,40,30,10,75.00,640.000000,,2026-07-23,no,Freight was charged on 30 of 40 invoices (75%).
+A T I Supplies,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+A&E Upholstery PTY LTD,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+A-Esque,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+A.H. Beard Pty Ltd (Administrator Appointed),,windsor,windsor,High,49,0,49,0.00,0.000000,,2026-07-23,no,Freight was zero on 49 of 49 invoices (100%).
+A1 Restorations,,customer,customer,Medium,3,3,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Aaon Printing & Signage,,customer,customer,High,20,16,4,80.00,365.000000,,2026-07-23,no,Freight was charged on 16 of 20 invoices (80%).
+Abacus Shade Structures,,customer,customer,High,40,38,2,95.00,760.000000,,2026-07-23,no,Freight was charged on 38 of 40 invoices (95%).
+Abalone Aquasuits P/L,,customer,customer,High,77,74,3,96.10,2540.000000,,2026-07-23,no,Freight was charged on 74 of 77 invoices (96%).
+Abbey Pallets,,windsor,windsor,High,64,0,64,0.00,0.000000,,2026-07-23,no,Freight was zero on 64 of 64 invoices (100%).
+Abbey Shutters and Blinds,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Abbey Upholstery,,customer,customer,Medium,3,2,1,66.67,50.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+ABC Textile Fabrication,,customer,customer,High,140,117,23,83.57,5405.000000,,2026-07-23,no,Freight was charged on 117 of 140 invoices (84%).
+Abecca Healthcare Ltd,,customer,customer,High,6,6,0,100.00,785.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Abgal Liners & Covers,,customer,customer,High,58,49,9,84.48,1000.000000,,2026-07-23,no,Freight was charged on 49 of 58 invoices (84%).
+ABMT Textiles,,customer,customer,High,19,19,0,100.00,665.000000,,2026-07-23,no,Freight was charged on 19 of 19 invoices (100%).
+About Bunting,,customer,customer,High,5,5,0,100.00,130.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Absolutely Anything Gymnastics,,windsor,windsor,Medium,3,1,2,33.33,120.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+AC Industries Pty Ltd,,customer,customer,High,242,211,31,87.19,31975.000000,,2026-07-23,no,Freight was charged on 211 of 242 invoices (87%).
+Academy Uniforms,,customer,customer,High,45,43,2,95.56,945.000000,,2026-07-23,no,Freight was charged on 43 of 45 invoices (96%).
+Accent Wine Packaging,,windsor,windsor,High,6,0,6,0.00,0.000000,,2026-07-23,no,Freight was zero on 6 of 6 invoices (100%).
+Access Industries,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Accessories and Automotive Management Pty Ltd,,unknown,unknown,,2,1,1,50.00,65.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Acclaim Upholstery,,customer,customer,High,62,58,4,93.55,950.000000,,2026-07-23,no,Freight was charged on 58 of 62 invoices (94%).
+Accommodation Linen,,customer,customer,High,10,10,0,100.00,325.000000,,2026-07-23,no,Freight was charged on 10 of 10 invoices (100%).
+Accordion House,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Ace Canvas,,customer,customer,High,24,24,0,100.00,750.000000,,2026-07-23,no,Freight was charged on 24 of 24 invoices (100%).
+Ace Filters Australia,,customer,customer,Medium,105,78,27,74.29,1685.000000,,2026-07-23,no,Freight was charged on 78 of 105 invoices (74%).
+Acme Binding Company,,customer,customer,Low,137,86,51,62.77,1820.000000,,2026-07-23,no,Freight was charged on 86 of 137 invoices (63%).
+Acoufelt,,unknown,unknown,,2,1,1,50.00,30.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Acromat,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+ACSOA,,windsor,windsor,Medium,6,2,4,33.33,115.000000,,2026-07-23,no,Freight was zero on 4 of 6 invoices (67%).
+Active Draping,,customer,customer,Low,2,2,0,100.00,50.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+ADA - Australian Defence Apparel P/L,,windsor,windsor,High,401,9,392,2.24,265.000000,,2026-07-23,no,Freight was zero on 392 of 401 invoices (98%).
+Addshade,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Adelaide Annexe & Canvas,,customer,customer,High,44,40,4,90.91,950.000000,,2026-07-23,no,Freight was charged on 40 of 44 invoices (91%).
+Adelaide Caravan Doctor,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Adelaide Filter Sales & Service,,customer,customer,Medium,4,4,0,100.00,90.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Adelaide Leather & Saddlery Supplies,,customer,customer,High,16,16,0,100.00,335.000000,,2026-07-23,no,Freight was charged on 16 of 16 invoices (100%).
+Adelaide Tarp Specialists,,customer,customer,High,10,9,1,90.00,355.000000,,2026-07-23,no,Freight was charged on 9 of 10 invoices (90%).
+Adiemas Services,,customer,customer,High,66,62,4,93.94,2685.000000,,2026-07-23,no,Freight was charged on 62 of 66 invoices (94%).
+Adore Bridal Alterations,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Adriatic Slumber,,customer,customer,Medium,178,138,40,77.53,15855.000000,,2026-07-23,no,Freight was charged on 138 of 178 invoices (78%).
+Advance Pallets,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Advanta Group P/L T/A Advanta Commercial Furniture,,customer,customer,High,121,104,17,85.95,23860.000000,,2026-07-23,no,Freight was charged on 104 of 121 invoices (86%).
+Adventure One P/L,,unknown,unknown,,2,1,1,50.00,25.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Adware Flags & Flagpoles,,customer,customer,High,10,8,2,80.00,125.000000,,2026-07-23,no,Freight was charged on 8 of 10 invoices (80%).
+Aerial Tarps,,customer,customer,High,47,44,3,93.62,1320.000000,,2026-07-23,no,Freight was charged on 44 of 47 invoices (94%).
+Aerospec Racing,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Aerosweep P/L,,customer,customer,Low,80,46,34,57.50,2040.000000,,2026-07-23,no,Freight was charged on 46 of 80 invoices (58%).
+Affordable Caravans - Sales & Repairs,,windsor,windsor,Medium,3,1,2,33.33,20.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+AFI Branding,,customer,customer,High,28,24,4,85.71,700.000000,,2026-07-23,no,Freight was charged on 24 of 28 invoices (86%).
+AG Playscapes,,customer,customer,High,8,8,0,100.00,375.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+AGCC Clothing,,windsor,windsor,High,9,0,9,0.00,0.000000,,2026-07-23,no,Freight was zero on 9 of 9 invoices (100%).
+AI Curtains & Blinds,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Air Safety Solutions P/L,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Aircraft Interiors Australia,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Airfence Safety Systems (Aust) Pty Ltd,,unknown,unknown,,12,6,6,50.00,175.000000,,2026-07-23,no,Freight evidence is evenly split: 6 charged and 6 zero-freight invoices.
+Airfleece Seat Covers,,customer,customer,High,10,10,0,100.00,200.000000,,2026-07-23,no,Freight was charged on 10 of 10 invoices (100%).
+Alan Fitzgerald,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Albany Leather,,customer,customer,Low,2,2,0,100.00,65.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Albany Regional Prison,,customer,customer,Medium,3,3,0,100.00,890.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Albert Andrews Pty Ltd,,customer,customer,Medium,4,3,1,75.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Albion Sports,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Alchemy Quest Limited,,customer,customer,Low,1,1,0,100.00,150.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Aleeda Wetsuits Australia Pty Ltd,,windsor,windsor,Low,7,3,4,42.86,55.000000,,2026-07-23,no,Freight was zero on 4 of 7 invoices (57%).
+Alfresco Shades,,customer,customer,High,46,43,3,93.48,885.010000,,2026-07-23,no,Freight was charged on 43 of 46 invoices (93%).
+Alibaba Furniture & Homewares,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Alisons Alterations,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+All About Canvas,,customer,customer,High,7,7,0,100.00,140.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+All Car Carpets,,customer,customer,Medium,62,46,16,74.19,855.000000,,2026-07-23,no,Freight was charged on 46 of 62 invoices (74%).
+All Tarps,,customer,customer,Low,2,2,0,100.00,45.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+All The Kings Men,,customer,customer,Low,2,2,0,100.00,35.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+All Trades Safety and Workwear Supplies,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Allertex,,windsor,windsor,Medium,14,4,10,28.57,45.000000,,2026-07-23,no,Freight was zero on 10 of 14 invoices (71%).
+Allied Filter Fabrics,,customer,customer,High,31,29,2,93.55,625.000000,,2026-07-23,no,Freight was charged on 29 of 31 invoices (94%).
+Allied Seating Group Pty Ltd,,customer,customer,High,66,58,8,87.88,2590.000000,,2026-07-23,no,Freight was charged on 58 of 66 invoices (88%).
+Allshelter Pty Ltd,,customer,customer,Medium,38,29,9,76.32,4825.000000,,2026-07-23,no,Freight was charged on 29 of 38 invoices (76%).
+Alphabet Bindery,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Alterations Now,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Alterations Plus Dressmaking,,windsor,windsor,Medium,3,1,2,33.33,20.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+Alum Windows,,unknown,unknown,,2,1,1,50.00,90.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Amad W.H. & Co.,,customer,customer,Low,109,64,45,58.72,1205.000000,,2026-07-23,no,Freight was charged on 64 of 109 invoices (59%).
+Amitesh Deo,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Ammon & Soners Group Pty Ltd,,customer,customer,High,46,43,3,93.48,980.000000,,2026-07-23,no,Freight was charged on 43 of 46 invoices (93%).
+AMP Australia,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+ANC Distribution Australia Pty Ltd,,customer,customer,High,28,23,5,82.14,445.000000,,2026-07-23,no,Freight was charged on 23 of 28 invoices (82%).
+Andrew Myers,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Andrew Wearing,,customer,customer,High,13,12,1,92.31,240.000000,,2026-07-23,no,Freight was charged on 12 of 13 invoices (92%).
+Andritz Fabrics and Rolls Pty Limited,,customer,customer,High,14,14,0,100.00,285.000000,,2026-07-23,no,Freight was charged on 14 of 14 invoices (100%).
+Angus Barrett P/L,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Anh Accessories,,customer,customer,Medium,7,5,2,71.43,90.000000,,2026-07-23,no,Freight was charged on 5 of 7 invoices (71%).
+Anna's Curtains,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Annie Birch,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Anstel Brands Pty Ltd,,customer,customer,High,12,11,1,91.67,175.000000,,2026-07-23,no,Freight was charged on 11 of 12 invoices (92%).
+Anthony Went,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Anthony's Shade and Sails,,customer,customer,High,6,6,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Anto Apparel,,unknown,unknown,,2,1,1,50.00,15.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Antrim Upholstery Pty Ltd,,customer,customer,High,49,42,7,85.71,965.000000,,2026-07-23,no,Freight was charged on 42 of 49 invoices (86%).
+Anwar Haidary,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Apollo Blinds Awnings Shutters Pty Ltd,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Apollo Camper,,windsor,windsor,Low,11,4,7,36.36,80.000000,,2026-07-23,no,Freight was zero on 7 of 11 invoices (64%).
+Apple Patch Sewing Centre,,customer,customer,High,26,25,1,96.15,1305.000000,,2026-07-23,no,Freight was charged on 25 of 26 invoices (96%).
+Arles Beds,,customer,customer,High,5,5,0,100.00,170.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Arli Carpets,,windsor,windsor,High,8,0,8,0.00,0.000000,,2026-07-23,no,Freight was zero on 8 of 8 invoices (100%).
+Armstrong Flooring,,windsor,windsor,High,5,0,5,0.00,0.000000,,2026-07-23,no,Freight was zero on 5 of 5 invoices (100%).
+Aro Technology,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Art Trim,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Arteil Ergonomic Seating WA,,customer,customer,High,29,25,4,86.21,2945.000000,,2026-07-23,no,Freight was charged on 25 of 29 invoices (86%).
+Arthur G Designs,,customer,customer,Low,225,142,83,63.11,5335.000000,,2026-07-23,no,Freight was charged on 142 of 225 invoices (63%).
+As Good As Its Seams,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Ascot Auto Trimmers,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Ashlee Krol,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Ashley Furniture Design P/L,,windsor,windsor,High,97,0,97,0.00,0.000000,,2026-07-23,no,Freight was zero on 97 of 97 invoices (100%).
+ASM Manufacturing,,customer,customer,Medium,3,2,1,66.67,40.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Ason Warehousing & Logistics,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+ASP Cases & Crates,,customer,customer,Medium,4,3,1,75.00,215.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Aspect Furniture,,customer,customer,Medium,3,2,1,66.67,100.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Aspect Windows,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Astra Furniture,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Astrum Furniture Pty Ltd,,windsor,windsor,High,16,0,16,0.00,0.000000,,2026-07-23,no,Freight was zero on 16 of 16 invoices (100%).
+Atlas Canvas,,customer,customer,High,8,8,0,100.00,170.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Audrey & Me,,customer,customer,High,22,21,1,95.45,539.550000,,2026-07-23,no,Freight was charged on 21 of 22 invoices (95%).
+Aumake International Ltd,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Aus Trim,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Aus-Tech P/L,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Ausbeds,,customer,customer,High,29,26,3,89.66,1325.000000,,2026-07-23,no,Freight was charged on 26 of 29 invoices (90%).
+Ausmade Clothing,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Ausnet Industries ( Beak Engineering ),,customer,customer,High,7,7,0,100.00,215.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Aussie Bush Leather,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Aussie Dog Products,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Aussie Fenders,,customer,customer,Medium,22,17,5,77.27,380.000000,,2026-07-23,no,Freight was charged on 17 of 22 invoices (77%).
+Aussie Hero Quilts,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Aussie Origin P/L,,customer,customer,Medium,3,2,1,66.67,40.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Aussie Pet Comfort Pty Ltd,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Aussie Shade Houses,,customer,customer,High,14,14,0,100.00,310.000000,,2026-07-23,no,Freight was charged on 14 of 14 invoices (100%).
+Aussie Shade Solutions,,customer,customer,Low,10,6,4,60.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 10 invoices (60%).
+Aussie Sports Goods,,customer,customer,High,7,6,1,85.71,120.000000,,2026-07-23,no,Freight was charged on 6 of 7 invoices (86%).
+Aussie Wool Comfort,,customer,customer,High,35,32,3,91.43,700.000000,,2026-07-23,no,Freight was charged on 32 of 35 invoices (91%).
+Austar Hats,,customer,customer,Medium,15,11,4,73.33,155.000000,,2026-07-23,no,Freight was charged on 11 of 15 invoices (73%).
+Austarps,,customer,customer,High,29,25,4,86.21,1225.000000,,2026-07-23,no,Freight was charged on 25 of 29 invoices (86%).
+Austcentre International P/L,,customer,customer,High,29,26,3,89.66,575.000000,,2026-07-23,no,Freight was charged on 26 of 29 invoices (90%).
+Austextiles,,customer,customer,High,89,80,9,89.89,2155.000000,,2026-07-23,no,Freight was charged on 80 of 89 invoices (90%).
+Australian Canvas Co,,customer,customer,Medium,3,3,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Australian Flag Company,,customer,customer,Medium,3,2,1,66.67,40.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Australian Leather P/L,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Australian Liquid Filter Co Pty Ltd,,customer,customer,High,13,11,2,84.62,230.000000,,2026-07-23,no,Freight was charged on 11 of 13 invoices (85%).
+Australian Luxury Bedding,,customer,customer,High,20,18,2,90.00,365.000000,,2026-07-23,no,Freight was charged on 18 of 20 invoices (90%).
+Australian Shade Concepts,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Australian Shade Wholesalers,,customer,customer,Low,18,10,8,55.56,315.000000,,2026-07-23,no,Freight was charged on 10 of 18 invoices (56%).
+Australian Sheepskin Distributors,,customer,customer,High,7,7,0,100.00,150.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Australian Sheepskin Souvenirs,,customer,customer,High,18,17,1,94.44,270.000000,,2026-07-23,no,Freight was charged on 17 of 18 invoices (94%).
+Australian Spa Covers,,unknown,unknown,,6,3,3,50.00,45.000000,,2026-07-23,no,Freight evidence is evenly split: 3 charged and 3 zero-freight invoices.
+Australian Stitch,,customer,customer,High,8,8,0,100.00,160.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Australian Teamwear P/L,,customer,customer,High,44,42,2,95.45,1480.000000,,2026-07-23,no,Freight was charged on 42 of 44 invoices (95%).
+Australian Textile Mills,,customer,customer,High,47,44,3,93.62,1710.000000,,2026-07-23,no,Freight was charged on 44 of 47 invoices (94%).
+Australian Ugg Original,,customer,customer,High,34,32,2,94.12,660.000000,,2026-07-23,no,Freight was charged on 32 of 34 invoices (94%).
+Australian Uggboots Pty Ltd,,windsor,windsor,Medium,80,21,59,26.25,290.000000,,2026-07-23,no,Freight was zero on 59 of 80 invoices (74%).
+Auswool Products P/L,,customer,customer,High,5,4,1,80.00,255.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+Auto Image Car Interiors,,customer,customer,Low,2,2,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Auvalia Group,,windsor,windsor,Low,26,10,16,38.46,135.000000,,2026-07-23,no,Freight was zero on 16 of 26 invoices (62%).
+Avanterra Group,,customer,customer,High,11,9,2,81.82,155.000000,,2026-07-23,no,Freight was charged on 9 of 11 invoices (82%).
+Avo Studio,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+AWB Designs,,windsor,windsor,High,7,0,7,0.00,0.000000,,2026-07-23,no,Freight was zero on 7 of 7 invoices (100%).
+Awnet,,customer,customer,Low,195,119,76,61.03,2360.000000,,2026-07-23,no,Freight was charged on 119 of 195 invoices (61%).
+B & B Watkins Industrial Sewing,,customer,customer,Medium,3,3,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+B & L Thorp Upholstery,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+B Q Pallets,,windsor,windsor,High,27,0,27,0.00,0.000000,,2026-07-23,no,Freight was zero on 27 of 27 invoices (100%).
+Baby Dink,,customer,customer,Low,5,3,2,60.00,90.000000,,2026-07-23,no,Freight was charged on 3 of 5 invoices (60%).
+Bachra Manufacturing,,customer,customer,High,46,41,5,89.13,1425.000000,,2026-07-23,no,Freight was charged on 41 of 46 invoices (89%).
+Badge Tech Promotional Products,,customer,customer,High,25,23,2,92.00,460.000000,,2026-07-23,no,Freight was charged on 23 of 25 invoices (92%).
+Bambi Enterprises,,customer,customer,High,81,72,9,88.89,1890.000000,,2026-07-23,no,Freight was charged on 72 of 81 invoices (89%).
+Bambini Bedding,,windsor,windsor,High,152,28,124,18.42,1290.000000,,2026-07-23,no,Freight was zero on 124 of 152 invoices (82%).
+Banner Brothers,,customer,customer,High,64,55,9,85.94,1580.000000,,2026-07-23,no,Freight was charged on 55 of 64 invoices (86%).
+Barmah Hats,,customer,customer,Medium,124,83,41,66.94,1625.000000,,2026-07-23,no,Freight was charged on 83 of 124 invoices (67%).
+Barrier Board,,windsor,windsor,High,9,1,8,11.11,85.000000,,2026-07-23,no,Freight was zero on 8 of 9 invoices (89%).
+Bathurst Foam & Rubber,,customer,customer,High,22,19,3,86.36,1905.000000,,2026-07-23,no,Freight was charged on 19 of 22 invoices (86%).
+Baylesh Upholstery,,customer,customer,Low,2,2,0,100.00,35.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+BB Furniture,,windsor,windsor,High,97,1,96,1.03,26.000000,,2026-07-23,no,Freight was zero on 96 of 97 invoices (99%).
+BCS Concrete Sleepers,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+BCSM Enterprise,,windsor,windsor,High,20,0,20,0.00,0.000000,,2026-07-23,no,Freight was zero on 20 of 20 invoices (100%).
+Be Right Back,,customer,customer,High,9,8,1,88.89,150.000000,,2026-07-23,no,Freight was charged on 8 of 9 invoices (89%).
+Beard A. H. Pty Ltd - NSW,,windsor,windsor,High,693,0,693,0.00,0.000000,,2026-07-23,no,Freight was zero on 693 of 693 invoices (100%).
+Beard A. H. Pty Ltd - NZ,,windsor,windsor,Medium,99,28,71,28.28,4493.480000,,2026-07-23,no,Freight was zero on 71 of 99 invoices (72%).
+Beard A. H. Pty Ltd - Qld,,windsor,windsor,High,439,2,437,0.46,50.000000,,2026-07-23,no,Freight was zero on 437 of 439 invoices (100%).
+Beard A. H. Pty Ltd - SA,,windsor,windsor,High,257,1,256,0.39,20.000000,,2026-07-23,no,Freight was zero on 256 of 257 invoices (100%).
+Beard A. H. Pty Ltd - Tasmania,,windsor,windsor,High,156,1,155,0.64,575.000000,,2026-07-23,no,Freight was zero on 155 of 156 invoices (99%).
+Beard A. H. Pty Ltd - Victoria,,windsor,windsor,High,452,4,448,0.88,140.000000,,2026-07-23,no,Freight was zero on 448 of 452 invoices (99%).
+Beard A. H. Pty Ltd - WA,,windsor,windsor,High,221,17,204,7.69,4620.000000,,2026-07-23,no,Freight was zero on 204 of 221 invoices (92%).
+Beau Pets,,customer,customer,Low,10,6,4,60.00,140.000000,,2026-07-23,no,Freight was charged on 6 of 10 invoices (60%).
+Beck's Bedding,,customer,customer,High,7,7,0,100.00,105.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Beckhouse Upholstery,,customer,customer,High,12,12,0,100.00,240.000000,,2026-07-23,no,Freight was charged on 12 of 12 invoices (100%).
+Bed Master Bedding,,windsor,windsor,Low,445,211,234,47.42,7465.000000,,2026-07-23,no,Freight was zero on 234 of 445 invoices (53%).
+Bed Protection Australia P/L,,customer,customer,Low,221,122,99,55.20,3690.000000,,2026-07-23,no,Freight was charged on 122 of 221 invoices (55%).
+Bedco Pty Ltd,,customer,customer,High,291,243,48,83.51,18828.000000,,2026-07-23,no,Freight was charged on 243 of 291 invoices (84%).
+Bedman,,customer,customer,High,5,4,1,80.00,90.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+Beds 4 Backs,,customer,customer,Medium,8,6,2,75.00,235.000000,,2026-07-23,no,Freight was charged on 6 of 8 invoices (75%).
+Bee Jays Canvas,,customer,customer,High,19,16,3,84.21,1105.000000,,2026-07-23,no,Freight was charged on 16 of 19 invoices (84%).
+Beehive Vinyl Products P/L,,windsor,windsor,Medium,76,23,53,30.26,970.000000,,2026-07-23,no,Freight was zero on 53 of 76 invoices (70%).
+Beilby's Pty Ltd,,customer,customer,Medium,7,5,2,71.43,130.000000,,2026-07-23,no,Freight was charged on 5 of 7 invoices (71%).
+Bekaert Deslee (Aust) Pty Ltd,,customer,customer,Medium,257,187,70,72.76,3715.000000,,2026-07-23,no,Freight was charged on 187 of 257 invoices (73%).
+Believe91,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Bellarine Truck & Ute Rental,,customer,customer,High,11,9,2,81.82,180.000000,,2026-07-23,no,Freight was charged on 9 of 11 invoices (82%).
+Ben Furney Flour Mills,,customer,customer,High,27,26,1,96.30,2110.000000,,2026-07-23,no,Freight was charged on 26 of 27 invoices (96%).
+Bendigo Health,,windsor,windsor,Medium,3,1,2,33.33,20.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+Bengo Industries,,customer,customer,Medium,84,61,23,72.62,3595.000000,,2026-07-23,no,Freight was charged on 61 of 84 invoices (73%).
+Beparta,,customer,customer,High,12,11,1,91.67,220.000000,,2026-07-23,no,Freight was charged on 11 of 12 invoices (92%).
+BESTT Clothing Manufacturing Pty Ltd,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Big Dog Golf Co.,,customer,customer,Medium,9,7,2,77.78,145.000000,,2026-07-23,no,Freight was charged on 7 of 9 invoices (78%).
+Bigfoot Bags & Covers Australia,,customer,customer,High,110,106,4,96.36,2225.000000,,2026-07-23,no,Freight was charged on 106 of 110 invoices (96%).
+Bilja Canvas,,customer,customer,High,9,8,1,88.89,165.000000,,2026-07-23,no,Freight was charged on 8 of 9 invoices (89%).
+Binder Enterprise,,windsor,windsor,Low,119,59,60,49.58,1235.000000,,2026-07-23,no,Freight was zero on 60 of 119 invoices (50%).
+Bindoon Boots,,customer,customer,Low,1,1,0,100.00,35.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Black Duck Seat Covers,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Blackman's Interior Repair Centre,,windsor,windsor,High,9,0,9,0.00,0.000000,,2026-07-23,no,Freight was zero on 9 of 9 invoices (100%).
+Blackmans Leather Vic Pty Ltd,,windsor,windsor,High,28,0,28,0.00,0.000000,,2026-07-23,no,Freight was zero on 28 of 28 invoices (100%).
+Blackmore and Roy,,customer,customer,High,50,47,3,94.00,1385.000000,,2026-07-23,no,Freight was charged on 47 of 50 invoices (94%).
+BLAM Printing,,customer,customer,High,48,44,4,91.67,1125.000000,,2026-07-23,no,Freight was charged on 44 of 48 invoices (92%).
+"Blencowe, Michael",,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Blue Mountains Ugg Boots,,customer,customer,High,63,57,6,90.48,1435.000000,,2026-07-23,no,Freight was charged on 57 of 63 invoices (90%).
+Bluestone Furniture & Upholstery,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Body Rest Bedding Co.,,windsor,windsor,Low,68,30,38,44.12,840.000000,,2026-07-23,no,Freight was zero on 38 of 68 invoices (56%).
+Boneida Print,,customer,customer,High,12,12,0,100.00,305.000000,,2026-07-23,no,Freight was charged on 12 of 12 invoices (100%).
+Bootstrap Pty Ltd,,customer,customer,High,80,75,5,93.75,3685.000000,,2026-07-23,no,Freight was charged on 75 of 80 invoices (94%).
+Boss Aluminium Pty Ltd,,customer,customer,High,40,38,2,95.00,810.000000,,2026-07-23,no,Freight was charged on 38 of 40 invoices (95%).
+Boyd,,customer,customer,Low,2,2,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+BQ Design,,customer,customer,High,80,70,10,87.50,1030.000000,,2026-07-23,no,Freight was charged on 70 of 80 invoices (88%).
+"Brabham, E.H. & E. R.",,windsor,windsor,Medium,4,0,4,0.00,0.000000,,2026-07-23,no,Freight was zero on 4 of 4 invoices (100%).
+Bradnams Windows & Doors P/L,,windsor,windsor,Medium,80,21,59,26.25,1216.000000,,2026-07-23,no,Freight was zero on 59 of 80 invoices (74%).
+Brand Furniture,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Brand Image Seat Covers,,customer,customer,High,30,29,1,96.67,540.000000,,2026-07-23,no,Freight was charged on 29 of 30 invoices (97%).
+Bravado,,unknown,unknown,,2,1,1,50.00,10.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Bravo Print & Design Pty Ltd,,windsor,windsor,High,127,22,105,17.32,500.000000,,2026-07-23,no,Freight was zero on 105 of 127 invoices (83%).
+Brett's,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Briar Will,,windsor,windsor,Medium,6,2,4,33.33,50.000000,,2026-07-23,no,Freight was zero on 4 of 6 invoices (67%).
+Bribie Upholstery,,customer,customer,High,10,9,1,90.00,185.000000,,2026-07-23,no,Freight was charged on 9 of 10 invoices (90%).
+Brilliant Furniture and Upholstery,,unknown,unknown,,16,8,8,50.00,325.580000,,2026-07-23,no,Freight evidence is evenly split: 8 charged and 8 zero-freight invoices.
+Brilliant Shade Sails,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Brisbane Sailmakers P/L,,customer,customer,High,59,54,5,91.53,1170.000000,,2026-07-23,no,Freight was charged on 54 of 59 invoices (92%).
+Brown Owl Leather,,customer,customer,Medium,3,2,1,66.67,30.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Brunella Schoolwear P/L,,customer,customer,High,22,22,0,100.00,450.000000,,2026-07-23,no,Freight was charged on 22 of 22 invoices (100%).
+BTO Climbing Pty Ltd,,customer,customer,Low,1,1,0,100.00,50.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Bubbling With Energy,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Buckaroo Leatherworks Pty Ltd,,customer,customer,Medium,91,72,19,79.12,3695.000000,,2026-07-23,no,Freight was charged on 72 of 91 invoices (79%).
+Buddy Motor Trimming,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Buffalo Sign Co,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Bulla Tarps,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Bundoora Boat Upholstery,,customer,customer,High,39,38,1,97.44,620.000000,,2026-07-23,no,Freight was charged on 38 of 39 invoices (97%).
+Burgtec,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+C & N Building Supplies,,unknown,unknown,,18,9,9,50.00,535.000000,,2026-07-23,no,Freight evidence is evenly split: 9 charged and 9 zero-freight invoices.
+C & T Upholstery,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+C V Services Group,,customer,customer,Low,1,1,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+C-Sale,,windsor,windsor,Medium,340,111,229,32.65,2104.270000,,2026-07-23,no,Freight was zero on 229 of 340 invoices (67%).
+C.A. Carpentry,,windsor,windsor,Medium,4,0,4,0.00,0.000000,,2026-07-23,no,Freight was zero on 4 of 4 invoices (100%).
+Camatic Pty Ltd,,customer,customer,Low,2,2,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Camelot Horse Rugs,,customer,customer,High,10,10,0,100.00,200.000000,,2026-07-23,no,Freight was charged on 10 of 10 invoices (100%).
+Camm Upholstery,,windsor,windsor,High,54,6,48,11.11,105.000000,,2026-07-23,no,Freight was zero on 48 of 54 invoices (89%).
+Campus School & College Wear,,customer,customer,High,18,17,1,94.44,360.000000,,2026-07-23,no,Freight was charged on 17 of 18 invoices (94%).
+Camsew - SewRent,,windsor,windsor,Medium,4,0,4,0.00,0.000000,,2026-07-23,no,Freight was zero on 4 of 4 invoices (100%).
+Canberra Tannery,,customer,customer,High,16,16,0,100.00,430.000000,,2026-07-23,no,Freight was charged on 16 of 16 invoices (100%).
+Canobolas Canvas,,customer,customer,High,18,18,0,100.00,510.000000,,2026-07-23,no,Freight was charged on 18 of 18 invoices (100%).
+Canvascraft (Aust) Pty Ltd,,customer,customer,Low,2,2,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Cape Country Upholstery,,customer,customer,High,18,18,0,100.00,2845.000000,,2026-07-23,no,Freight was charged on 18 of 18 invoices (100%).
+Captain Robbo,,customer,customer,High,28,25,3,89.29,355.000000,,2026-07-23,no,Freight was charged on 25 of 28 invoices (89%).
+Car-Bra Australia,,customer,customer,High,47,45,2,95.74,605.000000,,2026-07-23,no,Freight was charged on 45 of 47 invoices (96%).
+Careleda Pty Ltd,,customer,customer,High,50,50,0,100.00,1000.000000,,2026-07-23,no,Freight was charged on 50 of 50 invoices (100%).
+Carlisle Accessories,,windsor,windsor,Medium,6,2,4,33.33,20.000000,,2026-07-23,no,Freight was zero on 4 of 6 invoices (67%).
+Carluke Enterprises,,customer,customer,High,10,10,0,100.00,235.000000,,2026-07-23,no,Freight was charged on 10 of 10 invoices (100%).
+Carmen Kenny,,windsor,windsor,Medium,3,1,2,33.33,10.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+Carolyn's Creations,,customer,customer,Medium,3,3,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Carpet Edgetec Finishings,,customer,customer,High,7,7,0,100.00,145.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Carpet House,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Carpet Overlockers Pty Ltd,,customer,customer,Medium,12,8,4,66.67,215.000000,,2026-07-23,no,Freight was charged on 8 of 12 invoices (67%).
+Carroll & Richardson,,customer,customer,High,23,19,4,82.61,440.000000,,2026-07-23,no,Freight was charged on 19 of 23 invoices (83%).
+Casa Mia Furniture,,windsor,windsor,High,12,0,12,0.00,0.000000,,2026-07-23,no,Freight was zero on 12 of 12 invoices (100%).
+Casa Soft Lounges,,windsor,windsor,High,77,9,68,11.69,220.000000,,2026-07-23,no,Freight was zero on 68 of 77 invoices (88%).
+Casablanca Australia,,customer,customer,High,6,5,1,83.33,380.000000,,2026-07-23,no,Freight was charged on 5 of 6 invoices (83%).
+Casey Blinds and Shutters,,customer,customer,High,6,5,1,83.33,65.000000,,2026-07-23,no,Freight was charged on 5 of 6 invoices (83%).
+Cash's Apparel Solutions P/L,,customer,customer,High,7,7,0,100.00,160.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Catalyst Graphics,,customer,customer,High,138,129,9,93.48,5790.000000,,2026-07-23,no,Freight was charged on 129 of 138 invoices (93%).
+Cathlene Saul,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+CDY Motor Trimming,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Cenmel Pty Ltd,,windsor,windsor,High,36,2,34,5.56,50.000000,,2026-07-23,no,Freight was zero on 34 of 36 invoices (94%).
+Central Foam Supplies,,customer,customer,Low,256,162,94,63.28,11745.000000,,2026-07-23,no,Freight was charged on 162 of 256 invoices (63%).
+Century Seating System Pty Ltd,,windsor,windsor,High,10,2,8,20.00,50.000000,,2026-07-23,no,Freight was zero on 8 of 10 invoices (80%).
+Chair Imports (Sydney) Pty Ltd,,windsor,windsor,High,11,0,11,0.00,0.000000,,2026-07-23,no,Freight was zero on 11 of 11 invoices (100%).
+Chair Solutions - NSW,,customer,customer,Medium,108,78,30,72.22,7624.500000,,2026-07-23,no,Freight was charged on 78 of 108 invoices (72%).
+Chair Solutions - NZ,,customer,customer,Low,34,18,16,52.94,1340.000000,,2026-07-23,no,Freight was charged on 18 of 34 invoices (53%).
+Chair Solutions - QLD,,customer,customer,Low,94,58,36,61.70,14420.000000,,2026-07-23,no,Freight was charged on 58 of 94 invoices (62%).
+Chair Solutions - VIC,,customer,customer,Medium,266,199,67,74.81,7498.000000,,2026-07-23,no,Freight was charged on 199 of 266 invoices (75%).
+Chair Solutions - WA,,customer,customer,High,37,32,5,86.49,9280.000000,,2026-07-23,no,Freight was charged on 32 of 37 invoices (86%).
+Chand's Sheepskin Footwear,,windsor,windsor,Low,85,42,43,49.41,710.000000,,2026-07-23,no,Freight was zero on 43 of 85 invoices (51%).
+Chapman Furniture,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Charada Hawley,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Charlie Philippe,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Chatoyer Environmental P/L,,customer,customer,High,137,115,22,83.94,6235.000000,,2026-07-23,no,Freight was charged on 115 of 137 invoices (84%).
+Cheveux,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+"Chippindall, Jennifer",,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Chirnside Carpets,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Chiropedic Bedding,,windsor,windsor,Medium,430,88,342,20.47,4630.000000,,2026-07-23,no,Freight was zero on 342 of 430 invoices (80%).
+Chloe Turner,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Choices Flooring - Lilydale,,customer,customer,Medium,3,3,0,100.00,90.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Choices Flooring - Young,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Choozy,,customer,customer,High,43,38,5,88.37,835.000000,,2026-07-23,no,Freight was charged on 38 of 43 invoices (88%).
+Chris Industrial Sewing Repairs Pty Ltd,,customer,customer,High,20,19,1,95.00,315.000000,,2026-07-23,no,Freight was charged on 19 of 20 invoices (95%).
+Christine Bain,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+CHV Furniture,,customer,customer,High,5,5,0,100.00,70.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+City Comfort Pty Ltd,,windsor,windsor,High,44,7,37,15.91,200.000000,,2026-07-23,no,Freight was zero on 37 of 44 invoices (84%).
+Clarissa Luxford,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Clark Shade Sails,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Classic Fit Seat Covers,,customer,customer,High,39,37,2,94.87,880.100000,,2026-07-23,no,Freight was charged on 37 of 39 invoices (95%).
+Clear Edge Filtration,,windsor,windsor,Low,156,61,95,39.10,1490.000000,,2026-07-23,no,Freight was zero on 95 of 156 invoices (61%).
+Clemence Lebec,,customer,customer,Medium,4,4,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Cleon Design P/L.,,customer,customer,High,11,10,1,90.91,200.000000,,2026-07-23,no,Freight was charged on 10 of 11 invoices (91%).
+Clets Linen & Co Pty Ltd,,customer,customer,High,25,23,2,92.00,320.000000,,2026-07-23,no,Freight was charged on 23 of 25 invoices (92%).
+Clipper Plastics Pty Ltd,,customer,customer,High,101,83,18,82.18,2935.000000,,2026-07-23,no,Freight was charged on 83 of 101 invoices (82%).
+Clobber Australia,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Club Industries,,customer,customer,High,185,170,15,91.89,2585.000000,,2026-07-23,no,Freight was charged on 170 of 185 invoices (92%).
+CMK Furnishings,,customer,customer,High,9,8,1,88.89,160.000000,,2026-07-23,no,Freight was charged on 8 of 9 invoices (89%).
+Co-ordinated Furnishings,,customer,customer,High,13,13,0,100.00,190.000000,,2026-07-23,no,Freight was charged on 13 of 13 invoices (100%).
+Coastal Coasters,,customer,customer,High,27,27,0,100.00,545.000000,,2026-07-23,no,Freight was charged on 27 of 27 invoices (100%).
+Coastal Coverings,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Cobalt Health,,customer,customer,Medium,3,2,1,66.67,65.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Coffs Harbour Blinds & Awnings,,customer,customer,High,15,15,0,100.00,310.000000,,2026-07-23,no,Freight was charged on 15 of 15 invoices (100%).
+Colan Products P/L,,customer,customer,High,28,26,2,92.86,530.000000,,2026-07-23,no,Freight was charged on 26 of 28 invoices (93%).
+Coldy Holder Products,,customer,customer,High,13,12,1,92.31,250.000000,,2026-07-23,no,Freight was charged on 12 of 13 invoices (92%).
+College Knitwear Pty Ltd,,customer,customer,High,16,16,0,100.00,200.000000,,2026-07-23,no,Freight was charged on 16 of 16 invoices (100%).
+Collessione Chesterfield,,customer,customer,Low,11,6,5,54.55,155.000000,,2026-07-23,no,Freight was charged on 6 of 11 invoices (55%).
+Collier Clothing,,customer,customer,High,20,20,0,100.00,375.000000,,2026-07-23,no,Freight was charged on 20 of 20 invoices (100%).
+Colorbrite Australia,,customer,customer,High,14,13,1,92.86,300.000000,,2026-07-23,no,Freight was charged on 13 of 14 invoices (93%).
+Colour World Group Pty Ltd,,customer,customer,Low,2,2,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Colourful Canvas,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Combat Clothing Aust Pty Ltd,,customer,customer,High,8,8,0,100.00,165.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Comfort First,,windsor,windsor,Medium,4,0,4,0.00,0.000000,,2026-07-23,no,Freight was zero on 4 of 4 invoices (100%).
+Comfort Furniture Pty Ltd,,windsor,windsor,Medium,27,7,20,25.93,240.000000,,2026-07-23,no,Freight was zero on 20 of 27 invoices (74%).
+Comfort Plus Sofas,,customer,customer,Low,17,10,7,58.82,110.000000,,2026-07-23,no,Freight was charged on 10 of 17 invoices (59%).
+Comfort Sleep Bedding Company,,customer,customer,Low,615,338,277,54.96,18970.000000,,2026-07-23,no,Freight was charged on 338 of 615 invoices (55%).
+Comfort Zone,,customer,customer,High,17,15,2,88.24,750.000000,,2026-07-23,no,Freight was charged on 15 of 17 invoices (88%).
+Commercial Furniture Solutions,,windsor,windsor,Low,110,40,70,36.36,1365.000000,,2026-07-23,no,Freight was zero on 70 of 110 invoices (64%).
+Commercial Furniture Systems Pty Ltd,,customer,customer,Low,1,1,0,100.00,185.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Commercial Sewing P/L - WA,,windsor,windsor,Medium,3,1,2,33.33,25.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+Commercial Upholstery Solutions (Vic) Pty Ltd,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Complete Decor,,customer,customer,High,12,11,1,91.67,220.000000,,2026-07-23,no,Freight was charged on 11 of 12 invoices (92%).
+Complete Furniture & Upholstery,,customer,customer,High,15,14,1,93.33,295.000000,,2026-07-23,no,Freight was charged on 14 of 15 invoices (93%).
+Complete Re-Upholstery Services,,customer,customer,Medium,11,8,3,72.73,80.000000,,2026-07-23,no,Freight was charged on 8 of 11 invoices (73%).
+Con's Upholstery,,customer,customer,Low,8,5,3,62.50,140.000000,,2026-07-23,no,Freight was charged on 5 of 8 invoices (62%).
+Concept Apparel,,customer,customer,Medium,7,5,2,71.43,70.000000,,2026-07-23,no,Freight was charged on 5 of 7 invoices (71%).
+Concept Caravans,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Conforto Pty Ltd,,customer,customer,Low,273,177,96,64.84,6575.000000,,2026-07-23,no,Freight was charged on 177 of 273 invoices (65%).
+Connie Classics,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Contour Furniture,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Cool Outdoor Living,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Coolamon Blinds & Curtains,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Corinthian Doors,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Corporate Chair Systems,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Corporate Flag & Banner Co.,,unknown,unknown,,4,2,2,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 2 charged and 2 zero-freight invoices.
+Corrective Services Industries - Aldavilla,,customer,customer,Low,22,14,8,63.64,4250.000000,,2026-07-23,no,Freight was charged on 14 of 22 invoices (64%).
+Corrective Services Industries - Cessnock,,customer,customer,Low,1,1,0,100.00,135.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Corrective Services Industries - Goulburn,,customer,customer,High,7,6,1,85.71,727.000000,,2026-07-23,no,Freight was charged on 6 of 7 invoices (86%).
+Corrective Services Industries - South Nowra,,windsor,windsor,Medium,9,2,7,22.22,430.000000,,2026-07-23,no,Freight was zero on 7 of 9 invoices (78%).
+Cosier Design Furniture,,windsor,windsor,Medium,6,2,4,33.33,50.000000,,2026-07-23,no,Freight was zero on 4 of 6 invoices (67%).
+Country Wide Curtains & Blinds,,customer,customer,Medium,4,4,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Country Wool Pack Sales,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Couture Costume Dancewear,,customer,customer,High,34,34,0,100.00,600.000000,,2026-07-23,no,Freight was charged on 34 of 34 invoices (100%).
+Cove Covers,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Coverland Marine,,customer,customer,High,49,48,1,97.96,690.000000,,2026-07-23,no,Freight was charged on 48 of 49 invoices (98%).
+Cozy Koala P/L,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Craftsmen Bookbinding,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Crafty Jack,,windsor,windsor,High,17,3,14,17.65,60.000000,,2026-07-23,no,Freight was zero on 14 of 17 invoices (82%).
+Crate N Pack Solutions,,customer,customer,Low,1,1,0,100.00,50.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Creative Auto Interiors,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Creative Embroidery,,customer,customer,High,13,13,0,100.00,525.000000,,2026-07-23,no,Freight was charged on 13 of 13 invoices (100%).
+Croftlink,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Crown Doors International,,windsor,windsor,High,13,0,13,0.00,0.000000,,2026-07-23,no,Freight was zero on 13 of 13 invoices (100%).
+Crown K9,,windsor,windsor,High,6,0,6,0.00,0.000000,,2026-07-23,no,Freight was zero on 6 of 6 invoices (100%).
+Crown Posture Bedding,,windsor,windsor,High,566,1,565,0.18,15.000000,,2026-07-23,no,Freight was zero on 565 of 566 invoices (100%).
+Crown Windows,,windsor,windsor,High,5,0,5,0.00,0.000000,,2026-07-23,no,Freight was zero on 5 of 5 invoices (100%).
+Crystal Healthcare (Vic) Pty Ltd,,customer,customer,High,14,13,1,92.86,130.000000,,2026-07-23,no,Freight was charged on 13 of 14 invoices (93%).
+CSIRO Land & Water,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+CTM Auto Upholstery,,customer,customer,High,6,6,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+CTS Group,,customer,customer,High,8,8,0,100.00,210.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Cubbi Buddi,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Cult Design,,customer,customer,Low,2,2,0,100.00,190.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Cupid's Millinery Melbourne,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Curtain Interiors,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Curtain Kings Melbourne,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Curtain Tapes & Accessories,,customer,customer,High,24,23,1,95.83,460.000000,,2026-07-23,no,Freight was charged on 23 of 24 invoices (96%).
+Cushions R Us Sydney,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Custom Car Mats of Australia,,customer,customer,Medium,9,6,3,66.67,60.000000,,2026-07-23,no,Freight was charged on 6 of 9 invoices (67%).
+Custom Curtains & Bedspreads,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Custom Furniture Design,,windsor,windsor,Low,14,5,9,35.71,115.000000,,2026-07-23,no,Freight was zero on 9 of 14 invoices (64%).
+Custom Look,,customer,customer,Medium,3,3,0,100.00,105.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Custom Made Furniture,,customer,customer,Medium,4,4,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Custom Shade Structures Pty Ltd,,customer,customer,High,16,15,1,93.75,310.000000,,2026-07-23,no,Freight was charged on 15 of 16 invoices (94%).
+Cutana Hat Co,,customer,customer,High,19,19,0,100.00,380.000000,,2026-07-23,no,Freight was charged on 19 of 19 invoices (100%).
+Cutting Edge Motor Trimming & Shade Sails,,customer,customer,Low,38,20,18,52.63,420.000000,,2026-07-23,no,Freight was charged on 20 of 38 invoices (53%).
+D C Pallets,,windsor,windsor,High,31,0,31,0.00,0.000000,,2026-07-23,no,Freight was zero on 31 of 31 invoices (100%).
+D R Lounge Support,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+DAL Brands Pty Ltd,,customer,customer,Low,114,58,56,50.88,2420.000000,,2026-07-23,no,Freight was charged on 58 of 114 invoices (51%).
+Daley's AMU Supplies (NSW) P/L,,windsor,windsor,High,9,0,9,0.00,0.000000,,2026-07-23,no,Freight was zero on 9 of 9 invoices (100%).
+Daley's AMU Supplies (QLD) P/L,,windsor,windsor,Low,5,2,3,40.00,250.000000,,2026-07-23,no,Freight was zero on 3 of 5 invoices (60%).
+Daley's AMU Supplies (VIC) P/L,,unknown,unknown,,6,3,3,50.00,85.000000,,2026-07-23,no,Freight evidence is evenly split: 3 charged and 3 zero-freight invoices.
+Daley's AMU Supplies (WA) P/L,,windsor,windsor,Low,7,3,4,42.86,100.000000,,2026-07-23,no,Freight was zero on 4 of 7 invoices (57%).
+"Daley's Auto, Marine & Upholstery Supplies (SA)",,customer,customer,Low,2,2,0,100.00,105.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Dane Taylor Technologies,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Danfield Limited,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Daniel's Quality Upholstery,,customer,customer,Medium,6,4,2,66.67,100.000000,,2026-07-23,no,Freight was charged on 4 of 6 invoices (67%).
+Danish Eiderdowns,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Darling Downs Tarpaulins,,customer,customer,High,16,14,2,87.50,425.000000,,2026-07-23,no,Freight was charged on 14 of 16 invoices (88%).
+Darn Cheap Fabrics,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Darren Brown Upholstery,,customer,customer,Medium,4,3,1,75.00,75.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Darren Maynes Motor Trimming,,customer,customer,High,9,9,0,100.00,135.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+David Becker,,customer,customer,High,9,9,0,100.00,180.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+David Blackman Automotive Upholstery,,windsor,windsor,Medium,3,1,2,33.33,10.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+David Gumbrell Saddles,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+David Shaw,,customer,customer,Low,1,1,0,100.00,95.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Daylom & Vovo Upholstery,,customer,customer,Medium,4,4,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+DE Seal & Sons Pty Ltd,,customer,customer,High,20,17,3,85.00,1910.000000,,2026-07-23,no,Freight was charged on 17 of 20 invoices (85%).
+Deana Lawn,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Debbie Glover,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Deco Depot,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Decorator Collective,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Deepwater Canvas Repairs,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Defab Weavers,,customer,customer,High,7,6,1,85.71,90.000000,,2026-07-23,no,Freight was charged on 6 of 7 invoices (86%).
+Dejour Jeans,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Denim 108,,customer,customer,High,11,9,2,81.82,285.000000,,2026-07-23,no,Freight was charged on 9 of 11 invoices (82%).
+Denim Brothers,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Denim Yoke,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Design Comfort Furniture,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Design Furniture Co Pty Ltd,,windsor,windsor,Low,77,31,46,40.26,1320.000000,,2026-07-23,no,Freight was zero on 46 of 77 invoices (60%).
+Design Home Furniture,,windsor,windsor,High,55,5,50,9.09,102.000000,,2026-07-23,no,Freight was zero on 50 of 55 invoices (91%).
+Design to Print,,windsor,windsor,High,6,0,6,0.00,0.000000,,2026-07-23,no,Freight was zero on 6 of 6 invoices (100%).
+Diami Office Furniture,,windsor,windsor,High,36,0,36,0.00,0.000000,,2026-07-23,no,Freight was zero on 36 of 36 invoices (100%).
+Digital Fabrics,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Dimonds Gallery,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Dimonds Picture Framing,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Direct Pallets,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Direct Pallets Pty Ltd,,windsor,windsor,High,10,1,9,10.00,59.000000,,2026-07-23,no,Freight was zero on 9 of 10 invoices (90%).
+DMS Creative Curtains & Blinds,,customer,customer,Medium,3,2,1,66.67,35.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Dolce Extensions,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Dollar Curtains,,customer,customer,High,100,82,18,82.00,1425.000000,,2026-07-23,no,Freight was charged on 82 of 100 invoices (82%).
+DomeShelter Australia,,windsor,windsor,High,6,0,6,0.00,0.000000,,2026-07-23,no,Freight was zero on 6 of 6 invoices (100%).
+Donnie Soft Furnishings,,customer,customer,Medium,3,3,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Doolee Construction,,customer,customer,High,5,5,0,100.00,515.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Doyle Sails - NSW,,customer,customer,High,6,6,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Doyle Sails - QLD,,customer,customer,High,9,9,0,100.00,200.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+Dragonette,,unknown,unknown,,4,2,2,50.00,40.000000,,2026-07-23,no,Freight evidence is evenly split: 2 charged and 2 zero-freight invoices.
+Drapemaster Blinds,,customer,customer,Medium,4,3,1,75.00,45.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Dreamaster Bedding ( Villadale ),,windsor,windsor,Low,195,95,100,48.72,4580.000000,,2026-07-23,no,Freight was zero on 100 of 195 invoices (51%).
+Drop Bear Storage,,unknown,unknown,,4,2,2,50.00,60.000000,,2026-07-23,no,Freight evidence is evenly split: 2 charged and 2 zero-freight invoices.
+Dunlop Foams - Deer Park,,customer,customer,High,121,116,5,95.87,14140.000000,,2026-07-23,no,Freight was charged on 116 of 121 invoices (96%).
+Dunlop Foams - NSW,,customer,customer,High,29,29,0,100.00,18545.000000,,2026-07-23,no,Freight was charged on 29 of 29 invoices (100%).
+Dunlop Foams - Qld,,customer,customer,High,102,95,7,93.14,32365.000000,,2026-07-23,no,Freight was charged on 95 of 102 invoices (93%).
+Dunlop Foams - WA,,customer,customer,High,16,14,2,87.50,6510.000000,,2026-07-23,no,Freight was charged on 14 of 16 invoices (88%).
+Dustcotech,,customer,customer,High,43,41,2,95.35,845.000000,,2026-07-23,no,Freight was charged on 41 of 43 invoices (95%).
+Dyno Nobel,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+E & E Fashion P/L,,customer,customer,High,9,9,0,100.00,235.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+Eagle Wools,,customer,customer,High,45,44,1,97.78,1760.000000,,2026-07-23,no,Freight was charged on 44 of 45 invoices (98%).
+East Metropolitan Health Service WA,,customer,customer,High,16,15,1,93.75,2325.000000,,2026-07-23,no,Freight was charged on 15 of 16 invoices (94%).
+East Style Furniture,,windsor,windsor,High,5,0,5,0.00,0.000000,,2026-07-23,no,Freight was zero on 5 of 5 invoices (100%).
+Eastern Flooring Solutions,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Eastlink Carpet Solutions,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Easy Rest Pillows,,customer,customer,High,101,85,16,84.16,1895.000000,,2026-07-23,no,Freight was charged on 85 of 101 invoices (84%).
+Easy Signs,,customer,customer,Medium,136,104,32,76.47,9660.000000,,2026-07-23,no,Freight was charged on 104 of 136 invoices (76%).
+Echidna Sewing Pty Ltd,,customer,customer,High,9,9,0,100.00,185.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+Echo Furniture,,windsor,windsor,Low,55,27,28,49.09,590.000000,,2026-07-23,no,Freight was zero on 28 of 55 invoices (51%).
+Echuca Carpet Court,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Eclectic Boogaloo P/L,,windsor,windsor,High,8,0,8,0.00,0.000000,,2026-07-23,no,Freight was zero on 8 of 8 invoices (100%).
+Edge Lock Pty Ltd,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Edwards Pallet Recylers,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Elaine Osbourne,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Electric Water,,customer,customer,Medium,10,7,3,70.00,120.000000,,2026-07-23,no,Freight was charged on 7 of 10 invoices (70%).
+Elite Bedding Co.,,customer,customer,High,117,112,5,95.73,6095.000000,,2026-07-23,no,Freight was charged on 112 of 117 invoices (96%).
+Elite Furnishings & Upholstery,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Elite Netting,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Elite Tyre and Auto,,customer,customer,High,11,11,0,100.00,260.000000,,2026-07-23,no,Freight was charged on 11 of 11 invoices (100%).
+Elizabeth Machines Co - QLD,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Elliott Australia Pty Ltd,,customer,customer,Low,151,94,57,62.25,2420.000000,,2026-07-23,no,Freight was charged on 94 of 151 invoices (62%).
+Ellis & Sons Group Pty Ltd,,customer,customer,High,65,55,10,84.62,1135.000000,,2026-07-23,no,Freight was charged on 55 of 65 invoices (85%).
+Embroidery Creations,,customer,customer,High,7,6,1,85.71,180.000000,,2026-07-23,no,Freight was charged on 6 of 7 invoices (86%).
+Embroidery Source P/L,,windsor,windsor,High,536,0,536,0.00,0.000000,,2026-07-23,no,Freight was zero on 536 of 536 invoices (100%).
+Embroidery World,,customer,customer,Medium,4,3,1,75.00,160.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Emil Szendy,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Emu (Aust) Pty Ltd,,windsor,windsor,Low,75,33,42,44.00,795.000000,,2026-07-23,no,Freight was zero on 42 of 75 invoices (56%).
+Enable Pedorthics,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Endeavour Foundation,,customer,customer,High,13,12,1,92.31,290.000000,,2026-07-23,no,Freight was charged on 12 of 13 invoices (92%).
+Endue Group Pty Ltd,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Enduromat Mate Australia,,customer,customer,Low,2,2,0,100.00,45.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Ennio International Pty Ltd,,customer,customer,High,83,70,13,84.34,8035.000000,,2026-07-23,no,Freight was charged on 70 of 83 invoices (84%).
+Ensight Furniture,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Enviro - Foam Qld,,customer,customer,Medium,115,90,25,78.26,8836.500000,,2026-07-23,no,Freight was charged on 90 of 115 invoices (78%).
+Enviro Beds,,customer,customer,High,35,29,6,82.86,1495.000000,,2026-07-23,no,Freight was charged on 29 of 35 invoices (83%).
+Envirosmart Industrial Pty Ltd,,customer,customer,Low,83,55,28,66.27,8140.000000,,2026-07-23,no,Freight was charged on 55 of 83 invoices (66%).
+Esdan Plastics,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Essential Wetsuit Holders,,customer,customer,Low,284,174,110,61.27,4315.000000,,2026-07-23,no,Freight was charged on 174 of 284 invoices (61%).
+Eurofurn,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Europa Blinds & Drapes,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Evan Evans,,customer,customer,Medium,106,84,22,79.25,1685.000000,,2026-07-23,no,Freight was charged on 84 of 106 invoices (79%).
+Evan John Philp Int Ltd,,windsor,windsor,High,20,0,20,0.00,0.000000,,2026-07-23,no,Freight was zero on 20 of 20 invoices (100%).
+Ever Design Group Pty Ltd,,windsor,windsor,Medium,75,19,56,25.33,465.000000,,2026-07-23,no,Freight was zero on 56 of 75 invoices (75%).
+Everton Upholstery,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Everwear,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Evolution Sails Australia Pty Ltd,,customer,customer,High,29,28,1,96.55,720.000000,,2026-07-23,no,Freight was charged on 28 of 29 invoices (97%).
+Evolution Shade Sails - QLD,,customer,customer,Medium,173,135,38,78.03,3580.000000,,2026-07-23,no,Freight was charged on 135 of 173 invoices (78%).
+Excellent Leather,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Eyelets Supply Co.,,customer,customer,High,5,4,1,80.00,55.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+Ezy Blinds,,customer,customer,High,12,11,1,91.67,220.000000,,2026-07-23,no,Freight was charged on 11 of 12 invoices (92%).
+EzyShades,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Fabplay,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Fabric Conversions,,customer,customer,High,35,33,2,94.29,505.000000,,2026-07-23,no,Freight was charged on 33 of 35 invoices (94%).
+Fabric Solutions Australia,,customer,customer,High,41,40,1,97.56,870.000000,,2026-07-23,no,Freight was charged on 40 of 41 invoices (98%).
+Fabric Works,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Fabtex Pty Ltd,,customer,customer,High,166,152,14,91.57,3110.000000,,2026-07-23,no,Freight was charged on 152 of 166 invoices (92%).
+Fantastic Manufacturing Pty Ltd,,windsor,windsor,High,85,1,84,1.18,20.000000,,2026-07-23,no,Freight was zero on 84 of 85 invoices (99%).
+Fashion Way,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Fashionable Sail Shades,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Fast Finishing Services,,customer,customer,High,5,5,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Faucet Strommen,,customer,customer,Low,1,1,0,100.00,45.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Feelgood Australia Pty Ltd,,customer,customer,High,11,10,1,90.91,120.000000,,2026-07-23,no,Freight was charged on 10 of 11 invoices (91%).
+Fenech Curtains,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Ferno ( WA ),,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+FHL Distribution Centre Pty Ltd,,windsor,windsor,High,23,0,23,0.00,0.000000,,2026-07-23,no,Freight was zero on 23 of 23 invoices (100%).
+Filter Fab,,customer,customer,Medium,16,12,4,75.00,310.000000,,2026-07-23,no,Freight was charged on 12 of 16 invoices (75%).
+FilterCare Technical Textiles,,customer,customer,High,29,26,3,89.66,600.000000,,2026-07-23,no,Freight was charged on 26 of 29 invoices (90%).
+Filterfit,,windsor,windsor,Low,29,14,15,48.28,290.000000,,2026-07-23,no,Freight was zero on 15 of 29 invoices (52%).
+Final Guard Pty Ltd,,customer,customer,High,6,6,0,100.00,1685.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Fine Sewing Equipment,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Fine Upholstery,,windsor,windsor,High,131,14,117,10.69,333.000000,,2026-07-23,no,Freight was zero on 117 of 131 invoices (89%).
+Finehome Furniture & Bedding,,customer,customer,Medium,23,17,6,73.91,585.000000,,2026-07-23,no,Freight was charged on 17 of 23 invoices (74%).
+Fineseat,,customer,customer,Medium,59,46,13,77.97,4250.000000,,2026-07-23,no,Freight was charged on 46 of 59 invoices (78%).
+Fishermans Freezer,,customer,customer,Medium,4,4,0,100.00,90.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Fit My Car Pty Ltd,,customer,customer,Medium,123,94,29,76.42,4344.000000,,2026-07-23,no,Freight was charged on 94 of 123 invoices (76%).
+Fitline Alterations,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Fix and Fasten (North) Pty Ltd,,windsor,windsor,Medium,3,1,2,33.33,15.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+Flags of All Nations,,customer,customer,High,25,25,0,100.00,855.000000,,2026-07-23,no,Freight was charged on 25 of 25 invoices (100%).
+Flash Faery Industrial Sewing,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Flatout Services,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Fleetwood Distributors,,customer,customer,Low,21,12,9,57.14,180.000000,,2026-07-23,no,Freight was charged on 12 of 21 invoices (57%).
+Flexible Ducting Australia P/L,,customer,customer,High,20,20,0,100.00,270.000000,,2026-07-23,no,Freight was charged on 20 of 20 invoices (100%).
+FlexiMake Pty Ltd,,customer,customer,Medium,14,10,4,71.43,270.000000,,2026-07-23,no,Freight was charged on 10 of 14 invoices (71%).
+Flickers Australia Pty Ltd,,customer,customer,Medium,27,20,7,74.07,630.000000,,2026-07-23,no,Freight was charged on 20 of 27 invoices (74%).
+Flo-Smart,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Floor & Wall FX,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Flora Furniture,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Foam Suppliers,,windsor,windsor,High,37,1,36,2.70,10.000000,,2026-07-23,no,Freight was zero on 36 of 37 invoices (97%).
+Foamco Industries P/L - NSW,,customer,customer,High,214,197,17,92.06,45200.000000,,2026-07-23,no,Freight was charged on 197 of 214 invoices (92%).
+Foamco Industries P/L - QLD,,customer,customer,Medium,7,5,2,71.43,2995.000000,,2026-07-23,no,Freight was charged on 5 of 7 invoices (71%).
+Foamco Industries P/L - VIC,,customer,customer,High,14,12,2,85.71,2490.000000,,2026-07-23,no,Freight was charged on 12 of 14 invoices (86%).
+Foliage Farm Wholesale Nursery,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Formac Products,,customer,customer,High,21,18,3,85.71,375.000000,,2026-07-23,no,Freight was charged on 18 of 21 invoices (86%).
+Fortune Shoe Repairs,,customer,customer,High,7,7,0,100.00,140.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Fourty4 Upholstery,,windsor,windsor,High,15,3,12,20.00,60.000000,,2026-07-23,no,Freight was zero on 12 of 15 invoices (80%).
+Franke Stuart,,customer,customer,Medium,4,4,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Frankie & Roy,,customer,customer,High,5,4,1,80.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+Franklin Gem,,customer,customer,High,39,36,3,92.31,1015.000000,,2026-07-23,no,Freight was charged on 36 of 39 invoices (92%).
+Frozen Couture,,windsor,windsor,High,36,0,36,0.00,0.000000,,2026-07-23,no,Freight was zero on 36 of 36 invoices (100%).
+Funky Fido,,customer,customer,Low,5,3,2,60.00,30.000000,,2026-07-23,no,Freight was charged on 3 of 5 invoices (60%).
+Furniture by Design,,windsor,windsor,High,125,3,122,2.40,220.000000,,2026-07-23,no,Freight was zero on 122 of 125 invoices (98%).
+Furniture Eden Aust. P/L,,customer,customer,High,12,10,2,83.33,205.000000,,2026-07-23,no,Freight was charged on 10 of 12 invoices (83%).
+Furniture Innovations,,windsor,windsor,Medium,42,14,28,33.33,680.000000,,2026-07-23,no,Freight was zero on 28 of 42 invoices (67%).
+Furniture Inspirations,,windsor,windsor,High,24,2,22,8.33,40.000000,,2026-07-23,no,Freight was zero on 22 of 24 invoices (92%).
+Furniture New Zealand Ltd,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Furniture Talk,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Future Thermal,,customer,customer,Low,23,14,9,60.87,190.000000,,2026-07-23,no,Freight was charged on 14 of 23 invoices (61%).
+Futuresleep P/L NSW,NSW,windsor,windsor,High,656,125,531,19.05,48326.000000,,2026-07-23,no,Freight was zero on 531 of 656 invoices (81%).
+Futuresleep P/L QLD,QLD,windsor,windsor,High,378,71,307,18.78,36940.000000,,2026-07-23,no,Freight was zero on 307 of 378 invoices (81%).
+Futuresleep P/L VIC,VIC,windsor,windsor,High,1728,0,1728,0.00,0.000000,,2026-07-23,no,Freight was zero on 1728 of 1728 invoices (100%).
+Futuresleep P/L WA,WA,windsor,windsor,High,61,4,57,6.56,1455.000000,,2026-07-23,no,Freight was zero on 57 of 61 invoices (93%).
+Futuresleep T/A Royal Comfort Bedding P/L,,windsor,windsor,Medium,164,47,117,28.66,14230.000000,,2026-07-23,no,Freight was zero on 117 of 164 invoices (71%).
+G'Day Baby Pty Ltd,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+G.NANCY,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+G4S Custodial Services,,customer,customer,High,12,12,0,100.00,260.000000,,2026-07-23,no,Freight was charged on 12 of 12 invoices (100%).
+Gaas Furniture P/L,,customer,customer,Low,46,28,18,60.87,505.000000,,2026-07-23,no,Freight was charged on 28 of 46 invoices (61%).
+Galligans Mattress Factory,,customer,customer,Low,81,46,35,56.79,4285.000000,,2026-07-23,no,Freight was charged on 46 of 81 invoices (57%).
+Gaona Sportswear,,customer,customer,High,113,102,11,90.27,2360.000000,,2026-07-23,no,Freight was charged on 102 of 113 invoices (90%).
+Garden City Auto Trimming,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Garlock Pty Limited,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Gary Wilson,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Gaye Lumley,,customer,customer,Low,1,1,0,100.00,12.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Gecko Educational,,customer,customer,High,7,7,0,100.00,140.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Geelong Textiles Australia,,customer,customer,Medium,4,4,0,100.00,75.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Genuine Ugg Boots,,unknown,unknown,,16,8,8,50.00,150.000000,,2026-07-23,no,Freight evidence is evenly split: 8 charged and 8 zero-freight invoices.
+Geofabrics Australasia Pty Ltd - Qld,,windsor,windsor,Low,83,34,49,40.96,4520.000000,,2026-07-23,no,Freight was zero on 49 of 83 invoices (59%).
+Georges Canvas,,customer,customer,High,24,21,3,87.50,420.000000,,2026-07-23,no,Freight was charged on 21 of 24 invoices (88%).
+GHN Trading,,customer,customer,High,7,7,0,100.00,145.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Giant Inflatables Pty Ltd,,customer,customer,Medium,9,6,3,66.67,100.000000,,2026-07-23,no,Freight was charged on 6 of 9 invoices (67%).
+Gibbon Industries,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Giramondo Sportswear,,customer,customer,High,5,4,1,80.00,45.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+GK Blinds and Curtains,,customer,customer,Low,5,3,2,60.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 5 invoices (60%).
+GL Furniture,,windsor,windsor,High,90,9,81,10.00,195.000000,,2026-07-23,no,Freight was zero on 81 of 90 invoices (90%).
+Glanda International,,customer,customer,Low,5,3,2,60.00,30.000000,,2026-07-23,no,Freight was charged on 3 of 5 invoices (60%).
+"Glascott, Geoff & Marlene",,unknown,unknown,,36,18,18,50.00,730.000000,,2026-07-23,no,Freight evidence is evenly split: 18 charged and 18 zero-freight invoices.
+Glass Australia (WA) Pty Ltd,,customer,customer,High,9,8,1,88.89,274.000000,,2026-07-23,no,Freight was charged on 8 of 9 invoices (89%).
+Glendavin Contracts,,customer,customer,Medium,3,2,1,66.67,25.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Glide-Tec Pty Ltd,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Global Automotive Accessories,,windsor,windsor,High,29,1,28,3.45,25.000000,,2026-07-23,no,Freight was zero on 28 of 29 invoices (97%).
+Global Defence Solutions,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Global Safety Industries Pty Ltd,,customer,customer,High,9,9,0,100.00,220.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+Global Shade & Sails,,customer,customer,Medium,126,86,40,68.25,2160.000000,,2026-07-23,no,Freight was charged on 86 of 126 invoices (68%).
+Global Synthetics,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Globe Cotyarn Pty Ltd,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Glorious Home Decor,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+GMA Handcrafts,,customer,customer,High,7,7,0,100.00,200.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Go Play Commercial Playgrounds,,customer,customer,Low,2,2,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Godfrey Hirst Australia,,windsor,windsor,High,224,0,224,0.00,0.000000,,2026-07-23,no,Freight was zero on 224 of 224 invoices (100%).
+Gold Coast Embroidery,,customer,customer,High,26,25,1,96.15,1590.000000,,2026-07-23,no,Freight was charged on 25 of 26 invoices (96%).
+Gold Coast Shade Sails,,customer,customer,Medium,81,62,19,76.54,1353.000000,,2026-07-23,no,Freight was charged on 62 of 81 invoices (77%).
+Gold Coast Vinyl & Canvas,,customer,customer,Medium,6,4,2,66.67,80.000000,,2026-07-23,no,Freight was charged on 4 of 6 invoices (67%).
+Golden Eagle (Australia) Pty Ltd,,customer,customer,Low,1,1,0,100.00,35.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Golden Fleece Sheepskin,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Golden Rams Australia Pty Ltd,,customer,customer,High,7,6,1,85.71,140.000000,,2026-07-23,no,Freight was charged on 6 of 7 invoices (86%).
+Golden Sleep,,customer,customer,High,41,36,5,87.80,1230.000000,,2026-07-23,no,Freight was charged on 36 of 41 invoices (88%).
+Gordon Myers,,customer,customer,High,17,17,0,100.00,340.000000,,2026-07-23,no,Freight was charged on 17 of 17 invoices (100%).
+Goulburn Motor Trimming & Upholstery,,customer,customer,Medium,7,5,2,71.43,100.000000,,2026-07-23,no,Freight was charged on 5 of 7 invoices (71%).
+Grace Rose Lifestyle,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Grafton Shade Sails,,customer,customer,High,10,10,0,100.00,205.000000,,2026-07-23,no,Freight was charged on 10 of 10 invoices (100%).
+Graphic Metal Plates Pty Ltd,,customer,customer,Medium,3,3,0,100.00,1240.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Grashan Sportswear,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Greatex Upholstery,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Greatorex Textile Industries,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Greg Miller Upholstery,,customer,customer,High,22,22,0,100.00,525.000000,,2026-07-23,no,Freight was charged on 22 of 22 invoices (100%).
+Greg Welk,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Gregsan Clicking,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Grizzly Bags,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Guardian Safety,,customer,customer,High,226,200,26,88.50,5290.000000,,2026-07-23,no,Freight was charged on 200 of 226 invoices (88%).
+Guernier Sewing Machines,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Gunn & Taylor Printers,,windsor,windsor,High,6,0,6,0.00,0.000000,,2026-07-23,no,Freight was zero on 6 of 6 invoices (100%).
+Gym Thingz,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+H & J Furniture Co Pty Ltd,,windsor,windsor,Low,74,25,49,33.78,605.000000,,2026-07-23,no,Freight was zero on 49 of 74 invoices (66%).
+Habasit (Australia) Pty Limited,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Hamlins Accessories and Labels,,customer,customer,High,131,120,11,91.60,3190.000000,,2026-07-23,no,Freight was charged on 120 of 131 invoices (92%).
+Hanckel Services,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Hanrahan Tarpaulins & Emu Canvas,,customer,customer,Low,1,1,0,100.00,55.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Happy World Trading,,customer,customer,High,10,10,0,100.00,205.000000,,2026-07-23,no,Freight was charged on 10 of 10 invoices (100%).
+Harbro Furniture,,customer,customer,Medium,28,22,6,78.57,625.000000,,2026-07-23,no,Freight was charged on 22 of 28 invoices (79%).
+Harlow,,customer,customer,High,5,5,0,100.00,75.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Harry West Flags,,customer,customer,High,26,24,2,92.31,625.010000,,2026-07-23,no,Freight was charged on 24 of 26 invoices (92%).
+Harry's Fine Moccasins & Sheepskin Products,,windsor,windsor,High,9,0,9,0.00,0.000000,,2026-07-23,no,Freight was zero on 9 of 9 invoices (100%).
+Have-Rest Comfort Solutions,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Haverford Brands,,customer,customer,High,15,14,1,93.33,285.000000,,2026-07-23,no,Freight was charged on 14 of 15 invoices (93%).
+Hay Interiors,,customer,customer,High,6,6,0,100.00,130.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Head to Toe Safety Pty Ltd,,customer,customer,High,86,70,16,81.40,8390.000000,,2026-07-23,no,Freight was charged on 70 of 86 invoices (81%).
+Heard Canvas,,customer,customer,High,15,15,0,100.00,300.000000,,2026-07-23,no,Freight was charged on 15 of 15 invoices (100%).
+Heaven & Co. Pty Ltd,,windsor,windsor,Low,42,20,22,47.62,480.000000,,2026-07-23,no,Freight was zero on 22 of 42 invoices (52%).
+Heights Sewing Centre,,customer,customer,High,20,20,0,100.00,400.000000,,2026-07-23,no,Freight was charged on 20 of 20 invoices (100%).
+Helen Pos,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Hellweg International,,customer,customer,High,24,21,3,87.50,420.000000,,2026-07-23,no,Freight was charged on 21 of 24 invoices (88%).
+Henley Forge,,windsor,windsor,High,12,0,12,0.00,0.000000,,2026-07-23,no,Freight was zero on 12 of 12 invoices (100%).
+Hetin Foam Industries,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Hien Fashions,,unknown,unknown,,2,1,1,50.00,10.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Highlands Cobbler,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Highpoint Car Seat Covers,,customer,customer,Medium,3,3,0,100.00,55.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Hills Swimwear Manufacturing,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Hills Truss Plant,,unknown,unknown,,4,2,2,50.00,115.000000,,2026-07-23,no,Freight evidence is evenly split: 2 charged and 2 zero-freight invoices.
+Hirst Industries,,customer,customer,High,8,8,0,100.00,185.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Hitech Embroidery Pty Ltd,,customer,customer,Low,2,2,0,100.00,130.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+HM Decor,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Hoai Thuong,,customer,customer,Medium,25,18,7,72.00,1040.000000,,2026-07-23,no,Freight was charged on 18 of 25 invoices (72%).
+Holdfast Components P/L,,windsor,windsor,High,1203,3,1200,0.25,65.000000,,2026-07-23,no,Freight was zero on 1200 of 1203 invoices (100%).
+Hollyford Furniture,,windsor,windsor,High,8,0,8,0.00,0.000000,,2026-07-23,no,Freight was zero on 8 of 8 invoices (100%).
+Home Luxe,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Honeybee P/L,,customer,customer,High,14,14,0,100.00,340.000000,,2026-07-23,no,Freight was charged on 14 of 14 invoices (100%).
+Hopeless Lingerie,,customer,customer,Medium,4,3,1,75.00,50.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Hoppers Stitch,,customer,customer,High,5,4,1,80.00,55.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+Horiso,,customer,customer,High,29,29,0,100.00,650.000000,,2026-07-23,no,Freight was charged on 29 of 29 invoices (100%).
+Horizon Sailmakers P/L,,windsor,windsor,Medium,3,1,2,33.33,10.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+Hortitech,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+House of Alpaca,,customer,customer,High,7,6,1,85.71,160.000000,,2026-07-23,no,Freight was charged on 6 of 7 invoices (86%).
+House Of Drapes,,customer,customer,High,8,8,0,100.00,245.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+House Of Uniforms,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Howe Upholstery,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+HTT Clothing,,windsor,windsor,High,6,0,6,0.00,0.000000,,2026-07-23,no,Freight was zero on 6 of 6 invoices (100%).
+Huggys,,customer,customer,High,12,12,0,100.00,240.000000,,2026-07-23,no,Freight was charged on 12 of 12 invoices (100%).
+Hume Doors & Timber (Aust) Pty Ltd,,windsor,windsor,High,830,0,830,0.00,0.000000,,2026-07-23,no,Freight was zero on 830 of 830 invoices (100%).
+Hume Doors & Timber (SA) Pty Ltd,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Hume Doors & Timber Victoria,,windsor,windsor,High,12,2,10,16.67,40.000000,,2026-07-23,no,Freight was zero on 10 of 12 invoices (83%).
+Hunter Douglas,,customer,customer,High,6,6,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Hunting Lady,,customer,customer,Low,86,53,33,61.63,1047.000000,,2026-07-23,no,Freight was charged on 53 of 86 invoices (62%).
+Hy-Du-Ex,,customer,customer,High,22,19,3,86.36,295.000000,,2026-07-23,no,Freight was charged on 19 of 22 invoices (86%).
+HYB Pty Ltd,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Hybrid Custom Leather Services,,customer,customer,High,32,32,0,100.00,495.000000,,2026-07-23,no,Freight was charged on 32 of 32 invoices (100%).
+Hyland Sportswear,,customer,customer,Low,126,66,60,52.38,800.000000,,2026-07-23,no,Freight was charged on 66 of 126 invoices (52%).
+I Like That,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+IAC Acoustics (Australia) Pty Ltd,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Icon Furniture,,unknown,unknown,,22,11,11,50.00,260.000000,,2026-07-23,no,Freight evidence is evenly split: 11 charged and 11 zero-freight invoices.
+Ideal Interior Designers,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Identity Furniture,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+IMG Commercial P/L,,windsor,windsor,High,66,0,66,0.00,0.000000,,2026-07-23,no,Freight was zero on 66 of 66 invoices (100%).
+Impact Blinds & Curtains,,customer,customer,High,17,17,0,100.00,280.000000,,2026-07-23,no,Freight was charged on 17 of 17 invoices (100%).
+Impact Sports Promotions,,customer,customer,High,23,21,2,91.30,900.000000,,2026-07-23,no,Freight was charged on 21 of 23 invoices (91%).
+Imperial Mattress,,customer,customer,High,11,11,0,100.00,175.000000,,2026-07-23,no,Freight was charged on 11 of 11 invoices (100%).
+Imported Theatre Fabrics,,customer,customer,High,55,48,7,87.27,785.000000,,2026-07-23,no,Freight was charged on 48 of 55 invoices (87%).
+Impressive Built-In Wardrobes Pty Ltd,,windsor,windsor,High,55,0,55,0.00,0.000000,,2026-07-23,no,Freight was zero on 55 of 55 invoices (100%).
+Incomfort P/L,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Independent Filter Service,,customer,customer,High,41,38,3,92.68,625.000000,,2026-07-23,no,Freight was charged on 38 of 41 invoices (93%).
+Individual Interiors,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Infinity Jeans,,customer,customer,High,8,8,0,100.00,140.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Insite Engineering Ltd,,customer,customer,Medium,9,6,3,66.67,540.000000,,2026-07-23,no,Freight was charged on 6 of 9 invoices (67%).
+Installation Theatrical Engineering,,customer,customer,Medium,9,6,3,66.67,150.000000,,2026-07-23,no,Freight was charged on 6 of 9 invoices (67%).
+Installlawns,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Institch Design & Upholstery,,windsor,windsor,Medium,42,10,32,23.81,200.000000,,2026-07-23,no,Freight was zero on 32 of 42 invoices (76%).
+InterEarth,,customer,customer,Low,2,2,0,100.00,50.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Interior Art Concepts,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Interior Comfort,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Interknit P/L,,customer,customer,High,10,9,1,90.00,205.000000,,2026-07-23,no,Freight was charged on 9 of 10 invoices (90%).
+International Marine Pty Ltd,,customer,customer,High,8,8,0,100.00,150.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Into Blinds,,customer,customer,Medium,3,2,1,66.67,40.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Inwood Blinds & Awnings,,customer,customer,High,7,6,1,85.71,120.000000,,2026-07-23,no,Freight was charged on 6 of 7 invoices (86%).
+iSeek Blinds,,customer,customer,High,17,17,0,100.00,300.000000,,2026-07-23,no,Freight was charged on 17 of 17 invoices (100%).
+J & A Auto Upholstery,,customer,customer,Medium,4,3,1,75.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+J & B Canvas,,customer,customer,High,13,13,0,100.00,285.000000,,2026-07-23,no,Freight was charged on 13 of 13 invoices (100%).
+J & H Ewe-Niq,,customer,customer,Low,1,1,0,100.00,75.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+J & H Quality Kitchens,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+J & L Sewing Machines,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Jacaru P/L,,customer,customer,High,92,85,7,92.39,2080.000000,,2026-07-23,no,Freight was charged on 85 of 92 invoices (92%).
+Jack Stock,,windsor,windsor,High,373,3,370,0.80,202.000000,,2026-07-23,no,Freight was zero on 370 of 373 invoices (99%).
+Jackson Sofa,,customer,customer,Medium,20,14,6,70.00,315.000000,,2026-07-23,no,Freight was charged on 14 of 20 invoices (70%).
+Jackson WM.C P/L,,customer,customer,High,192,165,27,85.94,2810.000000,,2026-07-23,no,Freight was charged on 165 of 192 invoices (86%).
+JAG Curtains,,windsor,windsor,Medium,3,1,2,33.33,10.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+Jai Products,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+James Dean Designs Pty Ltd,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Jane's Curtains,,customer,customer,High,64,62,2,96.88,1240.000000,,2026-07-23,no,Freight was charged on 62 of 64 invoices (97%).
+Janie's Fabrics,,customer,customer,Medium,4,4,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+JAR Fumigation,,customer,customer,Medium,4,4,0,100.00,185.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Jardan Australia P/L,,windsor,windsor,High,207,30,177,14.49,975.000000,,2026-07-23,no,Freight was zero on 177 of 207 invoices (86%).
+Jaspa Herington P/L,,customer,customer,High,57,49,8,85.96,795.000000,,2026-07-23,no,Freight was charged on 49 of 57 invoices (86%).
+Jassi Leatherworks,,customer,customer,High,25,23,2,92.00,890.000000,,2026-07-23,no,Freight was charged on 23 of 25 invoices (92%).
+Jayco Caravan Mfg.,,customer,customer,High,68,58,10,85.29,1129.090000,,2026-07-23,no,Freight was charged on 58 of 68 invoices (85%).
+Jaylon Environmetal Systems,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+JBA Carpet Court,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+JC Furniture Frames,,windsor,windsor,High,5,0,5,0.00,0.000000,,2026-07-23,no,Freight was zero on 5 of 5 invoices (100%).
+Jean Works,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Jennifer Gill,,customer,customer,High,5,4,1,80.00,70.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+Jenny Scott Sorrento,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Jim Bradley Speedball Co,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Jimmy Fashion Pty Ltd,,customer,customer,Low,2,2,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+JJ Australia Pty Ltd,,customer,customer,High,18,17,1,94.44,285.000000,,2026-07-23,no,Freight was charged on 17 of 18 invoices (94%).
+JM Embroideries,,windsor,windsor,High,20,4,16,20.00,130.000000,,2026-07-23,no,Freight was zero on 16 of 20 invoices (80%).
+John Di Natale Engineering P/L,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Jon Wilson Canvas & Shade,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Jon's Shoe Repair Shop,,customer,customer,Medium,3,2,1,66.67,90.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Jordan Sheepskin Products,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Joseph's The Upholsterer,,windsor,windsor,High,17,0,17,0.00,0.000000,,2026-07-23,no,Freight was zero on 17 of 17 invoices (100%).
+Joyce Foam Products - NSW,,customer,customer,Low,287,148,139,51.57,16805.000000,,2026-07-23,no,Freight was charged on 148 of 287 invoices (52%).
+Joyce Foam Products - Qld,,customer,customer,High,17,16,1,94.12,2025.000000,,2026-07-23,no,Freight was charged on 16 of 17 invoices (94%).
+Joyce Foam Products - S.A,,customer,customer,High,76,73,3,96.05,8615.000000,,2026-07-23,no,Freight was charged on 73 of 76 invoices (96%).
+Joyce Foam Products - VIC,,windsor,windsor,High,90,12,78,13.33,215.000000,,2026-07-23,no,Freight was zero on 78 of 90 invoices (87%).
+Joyce Foam Products - W.A,,customer,customer,High,68,68,0,100.00,13225.000000,,2026-07-23,no,Freight was charged on 68 of 68 invoices (100%).
+JS Embroidery,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+JS Window Furnishing,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Julie Randle,,customer,customer,Medium,4,3,1,75.00,80.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Just Coolers,,customer,customer,High,93,88,5,94.62,3490.010000,,2026-07-23,no,Freight was charged on 88 of 93 invoices (95%).
+Just Cushions,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+JVC Pty Ltd,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+JVS Strapping,,customer,customer,High,13,11,2,84.62,145.000000,,2026-07-23,no,Freight was charged on 11 of 13 invoices (85%).
+K D Tailor,,customer,customer,Low,2,2,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+K-9 Homes,,windsor,windsor,High,398,48,350,12.06,1045.000000,,2026-07-23,no,Freight was zero on 350 of 398 invoices (88%).
+K. S. Furniture Frames,,windsor,windsor,High,13,0,13,0.00,0.000000,,2026-07-23,no,Freight was zero on 13 of 13 invoices (100%).
+KAB Seating Pty Ltd,,customer,customer,High,19,16,3,84.21,380.000000,,2026-07-23,no,Freight was charged on 16 of 19 invoices (84%).
+Kangaroo Bedding Pty Ltd,,windsor,windsor,High,144,20,124,13.89,660.000000,,2026-07-23,no,Freight was zero on 124 of 144 invoices (86%).
+Karen Bradshaw,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Karmine Leather,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Katrina's Designs,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Kay's Classic Fashion,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+KCA Steel Furniture Pty Ltd,,customer,customer,High,6,6,0,100.00,70.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+KE Group,,windsor,windsor,Low,9,4,5,44.44,100.000000,,2026-07-23,no,Freight was zero on 5 of 9 invoices (56%).
+KE-ZU Furniture,,customer,customer,High,19,17,2,89.47,1175.000000,,2026-07-23,no,Freight was charged on 17 of 19 invoices (89%).
+Keith Lengkeek,,customer,customer,High,18,16,2,88.89,320.000000,,2026-07-23,no,Freight was charged on 16 of 18 invoices (89%).
+Kelley's Wood Products,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Kellie Foster,,customer,customer,High,7,7,0,100.00,210.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Kelly & Windsor Australia P/L,,customer,customer,High,14,13,1,92.86,255.000000,,2026-07-23,no,Freight was charged on 13 of 14 invoices (93%).
+Kelmatt Australia,,windsor,windsor,Low,118,53,65,44.92,1145.000000,,2026-07-23,no,Freight was zero on 65 of 118 invoices (55%).
+Ken's Canvas & Upholstery,,unknown,unknown,,2,1,1,50.00,25.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Kerrie Rowe,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Kestrel Manufacturing Pty Ltd,,customer,customer,Medium,59,40,19,67.80,930.000000,,2026-07-23,no,Freight was charged on 40 of 59 invoices (68%).
+Kevin Trittinger,,windsor,windsor,Medium,4,0,4,0.00,0.000000,,2026-07-23,no,Freight was zero on 4 of 4 invoices (100%).
+Key Image Windowcoverings,,customer,customer,High,10,9,1,90.00,135.000000,,2026-07-23,no,Freight was charged on 9 of 10 invoices (90%).
+Khoi's Blinds,,customer,customer,Low,5,3,2,60.00,30.000000,,2026-07-23,no,Freight was charged on 3 of 5 invoices (60%).
+Kim Anh Fabrics,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Kim Nguyen,,customer,customer,Medium,4,4,0,100.00,55.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Kimono Sales,,windsor,windsor,High,6,0,6,0.00,0.000000,,2026-07-23,no,Freight was zero on 6 of 6 invoices (100%).
+Kings Sports Nets,,windsor,windsor,High,47,2,45,4.26,40.000000,,2026-07-23,no,Freight was zero on 45 of 47 invoices (96%).
+Kithmini,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+KL Hai,,unknown,unknown,,100,50,50,50.00,4405.000000,,2026-07-23,no,Freight evidence is evenly split: 50 charged and 50 zero-freight invoices.
+KLW Team & Club Wear,,customer,customer,High,9,9,0,100.00,180.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+Knightsbridge Furniture,,customer,customer,High,5,5,0,100.00,110.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Koala Manchester,,unknown,unknown,,2,1,1,50.00,10.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Koala Sleep,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Kookaburra Sports P/L,,windsor,windsor,High,40,2,38,5.00,80.000000,,2026-07-23,no,Freight was zero on 38 of 40 invoices (95%).
+Kool Trim,,customer,customer,High,9,9,0,100.00,125.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+Krasic Curtains,,customer,customer,High,7,7,0,100.00,140.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Kris Docherty Carpet Binding,,customer,customer,High,24,24,0,100.00,725.000000,,2026-07-23,no,Freight was charged on 24 of 24 invoices (100%).
+KRT Elite Pty Ltd,,customer,customer,Low,143,94,49,65.73,5060.000000,,2026-07-23,no,Freight was charged on 94 of 143 invoices (66%).
+Krystal Deans,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+KS Textiles,,customer,customer,High,58,51,7,87.93,1415.000000,,2026-07-23,no,Freight was charged on 51 of 58 invoices (88%).
+KSC Textiles,,windsor,windsor,Low,54,26,28,48.15,515.000000,,2026-07-23,no,Freight was zero on 28 of 54 invoices (52%).
+Ktena Knitting Mills,,customer,customer,High,76,70,6,92.11,1255.000000,,2026-07-23,no,Freight was charged on 70 of 76 invoices (92%).
+Kuver Designs,,customer,customer,High,14,13,1,92.86,270.000000,,2026-07-23,no,Freight was charged on 13 of 14 invoices (93%).
+KWN Trading Co,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+L Ritossa Furnishers Pty Ltd,,customer,customer,Low,17,11,6,64.71,725.000000,,2026-07-23,no,Freight was charged on 11 of 17 invoices (65%).
+L'Aurore,,customer,customer,High,19,18,1,94.74,405.000000,,2026-07-23,no,Freight was charged on 18 of 19 invoices (95%).
+La Joy,,customer,customer,Medium,20,15,5,75.00,335.000000,,2026-07-23,no,Freight was charged on 15 of 20 invoices (75%).
+Lama Furniture,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Lander Dave,,customer,customer,Low,2,2,0,100.00,35.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Latex Mattress Australia Pty Ltd,,customer,customer,Medium,24,17,7,70.83,1030.000000,,2026-07-23,no,Freight was charged on 17 of 24 invoices (71%).
+Laurie Fletcher,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+LawrieCo,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Le Nguyen,,customer,customer,Medium,27,20,7,74.07,485.000000,,2026-07-23,no,Freight was charged on 20 of 27 invoices (74%).
+Le Pritchard,,customer,customer,Low,7,4,3,57.14,75.000000,,2026-07-23,no,Freight was charged on 4 of 7 invoices (57%).
+Le Serge Leathergoods,,windsor,windsor,Medium,13,3,10,23.08,30.000000,,2026-07-23,no,Freight was zero on 10 of 13 invoices (77%).
+Lee Clothes Fashion,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Lefka P/L,,customer,customer,Low,2,2,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Leisure Design Furniture,,windsor,windsor,Medium,29,9,20,31.03,195.000000,,2026-07-23,no,Freight was zero on 20 of 29 invoices (69%).
+Leisure Lounges,,windsor,windsor,Medium,3,1,2,33.33,20.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+Lien Kieu Trang,,customer,customer,Medium,3,3,0,100.00,50.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Lifestyle Australia,,customer,customer,High,38,38,0,100.00,2745.000000,,2026-07-23,no,Freight was charged on 38 of 38 invoices (100%).
+Lili Gibson,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Lilit's Fabrics and Alterations,,windsor,windsor,High,9,0,9,0.00,0.000000,,2026-07-23,no,Freight was zero on 9 of 9 invoices (100%).
+Limassol Curtains,,windsor,windsor,Medium,6,2,4,33.33,40.000000,,2026-07-23,no,Freight was zero on 4 of 6 invoices (67%).
+Linda James,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Lindner Quality Socks,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Linen Room,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Lining Victoria,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Linkron,,customer,customer,Low,29,15,14,51.72,209.090000,,2026-07-23,no,Freight was charged on 15 of 29 invoices (52%).
+Lisa Adam,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Lisa's Lacies,,customer,customer,Low,2,2,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+LMB Knitwear,,customer,customer,High,40,37,3,92.50,765.000000,,2026-07-23,no,Freight was charged on 37 of 40 invoices (92%).
+Lontos Fabrications,,windsor,windsor,High,34,4,30,11.76,80.000000,,2026-07-23,no,Freight was zero on 30 of 34 invoices (88%).
+Louis Ferrier Leathergoods,,windsor,windsor,High,8,0,8,0.00,0.000000,,2026-07-23,no,Freight was zero on 8 of 8 invoices (100%).
+Lounges by AGEM,,customer,customer,High,83,70,13,84.34,1495.000000,,2026-07-23,no,Freight was charged on 70 of 83 invoices (84%).
+Lovers Bait,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+LR Sails Australia,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Luda Productions,,windsor,windsor,High,181,2,179,1.10,40.000000,,2026-07-23,no,Freight was zero on 179 of 181 invoices (99%).
+Luxmy Furniture,,customer,customer,High,10,10,0,100.00,725.000000,,2026-07-23,no,Freight was charged on 10 of 10 invoices (100%).
+Luxor Linen,,customer,customer,High,13,13,0,100.00,385.000000,,2026-07-23,no,Freight was charged on 13 of 13 invoices (100%).
+LVD Corp (Mong Tuyet Fashions),,windsor,windsor,High,34,4,30,11.76,110.000000,,2026-07-23,no,Freight was zero on 30 of 34 invoices (88%).
+Lynne Beavis,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+M Recht Accessories Pty Ltd,,windsor,windsor,High,422,16,406,3.79,255.000000,,2026-07-23,no,Freight was zero on 406 of 422 invoices (96%).
+Macarthur Canvas & PVC,,customer,customer,Medium,4,4,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Macrosphere,,customer,customer,Medium,4,4,0,100.00,66.180000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Made In The Shade,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Made Measure,,customer,customer,Medium,13,10,3,76.92,180.000000,,2026-07-23,no,Freight was charged on 10 of 13 invoices (77%).
+Made To Measure Mattresses P/L,,customer,customer,High,75,67,8,89.33,4350.000000,,2026-07-23,no,Freight was charged on 67 of 75 invoices (89%).
+Magnetic Attraction,,customer,customer,High,5,4,1,80.00,70.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+Magnifica,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Magnolia Creative Designs,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Mai Furniture & Bedding,,customer,customer,Medium,9,7,2,77.78,105.000000,,2026-07-23,no,Freight was charged on 7 of 9 invoices (78%).
+Maiko Pet Supplies,,customer,customer,High,16,15,1,93.75,345.000000,,2026-07-23,no,Freight was charged on 15 of 16 invoices (94%).
+Maka Leathergoods,,customer,customer,High,14,14,0,100.00,205.000000,,2026-07-23,no,Freight was charged on 14 of 14 invoices (100%).
+Makin Mattresses,,customer,customer,High,259,248,11,95.75,19972.000000,,2026-07-23,no,Freight was charged on 248 of 259 invoices (96%).
+Mako House,,customer,customer,High,16,16,0,100.00,320.000000,,2026-07-23,no,Freight was charged on 16 of 16 invoices (100%).
+Manpak Pty Ltd,,customer,customer,Low,2,2,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Manson Framers Pty Ltd,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Mardaw Interiors,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Marfar Sewing Parts & Accessories,,customer,customer,High,5,4,1,80.00,105.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+Mario's Upholstery,,unknown,unknown,,16,8,8,50.00,160.000000,,2026-07-23,no,Freight evidence is evenly split: 8 charged and 8 zero-freight invoices.
+Marks Pallets,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Marvel Printing Pty Ltd,,customer,customer,Medium,48,34,14,70.83,615.000000,,2026-07-23,no,Freight was charged on 34 of 48 invoices (71%).
+Marylee and VJ Accessories,,customer,customer,High,13,13,0,100.00,285.000000,,2026-07-23,no,Freight was charged on 13 of 13 invoices (100%).
+Mascot Motor Trimmers,,customer,customer,Low,1,1,0,100.00,35.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Massoud Upholstery,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Master Made Furniture P/L,,windsor,windsor,High,210,30,180,14.29,788.500000,,2026-07-23,no,Freight was zero on 180 of 210 invoices (86%).
+Mataro Furniture,,customer,customer,Low,83,44,39,53.01,2190.000000,,2026-07-23,no,Freight was charged on 44 of 83 invoices (53%).
+Matcraft Australia,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Matheus Trading Pty Ltd,,windsor,windsor,High,6,1,5,16.67,10.000000,,2026-07-23,no,Freight was zero on 5 of 6 invoices (83%).
+Mathews Furniture,,customer,customer,Medium,14,11,3,78.57,245.000000,,2026-07-23,no,Freight was charged on 11 of 14 invoices (79%).
+Mathews Industrial Products P/L,,customer,customer,High,13,13,0,100.00,260.000000,,2026-07-23,no,Freight was charged on 13 of 13 invoices (100%).
+Matic Furniture,,customer,customer,High,13,12,1,92.31,240.000000,,2026-07-23,no,Freight was charged on 12 of 13 invoices (92%).
+Matthew Smith,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Mattress Resources,,customer,customer,Medium,278,204,74,73.38,23795.000000,,2026-07-23,no,Freight was charged on 204 of 278 invoices (73%).
+Maureen Rice,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Max Mattresses,,customer,customer,Medium,4,3,1,75.00,135.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Max Miller's Carpet Choice,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+McColl Protective,,customer,customer,Medium,9,7,2,77.78,150.000000,,2026-07-23,no,Freight was charged on 7 of 9 invoices (78%).
+MCR Rugs,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Megara (Aust) Pty Ltd,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Mel Hornby,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Melbourne Aviation Container Services Pty Ltd,,customer,customer,High,6,6,0,100.00,95.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Melbourne Hats,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Melbourne Mattress Factory,,customer,customer,Low,124,78,46,62.90,3320.000000,,2026-07-23,no,Freight was charged on 78 of 124 invoices (63%).
+Merico Bedding Pty Ltd,,customer,customer,Medium,46,31,15,67.39,1050.000000,,2026-07-23,no,Freight was charged on 31 of 46 invoices (67%).
+Merino Craft (Aust) Pty Ltd,,customer,customer,Low,108,66,42,61.11,1992.280000,,2026-07-23,no,Freight was charged on 66 of 108 invoices (61%).
+Metro Shades,,customer,customer,Medium,3,2,1,66.67,70.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+MFI Service Bodies,,customer,customer,High,6,5,1,83.33,95.000000,,2026-07-23,no,Freight was charged on 5 of 6 invoices (83%).
+Michelle Design Upholstery,,customer,customer,Low,7,4,3,57.14,80.000000,,2026-07-23,no,Freight was charged on 4 of 7 invoices (57%).
+MIG Australia,,customer,customer,Low,14,9,5,64.29,90.000000,,2026-07-23,no,Freight was charged on 9 of 14 invoices (64%).
+Millard Caravans,,customer,customer,High,24,23,1,95.83,775.000000,,2026-07-23,no,Freight was charged on 23 of 24 invoices (96%).
+Millars Doors & Timber,,windsor,windsor,High,22,0,22,0.00,0.000000,,2026-07-23,no,Freight was zero on 22 of 22 invoices (100%).
+Mindjam Warehouse,,customer,customer,High,6,6,0,100.00,135.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+MiniJumbuk Corporation Pty Ltd,,customer,customer,High,123,115,8,93.50,9475.000000,,2026-07-23,no,Freight was charged on 115 of 123 invoices (93%).
+Mister Mattress,,customer,customer,High,181,171,10,94.48,22810.000000,,2026-07-23,no,Freight was charged on 171 of 181 invoices (94%).
+MJ Furniture Design,,customer,customer,Medium,3,3,0,100.00,90.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+MJC Sewing Machines,,customer,customer,High,16,16,0,100.00,225.000000,,2026-07-23,no,Freight was charged on 16 of 16 invoices (100%).
+MJM Upholstery,,windsor,windsor,High,5,1,4,20.00,10.000000,,2026-07-23,no,Freight was zero on 4 of 5 invoices (80%).
+Mobile Pallet Repairs,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Mokett by Stevie,,customer,customer,Medium,11,8,3,72.73,160.000000,,2026-07-23,no,Freight was charged on 8 of 11 invoices (73%).
+Molmic Designing Comfort,,windsor,windsor,High,219,0,219,0.00,0.000000,,2026-07-23,no,Freight was zero on 219 of 219 invoices (100%).
+Momento PRO Pty Ltd,,customer,customer,High,6,6,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Monkhouse Design,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Morley Canvas,,windsor,windsor,High,5,0,5,0.00,0.000000,,2026-07-23,no,Freight was zero on 5 of 5 invoices (100%).
+Mortels Sheepskins,,customer,customer,High,110,99,11,90.00,3180.000000,,2026-07-23,no,Freight was charged on 99 of 110 invoices (90%).
+Moscow Apparel,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Mountcastle P/L,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Mr Pallet,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Mr Sheepskin,,customer,customer,Low,2,2,0,100.00,50.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+MTK Upholstery Design,,customer,customer,Medium,6,4,2,66.67,40.000000,,2026-07-23,no,Freight was charged on 4 of 6 invoices (67%).
+MTL Group,,customer,customer,High,29,24,5,82.76,580.000000,,2026-07-23,no,Freight was charged on 24 of 29 invoices (83%).
+Muk Mat Manufacturing Pty Ltd,,customer,customer,Medium,142,113,29,79.58,16100.000000,,2026-07-23,no,Freight was charged on 113 of 142 invoices (80%).
+Mulberry Co Pty Ltd,,windsor,windsor,High,224,25,199,11.16,1325.000000,,2026-07-23,no,Freight was zero on 199 of 224 invoices (89%).
+Mulberry Motion,,windsor,windsor,High,44,0,44,0.00,0.000000,,2026-07-23,no,Freight was zero on 44 of 44 invoices (100%).
+Multishade,,customer,customer,Low,78,46,32,58.97,920.000000,,2026-07-23,no,Freight was charged on 46 of 78 invoices (59%).
+Murtagh Riding Boots,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+My Curtain,,windsor,windsor,High,7,0,7,0.00,0.000000,,2026-07-23,no,Freight was zero on 7 of 7 invoices (100%).
+My Direct Blinds,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+National Blind Suppliers,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+National Webbing Products,,customer,customer,High,35,30,5,85.71,515.000000,,2026-07-23,no,Freight was charged on 30 of 35 invoices (86%).
+Natural Sleep EC Realty Pty Ltd,,windsor,windsor,Medium,53,13,40,24.53,495.000000,,2026-07-23,no,Freight was zero on 40 of 53 invoices (75%).
+Natural Sports,,windsor,windsor,Medium,74,16,58,21.62,290.000000,,2026-07-23,no,Freight was zero on 58 of 74 invoices (78%).
+Netpro Canopies P/L,,customer,customer,Medium,4,4,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+New Style Blinds & Curtains,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+New View Window Fashions,,customer,customer,High,6,6,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+New Zealand Comfort Group Ltd,,windsor,windsor,High,69,2,67,2.90,220.000000,,2026-07-23,no,Freight was zero on 67 of 69 invoices (97%).
+Newlands Upholstery,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Newline Upholstery,,windsor,windsor,Low,108,42,66,38.89,585.000000,,2026-07-23,no,Freight was zero on 66 of 108 invoices (61%).
+NHU Q Supplies,,customer,customer,High,8,8,0,100.00,6760.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Nice Digs,,customer,customer,High,9,8,1,88.89,195.000000,,2026-07-23,no,Freight was charged on 8 of 9 invoices (89%).
+Nick's Fashions (Aust) P/L,,customer,customer,High,9,8,1,88.89,195.000000,,2026-07-23,no,Freight was charged on 8 of 9 invoices (89%).
+Nicky River Uggs,,customer,customer,High,17,16,1,94.12,755.000000,,2026-07-23,no,Freight was charged on 16 of 17 invoices (94%).
+Night N Day Comfort,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Nina B,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+NJ's Bob Power Canvas,,customer,customer,Medium,3,3,0,100.00,70.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+NL Products,,customer,customer,High,8,8,0,100.00,190.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Noble Furniture,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Noone Image Wear,,customer,customer,High,63,57,6,90.48,865.000000,,2026-07-23,no,Freight was charged on 57 of 63 invoices (90%).
+Noosa Exterior Blinds & Awnings,,customer,customer,Medium,4,3,1,75.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Nordic Design Furniture,,customer,customer,High,14,14,0,100.00,360.000000,,2026-07-23,no,Freight was charged on 14 of 14 invoices (100%).
+Norfolk Blinds,,customer,customer,High,38,34,4,89.47,820.000000,,2026-07-23,no,Freight was charged on 34 of 38 invoices (89%).
+Northern Boat Covers,,customer,customer,High,10,10,0,100.00,210.000000,,2026-07-23,no,Freight was charged on 10 of 10 invoices (100%).
+Northern Furniture Frames,,windsor,windsor,Low,37,13,24,35.14,435.000000,,2026-07-23,no,Freight was zero on 24 of 37 invoices (65%).
+Northern Star Constructions,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Northside Souvenirs,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+NorthWest Belts & Bearings Pty Ltd,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+NuFlow Australasia Pty Ltd,,customer,customer,High,21,21,0,100.00,435.000000,,2026-07-23,no,Freight was charged on 21 of 21 invoices (100%).
+NXT Upholstery,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+OBUS,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Oceania Mattress,,windsor,windsor,Low,23,9,14,39.13,205.000000,,2026-07-23,no,Freight was zero on 14 of 23 invoices (61%).
+Oceansuits,,customer,customer,High,18,18,0,100.00,310.000000,,2026-07-23,no,Freight was charged on 18 of 18 invoices (100%).
+Off Shore Sails & Rigging,,customer,customer,High,6,6,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Official,,customer,customer,High,35,35,0,100.00,960.000000,,2026-07-23,no,Freight was charged on 35 of 35 invoices (100%).
+Oku Den,,customer,customer,High,5,5,0,100.00,95.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Old Skool Auto Parts,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Olive And Belle Property Styling,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Olive Furniture Ltd,,customer,customer,Medium,3,3,0,100.00,225.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+OMA Shopfitting Systems Pty Ltd,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+On A Roll Carpet & Vinyl Pty Ltd,,customer,customer,Medium,7,5,2,71.43,90.000000,,2026-07-23,no,Freight was charged on 5 of 7 invoices (71%).
+Onitek P/L,,windsor,windsor,Medium,34,7,27,20.59,150.000000,,2026-07-23,no,Freight was zero on 27 of 34 invoices (79%).
+OnTrack Sportswear,,customer,customer,Medium,23,17,6,73.91,265.000000,,2026-07-23,no,Freight was charged on 17 of 23 invoices (74%).
+"Onyx Blinds, Screens and Shutters",,customer,customer,Medium,4,3,1,75.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Optimum Health Solutions,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Orana Australia Ltd,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Orange Motor Trimmers,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Origin Bedding,,customer,customer,Medium,20,15,5,75.00,560.000000,,2026-07-23,no,Freight was charged on 15 of 20 invoices (75%).
+Ortho Rest Pty Ltd,,customer,customer,High,6,6,0,100.00,205.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Orthotic Solutions - Qld,,customer,customer,High,36,32,4,88.89,705.000000,,2026-07-23,no,Freight was charged on 32 of 36 invoices (89%).
+Orthotic Technical Services,,customer,customer,High,16,16,0,100.00,230.000000,,2026-07-23,no,Freight was charged on 16 of 16 invoices (100%).
+Oscar Group Australia,,customer,customer,High,14,13,1,92.86,275.000000,,2026-07-23,no,Freight was charged on 13 of 14 invoices (93%).
+Oscar Living (Lanfranco Furniture),,customer,customer,Low,17,10,7,58.82,965.000000,,2026-07-23,no,Freight was charged on 10 of 17 invoices (59%).
+OSFM Kitchens & Robes,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Oxley Nets,,customer,customer,High,98,85,13,86.73,3215.000000,,2026-07-23,no,Freight was charged on 85 of 98 invoices (87%).
+Oz Maker,,customer,customer,High,11,11,0,100.00,240.000000,,2026-07-23,no,Freight was charged on 11 of 11 invoices (100%).
+Ozzy Fleece Sheepskin,,customer,customer,High,53,52,1,98.11,1065.000000,,2026-07-23,no,Freight was charged on 52 of 53 invoices (98%).
+P & L T-Shirts,,customer,customer,High,39,35,4,89.74,1020.000000,,2026-07-23,no,Freight was charged on 35 of 39 invoices (90%).
+P & N Le Maker,,customer,customer,Medium,22,17,5,77.27,275.000000,,2026-07-23,no,Freight was charged on 17 of 22 invoices (77%).
+Pace Pallet Services,,windsor,windsor,High,111,1,110,0.90,97.420000,,2026-07-23,no,Freight was zero on 110 of 111 invoices (99%).
+Pacific Furniture Design,,customer,customer,Low,2,2,0,100.00,90.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Pacific Paper Bags P/L,,customer,customer,Low,23,14,9,60.87,365.000000,,2026-07-23,no,Freight was charged on 14 of 23 invoices (61%).
+Pacific Salt P/L,,customer,customer,High,16,15,1,93.75,7165.000000,,2026-07-23,no,Freight was charged on 15 of 16 invoices (94%).
+Pacific Sheepskins,,customer,customer,High,49,43,6,87.76,1100.000000,,2026-07-23,no,Freight was charged on 43 of 49 invoices (88%).
+Pacific Spreads P/L,,customer,customer,High,37,37,0,100.00,835.000000,,2026-07-23,no,Freight was charged on 37 of 37 invoices (100%).
+Paddington Furniture,,windsor,windsor,Low,59,29,30,49.15,660.000000,,2026-07-23,no,Freight was zero on 30 of 59 invoices (51%).
+Paladin Sports,,customer,customer,High,6,6,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Pallet Recyclers Pty Ltd,,windsor,windsor,High,50,3,47,6.00,386.000000,,2026-07-23,no,Freight was zero on 47 of 50 invoices (94%).
+Pallets Express,,windsor,windsor,High,401,0,401,0.00,0.000000,,2026-07-23,no,Freight was zero on 401 of 401 invoices (100%).
+Pallets Inc,,windsor,windsor,High,185,0,185,0.00,0.000000,,2026-07-23,no,Freight was zero on 185 of 185 invoices (100%).
+Palmer Flags,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Palmone Shoes,,customer,customer,High,11,11,0,100.00,155.000000,,2026-07-23,no,Freight was charged on 11 of 11 invoices (100%).
+Paragon Mobility,,customer,customer,Medium,7,5,2,71.43,150.000000,,2026-07-23,no,Freight was charged on 5 of 7 invoices (71%).
+Paramount Blinds,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Paramount Furniture,,windsor,windsor,High,48,1,47,2.08,20.000000,,2026-07-23,no,Freight was zero on 47 of 48 invoices (98%).
+Parker Distribution P/L,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Parkes Wool Pack Repairs,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Parkwood Trading,,windsor,windsor,High,40,0,40,0.00,0.000000,,2026-07-23,no,Freight was zero on 40 of 40 invoices (100%).
+Past Outdoors,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Pattons Awnings,,customer,customer,High,19,16,3,84.21,495.000000,,2026-07-23,no,Freight was charged on 16 of 19 invoices (84%).
+Paul Gregory Carpet Laying,,customer,customer,High,5,4,1,80.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+Paul Scuglia,,windsor,windsor,High,12,0,12,0.00,0.000000,,2026-07-23,no,Freight was zero on 12 of 12 invoices (100%).
+Pavlov & Sons Textiles,,unknown,unknown,,2,1,1,50.00,10.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Paxford Canvas Products,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Pazner Group Pty Ltd,,customer,customer,High,56,50,6,89.29,1120.000000,,2026-07-23,no,Freight was charged on 50 of 56 invoices (89%).
+PC's Colourful Canvas,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Pea In A Pod Maternity,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Peacemaker Industries Pty Ltd,,customer,customer,Medium,11,8,3,72.73,210.000000,,2026-07-23,no,Freight was charged on 8 of 11 invoices (73%).
+Pearl Filtration P/L,,customer,customer,High,61,59,2,96.72,885.000000,,2026-07-23,no,Freight was charged on 59 of 61 invoices (97%).
+Peddot Pty Ltd,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+PEGAR Furniture,,windsor,windsor,Medium,4,0,4,0.00,0.000000,,2026-07-23,no,Freight was zero on 4 of 4 invoices (100%).
+Pennant Products,,customer,customer,High,8,7,1,87.50,105.000000,,2026-07-23,no,Freight was charged on 7 of 8 invoices (88%).
+Penny Cooke Design ( PCD Living ),,customer,customer,Medium,3,2,1,66.67,40.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Persuader P/L,,customer,customer,High,24,21,3,87.50,285.000000,,2026-07-23,no,Freight was charged on 21 of 24 invoices (88%).
+Perth Better Homes,,customer,customer,High,30,29,1,96.67,1450.000000,,2026-07-23,no,Freight was charged on 29 of 30 invoices (97%).
+Perth Mattress Innovations,,customer,customer,Low,1,1,0,100.00,273.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Pet Pillow,,customer,customer,High,7,6,1,85.71,150.000000,,2026-07-23,no,Freight was charged on 6 of 7 invoices (86%).
+Pet Trading,,customer,customer,High,128,114,14,89.06,3450.000000,,2026-07-23,no,Freight was charged on 114 of 128 invoices (89%).
+PetarG Design Pty Ltd,,customer,customer,High,12,12,0,100.00,235.000000,,2026-07-23,no,Freight was charged on 12 of 12 invoices (100%).
+Peter Brandes Upholstery,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Peter Cooke,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Peter Roberts,,windsor,windsor,High,16,0,16,0.00,0.000000,,2026-07-23,no,Freight was zero on 16 of 16 invoices (100%).
+Peter Ryan Saddlery,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Peter Sanders Carpet Overlocking,,customer,customer,High,9,8,1,88.89,160.000000,,2026-07-23,no,Freight was charged on 8 of 9 invoices (89%).
+Peter Smith Contractors,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Pheary,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Phil Hunt,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+PI Dang & NY Chung,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Piaffe Equestrian Supplies,,customer,customer,High,12,10,2,83.33,165.010000,,2026-07-23,no,Freight was charged on 10 of 12 invoices (83%).
+Pickers Vinyl & Canvas,,customer,customer,Medium,14,10,4,71.43,2040.000000,,2026-07-23,no,Freight was charged on 10 of 14 invoices (71%).
+Plascorp P/L,,windsor,windsor,High,110,1,109,0.91,10.000000,,2026-07-23,no,Freight was zero on 109 of 110 invoices (99%).
+Platypus Outdoors,,customer,customer,High,9,9,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+Play-Safe Services,,customer,customer,High,5,4,1,80.00,45.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+PlayCorp Group of Companies,,customer,customer,High,11,11,0,100.00,145.000000,,2026-07-23,no,Freight was charged on 11 of 11 invoices (100%).
+PLT Clothing,,unknown,unknown,,6,3,3,50.00,45.000000,,2026-07-23,no,Freight evidence is evenly split: 3 charged and 3 zero-freight invoices.
+Polar Linen,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Poly Fusion - WA P/L,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Polyfield Pty Ltd,,customer,customer,High,20,18,2,90.00,525.000000,,2026-07-23,no,Freight was charged on 18 of 20 invoices (90%).
+Polytex,,customer,customer,Low,94,51,43,54.26,2265.000000,,2026-07-23,no,Freight was charged on 51 of 94 invoices (54%).
+Pork Chop Promotions,,customer,customer,High,8,8,0,100.00,160.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Port Canvas & Sail Repairs,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Portside Boulders,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Portwest Pacific Pty Ltd,,customer,customer,High,21,19,2,90.48,990.000000,,2026-07-23,no,Freight was charged on 19 of 21 invoices (90%).
+Powder Blue,,customer,customer,Low,2,2,0,100.00,50.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Power Tarps,,customer,customer,Low,73,39,34,53.42,2385.000000,,2026-07-23,no,Freight was charged on 39 of 73 invoices (53%).
+Precision Foam Industries Pty Ltd,,customer,customer,Medium,3,2,1,66.67,60.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Precision Foam Manufacturing - NSW,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Precision Rigging P/L,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Premium Sewing Service,,customer,customer,Medium,19,14,5,73.68,310.000000,,2026-07-23,no,Freight was charged on 14 of 19 invoices (74%).
+Prespa Bedding,,customer,customer,High,22,19,3,86.36,305.000000,,2026-07-23,no,Freight was charged on 19 of 22 invoices (86%).
+Prestige Bedding,,windsor,windsor,Medium,93,22,71,23.66,695.000000,,2026-07-23,no,Freight was zero on 71 of 93 invoices (76%).
+Prestige Carpets,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Prestige Sheepskin & Lambswool Products,,customer,customer,High,66,65,1,98.48,6940.000000,,2026-07-23,no,Freight was charged on 65 of 66 invoices (98%).
+Print Finishing Line,,customer,customer,High,5,5,0,100.00,115.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Pro Textile Solutions,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Pro-Pac Packaging (Aust) P/L,,customer,customer,High,27,25,2,92.59,1040.000000,,2026-07-23,no,Freight was charged on 25 of 27 invoices (93%).
+Profilt (Aust) Pty Ltd,,customer,customer,Medium,4,3,1,75.00,50.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Profilt Ltd - NZ,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Programmed Timber Supplies,,customer,customer,High,11,10,1,90.91,285.000000,,2026-07-23,no,Freight was charged on 10 of 11 invoices (91%).
+Protecta Group,,customer,customer,High,27,23,4,85.19,3460.000000,,2026-07-23,no,Freight was charged on 23 of 27 invoices (85%).
+Provocator,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+PSC Trading,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+PT SIOEN SEMARANG ASIA,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+PTA Designs,,customer,customer,High,7,7,0,100.00,245.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+PTL Enterprise,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Purax Feather Holdings P/L,,customer,customer,High,12,12,0,100.00,180.000000,,2026-07-23,no,Freight was charged on 12 of 12 invoices (100%).
+Pyrotek Pty Ltd,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Q&D Regular Furniture P/L,,customer,customer,High,10,8,2,80.00,160.000000,,2026-07-23,no,Freight was charged on 8 of 10 invoices (80%).
+Q&H Trading P/L,,customer,customer,Low,13,7,6,53.85,110.000000,,2026-07-23,no,Freight was charged on 7 of 13 invoices (54%).
+QA Sportswear,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Qualitops,,customer,customer,Medium,136,102,34,75.00,2350.000000,,2026-07-23,no,Freight was charged on 102 of 136 invoices (75%).
+Qualitops1978,,customer,customer,High,6,6,0,100.00,140.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Quality Always P/L,,customer,customer,High,11,10,1,90.91,230.000000,,2026-07-23,no,Freight was charged on 10 of 11 invoices (91%).
+Quality Embroidery Service,,customer,customer,Low,2,2,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Quality Fashion Design,,customer,customer,High,33,28,5,84.85,595.000000,,2026-07-23,no,Freight was charged on 28 of 33 invoices (85%).
+Quality Flags,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Quality Rugs and Furnitures,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Quality Sleep Aust. P/L,,customer,customer,High,76,70,6,92.11,2400.000000,,2026-07-23,no,Freight was charged on 70 of 76 invoices (92%).
+Quality Trim,,customer,customer,High,48,44,4,91.67,715.000000,,2026-07-23,no,Freight was charged on 44 of 48 invoices (92%).
+Queensland Raceways,,customer,customer,Low,2,2,0,100.00,180.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Queensland Sewing Machines,,customer,customer,Medium,29,23,6,79.31,615.000000,,2026-07-23,no,Freight was charged on 23 of 29 invoices (79%).
+Quest Flooring P/L,,customer,customer,Low,74,41,33,55.41,1305.000000,,2026-07-23,no,Freight was charged on 41 of 74 invoices (55%).
+Quick Response P/L,,customer,customer,Medium,4,3,1,75.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Quilting Services Ltd.,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Quilts for Orphans,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+R & D Clothing Pty Ltd,,customer,customer,High,42,36,6,85.71,650.000000,,2026-07-23,no,Freight was charged on 36 of 42 invoices (86%).
+R & D Upholstery,,customer,customer,Medium,4,4,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+R & N Blades,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+R M Sewing Machines,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Rabz Rug City,,customer,customer,High,12,11,1,91.67,150.000000,,2026-07-23,no,Freight was charged on 11 of 12 invoices (92%).
+Rachel Moon Clothing,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Rae-Line Pty Ltd,,customer,customer,High,182,148,34,81.32,3985.000000,,2026-07-23,no,Freight was charged on 148 of 182 invoices (81%).
+Rainbow Bedding Products,,customer,customer,High,40,39,1,97.50,1220.000000,,2026-07-23,no,Freight was charged on 39 of 40 invoices (98%).
+Rainbow Filters Pty Ltd,,customer,customer,Low,2,2,0,100.00,55.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Ramsan Products,,customer,customer,High,9,8,1,88.89,160.000000,,2026-07-23,no,Freight was charged on 8 of 9 invoices (89%).
+RAPP Australia Pty Ltd,,customer,customer,Medium,91,69,22,75.82,1563.000000,,2026-07-23,no,Freight was charged on 69 of 91 invoices (76%).
+RAR Printing,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Ravo Clothing,,unknown,unknown,,2,1,1,50.00,10.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Ray Towers Carpets,,customer,customer,Low,1,1,0,100.00,35.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+RB Day & Sons,,customer,customer,High,35,33,2,94.29,830.000000,,2026-07-23,no,Freight was charged on 33 of 35 invoices (94%).
+RD Furniture,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Reality Furniture,,customer,customer,High,34,30,4,88.24,1235.000000,,2026-07-23,no,Freight was charged on 30 of 34 invoices (88%).
+Rebekah Kaberry,,customer,customer,Low,2,2,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Reclaim & Timber Co,,windsor,windsor,High,125,4,121,3.20,540.000000,,2026-07-23,no,Freight was zero on 121 of 125 invoices (97%).
+Reclaim & Timber Co - Queensland,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Reclaim & Timber Co - Victoria,,windsor,windsor,High,35,0,35,0.00,0.000000,,2026-07-23,no,Freight was zero on 35 of 35 invoices (100%).
+Record Marine,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Red Apple,,customer,customer,Low,2,2,0,100.00,95.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Reflective Impressions,,customer,customer,High,24,22,2,91.67,355.000000,,2026-07-23,no,Freight was charged on 22 of 24 invoices (92%).
+Regal Comfort,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Regal Manufacturers Ltd NZ,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Regal Seat Covers,,windsor,windsor,Medium,34,8,26,23.53,105.000000,,2026-07-23,no,Freight was zero on 26 of 34 invoices (76%).
+Regent Calisthenics,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Rehab Upholstery,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Remai Leathergoods,,customer,customer,High,9,9,0,100.00,180.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+Remfry Protective,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Renoma Creations,,unknown,unknown,,6,3,3,50.00,30.000000,,2026-07-23,no,Freight evidence is evenly split: 3 charged and 3 zero-freight invoices.
+Renver Clothing,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Resolve Image Solutions,,customer,customer,Low,10,6,4,60.00,85.000000,,2026-07-23,no,Freight was charged on 6 of 10 invoices (60%).
+Reveal Productions P/L,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Revolution Racegear,,customer,customer,High,41,39,2,95.12,495.000000,,2026-07-23,no,Freight was charged on 39 of 41 invoices (95%).
+Rex Furniture,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+RH Engineering,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Rheingold Furniture P/L,,windsor,windsor,Medium,37,12,25,32.43,398.660000,,2026-07-23,no,Freight was zero on 25 of 37 invoices (68%).
+Rialto Linen,,windsor,windsor,High,6,0,6,0.00,0.000000,,2026-07-23,no,Freight was zero on 6 of 6 invoices (100%).
+Richard Jagger,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Rick's Lounges,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Ridge Furniture,,customer,customer,Low,21,11,10,52.38,230.000000,,2026-07-23,no,Freight was charged on 11 of 21 invoices (52%).
+Riverfront Solutions,,customer,customer,Medium,4,4,0,100.00,90.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Riverland Floor Centre,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+RJ Eagar Limited,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+RM Williams,,customer,customer,Low,62,41,21,66.13,2165.000000,,2026-07-23,no,Freight was charged on 41 of 62 invoices (66%).
+RO Mattress,,customer,customer,Low,2,2,0,100.00,85.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Robbins Equine Services,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Robert Donald,,customer,customer,High,9,9,0,100.00,180.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+Rockdale Mattress Factory,,customer,customer,Medium,12,9,3,75.00,565.000000,,2026-07-23,no,Freight was charged on 9 of 12 invoices (75%).
+Rogi Lingerie,,customer,customer,High,10,9,1,90.00,120.000000,,2026-07-23,no,Freight was charged on 9 of 10 invoices (90%).
+Roman Leathergoods,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Roo Storage,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Rook Auto Upholstery,,customer,customer,Medium,3,3,0,100.00,65.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Ross Hanna Australia P/L,,customer,customer,High,62,58,4,93.55,1430.000000,,2026-07-23,no,Freight was charged on 58 of 62 invoices (94%).
+Rover Pet Products,,customer,customer,High,35,32,3,91.43,1135.000000,,2026-07-23,no,Freight was charged on 32 of 35 invoices (91%).
+Royal Australian,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Royal Luxury Bedding,,customer,customer,Medium,4,3,1,75.00,90.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+RP Auto Upholstery,,customer,customer,High,29,28,1,96.55,525.000000,,2026-07-23,no,Freight was charged on 28 of 29 invoices (97%).
+Rubber Jungle Wetsuits,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Ruby Scrunchi Co,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Rug Addiction,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Rugmaster,,unknown,unknown,,2,1,1,50.00,60.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Rugs and Mats Direct,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Rupert Collins Plastics,,customer,customer,High,11,11,0,100.00,155.000000,,2026-07-23,no,Freight was charged on 11 of 11 invoices (100%).
+RV Upholstery,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+RV Warehouse,,customer,customer,Medium,66,52,14,78.79,1270.000000,,2026-07-23,no,Freight was charged on 52 of 66 invoices (79%).
+RZ Designs,,windsor,windsor,High,34,2,32,5.88,80.000000,,2026-07-23,no,Freight was zero on 32 of 34 invoices (94%).
+S & S Floorcovering Solutions,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+S G Pty Ltd,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Safari Caravans,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Safeguard Home Improvements Pty Ltd,,customer,customer,High,10,9,1,90.00,180.000000,,2026-07-23,no,Freight was charged on 9 of 10 invoices (90%).
+Saferight,,customer,customer,High,19,18,1,94.74,635.000000,,2026-07-23,no,Freight was charged on 18 of 19 invoices (95%).
+Safety Nets Australia,,customer,customer,Medium,4,3,1,75.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Sally Field,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Salt Spray Covers,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Sample Room,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Sandbags Australia,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Sandman Mattress Factory,,customer,customer,High,85,79,6,92.94,2460.000000,,2026-07-23,no,Freight was charged on 79 of 85 invoices (93%).
+SAS Investing Group,,windsor,windsor,High,21,0,21,0.00,0.000000,,2026-07-23,no,Freight was zero on 21 of 21 invoices (100%).
+SASS: Sampling and Storage Solutions Pty Ltd,,customer,customer,High,20,20,0,100.00,355.000000,,2026-07-23,no,Freight was charged on 20 of 20 invoices (100%).
+Savitrek Pty Ltd,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Scarborough Mineshop,,customer,customer,High,31,29,2,93.55,1540.000000,,2026-07-23,no,Freight was charged on 29 of 31 invoices (94%).
+Scope Furniture (Aus) P/L,,customer,customer,Low,18,10,8,55.56,215.000000,,2026-07-23,no,Freight was charged on 10 of 18 invoices (56%).
+Seabrook Upholstery,,customer,customer,Low,2,2,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Sealy of Australia - N.S.W.,,windsor,windsor,High,547,0,547,0.00,0.000000,,2026-07-23,no,Freight was zero on 547 of 547 invoices (100%).
+Sealy of Australia - Queensland,,windsor,windsor,High,748,2,746,0.27,85.000000,,2026-07-23,no,Freight was zero on 746 of 748 invoices (100%).
+Sealy of Australia - South Australia,,windsor,windsor,High,365,0,365,0.00,0.000000,,2026-07-23,no,Freight was zero on 365 of 365 invoices (100%).
+Sealy of Australia - Victoria,,windsor,windsor,High,487,0,487,0.00,0.000000,,2026-07-23,no,Freight was zero on 487 of 487 invoices (100%).
+Sealy of Australia - West Australia,,windsor,windsor,High,163,0,163,0.00,0.000000,,2026-07-23,no,Freight was zero on 163 of 163 invoices (100%).
+Sealy of India Trading Private Limited,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Sealy of NZ Ltd C/- Sealy of Australia Qld,,customer,customer,Medium,45,33,12,73.33,5945.000000,,2026-07-23,no,Freight was charged on 33 of 45 invoices (73%).
+Seat City Pty Ltd,,customer,customer,High,31,31,0,100.00,840.000000,,2026-07-23,no,Freight was charged on 31 of 31 invoices (100%).
+Seat Cover World,,customer,customer,High,127,106,21,83.46,2945.000000,,2026-07-23,no,Freight was charged on 106 of 127 invoices (83%).
+Seatec Aquasuits,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Seating Solutions,,windsor,windsor,Low,5,2,3,40.00,70.000000,,2026-07-23,no,Freight was zero on 3 of 5 invoices (60%).
+"Seats ""R"" Us",,customer,customer,High,31,30,1,96.77,605.000000,,2026-07-23,no,Freight was charged on 30 of 31 invoices (97%).
+Seats of Australia Enterprises Pty Ltd T/A ACSOA,,customer,customer,High,19,17,2,89.47,835.000000,,2026-07-23,no,Freight was charged on 17 of 19 invoices (89%).
+Sefar Pty Ltd,,customer,customer,High,78,73,5,93.59,3195.000000,,2026-07-23,no,Freight was charged on 73 of 78 invoices (94%).
+Selby's Banners Pty Ltd,,customer,customer,Low,232,124,108,53.45,4520.000000,,2026-07-23,no,Freight was charged on 124 of 232 invoices (53%).
+Serenity Bedding,,windsor,windsor,Low,232,91,141,39.22,3320.000000,,2026-07-23,no,Freight was zero on 141 of 232 invoices (61%).
+Serious About Shade,,customer,customer,Low,10,6,4,60.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 10 invoices (60%).
+Sew ONTO IT,,customer,customer,Low,2,2,0,100.00,55.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+SewBizz Sewing Solutions,,unknown,unknown,,8,4,4,50.00,60.000000,,2026-07-23,no,Freight evidence is evenly split: 4 charged and 4 zero-freight invoices.
+Sewfix,,windsor,windsor,Low,218,101,117,46.33,1410.000000,,2026-07-23,no,Freight was zero on 117 of 218 invoices (54%).
+Sewfold,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Sewing Machine City,,windsor,windsor,Low,88,39,49,44.32,875.000000,,2026-07-23,no,Freight was zero on 49 of 88 invoices (56%).
+Sewing Machines Australia,,customer,customer,High,5,5,0,100.00,90.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Sewlex Manufacturing P/L,,customer,customer,High,7,7,0,100.00,70.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Seycon Timber,,windsor,windsor,High,98,1,97,1.02,35.000000,,2026-07-23,no,Freight was zero on 97 of 98 invoices (99%).
+Shaban Sulejman,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Shade 'N' Sails P/L,,customer,customer,High,51,47,4,92.16,1135.000000,,2026-07-23,no,Freight was charged on 47 of 51 invoices (92%).
+Shade Sails 4 U,,customer,customer,High,57,51,6,89.47,1070.000000,,2026-07-23,no,Freight was charged on 51 of 57 invoices (89%).
+Shadecom Pty Ltd,,customer,customer,Medium,8,6,2,75.00,125.000000,,2026-07-23,no,Freight was charged on 6 of 8 invoices (75%).
+Shadeform Sails,,customer,customer,High,22,19,3,86.36,390.000000,,2026-07-23,no,Freight was charged on 19 of 22 invoices (86%).
+Shademakers Hervey Bay,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Shades of Elegance,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+ShadeSails Australia,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Shadewest,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Shadows of Noosa,,customer,customer,High,9,8,1,88.89,185.000000,,2026-07-23,no,Freight was charged on 8 of 9 invoices (89%).
+Shady Places,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Shann Australia P/L,,customer,customer,High,44,42,2,95.45,690.000000,,2026-07-23,no,Freight was charged on 42 of 44 invoices (95%).
+Shann Australia P/L - NSW,,customer,customer,High,41,41,0,100.00,1125.000000,,2026-07-23,no,Freight was charged on 41 of 41 invoices (100%).
+Shann Australia P/L - Qld,,customer,customer,High,37,36,1,97.30,1195.000000,,2026-07-23,no,Freight was charged on 36 of 37 invoices (97%).
+Shann Australia P/L - SA,,customer,customer,High,24,24,0,100.00,500.000000,,2026-07-23,no,Freight was charged on 24 of 24 invoices (100%).
+Sharkskin International Pty Ltd,,customer,customer,High,44,36,8,81.82,1925.000000,,2026-07-23,no,Freight was charged on 36 of 44 invoices (82%).
+Shazbears,,customer,customer,Medium,6,4,2,66.67,50.000000,,2026-07-23,no,Freight was charged on 4 of 6 invoices (67%).
+Sheepy Hollow,,customer,customer,Medium,4,4,0,100.00,130.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Sheridan Window Furnishings,,customer,customer,Medium,21,15,6,71.43,240.000000,,2026-07-23,no,Freight was charged on 15 of 21 invoices (71%).
+Siba Moulded Car Carpets,,customer,customer,High,6,5,1,83.33,130.000000,,2026-07-23,no,Freight was charged on 5 of 6 invoices (83%).
+Sideliner P/L,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Signarama - Moorabbin,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+Silver Fleece,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Silver Lynx Furniture,,customer,customer,Medium,66,48,18,72.73,910.000000,,2026-07-23,no,Freight was charged on 48 of 66 invoices (73%).
+Simba Global,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Simetrie,,customer,customer,High,6,5,1,83.33,100.000000,,2026-07-23,no,Freight was charged on 5 of 6 invoices (83%).
+Simmon Consolidated,,customer,customer,High,10,9,1,90.00,155.000000,,2026-07-23,no,Freight was charged on 9 of 10 invoices (90%).
+Simmone Allott,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Simply Oarsome,,customer,customer,High,20,20,0,100.00,800.000000,,2026-07-23,no,Freight was charged on 20 of 20 invoices (100%).
+Simply The Best,,customer,customer,High,21,18,3,85.71,1270.000000,,2026-07-23,no,Freight was charged on 18 of 21 invoices (86%).
+Simtuck P/L,,customer,customer,High,56,53,3,94.64,645.000000,,2026-07-23,no,Freight was charged on 53 of 56 invoices (95%).
+Sincere Bedding,,customer,customer,Low,23,14,9,60.87,985.000000,,2026-07-23,no,Freight was charged on 14 of 23 invoices (61%).
+Sing To,,windsor,windsor,Low,16,7,9,43.75,165.000000,,2026-07-23,no,Freight was zero on 9 of 16 invoices (56%).
+Sir Charles Gairdner Hospital,,customer,customer,Low,2,2,0,100.00,350.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Sisley M & S P/L,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+SisterWorks,,windsor,windsor,High,5,1,4,20.00,35.000000,,2026-07-23,no,Freight was zero on 4 of 5 invoices (80%).
+SJ Carpets & Flooring,,customer,customer,High,7,6,1,85.71,100.000000,,2026-07-23,no,Freight was charged on 6 of 7 invoices (86%).
+SJ Partners Pty Ltd,,customer,customer,Low,28,15,13,53.57,680.000000,,2026-07-23,no,Freight was charged on 15 of 28 invoices (54%).
+SJB's Craft Creations,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+SJO Maintenance P/L,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Slapp R. & Co.,,customer,customer,High,5,5,0,100.00,110.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Sleep Better,,windsor,windsor,Low,239,92,147,38.49,4180.000000,,2026-07-23,no,Freight was zero on 147 of 239 invoices (62%).
+Sleep Calm Bedding,,windsor,windsor,Low,22,8,14,36.36,290.000000,,2026-07-23,no,Freight was zero on 14 of 22 invoices (64%).
+Sleep Capital,,customer,customer,Low,2,2,0,100.00,55.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Sleep On Bedding,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Sleep Renovation Pty Ltd,,windsor,windsor,High,65,4,61,6.15,80.000000,,2026-07-23,no,Freight was zero on 61 of 65 invoices (94%).
+Sleepcraft Distributors P/L,,customer,customer,Low,2,2,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Sleepmaker - N.S.W.,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Sleepmaker - Qld,,customer,customer,Low,51,33,18,64.71,3020.000000,,2026-07-23,no,Freight was charged on 33 of 51 invoices (65%).
+Sleepmaker - Tas,,windsor,windsor,Medium,45,13,32,28.89,465.000000,,2026-07-23,no,Freight was zero on 32 of 45 invoices (71%).
+Sleepmaker - Victoria,,customer,customer,Low,82,42,40,51.22,1615.000000,,2026-07-23,no,Freight was charged on 42 of 82 invoices (51%).
+Sleepmaker - W.A.,,windsor,windsor,Medium,3,1,2,33.33,65.000000,,2026-07-23,no,Freight was zero on 2 of 3 invoices (67%).
+Sleepy Heaven Bedding,,customer,customer,Low,25,15,10,60.00,240.000000,,2026-07-23,no,Freight was charged on 15 of 25 invoices (60%).
+Slix Australia,,customer,customer,Low,2,2,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Slumbercare Bedding - Vic P/L,,windsor,windsor,Medium,557,177,380,31.78,6230.000000,,2026-07-23,no,Freight was zero on 380 of 557 invoices (68%).
+Slumbercorp Australasia (NT) P/L,,customer,customer,High,185,163,22,88.11,37540.000000,,2026-07-23,no,Freight was charged on 163 of 185 invoices (88%).
+Slumbercorp Australasia (QLD) P/L,,customer,customer,Medium,261,206,55,78.93,21341.000000,,2026-07-23,no,Freight was charged on 206 of 261 invoices (79%).
+Slumbercorp Australasia (WA) P/L,,customer,customer,Low,444,278,166,62.61,138857.730000,,2026-07-23,no,Freight was charged on 278 of 444 invoices (63%).
+Slumberest Beds,,customer,customer,Low,214,114,100,53.27,4480.000000,,2026-07-23,no,Freight was charged on 114 of 214 invoices (53%).
+Slumberworld Geelong,,customer,customer,High,18,18,0,100.00,395.000000,,2026-07-23,no,Freight was charged on 18 of 18 invoices (100%).
+Slumberworld Warrnambool,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+SM Cabinets,,windsor,windsor,Medium,4,0,4,0.00,0.000000,,2026-07-23,no,Freight was zero on 4 of 4 invoices (100%).
+Smart Seating,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Smart Stitches Design & Embroidery,,windsor,windsor,High,5,0,5,0.00,0.000000,,2026-07-23,no,Freight was zero on 5 of 5 invoices (100%).
+Smith Sails,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Smoke Control,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Snowy Auto And Marine Trim,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Snuggle Rite Industries Australia P/L.,,customer,customer,High,104,88,16,84.62,1605.000000,,2026-07-23,no,Freight was charged on 88 of 104 invoices (85%).
+Snuggs Sheepskin Products,,windsor,windsor,High,29,0,29,0.00,0.000000,,2026-07-23,no,Freight was zero on 29 of 29 invoices (100%).
+Socks R Us Pty Ltd,,customer,customer,High,38,32,6,84.21,450.000000,,2026-07-23,no,Freight was charged on 32 of 38 invoices (84%).
+Sofarie,,windsor,windsor,High,82,8,74,9.76,179.000000,,2026-07-23,no,Freight was zero on 74 of 82 invoices (90%).
+SOLAFT Filtration Solutions Australia Pty Ltd,,unknown,unknown,,4,2,2,50.00,40.000000,,2026-07-23,no,Freight evidence is evenly split: 2 charged and 2 zero-freight invoices.
+Solarscreen,,customer,customer,High,86,79,7,91.86,5160.000000,,2026-07-23,no,Freight was charged on 79 of 86 invoices (92%).
+Solarsuit Australia,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Solomon’s Flooring,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Somerfield's Carpet Court,,customer,customer,Medium,4,4,0,100.00,85.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Somerset Productions,,windsor,windsor,High,27,4,23,14.81,50.000000,,2026-07-23,no,Freight was zero on 23 of 27 invoices (85%).
+Sonia D'Ochoa,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Sophia Clothing,,customer,customer,Medium,4,4,0,100.00,190.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Sophie Clark Saddlery,,customer,customer,High,20,18,2,90.00,340.000000,,2026-07-23,no,Freight was charged on 18 of 20 invoices (90%).
+Sord Australia,,windsor,windsor,Medium,41,9,32,21.95,100.000000,,2026-07-23,no,Freight was zero on 32 of 41 invoices (78%).
+SOS Shade Fabrications,,customer,customer,High,71,64,7,90.14,1495.000000,,2026-07-23,no,Freight was charged on 64 of 71 invoices (90%).
+Soul Sports,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+South Bunarba Agriculture,,customer,customer,Low,1,1,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Southern Cross Canvas Products,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Southern Cross Netting,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Southern Tarpaulins,,customer,customer,High,15,12,3,80.00,490.000000,,2026-07-23,no,Freight was charged on 12 of 15 invoices (80%).
+Spacecraft Aust Pty Ltd,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Spanset Australia,,customer,customer,High,53,49,4,92.45,1040.000000,,2026-07-23,no,Freight was charged on 49 of 53 invoices (92%).
+Special Binding Service,,customer,customer,High,8,8,0,100.00,170.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Special T Print,,unknown,unknown,,4,2,2,50.00,40.000000,,2026-07-23,no,Freight evidence is evenly split: 2 charged and 2 zero-freight invoices.
+Specialty Foams Australia,,unknown,unknown,,4,2,2,50.00,40.000000,,2026-07-23,no,Freight evidence is evenly split: 2 charged and 2 zero-freight invoices.
+Specialty Group,,customer,customer,Low,2,2,0,100.00,35.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Sperling Enterprises Pty Ltd,,customer,customer,High,86,70,16,81.40,5075.000000,,2026-07-23,no,Freight was charged on 70 of 86 invoices (81%).
+Sphinx Australia,,customer,customer,High,48,42,6,87.50,1735.000000,,2026-07-23,no,Freight was charged on 42 of 48 invoices (88%).
+Spicer Canvas,,customer,customer,High,10,8,2,80.00,150.000000,,2026-07-23,no,Freight was charged on 8 of 10 invoices (80%).
+Spinal Support Bed Systems,,customer,customer,Low,93,56,37,60.22,1860.000000,,2026-07-23,no,Freight was charged on 56 of 93 invoices (60%).
+Sports Australia,,windsor,windsor,High,22,1,21,4.55,10.000000,,2026-07-23,no,Freight was zero on 21 of 22 invoices (95%).
+SS Blinds Pty Ltd,,windsor,windsor,Medium,6,2,4,33.33,40.000000,,2026-07-23,no,Freight was zero on 4 of 6 invoices (67%).
+SSquare Australia Blinds & Curtains,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+St Morris Upholsterers,,customer,customer,Low,2,2,0,100.00,95.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Stacey Kuhnell,,customer,customer,High,7,6,1,85.71,115.000000,,2026-07-23,no,Freight was charged on 6 of 7 invoices (86%).
+Stan Bond (SA) P/L,,customer,customer,Medium,3,3,0,100.00,60.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Standard Pallets,,windsor,windsor,High,7,0,7,0.00,0.000000,,2026-07-23,no,Freight was zero on 7 of 7 invoices (100%).
+Starose Pty Ltd,,customer,customer,High,35,31,4,88.57,1200.000000,,2026-07-23,no,Freight was charged on 31 of 35 invoices (89%).
+Starsub,,customer,customer,Medium,41,29,12,70.73,1105.000000,,2026-07-23,no,Freight was charged on 29 of 41 invoices (71%).
+Statewide Sewing Centre,,customer,customer,High,7,7,0,100.00,140.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Stegbar Windows & Doors,,windsor,windsor,High,131,4,127,3.05,245.000000,,2026-07-23,no,Freight was zero on 127 of 131 invoices (97%).
+Stegbar Windows Rowville,,customer,customer,Medium,36,25,11,69.44,555.000000,,2026-07-23,no,Freight was charged on 25 of 36 invoices (69%).
+Stewart Gillman International P/L,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Stingray Shade & Vinyl,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Stirling Canvas Industries,,customer,customer,Medium,3,3,0,100.00,105.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Stirling Nightingale Pty Ltd,,customer,customer,High,67,60,7,89.55,21655.000000,,2026-07-23,no,Freight was charged on 60 of 67 invoices (90%).
+Stitch and Staple Upholstery,,customer,customer,High,14,13,1,92.86,295.000000,,2026-07-23,no,Freight was charged on 13 of 14 invoices (93%).
+Stock...,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Stockade Leather,,windsor,windsor,Medium,8,2,6,25.00,20.000000,,2026-07-23,no,Freight was zero on 6 of 8 invoices (75%).
+Straya Made,,customer,customer,High,7,7,0,100.00,170.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Straya Uggs,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Stritek International,,customer,customer,Medium,12,9,3,75.00,160.000000,,2026-07-23,no,Freight was charged on 9 of 12 invoices (75%).
+Stubbify Pty Ltd,,customer,customer,High,49,40,9,81.63,1075.000000,,2026-07-23,no,Freight was charged on 40 of 49 invoices (82%).
+Stubby Coolers R Us,,customer,customer,High,47,40,7,85.11,990.000000,,2026-07-23,no,Freight was charged on 40 of 47 invoices (85%).
+Style Ergonomics,,customer,customer,Medium,74,58,16,78.38,1285.000000,,2026-07-23,no,Freight was charged on 58 of 74 invoices (78%).
+Style Shades,,customer,customer,High,33,32,1,96.97,1295.000000,,2026-07-23,no,Freight was charged on 32 of 33 invoices (97%).
+Styleprint Pty Ltd,,customer,customer,High,6,6,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Sue McLean,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Sugar Coast Canvas & Trimming,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Suite Comfort Co NZ,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Sulfaro Furniture,,customer,customer,High,8,7,1,87.50,100.000000,,2026-07-23,no,Freight was charged on 7 of 8 invoices (88%).
+Suncraft Shades,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Sunscreen Solutions,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Sunshine Coast Upholstery,,customer,customer,High,14,14,0,100.00,280.000000,,2026-07-23,no,Freight was charged on 14 of 14 invoices (100%).
+Sunshine Motor Trimming,,customer,customer,High,16,15,1,93.75,215.000000,,2026-07-23,no,Freight was charged on 15 of 16 invoices (94%).
+Supafit Seat Covers,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Super Master Bedding,,customer,customer,Low,23,15,8,65.22,475.000000,,2026-07-23,no,Freight was charged on 15 of 23 invoices (65%).
+Super Slippers,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Superior Filters,,customer,customer,High,29,29,0,100.00,580.000000,,2026-07-23,no,Freight was charged on 29 of 29 invoices (100%).
+Superstar Kids,,windsor,windsor,High,17,0,17,0.00,0.000000,,2026-07-23,no,Freight was zero on 17 of 17 invoices (100%).
+Supertrim,,windsor,windsor,High,91,5,86,5.49,65.000000,,2026-07-23,no,Freight was zero on 86 of 91 invoices (95%).
+Supreme Shades,,customer,customer,High,90,77,13,85.56,6565.000000,,2026-07-23,no,Freight was charged on 77 of 90 invoices (86%).
+Sura Couture,,customer,customer,Low,11,7,4,63.64,130.000000,,2026-07-23,no,Freight was charged on 7 of 11 invoices (64%).
+Susan Becker Pty Ltd,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Sutto's Floor Coverings,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Swags Plus,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Swan Bedding,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Sydney Carpet Overlocking & Fringing,,customer,customer,Medium,101,73,28,72.28,1710.000000,,2026-07-23,no,Freight was charged on 73 of 101 invoices (72%).
+Sydney Sewing (Sewing Australia Pty Ltd),,customer,customer,High,195,174,21,89.23,4060.000000,,2026-07-23,no,Freight was charged on 174 of 195 invoices (89%).
+Sydney Shade Sails - NSW,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+T & T Sewing Accessories,,customer,customer,High,8,8,0,100.00,320.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+T Maker,,customer,customer,Medium,16,11,5,68.75,210.000000,,2026-07-23,no,Freight was charged on 11 of 16 invoices (69%).
+Tailored Car Accessories,,customer,customer,High,34,31,3,91.18,475.000000,,2026-07-23,no,Freight was charged on 31 of 34 invoices (91%).
+Tam Toan,,windsor,windsor,High,13,0,13,0.00,0.000000,,2026-07-23,no,Freight was zero on 13 of 13 invoices (100%).
+"Tarp, Shapes & Covers",,customer,customer,High,7,7,0,100.00,140.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+TBA Textiles Pty Ltd,,customer,customer,Medium,3,3,0,100.00,65.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Tebb's Canvas Products P/L,,customer,customer,High,23,19,4,82.61,215.000000,,2026-07-23,no,Freight was charged on 19 of 23 invoices (83%).
+Tech Vest Australia,,customer,customer,High,73,70,3,95.89,1650.000000,,2026-07-23,no,Freight was charged on 70 of 73 invoices (96%).
+Tessa Upholstery,,windsor,windsor,Medium,4,0,4,0.00,0.000000,,2026-07-23,no,Freight was zero on 4 of 4 invoices (100%).
+Textiles Express,,windsor,windsor,High,109,0,109,0.00,0.000000,,2026-07-23,no,Freight was zero on 109 of 109 invoices (100%).
+Thanh Nha Clothing,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Thanh Xuan,,windsor,windsor,High,188,4,184,2.13,100.000000,,2026-07-23,no,Freight was zero on 184 of 188 invoices (98%).
+The Amasiko Partnership,,customer,customer,Low,1,1,0,100.00,10.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+The Australian Coat Company,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+The Banner Lady,,customer,customer,High,9,8,1,88.89,175.000000,,2026-07-23,no,Freight was charged on 8 of 9 invoices (89%).
+The Bindery,,unknown,unknown,,6,3,3,50.00,30.000000,,2026-07-23,no,Freight evidence is evenly split: 3 charged and 3 zero-freight invoices.
+The Canvas Seat Cover Company,,customer,customer,High,73,64,9,87.67,2105.000000,,2026-07-23,no,Freight was charged on 64 of 73 invoices (88%).
+The Compostable Designer,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+The Curtain Factory,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+The Curtainmaker,,customer,customer,Medium,3,3,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+The Dusty Road,,customer,customer,Low,2,2,0,100.00,395.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+The Event Space,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+The Fibre Factory,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+The Foam Booth,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+The Leather Shop,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+The Main Room,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+The Mat Factory,,customer,customer,Low,2,2,0,100.00,45.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+The Mattress Company,,customer,customer,High,104,98,6,94.23,6990.000000,,2026-07-23,no,Freight was charged on 98 of 104 invoices (94%).
+The Nest Climbing Gym Pty Ltd,,customer,customer,High,5,4,1,80.00,110.000000,,2026-07-23,no,Freight was charged on 4 of 5 invoices (80%).
+The Only Juan Sewing and Craft Supplies Pty Ltd,,customer,customer,Medium,9,7,2,77.78,170.000000,,2026-07-23,no,Freight was charged on 7 of 9 invoices (78%).
+The Outdoor Shop Australia,,customer,customer,Medium,3,3,0,100.00,90.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+The Pallet People,,windsor,windsor,High,72,0,72,0.00,0.000000,,2026-07-23,no,Freight was zero on 72 of 72 invoices (100%).
+The Pillow Factory,,customer,customer,Medium,48,37,11,77.08,550.000000,,2026-07-23,no,Freight was charged on 37 of 48 invoices (77%).
+The Posture Care Chair Company,,customer,customer,High,206,170,36,82.52,7940.000000,,2026-07-23,no,Freight was charged on 170 of 206 invoices (83%).
+The Printing Edge,,customer,customer,High,19,18,1,94.74,360.000000,,2026-07-23,no,Freight was charged on 18 of 19 invoices (95%).
+The Seat Shop Pty Ltd,,customer,customer,High,84,77,7,91.67,2790.000000,,2026-07-23,no,Freight was charged on 77 of 84 invoices (92%).
+The Seatery,,customer,customer,High,32,27,5,84.38,745.000000,,2026-07-23,no,Freight was charged on 27 of 32 invoices (84%).
+The Snake Hole,,customer,customer,Low,2,2,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+The UGG Boot Factory Pty Ltd,,customer,customer,High,24,24,0,100.00,720.000000,,2026-07-23,no,Freight was charged on 24 of 24 invoices (100%).
+The Victoria Carpet Co P/L,,customer,customer,High,17,15,2,88.24,370.000000,,2026-07-23,no,Freight was charged on 15 of 17 invoices (88%).
+The Workwear Group,,windsor,windsor,Medium,20,6,14,30.00,175.000000,,2026-07-23,no,Freight was zero on 14 of 20 invoices (70%).
+Theatre Star,,customer,customer,High,5,5,0,100.00,125.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Theo's Discount Craft,,customer,customer,Medium,81,56,25,69.14,1275.000000,,2026-07-23,no,Freight was charged on 56 of 81 invoices (69%).
+Thi-Ut Nguyen,,windsor,windsor,High,9,0,9,0.00,0.000000,,2026-07-23,no,Freight was zero on 9 of 9 invoices (100%).
+Thomas Textiles,,customer,customer,High,17,16,1,94.12,385.000000,,2026-07-23,no,Freight was charged on 16 of 17 invoices (94%).
+Thomastown Sewing Sports Apparel,,customer,customer,Medium,3,3,0,100.00,90.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Thonet Australia,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Thorline Products,,customer,customer,Low,32,18,14,56.25,360.000000,,2026-07-23,no,Freight was charged on 18 of 32 invoices (56%).
+Tiamis Group,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Tiara Trims,,windsor,windsor,Medium,28,9,19,32.14,185.000000,,2026-07-23,no,Freight was zero on 19 of 28 invoices (68%).
+Tiger Angel P/L,,customer,customer,High,14,12,2,85.71,150.000000,,2026-07-23,no,Freight was charged on 12 of 14 invoices (86%).
+Tiger Fast,,windsor,windsor,Low,11,5,6,45.45,100.000000,,2026-07-23,no,Freight was zero on 6 of 11 invoices (55%).
+Tina Cosby,,customer,customer,High,5,5,0,100.00,125.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Tina Hedley,,customer,customer,Medium,3,3,0,100.00,65.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Tina Upholstery,,unknown,unknown,,2,1,1,50.00,15.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Tip Top Blinds,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+TLC Upholstery,,customer,customer,High,12,12,0,100.00,285.000000,,2026-07-23,no,Freight was charged on 12 of 12 invoices (100%).
+Tom's Living,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Tommy Campers,,customer,customer,Medium,11,8,3,72.73,165.000000,,2026-07-23,no,Freight was charged on 8 of 11 invoices (73%).
+Toni Fisher,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Toolfast,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Top Form Furniture Pty Ltd,,windsor,windsor,Low,5,2,3,40.00,45.000000,,2026-07-23,no,Freight was zero on 3 of 5 invoices (60%).
+Top Industrial P/L,,customer,customer,Medium,4,4,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Total Noise Control P/L,,windsor,windsor,High,7,1,6,14.29,50.000000,,2026-07-23,no,Freight was zero on 6 of 7 invoices (86%).
+Town & Country Carpet Overlocking,,customer,customer,High,14,13,1,92.86,290.000000,,2026-07-23,no,Freight was charged on 13 of 14 invoices (93%).
+Tracy Mirtschin,,customer,customer,High,19,17,2,89.47,415.000000,,2026-07-23,no,Freight was charged on 17 of 19 invoices (89%).
+Trade Sails Australia,,unknown,unknown,,10,5,5,50.00,120.000000,,2026-07-23,no,Freight evidence is evenly split: 5 charged and 5 zero-freight invoices.
+Tricia Brown,,customer,customer,Low,1,1,0,100.00,15.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Trim Worx,,customer,customer,Medium,4,4,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Trimtech Automotive Interiors,,customer,customer,High,12,12,0,100.00,230.000000,,2026-07-23,no,Freight was charged on 12 of 12 invoices (100%).
+Tripler Trading Co,,customer,customer,High,23,22,1,95.65,330.000000,,2026-07-23,no,Freight was charged on 22 of 23 invoices (96%).
+Triton Canvas,,windsor,windsor,Medium,3,0,3,0.00,0.000000,,2026-07-23,no,Freight was zero on 3 of 3 invoices (100%).
+TST Carpet Manufacturers,,customer,customer,High,63,53,10,84.13,1940.000000,,2026-07-23,no,Freight was charged on 53 of 63 invoices (84%).
+Tuffa Workwear P/L,,windsor,windsor,Medium,399,123,276,30.83,2835.000000,,2026-07-23,no,Freight was zero on 276 of 399 invoices (69%).
+Tuffmar International,,customer,customer,Medium,4,4,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Tumbling Til Activewear,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Turbo Building Group,,customer,customer,Low,1,1,0,100.00,65.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Tweed Bait,,customer,customer,Medium,3,3,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 3 of 3 invoices (100%).
+Twilite Verticals,,customer,customer,High,7,7,0,100.00,105.000000,,2026-07-23,no,Freight was charged on 7 of 7 invoices (100%).
+Twins Curtains,,customer,customer,High,10,10,0,100.00,195.000000,,2026-07-23,no,Freight was charged on 10 of 10 invoices (100%).
+U Boots,,windsor,windsor,Low,74,25,49,33.78,445.000000,,2026-07-23,no,Freight was zero on 49 of 74 invoices (66%).
+Ultimate Home Decors,,windsor,windsor,Low,7,3,4,42.86,60.000000,,2026-07-23,no,Freight was zero on 4 of 7 invoices (57%).
+Under Raps Pty Ltd,,customer,customer,High,47,45,2,95.74,1875.000000,,2026-07-23,no,Freight was charged on 45 of 47 invoices (96%).
+Uniform By Design,,windsor,windsor,Medium,35,8,27,22.86,160.000000,,2026-07-23,no,Freight was zero on 27 of 35 invoices (77%).
+Uninet Enclosure Systems,,customer,customer,High,20,17,3,85.00,1335.000000,,2026-07-23,no,Freight was charged on 17 of 20 invoices (85%).
+Unique Upholstery,,windsor,windsor,Medium,4,0,4,0.00,0.000000,,2026-07-23,no,Freight was zero on 4 of 4 invoices (100%).
+United Sling Co,,customer,customer,High,27,25,2,92.59,710.000000,,2026-07-23,no,Freight was charged on 25 of 27 invoices (93%).
+Universal Upholstery,,customer,customer,High,26,25,1,96.15,510.000000,,2026-07-23,no,Freight was charged on 25 of 26 invoices (96%).
+Update Furniture Pty Ltd,,customer,customer,Low,43,22,21,51.16,470.000000,,2026-07-23,no,Freight was charged on 22 of 43 invoices (51%).
+Upholstery Solutions,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Urshs Sewing,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+V J Embroidery,,customer,customer,High,8,8,0,100.00,515.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Valdes Couture,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Vanketo,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Venture International (Vietnam) Joint Stock Co,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+Vermont Textiles,,customer,customer,High,11,10,1,90.91,230.000000,,2026-07-23,no,Freight was charged on 10 of 11 invoices (91%).
+Vertech - ( South East Rugs ),,customer,customer,High,27,26,1,96.30,665.000000,,2026-07-23,no,Freight was charged on 26 of 27 invoices (96%).
+Vespa Fashion,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Vicky Sewing,,customer,customer,Low,2,2,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Victor Footwear,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Victoria Furniture (VIC) Pty Ltd,,customer,customer,Low,17,10,7,58.82,305.000000,,2026-07-23,no,Freight was charged on 10 of 17 invoices (59%).
+Victorian Furniture Town,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+View Furniture,,customer,customer,Low,1,1,0,100.00,30.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Vikal International,,customer,customer,Low,1,1,0,100.00,25.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Village Court Saddlery,,customer,customer,Medium,3,2,1,66.67,40.000000,,2026-07-23,no,Freight was charged on 2 of 3 invoices (67%).
+Vision Auto Pty Ltd,,customer,customer,High,55,51,4,92.73,1150.000000,,2026-07-23,no,Freight was charged on 51 of 55 invoices (93%).
+Vision Safe P/L,,customer,customer,High,7,6,1,85.71,120.000000,,2026-07-23,no,Freight was charged on 6 of 7 invoices (86%).
+Visscher-Caravelle,,customer,customer,High,74,66,8,89.19,1425.000000,,2026-07-23,no,Freight was charged on 66 of 74 invoices (89%).
+Vista Industries P/L,,customer,customer,High,6,6,0,100.00,90.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Visual Solutions,,windsor,windsor,Medium,143,40,103,27.97,1135.000000,,2026-07-23,no,Freight was zero on 103 of 143 invoices (72%).
+Vivad Australia P/L,,customer,customer,Low,63,38,25,60.32,930.000000,,2026-07-23,no,Freight was charged on 38 of 63 invoices (60%).
+Vivid FX Pty Ltd,,customer,customer,Low,2,2,0,100.00,40.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+VMM Pty Ltd - Sleep & Relax,,windsor,windsor,Low,127,43,84,33.86,1015.000000,,2026-07-23,no,Freight was zero on 84 of 127 invoices (66%).
+VN Clothing,,customer,customer,High,59,51,8,86.44,1280.000000,,2026-07-23,no,Freight was charged on 51 of 59 invoices (86%).
+Vogue Upholstery,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Vootu,,unknown,unknown,,2,1,1,50.00,10.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+VSRP Rubber,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+WakeNSurf,,customer,customer,High,9,9,0,100.00,190.000000,,2026-07-23,no,Freight was charged on 9 of 9 invoices (100%).
+Walk Holdings,,customer,customer,High,106,91,15,85.85,8410.000000,,2026-07-23,no,Freight was charged on 91 of 106 invoices (86%).
+Walkalong Shoe Travel,,windsor,windsor,High,6,1,5,16.67,20.000000,,2026-07-23,no,Freight was zero on 5 of 6 invoices (83%).
+Walltopia AD,,customer,customer,Low,5,3,2,60.00,140.000000,,2026-07-23,no,Freight was charged on 3 of 5 invoices (60%).
+Warren Frazer,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Waterline Mfg Pty Ltd,,customer,customer,High,48,47,1,97.92,980.000000,,2026-07-23,no,Freight was charged on 47 of 48 invoices (98%).
+Waverley Mills,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Weatherware Protection Pty Ltd,,windsor,windsor,High,6,0,6,0.00,0.000000,,2026-07-23,no,Freight was zero on 6 of 6 invoices (100%).
+Welspring Pty Ltd,,unknown,unknown,,2,1,1,50.00,20.000000,,2026-07-23,no,Freight evidence is evenly split: 1 charged and 1 zero-freight invoices.
+Wessand Pty Ltd,,windsor,windsor,Low,41,19,22,46.34,1515.000000,,2026-07-23,no,Freight was zero on 22 of 41 invoices (54%).
+West Coast Shade,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+West Shade Services,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Westam Rugs,,customer,customer,High,65,63,2,96.92,1815.000000,,2026-07-23,no,Freight was charged on 63 of 65 invoices (97%).
+Western Sydney Boat Covers,,customer,customer,High,6,6,0,100.00,120.000000,,2026-07-23,no,Freight was charged on 6 of 6 invoices (100%).
+Western Tarps,,customer,customer,High,21,21,0,100.00,610.000000,,2026-07-23,no,Freight was charged on 21 of 21 invoices (100%).
+Westhaven Industries,,customer,customer,High,12,10,2,83.33,235.000000,,2026-07-23,no,Freight was charged on 10 of 12 invoices (83%).
+WG Trunk Co P/L,,customer,customer,High,43,36,7,83.72,1420.000000,,2026-07-23,no,Freight was charged on 36 of 43 invoices (84%).
+Whittley Marine Group,,customer,customer,Low,16,9,7,56.25,230.000000,,2026-07-23,no,Freight was charged on 9 of 16 invoices (56%).
+Wild Wool Productions Pty Ltd,,customer,customer,Medium,265,209,56,78.87,6385.000000,,2026-07-23,no,Freight was charged on 209 of 265 invoices (79%).
+William A. McNeil & Co. Pty Ltd,,customer,customer,High,28,24,4,85.71,695.000000,,2026-07-23,no,Freight was charged on 24 of 28 invoices (86%).
+William Wade,,customer,customer,High,5,5,0,100.00,100.000000,,2026-07-23,no,Freight was charged on 5 of 5 invoices (100%).
+Windoor Joinery,,windsor,windsor,Medium,30,10,20,33.33,362.000000,,2026-07-23,no,Freight was zero on 20 of 30 invoices (67%).
+Windsor Blinds & Awnings,,customer,customer,High,14,14,0,100.00,280.000000,,2026-07-23,no,Freight was charged on 14 of 14 invoices (100%).
+Windsor Textiles Aust.,,windsor,windsor,Medium,4,0,4,0.00,0.000000,,2026-07-23,no,Freight was zero on 4 of 4 invoices (100%).
+Winning Blinds,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Winterfield Cabinets,,windsor,windsor,High,6,0,6,0.00,0.000000,,2026-07-23,no,Freight was zero on 6 of 6 invoices (100%).
+Wire Aid,,windsor,windsor,Medium,4,1,3,25.00,20.000000,,2026-07-23,no,Freight was zero on 3 of 4 invoices (75%).
+"Wise, C E",,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+WK Carpets,,customer,customer,Low,2,2,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 2 of 2 invoices (100%).
+Wonthaggi Sewing Centre,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Wool Products Australia P/L.,,customer,customer,High,167,151,16,90.42,3840.000000,,2026-07-23,no,Freight was charged on 151 of 167 invoices (90%).
+Woolly Fleece Australia P/L,,customer,customer,Medium,156,120,36,76.92,24725.000000,,2026-07-23,no,Freight was charged on 120 of 156 invoices (77%).
+Woolpack (t/a Planet Protector Group),,customer,customer,Low,1,1,0,100.00,50.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Woolsy Products,,customer,customer,High,8,8,0,100.00,140.000000,,2026-07-23,no,Freight was charged on 8 of 8 invoices (100%).
+Workthreads Embroidery,,customer,customer,High,10,9,1,90.00,430.000000,,2026-07-23,no,Freight was charged on 9 of 10 invoices (90%).
+Workwear Industries,,customer,customer,High,23,19,4,82.61,510.000000,,2026-07-23,no,Freight was charged on 19 of 23 invoices (83%).
+Xtreme Styling Concepts,,customer,customer,High,71,68,3,95.77,1500.000000,,2026-07-23,no,Freight was charged on 68 of 71 invoices (96%).
+YSG Tailors,,windsor,windsor,Low,1,0,1,0.00,0.000000,,2026-07-23,no,Freight was zero on 1 of 1 invoices (100%).
+Zak Pak Timber Products,,windsor,windsor,High,98,0,98,0.00,0.000000,,2026-07-23,no,Freight was zero on 98 of 98 invoices (100%).
+Zakala Pty Ltd,,customer,customer,Medium,4,4,0,100.00,80.000000,,2026-07-23,no,Freight was charged on 4 of 4 invoices (100%).
+Zambu Clothing,,customer,customer,Medium,4,3,1,75.00,75.000000,,2026-07-23,no,Freight was charged on 3 of 4 invoices (75%).
+Zap Texnikos,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+Zara Curtains and Blinds,,customer,customer,High,15,15,0,100.00,325.000000,,2026-07-23,no,Freight was charged on 15 of 15 invoices (100%).
+Zenger,,customer,customer,Medium,12,9,3,75.00,270.000000,,2026-07-23,no,Freight was charged on 9 of 12 invoices (75%).
+Zumy,,windsor,windsor,Low,2,0,2,0.00,0.000000,,2026-07-23,no,Freight was zero on 2 of 2 invoices (100%).
+ZZZZZZMattress Barn Pty Ltd,,windsor,windsor,High,11,0,11,0.00,0.000000,,2026-07-23,no,Freight was zero on 11 of 11 invoices (100%).
+ZZZZZZMetro Shades,,customer,customer,Low,1,1,0,100.00,20.000000,,2026-07-23,no,Freight was charged on 1 of 1 invoices (100%).
+ZZZZZZSelby's Canvas & Shade,,windsor,windsor,High,5,1,4,20.00,10.000000,,2026-07-23,no,Freight was zero on 4 of 5 invoices (80%).
+ZZZZZZSewing Trade Equipment,,customer,customer,High,15,13,2,86.67,935.000000,,2026-07-23,no,Freight was charged on 13 of 15 invoices (87%).
