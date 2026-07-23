@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Suppliers · Windsor Widget 2.0{% endblock %}
+{% block content %}
+<section class="page-heading compact-heading">
+  <div>
+    <p class="eyebrow">Supplier control</p>
+    <h1>Suppliers</h1>
+    <p>Purchase history, open MYOB quantities, item ownership and operational lead times.</p>
+  </div>
+</section>
+
+<form class="filter-bar" method="get" action="/suppliers">
+  <label class="filter-search"><span>Search</span><input type="search" name="q" value="{{ query }}" placeholder="Supplier, card ID, contact or email"></label>
+  <label><span>Status</span><select name="status">
+    <option value="active" {% if selected_status == "active" %}selected{% endif %}>Active</option>
+    <option value="all" {% if selected_status == "all" %}selected{% endif %}>All</option>
+    <option value="inactive" {% if selected_status == "inactive" %}selected{% endif %}>Inactive</option>
+  </select></label>
+  <button class="button button-primary" type="submit">Apply</button>
+</form>
+
+<section class="table-panel supplier-register-panel">
+  <div class="table-toolbar">
+    <div><strong>Supplier register</strong><span>Open a supplier for linked items, pricing, purchase orders and lead-time settings.</span></div>
+    <div class="buyer-count"><strong>{{ rows | length }}</strong><span>suppliers</span></div>
+  </div>
+  <div class="table-scroll supplier-register-scroll">
+    <table class="data-table supplier-register-table" data-sortable-table>
+      <thead><tr>
+        <th data-sort="text">Supplier</th>
+        <th data-sort="text">Card ID</th>
+        <th data-sort="text">Contact</th>
+        <th data-sort="number" class="number">Linked Items</th>
+        <th data-sort="number" class="number demand-start">Purchase Docs</th>
+        <th data-sort="number" class="number">Purchase Qty</th>
+        <th data-sort="number" class="number">Purchase Value</th>
+        <th data-sort="number" class="number supply-start">Open Qty</th>
+        <th data-sort="number" class="number">Default Lead</th>
+        <th data-sort="date">Last Purchase</th>
+      </tr></thead>
+      <tbody>
+        {% for row in rows %}
+        <tr tabindex="0" data-row-href="{{ request.url_for('supplier_detail', supplier_id=row.supplier_id) }}">
+          <td data-value="{{ row.display_name }}">
+            <a class="item-link" href="{{ request.url_for('supplier_detail', supplier_id=row.supplier_id) }}">{{ row.display_name }}</a>
+            <small class="compact muted">{{ row.card_status or ("Active" if row.is_active else "Inactive") }}</small>
+          </td>
+          <td data-value="{{ row.myob_card_id or row.myob_record_id or '' }}">{{ row.myob_card_id or row.myob_record_id or "—" }}</td>
+          <td data-value="{{ row.contact_name or '' }}">
+            {{ row.contact_name or "—" }}
+            {% if row.email %}<small class="compact muted">{{ row.email }}</small>{% endif %}
+          </td>
+          <td data-value="{{ row.linked_item_count }}" class="number">{{ row.linked_item_count | integer }}</td>
+          <td data-value="{{ row.purchase_document_count }}" class="number demand-start">{{ row.purchase_document_count | integer }}</td>
+          <td data-value="{{ row.purchase_quantity }}" class="number">{{ row.purchase_quantity | qty }}</td>
+          <td data-value="{{ row.purchase_value }}" class="number">{{ row.purchase_value | qty }}</td>
+          <td data-value="{{ row.open_quantity }}" class="number supply-start {% if row.open_quantity > 0 %}strong-number{% endif %}">{{ row.open_quantity | qty }}</td>
+          <td data-value="{{ row.default_total_lead_days }}" class="number">{{ row.default_total_lead_days }} days</td>
+          <td data-value="{{ row.last_purchase_date or '' }}">{{ row.last_purchase_date or "—" }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="10" class="empty-state">No matching suppliers were returned.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

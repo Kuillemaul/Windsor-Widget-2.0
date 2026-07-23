@@ -30,6 +30,7 @@ from windsor_widget.services.planning import (
 from windsor_widget.web.auth import WebPrincipal, authenticate_user, get_principal
 from windsor_widget.web.customers import build_customers_router
 from windsor_widget.web.items import build_items_router
+from windsor_widget.web.suppliers import build_suppliers_router
 
 _WEB_ROOT = Path(__file__).resolve().parent
 _TEMPLATES = Jinja2Templates(directory=str(_WEB_ROOT / "templates"))
@@ -348,6 +349,16 @@ def create_app(
 
     app.include_router(
         build_customers_router(
+            _session,
+            _TEMPLATES,
+            _require_principal,
+            _template_context,
+            _validate_csrf,
+        )
+    )
+
+    app.include_router(
+        build_suppliers_router(
             _session,
             _TEMPLATES,
             _require_principal,

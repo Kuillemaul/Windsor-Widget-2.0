@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+{% block title %}{{ dashboard.display_name }} · Supplier Summary · Windsor Widget 2.0{% endblock %}
+{% block content %}
+<section class="page-heading supplier-detail-heading">
+  <div>
+    <p class="eyebrow">Supplier Summary</p>
+    <h1>{{ dashboard.display_name }}</h1>
+    <p>{{ dashboard.myob_card_id or dashboard.myob_record_id or "No MYOB identifier" }} · {{ dashboard.card_status or ("Active" if dashboard.is_active else "Inactive") }}</p>
+  </div>
+  <div class="heading-actions">
+    <a class="button" href="/suppliers">Back to Suppliers</a>
+    {% if principal.can_change_operations and not edit_mode %}
+    <a class="button button-primary" href="{{ request.url.path }}?months={{ months }}&amp;as_of={{ as_of }}&amp;edit=true">Edit</a>
+    {% endif %}
+    {% if edit_mode %}
+    <a class="button" href="{{ request.url.path }}?months={{ months }}&amp;as_of={{ as_of }}">Cancel edit</a>
+    {% endif %}
+  </div>
+</section>
+
+<form class="filter-bar supplier-detail-filters" method="get" action="{{ request.url.path }}">
+  <label><span>Purchase window</span><select name="months">
+    {% for option in (3, 6, 12, 18, 24, 36) %}
+    <option value="{{ option }}" {% if months == option %}selected{% endif %}>{{ option }} months</option>
+    {% endfor %}
+  </select></label>
+  <label><span>As at</span><input type="date" name="as_of" value="{{ as_of }}"></label>
+  {% if edit_mode %}<input type="hidden" name="edit" value="true">{% endif %}
+  <button class="button button-primary" type="submit">Recalculate</button>
+</form>
+
+{% if edit_mode %}
+<section class="panel supplier-edit-panel">
+  <p class="eyebrow">Edit mode</p>
+  <h2>Default operational lead times</h2>
+  <p>These defaults apply when an item does not have a supplier-specific override.</p>
+  <form method="post" action="/suppliers/{{ dashboard.supplier_id }}/lead-times" class="supplier-lead-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="months" value="{{ months }}">
+    <input type="hidden" name="as_of" value="{{ as_of }}">
+    <label><span>Manufacturing days</span><input type="number" min="0" max="3650" name="manufacturing_lead_days" value="{{ dashboard.default_manufacturing_lead_days if dashboard.default_manufacturing_lead_days is not none else '' }}"></label>
+    <label><span>Transit days</span><input type="number" min="0" max="3650" name="transit_lead_days" value="{{ dashboard.default_transit_lead_days if dashboard.default_transit_lead_days is not none else '' }}"></label>
+    <label><span>Buffer days</span><input type="number" min="0" max="3650" name="buffer_days" value="{{ dashboard.default_buffer_days if dashboard.default_buffer_days is not none else '' }}"></label>
+    <button class="button button-primary" type="submit">Save defaults</button>
+    <small>All changes are written to the audit log.</small>
+  </form>
+</section>
+{% endif %}
+
+<section class="metric-grid supplier-metric-grid">
+  <article class="metric-card accent-card">
+    <span class="metric-label">Period purchase quantity</span>
+    <strong>{{ dashboard.purchase_period.transaction_quantity | qty }}</strong>
+    <small>{{ dashboard.period_start }} – {{ dashboard.as_of_date }}</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Period purchase value</span>
+    <strong>{{ dashboard.purchase_period.transaction_value | qty }}</strong>
+    <small>{{ dashboard.purchase_period.document_count | integer }} documents</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Open purchase quantity</span>
+    <strong>{{ dashboard.purchase_all_time.open_quantity | qty }}</strong>
+    <small>MYOB order quantity less received quantity</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Linked items</span>
+    <strong>{{ dashboard.linked_item_count | integer }}</strong>
+    <small>{{ dashboard.items | length }} purchased or linked items shown</small>
+  </article>
+</section>
+
+<div class="supplier-top-grid">
+  <section class="panel detail-panel">
+    <p class="eyebrow">Supplier</p>
+    <h2>Contact details</h2>
+    <dl class="detail-list">
+      <div><dt>MYOB record</dt><dd>{{ dashboard.myob_record_id or "—" }}</dd></div>
+      <div><dt>MYOB card</dt><dd>{{ dashboard.myob_card_id or "—" }}</dd></div>
+      <div><dt>Contact</dt><dd>{{ dashboard.contact_name or "—" }}</dd></div>
+      <div><dt>Email</dt><dd>{{ dashboard.email or "—" }}</dd></div>
+      <div><dt>Phone</dt><dd>{{ dashboard.phone or "—" }}</dd></div>
+      <div><dt>First purchase</dt><dd>{{ dashboard.purchase_all_time.first_date or "—" }}</dd></div>
+      <div><dt>Last purchase</dt><dd>{{ dashboard.purchase_all_time.last_date or "—" }}</dd></div>
+    </dl>
+  </section>
+
+  <section class="panel detail-panel">
+    <p class="eyebrow">Lead-time control</p>
+    <h2>Supplier defaults</h2>
+    <div class="supplier-lead-summary">
+      <div><span>Manufacturing</span><strong>{{ dashboard.default_manufacturing_lead_days or 0 }} days</strong></div>
+      <div><span>Transit</span><strong>{{ dashboard.default_transit_lead_days or 0 }} days</strong></div>
+      <div><span>Buffer</span><strong>{{ dashboard.default_buffer_days or 0 }} days</strong></div>
+      <div class="supplier-lead-total"><span>Total default lead</span><strong>{{ dashboard.default_total_lead_days }} days</strong></div>
+    </div>
+    <p class="muted">Item overrides are shown below. Shipment and container milestones will join this view during the On Order stage.</p>
+  </section>
+</div>
+
+<section class="table-panel supplier-items-panel">
+  <div class="table-toolbar">
+    <div><strong>Supplier items</strong><span>Purchase history, current inventory position, open MYOB quantities and effective lead times.</span></div>
+    <div class="buyer-count"><strong>{{ dashboard.items | length }}</strong><span>items</span></div>
+  </div>
+  <div class="table-scroll supplier-items-scroll">
+    <table class="data-table supplier-items-table" data-sortable-table>
+      <thead><tr>
+        <th data-sort="text">Item</th>
+        <th data-sort="text">Description</th>
+        <th data-sort="text">Link</th>
+        <th data-sort="number" class="number">MOQ</th>
+        <th data-sort="number" class="number">Lead Days</th>
+        <th data-sort="number" class="number inventory-start">SOH</th>
+        <th data-sort="number" class="number">Inventory On Order</th>
+        <th data-sort="number" class="number demand-start">Period Qty</th>
+        <th data-sort="number" class="number">All-Time Qty</th>
+        <th data-sort="number" class="number supply-start">Received</th>
+        <th data-sort="number" class="number">Open PO Qty</th>
+        <th data-sort="number" class="number price-start">Last Unit Price</th>
+        <th data-sort="date">Last Purchase</th>
+        {% if edit_mode %}<th>Settings</th>{% endif %}
+      </tr></thead>
+      <tbody>
+        {% for item in dashboard.items %}
+        <tr>
+          <td data-value="{{ item.item_number }}"><a class="item-link" href="{{ request.url_for('item_detail', item_number=item.item_number) }}">{{ item.item_number }}</a></td>
+          <td data-value="{{ item.item_name }}" class="description-cell">{{ item.item_name }}</td>
+          <td data-value="{{ item.match_status }}">
+            {% if item.is_linked %}
+            <span class="tag {% if item.is_preferred %}tag-stocked{% else %}tag-review{% endif %}">{{ "Preferred" if item.is_preferred else "Linked" }}</span>
+            {% else %}<span class="muted">Purchase history only</span>{% endif %}
+            {% if item.supplier_item_number %}<small class="compact muted">{{ item.supplier_item_number }}</small>{% endif %}
+          </td>
+          <td data-value="{{ item.minimum_order_quantity or 0 }}" class="number">{% if item.minimum_order_quantity is not none %}{{ item.minimum_order_quantity | qty }}{% else %}—{% endif %}</td>
+          <td data-value="{{ item.effective_total_lead_days }}" class="number supplier-lead-cell">
+            <strong>{{ item.effective_total_lead_days }}</strong>
+            <small>M {{ item.effective_manufacturing_lead_days }} · T {{ item.effective_transit_lead_days }} · B {{ item.effective_buffer_days }}</small>
+          </td>
+          <td data-value="{{ item.on_hand }}" class="number inventory-start">{{ item.on_hand | qty }}</td>
+          <td data-value="{{ item.inventory_on_order }}" class="number">{{ item.inventory_on_order | qty }}</td>
+          <td data-value="{{ item.period_quantity }}" class="number demand-start">{{ item.period_quantity | qty }}</td>
+          <td data-value="{{ item.all_time_quantity }}" class="number">{{ item.all_time_quantity | qty }}</td>
+          <td data-value="{{ item.received_quantity }}" class="number supply-start">{{ item.received_quantity | qty }}</td>
+          <td data-value="{{ item.open_quantity }}" class="number {% if item.open_quantity > 0 %}strong-number{% endif %}">{{ item.open_quantity | qty }}</td>
+          <td data-value="{{ item.last_purchase_price or 0 }}" class="number price-start">
+            {% if item.last_purchase_price is not none %}<strong>{% if item.last_purchase_currency %}{{ item.last_purchase_currency }} {% endif %}{{ item.last_purchase_price | qty }}</strong>{% else %}—{% endif %}
+          </td>
+          <td data-value="{{ item.last_purchase_date or '' }}">{{ item.last_purchase_date or "—" }}</td>
+          {% if edit_mode %}
+          <td class="supplier-settings-cell">
+            <details>
+              <summary class="button button-small">Edit</summary>
+              <form method="post" action="/suppliers/{{ dashboard.supplier_id }}/items/{{ item.item_id }}" class="supplier-item-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <input type="hidden" name="months" value="{{ months }}">
+                <input type="hidden" name="as_of" value="{{ as_of }}">
+                <label class="supplier-check"><input type="checkbox" name="is_linked" value="true" {% if item.is_linked %}checked{% endif %}> Linked to supplier</label>
+                <label class="supplier-check"><input type="checkbox" name="is_preferred" value="true" {% if item.is_preferred %}checked{% endif %}> Preferred supplier</label>
+                <label><span>Supplier item number</span><input type="text" name="supplier_item_number" value="{{ item.supplier_item_number or '' }}"></label>
+                <label><span>Minimum order quantity</span><input type="number" step="0.001" min="0" name="minimum_order_quantity" value="{{ item.minimum_order_quantity if item.minimum_order_quantity is not none else '' }}"></label>
+                <div class="supplier-item-lead-grid">
+                  <label><span>Manufacturing override</span><input type="number" min="0" max="3650" name="manufacturing_lead_days_override" value="{{ item.manufacturing_lead_days_override if item.manufacturing_lead_days_override is not none else '' }}"></label>
+                  <label><span>Transit override</span><input type="number" min="0" max="3650" name="transit_lead_days_override" value="{{ item.transit_lead_days_override if item.transit_lead_days_override is not none else '' }}"></label>
+                  <label><span>Buffer override</span><input type="number" min="0" max="3650" name="buffer_days_override" value="{{ item.buffer_days_override if item.buffer_days_override is not none else '' }}"></label>
+                </div>
+                <button class="button button-primary button-small" type="submit">Save item settings</button>
+              </form>
+            </details>
+          </td>
+          {% endif %}
+        </tr>
+        {% else %}
+        <tr><td colspan="{{ 14 if edit_mode else 13 }}" class="empty-state">No purchased or linked items were found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="table-panel supplier-documents-panel">
+  <div class="table-toolbar">
+    <div><strong>Recent purchase documents</strong><span>Quantities come directly from the active MYOB purchase lines.</span></div>
+  </div>
+  <div class="table-scroll supplier-documents-scroll">
+    <table class="data-table supplier-documents-table" data-sortable-table>
+      <thead><tr>
+        <th data-sort="date">Date</th>
+        <th data-sort="text">Purchase No.</th>
+        <th data-sort="text">Supplier Invoice</th>
+        <th data-sort="text">Status</th>
+        <th data-sort="number" class="number">Lines</th>
+        <th data-sort="number" class="number demand-start">Transaction Qty</th>
+        <th data-sort="number" class="number">Order Qty</th>
+        <th data-sort="number" class="number supply-start">Received</th>
+        <th data-sort="number" class="number">Billed</th>
+        <th data-sort="number" class="number">Open Qty</th>
+        <th data-sort="number" class="number price-start">Value</th>
+        <th data-sort="date">Shipping Date</th>
+      </tr></thead>
+      <tbody>
+        {% for document in dashboard.documents %}
+        <tr>
+          <td data-value="{{ document.last_transaction_date }}">{{ document.last_transaction_date }}</td>
+          <td data-value="{{ document.purchase_no }}"><strong>{{ document.purchase_no }}</strong></td>
+          <td data-value="{{ document.supplier_invoice_no or '' }}">{{ document.supplier_invoice_no or "—" }}</td>
+          <td data-value="{{ document.status_summary }}">{{ document.status_summary }}</td>
+          <td data-value="{{ document.line_count }}" class="number">{{ document.line_count | integer }}</td>
+          <td data-value="{{ document.transaction_quantity }}" class="number demand-start">{{ document.transaction_quantity | qty }}</td>
+          <td data-value="{{ document.order_quantity }}" class="number">{{ document.order_quantity | qty }}</td>
+          <td data-value="{{ document.received_quantity }}" class="number supply-start">{{ document.received_quantity | qty }}</td>
+          <td data-value="{{ document.billed_quantity }}" class="number">{{ document.billed_quantity | qty }}</td>
+          <td data-value="{{ document.open_quantity }}" class="number {% if document.open_quantity > 0 %}strong-number{% endif %}">{{ document.open_quantity | qty }}</td>
+          <td data-value="{{ document.value }}" class="number price-start">{% if document.currency_code %}{{ document.currency_code }} {% endif %}{{ document.value | qty }}</td>
+          <td data-value="{{ document.latest_shipping_date or '' }}">{{ document.latest_shipping_date or "—" }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="12" class="empty-state">No purchase documents were found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
