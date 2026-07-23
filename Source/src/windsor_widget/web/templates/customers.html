@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Customers · Windsor Widget 2.0{% endblock %}
+{% block content %}
+<section class="page-heading compact-heading">
+  <div>
+    <p class="eyebrow">Customer accounts</p>
+    <h1>Customers</h1>
+    <p>Search MYOB customer cards, review account settings and open sales history.</p>
+  </div>
+</section>
+
+<form class="filter-bar customer-filter-bar" method="get" action="/customers">
+  <label class="filter-search"><span>Search</span><input type="search" name="q" value="{{ query }}" placeholder="Customer, card ID, record ID or city" autofocus></label>
+  <label><span>State</span><select name="state">
+    <option value="">All states</option>
+    {% for value in states %}<option value="{{ value }}" {% if selected_state == value %}selected{% endif %}>{{ value }}</option>{% endfor %}
+  </select></label>
+  <label><span>Payment</span><select name="payment">
+    {% for value, label in [("", "All"), ("unknown", "Unknown"), ("prepay", "Prepay"), ("account", "Account")] %}
+    <option value="{{ value }}" {% if selected_payment == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select></label>
+  <label><span>Freight payer</span><select name="freight">
+    {% for value, label in [("", "All"), ("unknown", "Unknown"), ("customer", "Customer"), ("windsor", "Windsor")] %}
+    <option value="{{ value }}" {% if selected_freight == value %}selected{% endif %}>{{ label }}</option>
+    {% endfor %}
+  </select></label>
+  <button class="button button-primary" type="submit">Apply</button>
+</form>
+
+<section class="table-panel">
+  <div class="table-toolbar">
+    <div><strong>Customer register</strong><span>Double-click a row to open Customer Summary.</span></div>
+    <div class="buyer-count"><strong>{{ rows | length }}</strong><span>customers</span></div>
+  </div>
+  <div class="table-scroll customer-register-scroll">
+    <table class="data-table customer-register-table" data-sortable-table>
+      <thead>
+        <tr>
+          <th data-sort="text">Customer</th>
+          <th data-sort="text">Card ID</th>
+          <th data-sort="text">Record ID</th>
+          <th data-sort="text">City</th>
+          <th data-sort="text">State</th>
+          <th data-sort="text">Payment</th>
+          <th data-sort="text">Freight</th>
+          <th data-sort="text">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr tabindex="0" data-row-href="{{ request.url_for('customer_detail', customer_id=row.customer_account_id) }}">
+          <td data-value="{{ row.display_name }}"><a class="item-link" href="{{ request.url_for('customer_detail', customer_id=row.customer_account_id) }}">{{ row.display_name }}</a></td>
+          <td data-value="{{ row.myob_card_id or '' }}">{{ row.myob_card_id or "—" }}</td>
+          <td data-value="{{ row.myob_record_id or '' }}">{{ row.myob_record_id or "—" }}</td>
+          <td data-value="{{ row.city or '' }}">{{ row.city or "—" }}</td>
+          <td data-value="{{ row.state or '' }}">{{ row.state or "—" }}</td>
+          <td data-value="{{ row.payment_basis }}"><span class="customer-setting customer-setting-{{ row.payment_basis }}">{{ row.payment_basis | title }}</span></td>
+          <td data-value="{{ row.freight_payer }}"><span class="customer-setting">{{ row.freight_payer | title }}</span></td>
+          <td data-value="{{ row.card_status or '' }}">{{ row.card_status or ("Active" if row.is_active else "Inactive") }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="8" class="empty-state">No matching customers were returned.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

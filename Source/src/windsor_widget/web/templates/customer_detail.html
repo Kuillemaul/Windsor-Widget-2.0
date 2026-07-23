@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block title %}{{ summary.display_name }} · Customer Summary · Windsor Widget 2.0{% endblock %}
+{% block content %}
+<section class="page-heading customer-detail-heading">
+  <div>
+    <p class="eyebrow">Customer Summary</p>
+    <h1>{{ summary.display_name }}</h1>
+    <p>
+      {{ summary.myob_card_id or summary.myob_record_id or "No MYOB identifier" }}
+      {% if summary.city or summary.state %} · {{ summary.city or "" }}{% if summary.state %}, {{ summary.state }}{% endif %}{% endif %}
+    </p>
+  </div>
+  <div class="heading-actions">
+    <a class="button" href="/customers">Back to Customers</a>
+  </div>
+</section>
+
+<form class="filter-bar customer-detail-filters" method="get" action="{{ request.url.path }}">
+  <label><span>Sales window</span><select name="months">
+    {% for option in (3, 6, 12, 18, 24, 36) %}
+    <option value="{{ option }}" {% if months == option %}selected{% endif %}>{{ option }} months</option>
+    {% endfor %}
+  </select></label>
+  <label><span>As at</span><input type="date" name="as_of" value="{{ as_of }}"></label>
+  <button class="button button-primary" type="submit">Recalculate</button>
+</form>
+
+<section class="metric-grid customer-metric-grid">
+  <article class="metric-card accent-card">
+    <span class="metric-label">Period sales quantity</span>
+    <strong>{{ summary.sales_period.quantity | qty }}</strong>
+    <small>{{ summary.period_start }} – {{ summary.as_of_date }}</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Period sales value</span>
+    <strong>{{ summary.sales_period.value | qty }}</strong>
+    <small>{{ summary.sales_period.document_count | integer }} invoices</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">All-time quantity</span>
+    <strong>{{ summary.sales_all_time.quantity | qty }}</strong>
+    <small>{{ summary.sales_all_time.document_count | integer }} invoices</small>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Current explicit cover</span>
+    <strong>{{ summary.current_cover_orders.quantity | qty }}</strong>
+    <small>{{ summary.current_cover_orders.document_count | integer }} cover orders</small>
+  </article>
+</section>
+
+<div class="customer-top-grid">
+  <section class="panel detail-panel">
+    <p class="eyebrow">Account</p>
+    <h2>Contact and trading details</h2>
+    <dl class="detail-list">
+      <div><dt>Card status</dt><dd>{{ summary.card_status or ("Active" if summary.is_active else "Inactive") }}</dd></div>
+      <div><dt>Address</dt><dd>{{ summary.address_line_1 or "—" }}</dd></div>
+      <div><dt>Location</dt><dd>{{ summary.city or "—" }}{% if summary.state %}, {{ summary.state }}{% endif %} {{ summary.postcode or "" }}</dd></div>
+      <div><dt>Contact</dt><dd>{{ summary.contact_name or "—" }}</dd></div>
+      <div><dt>Email</dt><dd>{{ summary.email or "—" }}</dd></div>
+      <div><dt>Phone</dt><dd>{{ summary.phone or "—" }}</dd></div>
+      <div><dt>MYOB terms</dt><dd>{{ summary.terms_description or "—" }}</dd></div>
+      <div><dt>Price level</dt><dd>{{ summary.price_level or "—" }}</dd></div>
+      <div><dt>Shipping method</dt><dd>{{ summary.shipping_method or "—" }}</dd></div>
+    </dl>
+  </section>
+
+  <section class="panel detail-panel">
+    <p class="eyebrow">Commercial control</p>
+    <h2>Payment and freight</h2>
+    <div class="commercial-status">
+      <div><span>Payment basis</span><strong>{{ summary.payment_basis | title }}</strong></div>
+      <div><span>Freight payer</span><strong>{{ summary.freight_payer | title }}</strong></div>
+      <div><span>Group match</span><strong>{{ summary.group_match_status | title }}</strong></div>
+    </div>
+
+    {% if principal.can_change_operations %}
+    <form method="post" action="/customers/{{ summary.customer_account_id }}/commercial-terms" class="commercial-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="return_to" value="{{ request.url.path }}?months={{ months }}&amp;as_of={{ as_of }}">
+      <label><span>Payment basis</span><select name="payment_basis">
+        <option value="unknown" {% if summary.payment_basis == 'unknown' %}selected{% endif %}>Unknown</option>
+        <option value="prepay" {% if summary.payment_basis == 'prepay' %}selected{% endif %}>Prepay</option>
+        <option value="account" {% if summary.payment_basis == 'account' %}selected{% endif %}>Account</option>
+      </select></label>
+      <label><span>Freight payer</span><select name="freight_payer">
+        <option value="unknown" {% if summary.freight_payer == 'unknown' %}selected{% endif %}>Unknown</option>
+        <option value="customer" {% if summary.freight_payer == 'customer' %}selected{% endif %}>Customer</option>
+        <option value="windsor" {% if summary.freight_payer == 'windsor' %}selected{% endif %}>Windsor</option>
+      </select></label>
+      <button class="button button-primary" type="submit">Save settings</button>
+      <small>Changes are recorded in the audit log.</small>
+    </form>
+    {% endif %}
+
+    <div class="price-file-list">
+      <h3>Customer price files</h3>
+      {% for price_file in price_files %}
+      <a class="price-file-row" href="{{ request.url_for('customer_price_file', customer_id=summary.customer_account_id, price_file_id=price_file.customer_price_file_id) }}">
+        <strong>{{ price_file.file_name }}</strong>
+        <span>{{ price_file.group_name }} · {{ price_file.match_status | title }}{% if price_file.confidence is not none %} · {{ price_file.confidence }}%{% endif %}</span>
+      </a>
+      {% else %}
+      <p class="muted">No active customer price workbook is linked to this customer group.</p>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+<section class="panel sales-chart-panel">
+  <div class="sales-chart-heading">
+    <div>
+      <p class="eyebrow">Sales history</p>
+      <h2>Monthly customer sales quantity</h2>
+      <p>Invoiced quantity only. The line shows the linear trend across the selected period.</p>
+    </div>
+    <div class="sales-chart-stats">
+      <div><span>Total quantity</span><strong>{{ sales_chart.total_quantity | qty }}</strong></div>
+      <div><span>Monthly average</span><strong>{{ sales_chart.average_quantity | qty }}</strong></div>
+      <div><span>Trend per month</span><strong class="{% if sales_chart.monthly_slope > 0 %}trend-up{% elif sales_chart.monthly_slope < 0 %}trend-down{% else %}trend-flat{% endif %}">{{ sales_chart.monthly_slope | qty }}</strong></div>
+    </div>
+  </div>
+  {% if sales_chart.points %}
+  <div class="sales-chart-shell">
+    <svg class="sales-quantity-chart" viewBox="0 0 {{ sales_chart.width }} {{ sales_chart.height }}" role="img" aria-label="Monthly invoiced sales quantity for {{ summary.display_name }}" preserveAspectRatio="xMidYMid meet">
+      {% for tick in sales_chart.ticks %}
+      <line class="sales-chart-grid-line" x1="{{ sales_chart.plot_left }}" y1="{{ tick.y }}" x2="{{ sales_chart.plot_right }}" y2="{{ tick.y }}"></line>
+      <text class="sales-chart-y-label" x="{{ sales_chart.plot_left - 10 }}" y="{{ tick.y + 4 }}" text-anchor="end">{{ tick.label }}</text>
+      {% endfor %}
+      <line class="sales-chart-zero-line" x1="{{ sales_chart.plot_left }}" y1="{{ sales_chart.zero_y }}" x2="{{ sales_chart.plot_right }}" y2="{{ sales_chart.zero_y }}"></line>
+      {% for point in sales_chart.points %}
+      <rect class="sales-chart-bar" x="{{ point.bar_x }}" y="{{ point.bar_y }}" width="{{ point.bar_width }}" height="{{ point.bar_height }}"><title>{{ point.label }}: {{ point.quantity_label }}</title></rect>
+      {% endfor %}
+      <polyline class="sales-chart-trend-line" points="{{ sales_chart.trend_points }}"></polyline>
+      {% for point in sales_chart.points %}
+      <circle class="sales-chart-trend-point" cx="{{ point.x }}" cy="{{ point.trend_y }}" r="3.5"><title>{{ point.label }} trend: {{ point.trend_label }}</title></circle>
+      {% if point.show_label %}<text class="sales-chart-x-label" x="{{ point.x }}" y="{{ sales_chart.plot_bottom + 24 }}" text-anchor="middle">{{ point.label }}</text>{% endif %}
+      {% endfor %}
+    </svg>
+  </div>
+  {% else %}<div class="empty-state">No invoiced sales history was returned.</div>{% endif %}
+</section>
+
+<section class="table-panel customer-items-panel">
+  <div class="table-toolbar">
+    <div><strong>Items purchased</strong><span>Selected-period quantities, lifetime totals and the last invoiced price.</span></div>
+    <div class="buyer-count"><strong>{{ item_sales | length }}</strong><span>items</span></div>
+  </div>
+  <div class="table-scroll customer-items-scroll">
+    <table class="data-table customer-items-table" data-sortable-table>
+      <thead><tr>
+        <th data-sort="text">Item</th><th data-sort="text">Description</th>
+        <th data-sort="number" class="number demand-start">Period Qty</th>
+        <th data-sort="number" class="number">Period Invoices</th>
+        <th data-sort="number" class="number">Period Value</th>
+        <th data-sort="number" class="number supply-start">All-Time Qty</th>
+        <th data-sort="number" class="number">All-Time Invoices</th>
+        <th data-sort="number" class="number price-start">Last Unit Price</th>
+        <th data-sort="date">First Bought</th><th data-sort="date">Last Bought</th>
+      </tr></thead>
+      <tbody>
+        {% for item in item_sales %}
+        <tr tabindex="0" data-row-href="{{ request.url_for('item_detail', item_number=item.item_number) }}">
+          <td data-value="{{ item.item_number }}"><a class="item-link" href="{{ request.url_for('item_detail', item_number=item.item_number) }}">{{ item.item_number }}</a></td>
+          <td data-value="{{ item.item_name }}">{{ item.item_name }}</td>
+          <td data-value="{{ item.period_quantity }}" class="number demand-start">{{ item.period_quantity | qty }}</td>
+          <td data-value="{{ item.period_invoice_count }}" class="number">{{ item.period_invoice_count | integer }}</td>
+          <td data-value="{{ item.period_value }}" class="number">{{ item.period_value | qty }}</td>
+          <td data-value="{{ item.all_time_quantity }}" class="number supply-start strong-number">{{ item.all_time_quantity | qty }}</td>
+          <td data-value="{{ item.all_time_invoice_count }}" class="number">{{ item.all_time_invoice_count | integer }}</td>
+          <td data-value="{{ item.last_net_unit_price }}" class="number price-start last-price-cell">
+            <strong>{% if item.last_currency_code %}{{ item.last_currency_code }} {% endif %}{{ item.last_net_unit_price | qty }}</strong>
+            <small>Invoice {{ item.last_invoice_no or "—" }} · Qty {{ item.last_purchase_quantity | qty }}</small>
+            {% if item.last_discount_percent != 0 %}<small>MYOB unit {{ item.last_unit_price | qty }} less {{ item.last_discount_percent | qty }}%</small>{% endif %}
+          </td>
+          <td data-value="{{ item.first_purchase_date or '' }}">{{ item.first_purchase_date or "—" }}</td>
+          <td data-value="{{ item.last_purchase_date or '' }}">{{ item.last_purchase_date or "—" }}</td>
+        </tr>
+        {% else %}<tr><td colspan="10" class="empty-state">No invoiced item history was found.</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="table-panel customer-invoices-panel">
+  <div class="table-toolbar">
+    <div><strong>Recent invoices</strong><span>Double-click a row to inspect invoice lines.</span></div>
+  </div>
+  <div class="table-scroll customer-invoices-scroll">
+    <table class="data-table customer-invoices-table" data-sortable-table>
+      <thead><tr>
+        <th data-sort="date">Date</th><th data-sort="text">Invoice</th>
+        <th data-sort="number" class="number">Lines</th>
+        <th data-sort="number" class="number">Quantity</th>
+        <th data-sort="number" class="number">Value</th>
+      </tr></thead>
+      <tbody>
+        {% for invoice in invoices %}
+        <tr tabindex="0" data-row-href="{{ request.url_for('customer_invoice', customer_id=summary.customer_account_id, sales_document_id=invoice.sales_document_id) }}">
+          <td data-value="{{ invoice.last_transaction_date }}">{{ invoice.last_transaction_date }}</td>
+          <td data-value="{{ invoice.invoice_no }}"><a class="item-link" href="{{ request.url_for('customer_invoice', customer_id=summary.customer_account_id, sales_document_id=invoice.sales_document_id) }}">{{ invoice.invoice_no }}</a></td>
+          <td data-value="{{ invoice.line_count }}" class="number">{{ invoice.line_count | integer }}</td>
+          <td data-value="{{ invoice.quantity }}" class="number">{{ invoice.quantity | qty }}</td>
+          <td data-value="{{ invoice.value }}" class="number">{{ invoice.value | qty }}</td>
+        </tr>
+        {% else %}<tr><td colspan="5" class="empty-state">No invoices were found.</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ invoice.invoice_no }} · {{ invoice.customer_name }} · Windsor Widget 2.0{% endblock %}
+{% block content %}
+<section class="page-heading customer-detail-heading">
+  <div>
+    <p class="eyebrow">Invoice detail</p>
+    <h1>{{ invoice.invoice_no }}</h1>
+    <p>{{ invoice.customer_name }} · {{ invoice.transaction_date }}</p>
+  </div>
+  <div class="heading-actions">
+    <a class="button" href="/customers/{{ invoice.customer_account_id }}">Back to Customer</a>
+  </div>
+</section>
+
+<section class="summary-strip">
+  <div><span>Customer</span><strong>{{ invoice.customer_name }}</strong></div>
+  <div><span>Invoice</span><strong>{{ invoice.invoice_no }}</strong></div>
+  <div><span>Date</span><strong>{{ invoice.transaction_date }}</strong></div>
+  <div><span>Total quantity</span><strong>{{ invoice.quantity | qty }}</strong></div>
+  <div><span>Total value</span><strong>{{ invoice.value | qty }}</strong></div>
+</section>
+
+<section class="table-panel">
+  <div class="table-toolbar"><div><strong>Invoice lines</strong><span>MYOB invoiced lines only.</span></div></div>
+  <div class="table-scroll invoice-lines-scroll">
+    <table class="data-table invoice-lines-table">
+      <thead><tr>
+        <th>Item</th><th>Description</th><th class="number">Quantity</th>
+        <th class="number">Unit Price</th><th class="number">Discount</th>
+        <th class="number">Net Unit Price</th><th class="number">Line Total</th>
+      </tr></thead>
+      <tbody>
+        {% for line in invoice.lines %}
+        <tr>
+          <td>{% if line.item_number %}<a class="item-link" href="/items/{{ line.item_number }}">{{ line.item_number }}</a>{% else %}—{% endif %}</td>
+          <td>{{ line.item_name }}{% if line.description and line.description != line.item_name %}<small class="compact muted">{{ line.description }}</small>{% endif %}</td>
+          <td class="number">{{ line.quantity | qty }}</td>
+          <td class="number">{% if line.currency_code %}{{ line.currency_code }} {% endif %}{{ line.unit_price | qty }}</td>
+          <td class="number">{{ line.discount_percent | qty }}%</td>
+          <td class="number strong-number">{% if line.currency_code %}{{ line.currency_code }} {% endif %}{{ line.net_unit_price | qty }}</td>
+          <td class="number">{{ line.line_total | qty }}</td>
+        </tr>
+        {% else %}<tr><td colspan="7" class="empty-state">No active invoiced lines were found.</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
