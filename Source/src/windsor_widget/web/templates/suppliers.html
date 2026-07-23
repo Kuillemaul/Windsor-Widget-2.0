@@ -21,7 +21,7 @@
 
 <section class="table-panel supplier-register-panel">
   <div class="table-toolbar">
-    <div><strong>Supplier register</strong><span>Open a supplier for linked items, bill quantities, last costs and lead-time settings.</span></div>
+    <div><strong>Supplier register</strong><span>{% if query %}Search includes matching supplier cards without bill history.{% else %}Only suppliers with purchase-bill history are shown. Search finds every supplier card.{% endif %}</span></div>
     <div class="buyer-count"><strong>{{ rows | length }}</strong><span>suppliers</span></div>
   </div>
   <div class="table-scroll supplier-register-scroll">

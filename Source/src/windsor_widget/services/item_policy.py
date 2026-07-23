@@ -354,6 +354,72 @@ def list_item_policy_rows(
     return tuple(result)
 
 
+
+def set_item_policies(
+    session: Session,
+    *,
+    item_ids: tuple[uuid.UUID, ...],
+    policy: str,
+    actor_user_id: uuid.UUID,
+) -> int:
+    """Apply one audited purchasing policy to multiple selected items."""
+
+    normalized = policy.strip().casefold()
+    if normalized not in _ALLOWED_POLICIES:
+        raise ValueError(f"Unsupported replenishment policy: {policy!r}")
+
+    requested = tuple(dict.fromkeys(item_ids))
+    if not requested:
+        raise ValueError("Select at least one item.")
+
+    items: list[Item] = []
+    for chunk in _chunks(requested):
+        items.extend(
+            session.scalars(
+                select(Item)
+                .where(Item.item_id.in_(chunk))
+                .order_by(Item.item_number)
+            )
+        )
+
+    found_ids = {item.item_id for item in items}
+    missing = tuple(item_id for item_id in requested if item_id not in found_ids)
+    if missing:
+        raise LookupError(
+            "One or more selected items no longer exist: "
+            + ", ".join(str(item_id) for item_id in missing[:10])
+        )
+
+    reviewed_at = utc_now()
+    changed = 0
+    for item in items:
+        old_policy = item.replenishment_policy or "unknown"
+        if old_policy == normalized:
+            continue
+
+        item.replenishment_policy = normalized
+        item.policy_source = "user"
+        item.policy_reviewed_at = reviewed_at
+        item.policy_reviewed_by_user_id = actor_user_id
+        session.add(
+            AuditEvent(
+                actor_user_id=actor_user_id,
+                action="item.policy.updated",
+                entity_type="item",
+                entity_id=str(item.item_id),
+                source="web",
+                summary=(
+                    f"{item.item_number} purchasing policy changed from "
+                    f"{old_policy} to {normalized} by bulk action."
+                ),
+            )
+        )
+        changed += 1
+
+    session.flush()
+    return changed
+
+
 def set_item_policy(
     session: Session,
     *,

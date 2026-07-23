@@ -12,7 +12,11 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Query, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
-from windsor_widget.services.item_policy import list_item_policy_rows, set_item_policy
+from windsor_widget.services.item_policy import (
+    list_item_policy_rows,
+    set_item_policies,
+    set_item_policy,
+)
 from windsor_widget.services.item_insights import (
     build_monthly_sales_chart,
     get_item_customer_sales,
@@ -48,6 +52,7 @@ def build_items_router(
         request: Request,
         q: str = Query(default=""),
         tag: str = Query(default=""),
+        updated: int = Query(default=0, ge=0),
         session: Session = Depends(session_dependency),
     ):
         principal = require_principal(request, session)
@@ -61,6 +66,7 @@ def build_items_router(
                 rows=rows,
                 query=q,
                 selected_tag=tag,
+                bulk_updated=updated,
                 active_page="items",
             ),
         )
@@ -147,6 +153,51 @@ def build_items_router(
                 active_page="items",
             ),
         )
+
+    @router.post("/items/policy/bulk")
+    def change_item_policies(
+        request: Request,
+        item_ids: list[str] = Form(default=[]),
+        policy: str = Form(...),
+        csrf_token: str = Form(...),
+        q: str = Form(default=""),
+        tag: str = Form(default=""),
+        session: Session = Depends(session_dependency),
+    ):
+        principal = require_principal(request, session)
+        validate_csrf(request, csrf_token)
+        if not bool(getattr(principal, "can_change_operations", False)):
+            raise HTTPException(
+                status_code=403,
+                detail="This account cannot change item policies.",
+            )
+
+        try:
+            resolved_ids = tuple(uuid.UUID(value) for value in item_ids)
+            changed = set_item_policies(
+                session,
+                item_ids=resolved_ids,
+                policy=policy,
+                actor_user_id=uuid.UUID(str(principal.user_id)),
+            )
+            session.commit()
+        except (ValueError, LookupError) as exc:
+            session.rollback()
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+        query = urlencode(
+            {
+                key: value
+                for key, value in {
+                    "q": q,
+                    "tag": tag,
+                    "updated": str(changed),
+                }.items()
+                if value
+            }
+        )
+        destination = f"/items?{query}" if query else "/items"
+        return RedirectResponse(url=destination, status_code=303)
 
     @router.post("/items/{item_id}/policy")
     def change_item_policy(

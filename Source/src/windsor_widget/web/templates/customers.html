@@ -30,7 +30,7 @@
 
 <section class="table-panel">
   <div class="table-toolbar">
-    <div><strong>Customer register</strong><span>Double-click a row to open Customer Summary.</span></div>
+    <div><strong>Customer register</strong><span>{% if query %}Search includes matching customer cards without invoice history.{% else %}Only customers with invoice history are shown. Search finds every customer card.{% endif %}</span></div>
     <div class="buyer-count"><strong>{{ rows | length }}</strong><span>customers</span></div>
   </div>
   <div class="table-scroll customer-register-scroll">

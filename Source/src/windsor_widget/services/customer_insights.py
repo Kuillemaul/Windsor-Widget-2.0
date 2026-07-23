@@ -148,6 +148,26 @@ def list_customers(
                 func.lower(func.coalesce(CustomerAccount.city, "")).like(pattern),
             )
         )
+    else:
+        # Keep the normal register operationally useful. Customer cards with no
+        # invoice history remain searchable and are shown as soon as a search is
+        # entered.
+        invoiced_customer_exists = (
+            select(SalesLine.sales_line_id)
+            .select_from(SalesLine)
+            .join(
+                SalesDocument,
+                SalesDocument.sales_document_id == SalesLine.sales_document_id,
+            )
+            .where(
+                SalesDocument.customer_account_id
+                == CustomerAccount.customer_account_id,
+                SalesLine.is_active == true(),
+                func.upper(func.coalesce(SalesLine.sale_status, "")) == "I",
+            )
+            .exists()
+        )
+        statement = statement.where(invoiced_customer_exists)
 
     state_key = state.strip()
     if state_key:

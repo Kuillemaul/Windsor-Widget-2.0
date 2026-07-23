@@ -359,6 +359,14 @@ def list_suppliers(
             )
         )
 
+    else:
+        # Default register view hides supplier cards without bill history.
+        # A search deliberately removes this restriction so dormant or
+        # never-used supplier cards can still be found.
+        statement = statement.where(
+            purchase_aggregate.c.document_count.is_not(None)
+        )
+
     rows: list[SupplierRegisterRow] = []
     for row in session.execute(statement):
         supplier = row[0]

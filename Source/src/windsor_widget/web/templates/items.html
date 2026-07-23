@@ -19,6 +19,31 @@
   <button class="button button-primary" type="submit">Apply</button>
 </form>
 
+{% if principal.can_change_operations %}
+<section class="bulk-policy-panel">
+  <form id="bulk-policy-form" method="post" action="/items/policy/bulk" class="bulk-policy-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="q" value="{{ query }}">
+    <input type="hidden" name="tag" value="{{ selected_tag }}">
+    <div>
+      <strong>Bulk policy change</strong>
+      <span data-policy-selection-count>0 items selected</span>
+      {% if bulk_updated %}<span class="bulk-policy-success">{{ bulk_updated }} item{% if bulk_updated != 1 %}s{% endif %} changed.</span>{% endif %}
+    </div>
+    <label>
+      <span>Set selected to</span>
+      <select name="policy" aria-label="Policy for selected items">
+        <option value="unknown">Unclassified</option>
+        <option value="stocked">Stocked</option>
+        <option value="make_to_order">Made to Order</option>
+        <option value="manual">Run Out / Manual</option>
+      </select>
+    </label>
+    <button class="button button-primary" type="submit" data-bulk-policy-submit disabled>Apply to selected</button>
+  </form>
+</section>
+{% endif %}
+
 <section class="policy-key">
   <span class="tag tag-cover">COVER</span><span>active explicit cover commitment</span>
   <span class="tag tag-mto">MTO</span><span>forecast disabled</span>
@@ -32,6 +57,7 @@
   <div class="table-scroll">
     <table class="data-table item-policy-table" data-sortable-table>
       <thead><tr>
+        <th class="selection-cell">{% if principal.can_change_operations %}<input type="checkbox" data-policy-select-all aria-label="Select every visible item">{% endif %}</th>
         <th data-sort="text">Item</th><th data-sort="text">Description</th><th>Tags</th>
         <th data-sort="number" class="number">SOH</th><th data-sort="number" class="number">On Order</th>
         <th data-sort="number" class="number cover-start">Customer Cover</th><th data-sort="number" class="number">Pool</th>
@@ -40,6 +66,18 @@
       <tbody>
       {% for row in rows %}
       <tr>
+        <td class="selection-cell">
+          {% if principal.can_change_operations %}
+          <input
+            type="checkbox"
+            name="item_ids"
+            value="{{ row.item_id }}"
+            form="bulk-policy-form"
+            data-policy-select
+            aria-label="Select {{ row.item_number }}"
+          >
+          {% endif %}
+        </td>
         <td data-value="{{ row.item_number }}"><a class="item-link" href="{{ request.url_for('item_detail', item_number=row.item_number) }}">{{ row.item_number }}</a></td>
         <td data-value="{{ row.item_name }}" class="description-cell">{{ row.item_name }}</td>
         <td><div class="tag-stack">{% for item_tag in row.tags %}<span class="tag tag-{{ item_tag|lower|replace(' ', '') }}">{{ item_tag }}</span>{% else %}<span class="muted">—</span>{% endfor %}</div></td>
@@ -65,7 +103,7 @@
           {% else %}<span class="muted">{{ row.policy_label }}</span>{% endif %}
         </td>
       </tr>
-      {% else %}<tr><td colspan="10" class="empty-state">No matching items were returned.</td></tr>{% endfor %}
+      {% else %}<tr><td colspan="11" class="empty-state">No matching items were returned.</td></tr>{% endfor %}
       </tbody>
     </table>
   </div>
