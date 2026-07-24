@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Manufacture Orders · Windsor Widget{% endblock %}
+{% block content %}
+<section class="page-heading order-page-heading">
+  <div>
+    <p class="eyebrow">Stage 1</p>
+    <h1>Manufacture Orders</h1>
+    <p>Tell suppliers what to manufacture or hold. Shipping decisions remain separate.</p>
+  </div>
+  {% if principal.can_change_operations %}
+  <a class="button button-primary" href="/manufacture-orders/new">New manufacture order</a>
+  {% endif %}
+</section>
+
+{% if created %}<div class="notice notice-success">Manufacture order created.</div>{% endif %}
+
+<section class="workflow-strip" aria-label="Ordering workflow">
+  <a class="workflow-step active" href="/manufacture-orders"><strong>1</strong><span>Manufacture</span></a>
+  <a class="workflow-step" href="/bring-in"><strong>2</strong><span>Bring In</span></a>
+  <span class="workflow-step future"><strong>3</strong><span>Shipment</span></span>
+</section>
+
+<form class="filter-panel order-filter-panel" method="get" action="/manufacture-orders">
+  <label><span>Search</span><input type="search" name="q" value="{{ query }}" placeholder="Order number or supplier"></label>
+  <label><span>Supplier</span>
+    <select name="supplier_id">
+      <option value="">All suppliers</option>
+      {% for supplier in suppliers %}<option value="{{ supplier.value }}" {% if selected_supplier == supplier.value %}selected{% endif %}>{{ supplier.label }}</option>{% endfor %}
+    </select>
+  </label>
+  <label><span>Status</span>
+    <select name="status">
+      {% for value, label in [('open','Open'),('draft','Draft'),('sent','Sent to supplier'),('in_production','In production'),('ready','Ready'),('closed','Closed'),('cancelled','Cancelled'),('all','All')] %}
+      <option value="{{ value }}" {% if selected_status == value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <button class="button button-primary" type="submit">Apply</button>
+</form>
+
+<section class="table-panel">
+  <div class="table-toolbar">
+    <div><strong>Manufacture-order register</strong><span>Open quantities are available for later Bring In allocation.</span></div>
+    <div class="buyer-count"><strong>{{ rows | length }}</strong><span>orders</span></div>
+  </div>
+  <div class="table-scroll">
+    <table class="data-table order-register-table">
+      <thead><tr><th>Order</th><th>Supplier</th><th>Ordered</th><th>Expected ready</th><th>Status</th><th class="numeric">Lines</th><th class="numeric">Ordered qty</th><th class="numeric">Remaining</th><th class="numeric">Bring In</th></tr></thead>
+      <tbody>
+        {% for row in rows %}
+        <tr data-href="{{ request.url_for('manufacture_order_detail', order_id=row.order_id) }}">
+          <td><a class="item-link" href="{{ request.url_for('manufacture_order_detail', order_id=row.order_id) }}">{{ row.order_number }}</a></td>
+          <td>{{ row.supplier_name }}</td>
+          <td>{{ row.order_date }}</td>
+          <td>{{ row.expected_ready_date or '—' }}</td>
+          <td><span class="order-status status-{{ row.status }}">{{ row.status_label }}</span></td>
+          <td class="numeric">{{ row.line_count }}</td>
+          <td class="numeric">{{ row.ordered_quantity | qty }}</td>
+          <td class="numeric">{{ row.remaining_quantity | qty }}</td>
+          <td class="numeric">{{ row.active_bring_in_quantity | qty }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="9" class="empty-state">No manufacture orders match these filters.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

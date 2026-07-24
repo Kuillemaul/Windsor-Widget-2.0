@@ -10,11 +10,13 @@
   <link rel="stylesheet" href="{{ url_for('static', path='css/item-detail.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='css/customer.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', path='css/supplier.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/manufacture.css') }}">
   <script src="{{ url_for('static', path='js/theme.js') }}" defer></script>
   <script src="{{ url_for('static', path='js/table.js') }}" defer></script>
   <script src="{{ url_for('static', path='js/customer.js') }}" defer></script>
   <script src="{{ url_for('static', path='js/price-files.js') }}" defer></script>
   <script src="{{ url_for('static', path='js/items.js') }}" defer></script>
+  <script src="{{ url_for('static', path='js/manufacture.js') }}" defer></script>
 </head>
 <body>
   <header class="app-header">
@@ -28,6 +30,8 @@
     <nav class="primary-nav" aria-label="Primary navigation">
       <a href="/dashboard" class="{% if active_page == 'dashboard' %}active{% endif %}">Dashboard</a>
       <a href="/order-analysis" class="{% if active_page == 'order-analysis' %}active{% endif %}">Order Analysis</a>
+      <a href="/manufacture-orders" class="{% if active_page == 'manufacture-orders' %}active{% endif %}">Manufacture</a>
+      <a href="/bring-in" class="{% if active_page == 'bring-in' %}active{% endif %}">Bring In</a>
       <a href="/items" class="{% if active_page == 'items' %}active{% endif %}">Items</a>
       <a href="/customers" class="{% if active_page == 'customers' %}active{% endif %}">Customers</a>
       <a href="/suppliers" class="{% if active_page == 'suppliers' %}active{% endif %}">Suppliers</a>

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}New Manufacture Order · Windsor Widget{% endblock %}
+{% block content %}
+<section class="page-heading">
+  <div>
+    <p class="eyebrow">Stage 1</p>
+    <h1>New manufacture order</h1>
+    <p>Create the supplier order header first, then add its item lines.</p>
+  </div>
+  <a class="button button-quiet" href="/manufacture-orders">Back to orders</a>
+</section>
+
+<section class="form-card order-form-card">
+  <form method="post" action="/manufacture-orders/new" class="form-grid two-column-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label class="field-wide"><span>Supplier</span>
+      <select name="supplier_id" required autofocus>
+        <option value="">Select supplier</option>
+        {% for supplier in suppliers %}<option value="{{ supplier.value }}">{{ supplier.label }}</option>{% endfor %}
+      </select>
+    </label>
+    <label><span>Manufacture order number</span><input name="order_number" maxlength="100" required placeholder="e.g. YU-2026-041"></label>
+    <label><span>Order date</span><input type="date" name="order_date" value="{{ today }}" required></label>
+    <label><span>Expected ready date</span><input type="date" name="expected_ready_date"><small>Leave blank to use the supplier manufacturing lead time.</small></label>
+    <label><span>Supplier reference</span><input name="supplier_reference" maxlength="150"></label>
+    <label class="field-wide"><span>Notes</span><textarea name="notes" rows="4" placeholder="Purpose, customer context or supplier instructions"></textarea></label>
+    <div class="form-actions field-wide">
+      <a class="button button-quiet" href="/manufacture-orders">Cancel</a>
+      <button class="button button-primary" type="submit">Create draft order</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

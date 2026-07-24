@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% block title %}{{ order.order_number }} · Manufacture Order{% endblock %}
+{% block content %}
+<section class="page-heading order-detail-heading">
+  <div>
+    <p class="eyebrow">Manufacture order · {{ order.supplier_name }}</p>
+    <h1>{{ order.order_number }}</h1>
+    <p>Ordered {{ order.order_date }} · Expected ready {{ order.expected_ready_date or 'not set' }}</p>
+  </div>
+  <div class="heading-actions">
+    <span class="order-status status-{{ order.status }} order-status-large">{{ order.status_label }}</span>
+    <a class="button button-quiet" href="/manufacture-orders">Back to orders</a>
+  </div>
+</section>
+
+{% if created %}<div class="notice notice-success">Manufacture order created. Add the item lines below.</div>{% endif %}
+{% if updated %}<div class="notice notice-success">Changes saved.</div>{% endif %}
+
+<section class="workflow-strip" aria-label="Ordering workflow">
+  <a class="workflow-step active" href="/manufacture-orders"><strong>1</strong><span>Manufacture</span></a>
+  <a class="workflow-step" href="/bring-in"><strong>2</strong><span>Bring In</span></a>
+  <span class="workflow-step future"><strong>3</strong><span>Shipment</span></span>
+</section>
+
+<section class="metric-grid order-metric-grid">
+  <article><span>Total ordered</span><strong>{{ order.total_ordered | qty }}</strong></article>
+  <article><span>Open quantity</span><strong>{{ order.total_remaining | qty }}</strong></article>
+  <article><span>On Bring In list</span><strong>{{ order.total_bring_in | qty }}</strong></article>
+  <article><span>Lines</span><strong>{{ order.lines | length }}</strong></article>
+</section>
+
+<section class="order-layout">
+  <article class="form-card order-summary-card">
+    <div class="section-heading"><div><h2>Order details</h2><p>Lead-time dates are planning assumptions unless the supplier confirms otherwise.</p></div></div>
+    {% if principal.can_change_operations %}
+    <form method="post" action="/manufacture-orders/{{ order.order_id }}/update" class="form-grid two-column-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="version" value="{{ order.version }}">
+      <label><span>Expected ready date</span><input type="date" name="expected_ready_date" value="{{ order.expected_ready_date or '' }}"></label>
+      <label><span>Supplier reference</span><input name="supplier_reference" maxlength="150" value="{{ order.supplier_reference or '' }}"></label>
+      <label class="field-wide"><span>Notes</span><textarea name="notes" rows="3">{{ order.notes or '' }}</textarea></label>
+      <div class="form-actions field-wide"><button class="button button-primary" type="submit">Save order details</button></div>
+    </form>
+    {% else %}
+    <dl class="detail-list"><dt>Supplier reference</dt><dd>{{ order.supplier_reference or '—' }}</dd><dt>Notes</dt><dd>{{ order.notes or '—' }}</dd></dl>
+    {% endif %}
+    <div class="audit-footnote">Created by {{ order.created_by }} · Last changed by {{ order.updated_by }} · Version {{ order.version }}{% if order.source_purchase_number %} · Linked MYOB PO {{ order.source_purchase_number }}{% endif %}</div>
+  </article>
+
+  <article class="form-card order-status-card">
+    <div class="section-heading"><div><h2>Workflow status</h2><p>Sending the order moves it into production. Ready can be assumed from line dates.</p></div></div>
+    {% if principal.can_change_operations %}
+    <form method="post" action="/manufacture-orders/{{ order.order_id }}/status" class="status-form">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="version" value="{{ order.version }}">
+      <select name="status">
+        {% for value, label in [('draft','Draft'),('sent','Sent to supplier'),('in_production','In production'),('ready','Ready'),('closed','Closed'),('cancelled','Cancelled')] %}<option value="{{ value }}" {% if order.status == value %}selected{% endif %}>{{ label }}</option>{% endfor %}
+      </select>
+      <button class="button button-primary" type="submit">Change status</button>
+    </form>
+    {% endif %}
+  </article>
+</section>
+
+{% if principal.can_change_operations and order.status not in ['closed', 'cancelled'] %}
+<section class="form-card add-line-card">
+  <div class="section-heading"><div><h2>Add item line</h2><p>The expected-ready date uses the item/supplier manufacturing override first, then the supplier default.</p></div></div>
+  <form method="post" action="/manufacture-orders/{{ order.order_id }}/lines" class="form-grid line-entry-form" data-manufacture-line-form>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <input type="hidden" name="version" value="{{ order.version }}">
+    <label class="field-wide"><span>Item</span><select name="item_id" required><option value="">Select item</option>{% for item in items %}<option value="{{ item.value }}">{{ item.label }}</option>{% endfor %}</select></label>
+    <label><span>Ordered quantity</span><input type="number" step="0.000001" min="0.000001" name="ordered_quantity" required></label>
+    <label><span>Expected ready override</span><input type="date" name="expected_ready_date"><small>Blank uses configured manufacturing lead time.</small></label>
+    <label><span>Unit cost</span><input type="number" step="0.000001" min="0" name="unit_cost"></label>
+    <label><span>Currency</span><input name="currency_code" maxlength="10" placeholder="USD"></label>
+    <label><span>Purpose</span><select name="allocation_type" data-allocation-type><option value="general_stock">General stock</option><option value="customer_cover">Customer cover</option><option value="mto">Made to Order</option></select></label>
+    <label><span>Allocated quantity</span><input type="number" step="0.000001" min="0.000001" name="allocation_quantity"><small>Blank allocates the full line.</small></label>
+    <label class="field-wide" data-customer-field><span>Customer</span><select name="customer_account_id"><option value="">No customer</option>{% for customer in customers %}<option value="{{ customer.value }}">{{ customer.label }}</option>{% endfor %}</select></label>
+    <label><span>Customer PO / reference</span><input name="customer_reference" maxlength="250"></label>
+    <label><span>Allocation note</span><input name="allocation_notes" maxlength="500"></label>
+    <label class="check-field"><input type="checkbox" name="add_to_bring_in" value="true" data-bring-in-toggle><span>Add this item to the Bring In list now</span></label>
+    <label data-bring-in-quantity><span>Bring In quantity</span><input type="number" step="0.000001" min="0.000001" name="bring_in_quantity"><small>Blank uses the full ordered quantity.</small></label>
+    <div class="form-actions field-wide"><button class="button button-primary" type="submit">Add line</button></div>
+  </form>
+</section>
+{% endif %}
+
+<section class="order-lines-section">
+  <div class="section-heading"><div><h2>Manufacture lines</h2><p>Bring In requests are item-level; a later shipment can draw down older supplier orders first.</p></div></div>
+  {% for line in order.lines %}
+  <article class="manufacture-line-card" id="line-{{ line.line_id }}">
+    <header class="manufacture-line-header">
+      <div><span class="line-sequence">{{ line.line_sequence }}</span><h3><a class="item-link" href="{{ request.url_for('item_detail', item_number=line.item_number) }}">{{ line.item_number }}</a></h3><p>{{ line.item_name }}</p></div>
+      <div class="line-header-numbers"><span class="readiness-chip readiness-{{ line.readiness_tone }}">{{ line.readiness_label }}</span><strong>{{ line.remaining_quantity | qty }} open</strong><small>{{ line.ordered_quantity | qty }} ordered</small></div>
+    </header>
+
+    <div class="line-facts">
+      <div><span>Expected ready</span><strong>{{ line.expected_ready_date or 'Not set' }}</strong></div>
+      <div><span>Cancelled</span><strong>{{ line.cancelled_quantity | qty }}</strong></div>
+      <div><span>Allocated purpose</span><strong>{{ line.allocation_total | qty }}</strong></div>
+      <div><span>Unallocated</span><strong>{{ line.unallocated_quantity | qty }}</strong></div>
+      <div><span>Bring In requests</span><strong>{{ line.active_bring_in_quantity | qty }}</strong></div>
+    </div>
+
+    {% if line.supplier_status_note %}<div class="supplier-note"><strong>Supplier note:</strong> {{ line.supplier_status_note }}</div>{% endif %}
+
+    <div class="line-sections">
+      <section>
+        <h4>Customer / purpose allocations</h4>
+        <div class="allocation-list">
+          {% for allocation in line.allocations %}
+          <div class="allocation-row">
+            <div><span class="allocation-chip allocation-{{ allocation.allocation_type }}">{{ allocation.allocation_label }}</span><strong>{{ allocation.quantity | qty }}</strong>{% if allocation.customer_name %}<span>{{ allocation.customer_name }}</span>{% endif %}{% if allocation.customer_reference %}<small>{{ allocation.customer_reference }}</small>{% endif %}</div>
+            {% if principal.can_change_operations %}
+            <form method="post" action="/manufacture-orders/{{ order.order_id }}/lines/{{ line.line_id }}/allocations/{{ allocation.allocation_id }}/delete">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="version" value="{{ order.version }}"><button class="button button-small button-quiet" type="submit">Remove</button>
+            </form>
+            {% endif %}
+          </div>
+          {% else %}<p class="empty-inline">No explicit allocation.</p>{% endfor %}
+        </div>
+        {% if principal.can_change_operations and line.unallocated_quantity > 0 %}
+        <details class="inline-editor"><summary>Add allocation</summary>
+          <form method="post" action="/manufacture-orders/{{ order.order_id }}/lines/{{ line.line_id }}/allocations" class="form-grid compact-form" data-allocation-form>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="version" value="{{ order.version }}">
+            <label><span>Purpose</span><select name="allocation_type" data-allocation-type><option value="general_stock">General stock</option><option value="customer_cover">Customer cover</option><option value="mto">Made to Order</option></select></label>
+            <label><span>Quantity</span><input type="number" step="0.000001" min="0.000001" max="{{ line.unallocated_quantity }}" name="quantity" required></label>
+            <label class="field-wide" data-customer-field><span>Customer</span><select name="customer_account_id"><option value="">No customer</option>{% for customer in customers %}<option value="{{ customer.value }}">{{ customer.label }}</option>{% endfor %}</select></label>
+            <label><span>Customer reference</span><input name="customer_reference" maxlength="250"></label>
+            <label><span>Notes</span><input name="notes" maxlength="500"></label>
+            <button class="button button-small button-primary" type="submit">Add allocation</button>
+          </form>
+        </details>
+        {% endif %}
+      </section>
+
+      {% if principal.can_change_operations %}
+      <section>
+        <h4>Line status and quantity</h4>
+        <details class="inline-editor"><summary>Edit line</summary>
+          <form method="post" action="/manufacture-orders/{{ order.order_id }}/lines/{{ line.line_id }}/update" class="form-grid compact-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="version" value="{{ order.version }}">
+            <label><span>Ordered</span><input type="number" step="0.000001" min="0.000001" name="ordered_quantity" value="{{ line.ordered_quantity }}" required></label>
+            <label><span>Cancelled</span><input type="number" step="0.000001" min="0" name="cancelled_quantity" value="{{ line.cancelled_quantity }}" required></label>
+            <label><span>Expected ready</span><input type="date" name="expected_ready_date" value="{{ line.expected_ready_date or '' }}"></label>
+            <label><span>Supplier readiness</span><select name="readiness_override"><option value="auto" {% if line.readiness_code in ['in_production','assumed_ready'] %}selected{% endif %}>Automatic from date</option><option value="delayed" {% if line.readiness_code == 'delayed' %}selected{% endif %}>Supplier reported delayed</option><option value="partially_ready" {% if line.readiness_code == 'partially_ready' %}selected{% endif %}>Partially ready</option><option value="confirmed_ready" {% if line.readiness_code == 'confirmed_ready' %}selected{% endif %}>Supplier confirmed ready</option><option value="cancelled" {% if line.readiness_code == 'cancelled' %}selected{% endif %}>Cancelled</option></select></label>
+            <label><span>Ready quantity</span><input type="number" step="0.000001" min="0" name="supplier_ready_quantity" value="{{ line.supplier_ready_quantity if line.supplier_ready_quantity is not none else '' }}"></label>
+            <label class="field-wide"><span>Supplier status note</span><textarea name="supplier_status_note" rows="2">{{ line.supplier_status_note or '' }}</textarea></label>
+            <button class="button button-small button-primary" type="submit">Save line</button>
+          </form>
+        </details>
+
+        <details class="inline-editor"><summary>Add to Bring In list</summary>
+          <form method="post" action="/manufacture-orders/{{ order.order_id }}/lines/{{ line.line_id }}/bring-in" class="inline-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}"><input type="hidden" name="version" value="{{ order.version }}">
+            <label><span>Quantity required</span><input type="number" step="0.000001" min="0.000001" name="requested_quantity" value="{{ line.remaining_quantity }}" required></label>
+            <button class="button button-small button-primary" type="submit">Add requirement</button>
+          </form>
+        </details>
+      </section>
+      {% endif %}
+    </div>
+  </article>
+  {% else %}
+  <div class="empty-state empty-card">No item lines have been added to this manufacture order.</div>
+  {% endfor %}
+</section>
+{% endblock %}

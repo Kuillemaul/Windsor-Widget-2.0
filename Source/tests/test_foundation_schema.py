@@ -36,6 +36,10 @@ EXPECTED_TABLES = {
     "transaction_line_observations",
     "inventory_snapshots",
     "inventory_snapshot_lines",
+    "manufacture_orders",
+    "manufacture_order_lines",
+    "manufacture_line_allocations",
+    "bring_in_requests",
 }
 
 

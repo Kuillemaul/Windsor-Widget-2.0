@@ -9,6 +9,7 @@ import pytest
 from windsor_widget.config import RuntimeSettings, UnsafeConfigurationError
 from windsor_widget.db.base import Base
 from windsor_widget.db.bootstrap import (
+    ALEMBIC_HEAD,
     APPROVED_DEVELOPMENT_DATABASE,
     CREATE_DATABASE_SQL,
     ensure_development_database,
@@ -141,7 +142,7 @@ def test_verification_checks_name_revision_and_every_expected_table() -> None:
     connection = FakeConnection(
         [
             FakeResult(scalar=APPROVED_DEVELOPMENT_DATABASE),
-            FakeResult(scalar="0006_web_accounts"),
+            FakeResult(scalar=ALEMBIC_HEAD),
             FakeResult(rows=[(name,) for name in tables]),
         ]
     )
@@ -152,6 +153,6 @@ def test_verification_checks_name_revision_and_every_expected_table() -> None:
     )
 
     assert report.database == APPROVED_DEVELOPMENT_DATABASE
-    assert report.alembic_revision == "0006_web_accounts"
+    assert report.alembic_revision == ALEMBIC_HEAD
     assert set(report.tables) == set(tables)
     assert engine.disposed is True

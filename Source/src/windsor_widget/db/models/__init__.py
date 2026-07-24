@@ -31,6 +31,13 @@ from windsor_widget.db.models.inventory import (
     InventorySnapshotLine,
 )
 
+from windsor_widget.db.models.operations import (
+    BringInRequest,
+    ManufactureLineAllocation,
+    ManufactureOrder,
+    ManufactureOrderLine,
+)
+
 __all__ = [
     "AppUser",
     "AuditEvent",
@@ -55,4 +62,8 @@ __all__ = [
     "TransactionLineObservation",
     "InventorySnapshot",
     "InventorySnapshotLine",
+    "ManufactureOrder",
+    "ManufactureOrderLine",
+    "ManufactureLineAllocation",
+    "BringInRequest",
 ]

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Bring In · Windsor Widget{% endblock %}
+{% block content %}
+<section class="page-heading order-page-heading">
+  <div>
+    <p class="eyebrow">Stage 2</p>
+    <h1>Bring In List</h1>
+    <p>Items shortlisted for a future shipment. This list does not reserve a particular manufacture order yet.</p>
+  </div>
+</section>
+
+<section class="workflow-strip" aria-label="Ordering workflow">
+  <a class="workflow-step" href="/manufacture-orders"><strong>1</strong><span>Manufacture</span></a>
+  <a class="workflow-step active" href="/bring-in"><strong>2</strong><span>Bring In</span></a>
+  <span class="workflow-step future"><strong>3</strong><span>Shipment</span></span>
+</section>
+
+<div class="notice notice-info"><strong>Suggestion engine comes next.</strong> This first stage records manual Bring In requirements and keeps them item-level so Stage 2 can draw down the oldest suitable supplier order first.</div>
+
+<form class="filter-panel order-filter-panel" method="get" action="/bring-in">
+  <label><span>Search</span><input type="search" name="q" value="{{ query }}" placeholder="Item or supplier"></label>
+  <label><span>Supplier</span>
+    <select name="supplier_id">
+      <option value="">All suppliers</option>
+      {% for supplier in suppliers %}<option value="{{ supplier.value }}" {% if selected_supplier == supplier.value %}selected{% endif %}>{{ supplier.label }}</option>{% endfor %}
+    </select>
+  </label>
+  <label><span>Status</span>
+    <select name="status">
+      {% for value, label in [('active','Active'),('allocated','Allocated'),('completed','Completed'),('cancelled','Cancelled'),('all','All')] %}<option value="{{ value }}" {% if selected_status == value %}selected{% endif %}>{{ label }}</option>{% endfor %}
+    </select>
+  </label>
+  <button class="button button-primary" type="submit">Apply</button>
+</form>
+
+<section class="table-panel">
+  <div class="table-toolbar"><div><strong>Bring In requirements</strong><span>Available quantity is across all open manufacture orders for that supplier and item.</span></div><div class="buyer-count"><strong>{{ rows | length }}</strong><span>requests</span></div></div>
+  <div class="table-scroll">
+    <table class="data-table bring-in-table">
+      <thead><tr><th>Priority</th><th>Item</th><th>Supplier</th><th class="numeric">Requested</th><th class="numeric">Open at supplier</th><th>Source</th><th>Reason</th><th>Created</th><th></th></tr></thead>
+      <tbody>
+        {% for row in rows %}
+        <tr>
+          <td><span class="priority-chip priority-{{ row.priority }}">{{ row.priority | upper }}</span></td>
+          <td><a class="item-link" href="{{ request.url_for('item_detail', item_number=row.item_number) }}">{{ row.item_number }}</a><small class="compact">{{ row.item_name }}</small></td>
+          <td>{{ row.supplier_name }}</td>
+          <td class="numeric">{{ row.requested_quantity | qty }}</td>
+          <td class="numeric {% if row.available_open_quantity < row.requested_quantity %}quantity-warning{% endif %}">{{ row.available_open_quantity | qty }}</td>
+          <td>{% if row.source_order_id %}<a class="item-link" href="{{ request.url_for('manufacture_order_detail', order_id=row.source_order_id) }}">{{ row.source_order_number }}</a>{% else %}Manual / suggestion{% endif %}</td>
+          <td>{{ row.reason or '—' }}</td>
+          <td>{{ row.created_at.strftime('%Y-%m-%d') }}<small class="compact">{{ row.created_by }}</small></td>
+          <td>{% if principal.can_change_operations and row.status == 'active' %}<form method="post" action="/bring-in/{{ row.request_id }}/cancel"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="button button-small button-quiet" type="submit">Remove</button></form>{% endif %}</td>
+        </tr>
+        {% else %}<tr><td colspan="9" class="empty-state">No Bring In requests match these filters.</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
