@@ -295,6 +295,10 @@ class ItemSupplier(Base):
             "buffer_days_override IS NULL OR buffer_days_override >= 0",
             name="buffer_days_nonnegative",
         ),
+        CheckConstraint(
+            "packing_source IN (\'unknown\', \'supplier_workbook\', \'user\')",
+            name="packing_source_valid",
+        ),
         UniqueConstraint("item_id", "supplier_id", name="item_supplier"),
         Index("ix_item_suppliers_preferred", "item_id", "is_preferred"),
     )
@@ -317,6 +321,23 @@ class ItemSupplier(Base):
     last_purchase_date: Mapped[date | None] = mapped_column(Date)
     last_purchase_price: Mapped[Decimal | None] = mapped_column(Numeric(18, 6))
     last_purchase_currency: Mapped[str | None] = mapped_column(String(10))
+    supplier_description_raw: Mapped[str | None] = mapped_column(UnicodeText)
+    supplier_size_raw: Mapped[str | None] = mapped_column(Unicode(250))
+    supplier_colour_raw: Mapped[str | None] = mapped_column(Unicode(250))
+    supplier_unit_type: Mapped[str | None] = mapped_column(Unicode(100))
+    packing_quantity_per_unit_raw: Mapped[str | None] = mapped_column(Unicode(100))
+    roll_spool_length_metres: Mapped[Decimal | None] = mapped_column(Numeric(18, 6))
+    packing_quantity_per_carton_raw: Mapped[str | None] = mapped_column(Unicode(100))
+    metres_per_carton: Mapped[Decimal | None] = mapped_column(Numeric(18, 6))
+    supplier_units_per_carton: Mapped[Decimal | None] = mapped_column(Numeric(18, 6))
+    supplier_label_description_raw: Mapped[str | None] = mapped_column(Unicode(500))
+    packing_source: Mapped[str] = mapped_column(
+        String(30), nullable=False, default="unknown"
+    )
+    packing_source_workbook: Mapped[str | None] = mapped_column(Unicode(1000))
+    packing_source_worksheet: Mapped[str | None] = mapped_column(Unicode(100))
+    packing_source_row: Mapped[int | None] = mapped_column(Integer)
+    packing_verified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=False))
     match_status: Mapped[str] = mapped_column(
         String(20), nullable=False, default="proposed"
     )

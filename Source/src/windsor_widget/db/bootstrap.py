@@ -23,7 +23,7 @@ from windsor_widget.db import models as _models  # noqa: F401
 from windsor_widget.db.base import Base
 
 APPROVED_DEVELOPMENT_DATABASE = "WindsorWidgetV2_DEV"
-ALEMBIC_HEAD = "0008_supplier_order_templates"
+ALEMBIC_HEAD = "0009_yuchang_packing_fields"
 CREATE_DATABASE_SQL = "CREATE DATABASE [WindsorWidgetV2_DEV]"
 
 
