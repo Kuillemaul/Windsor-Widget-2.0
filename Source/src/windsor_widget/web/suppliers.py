@@ -18,6 +18,8 @@ from windsor_widget.services.supplier_insights import (
     set_supplier_item_settings,
 )
 
+from windsor_widget.services.replenishment_behavior import get_supplier_receiving_behavior
+
 
 def _supplier_id(value: str) -> uuid.UUID:
     try:
@@ -95,6 +97,11 @@ def build_suppliers_router(
                 months=months,
                 as_of_date=as_of_date,
             )
+            receiving_behavior = get_supplier_receiving_behavior(
+                session,
+                dashboard.supplier_id,
+                as_of_date=as_of_date,
+            )
         except LookupError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         except ValueError as exc:
@@ -107,6 +114,7 @@ def build_suppliers_router(
                 request,
                 principal=principal,
                 dashboard=dashboard,
+                receiving_behavior=receiving_behavior,
                 months=months,
                 as_of=as_of_date.isoformat(),
                 edit_mode=edit_mode,

@@ -134,6 +134,47 @@
   </section>
 </div>
 
+
+<section class="panel behaviour-panel" id="observed-purchasing-behaviour">
+  <div class="panel-heading behaviour-heading">
+    <div>
+      <p class="eyebrow">Observed behaviour</p>
+      <h2>Purchasing, sales and coverage pattern</h2>
+      <p>Read-only historical analysis. It is not yet driving the Suggested Order above.</p>
+    </div>
+    <span class="behaviour-confidence behaviour-confidence-{{ behaviour.confidence|lower|replace(' ', '-') }}">{{ behaviour.confidence }} confidence</span>
+  </div>
+
+  <div class="behaviour-metric-grid">
+    <div><span>Purchase supplier</span><strong>{{ behaviour.purchase_supplier_name or "No bill supplier" }}</strong><small>{{ behaviour.supplier_source }}</small></div>
+    <div><span>Demand pattern</span><strong>{{ behaviour.demand_pattern }}</strong><small>{{ behaviour.active_sales_months }}/{{ behaviour.demand_months }} active months</small></div>
+    <div><span>Monthly invoiced demand</span><strong>{{ behaviour.average_monthly_sales | qty }}</strong><small>{{ behaviour.demand_start }} – {{ behaviour.demand_end }}</small></div>
+    <div><span>Typical sales event</span><strong>{{ behaviour.typical_sales_event_quantity | qty }}</strong><small>{{ behaviour.sales_event_count }} events{% if behaviour.sales_interval_days %} · {{ behaviour.sales_interval_days }} day median interval{% endif %}</small></div>
+
+    <div><span>Typical item receipt</span><strong>{{ behaviour.typical_purchase_quantity | qty }}</strong><small>{{ behaviour.purchase_event_count }} receiving wave{% if behaviour.purchase_event_count != 1 %}s{% endif %}</small></div>
+    <div><span>Item receipt interval</span><strong>{% if behaviour.purchase_interval_days %}{{ behaviour.purchase_interval_days }} days{% else %}—{% endif %}</strong><small>{{ behaviour.purchase_consistency }}</small></div>
+    <div><span>Supplier receipt interval</span><strong>{% if behaviour.supplier_receipt_interval_days %}{{ behaviour.supplier_receipt_interval_days }} days{% else %}—{% endif %}</strong><small>{{ behaviour.supplier_wave_count }} waves · {{ behaviour.supplier_receipt_consistency }}</small></div>
+    <div><span>Historical batch coverage</span><strong>{% if behaviour.observed_batch_cover_months is not none %}{{ behaviour.observed_batch_cover_months | qty }} months{% else %}—{% endif %}</strong><small>Typical item receipt ÷ monthly sales</small></div>
+
+    <div><span>Observed coverage horizon</span><strong>{{ behaviour.observed_coverage_days }} days</strong><small>Greatest of lead time, supplier cadence or item cadence</small></div>
+    <div><span>Observed cycle demand</span><strong>{{ behaviour.observed_cycle_demand | qty }}</strong><small>{{ behaviour.lead_days }} day {{ behaviour.lead_source }}</small></div>
+    <div><span>Current projected pool</span><strong>{{ behaviour.projected_pool | qty }}</strong><small>SOH {{ behaviour.current_on_hand | qty }} + On Order {{ behaviour.current_on_order | qty }}</small></div>
+    <div class="{% if behaviour.behavioural_gap > 0 %}warning-metric{% endif %}"><span>Behavioural coverage gap</span><strong>{{ behaviour.behavioural_gap | qty }}</strong><small>Advisory requirement {{ behaviour.behavioural_requirement | qty }}</small></div>
+  </div>
+
+  <div class="behaviour-dates">
+    <span>First item receipt: <strong>{{ behaviour.first_purchase_date or "—" }}</strong></span>
+    <span>Last item receipt: <strong>{{ behaviour.last_purchase_date or "—" }}</strong></span>
+    <span>Last supplier wave: <strong>{{ behaviour.last_supplier_wave_date or "—" }}</strong></span>
+    <span>Next historical-cycle date: <strong>{{ behaviour.next_observed_cycle_date or "—" }}</strong></span>
+  </div>
+
+  <details class="behaviour-notes">
+    <summary>How this was calculated</summary>
+    {% for note in behaviour.notes %}<p>{{ note }}</p>{% endfor %}
+  </details>
+</section>
+
 <section class="panel sales-chart-panel">
   <div class="sales-chart-heading">
     <div>

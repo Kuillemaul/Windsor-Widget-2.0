@@ -98,6 +98,56 @@
   </section>
 </div>
 
+
+<section class="panel supplier-behaviour-panel" id="supplier-receiving-behaviour">
+  <div class="panel-heading behaviour-heading">
+    <div>
+      <p class="eyebrow">Observed receiving behaviour</p>
+      <h2>Historical supplier receiving cadence</h2>
+      <p>Nearby bill dates are grouped into one receiving wave. Bill dates are a proxy, not a confirmed warehouse receipt timestamp.</p>
+    </div>
+    <span class="behaviour-confidence behaviour-confidence-{{ receiving_behavior.confidence|lower|replace(' ', '-') }}">{{ receiving_behavior.confidence }} confidence</span>
+  </div>
+
+  <div class="behaviour-metric-grid supplier-behaviour-metrics">
+    <div><span>Receiving waves</span><strong>{{ receiving_behavior.wave_count | integer }}</strong><small>{{ receiving_behavior.first_wave_date or "—" }} – {{ receiving_behavior.latest_wave_date or "—" }}</small></div>
+    <div><span>Median interval</span><strong>{% if receiving_behavior.median_interval_days %}{{ receiving_behavior.median_interval_days }} days{% else %}—{% endif %}</strong><small>{{ receiving_behavior.consistency }}</small></div>
+    <div><span>Observed interval range</span><strong>{% if receiving_behavior.minimum_interval_days is not none %}{{ receiving_behavior.minimum_interval_days }}–{{ receiving_behavior.maximum_interval_days }} days{% else %}—{% endif %}</strong><small>Between receiving waves</small></div>
+    <div><span>Next historical-cycle date</span><strong>{{ receiving_behavior.next_observed_cycle_date or "—" }}</strong><small>Pattern indicator only; not an ETA</small></div>
+  </div>
+
+  {% if receiving_behavior.recent_waves %}
+  <div class="table-scroll supplier-wave-scroll">
+    <table class="data-table supplier-wave-table" data-sortable-table>
+      <thead><tr>
+        <th data-sort="date">Wave start</th>
+        <th data-sort="date">Wave end</th>
+        <th data-sort="number" class="number">Bills</th>
+        <th data-sort="number" class="number">Items</th>
+        <th data-sort="number" class="number">Lines</th>
+        <th data-sort="number" class="number demand-start">Quantity</th>
+        <th data-sort="number" class="number price-start">Value</th>
+      </tr></thead>
+      <tbody>
+      {% for wave in receiving_behavior.recent_waves %}
+        <tr>
+          <td data-value="{{ wave.start_date }}">{{ wave.start_date }}</td>
+          <td data-value="{{ wave.end_date }}">{{ wave.end_date }}</td>
+          <td data-value="{{ wave.document_count }}" class="number">{{ wave.document_count | integer }}</td>
+          <td data-value="{{ wave.item_count }}" class="number">{{ wave.item_count | integer }}</td>
+          <td data-value="{{ wave.line_count }}" class="number">{{ wave.line_count | integer }}</td>
+          <td data-value="{{ wave.total_quantity }}" class="number demand-start">{{ wave.total_quantity | qty }}</td>
+          <td data-value="{{ wave.total_value }}" class="number price-start">{{ wave.total_value | qty }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty-state">No genuine positive purchase-bill history was found for this supplier.</div>
+  {% endif %}
+</section>
+
 <section class="table-panel supplier-items-panel">
   <div class="table-toolbar">
     <div><strong>Supplier items</strong><span>Bill quantities, current inventory position, last billed costs and effective lead times.</span></div>

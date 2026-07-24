@@ -61,6 +61,11 @@ def test_item_detail_route_assembles_sales_chart_and_customer_list(monkeypatch):
     )
     monkeypatch.setattr(
         item_routes,
+        "get_item_replenishment_behavior",
+        lambda *args, **kwargs: SimpleNamespace(item_number="I1"),
+    )
+    monkeypatch.setattr(
+        item_routes,
         "get_item_monthly_sales",
         lambda *args, **kwargs: points,
     )
@@ -109,3 +114,23 @@ def test_item_detail_return_path_rejects_external_redirects():
     assert item_routes._safe_item_return("/items/I1?months=12") == "/items/I1?months=12"
     assert item_routes._safe_item_return("https://example.com") is None
     assert item_routes._safe_item_return("//example.com/items/I1") is None
+
+def test_item_detail_route_allows_item_numbers_with_slashes():
+    app = FastAPI()
+    app.include_router(
+        item_routes.build_items_router(
+            _session_dependency,
+            _Templates(),
+            _require_principal,
+            _template_context,
+            _validate_csrf,
+        )
+    )
+
+    path = app.url_path_for(
+        "item_detail",
+        item_number="TESTO/ITEM",
+    )
+
+    assert str(path) == "/items/TESTO/ITEM"
+

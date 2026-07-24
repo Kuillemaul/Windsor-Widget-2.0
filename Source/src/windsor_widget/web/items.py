@@ -22,6 +22,7 @@ from windsor_widget.services.item_insights import (
     get_item_customer_sales,
 )
 from windsor_widget.services.planning import PlanningLookupError, get_item_planning_analysis
+from windsor_widget.services.replenishment_behavior import get_item_replenishment_behavior
 from windsor_widget.services.reporting import (
     ReportingLookupError,
     get_item_monthly_sales,
@@ -71,7 +72,7 @@ def build_items_router(
             ),
         )
 
-    @router.get("/items/{item_number}", response_class=HTMLResponse, name="item_detail")
+    @router.get("/items/{item_number:path}", response_class=HTMLResponse, name="item_detail")
     def item_detail(
         request: Request,
         item_number: str,
@@ -102,6 +103,13 @@ def build_items_router(
                 fallback_lead_weeks=lead_weeks,
                 trend_mode=trend_mode,
                 as_of_date=as_of_date,
+            )
+            behaviour = get_item_replenishment_behavior(
+                session,
+                summary.item_id,
+                as_of_date=as_of_date,
+                demand_months=max(12, months),
+                fallback_lead_days=max(1, int(lead_weeks)) * 7,
             )
             monthly_sales = get_item_monthly_sales(
                 session,
@@ -142,6 +150,7 @@ def build_items_router(
                 principal=principal,
                 summary=summary,
                 planning=planning,
+                behaviour=behaviour,
                 monthly_sales=monthly_sales,
                 sales_chart=sales_chart,
                 customer_sales=customer_sales,
