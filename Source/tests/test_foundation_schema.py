@@ -40,6 +40,7 @@ EXPECTED_TABLES = {
     "manufacture_order_lines",
     "manufacture_line_allocations",
     "bring_in_requests",
+    "supplier_order_templates",
 }
 
 

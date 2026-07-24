@@ -14,10 +14,14 @@
   <form method="post" action="/manufacture-orders/new" class="form-grid two-column-form">
     <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
     <label class="field-wide"><span>Supplier</span>
-      <select name="supplier_id" required autofocus>
-        <option value="">Select supplier</option>
-        {% for supplier in suppliers %}<option value="{{ supplier.value }}">{{ supplier.label }}</option>{% endfor %}
-      </select>
+      <div class="smart-combobox" data-smart-combobox>
+        <input type="search" data-smart-input autocomplete="off" required autofocus placeholder="Type YU or part of the supplier name" aria-label="Supplier">
+        <input type="hidden" name="supplier_id" data-smart-value>
+        <div class="smart-combobox-menu" data-smart-menu hidden>
+          {% for supplier in suppliers %}<button type="button" data-smart-option data-value="{{ supplier.value }}" data-label="{{ supplier.label }}">{{ supplier.label }}</button>{% endfor %}
+        </div>
+      </div>
+      <small>Start typing to filter the supplier list.</small>
     </label>
     <label><span>Manufacture order number</span><input name="order_number" maxlength="100" required placeholder="e.g. YU-2026-041"></label>
     <label><span>Order date</span><input type="date" name="order_date" value="{{ today }}" required></label>

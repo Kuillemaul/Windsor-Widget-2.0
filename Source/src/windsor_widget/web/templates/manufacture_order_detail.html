@@ -62,13 +62,61 @@
   </article>
 </section>
 
+{% if yu_template %}
+<section class="form-card yu-export-card">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">YU supplier order</p>
+      <h2>Hengchang Textile Factory order form</h2>
+      <p>Column A in the selected workbook is the permanent Windsor item mapping. The supplier heading is preserved unchanged.</p>
+    </div>
+    {% if yu_template.configured and yu_template.file_exists %}<span class="template-state template-ready">Template ready</span>{% else %}<span class="template-state template-required">Setup required</span>{% endif %}
+  </div>
+  {% if template_saved %}<div class="notice notice-success">YU order-form template saved and verified.</div>{% endif %}
+  {% if template_opened %}<div class="notice notice-info">The workbook was opened on the Widget server PC.</div>{% endif %}
+  {% if yu_template.message %}<div class="notice notice-info">{{ yu_template.message }}</div>{% endif %}
+
+  {% if principal.can_change_operations %}
+  <form method="post" action="/manufacture-orders/{{ order.order_id }}/yu/template" class="form-grid yu-template-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label class="field-wide"><span>Template folder</span><input name="folder_path" value="{{ yu_template.folder_path }}" required><small>The active workbook remains in the shared Yuchang order-forms folder.</small></label>
+    <label class="field-wide"><span>Active workbook</span><input name="file_name" list="yu-template-files" value="{{ yu_template.file_name }}" required placeholder="Select or type the workbook filename"><datalist id="yu-template-files">{% for file in yu_template.available_files %}<option value="{{ file.file_name }}">{{ file.modified_at.strftime('%d/%m/%Y %H:%M') }}</option>{% endfor %}</datalist></label>
+    <div class="form-actions field-wide"><button class="button button-quiet" type="submit">Save and verify template</button></div>
+  </form>
+  {% endif %}
+
+  {% if yu_template.configured %}
+  <dl class="template-details">
+    <dt>Workbook</dt><dd>{{ yu_template.full_path }}</dd>
+    <dt>Worksheet used</dt><dd>{{ yu_template.worksheet_name }}</dd>
+    <dt>Verified</dt><dd>{% if yu_template.verified_at %}{{ yu_template.verified_at.strftime('%d/%m/%Y %H:%M') }}{% if yu_template.verified_by %} by {{ yu_template.verified_by }}{% endif %}{% else %}Not yet{% endif %}</dd>
+  </dl>
+  <div class="yu-template-actions">
+    {% if principal.can_change_operations and yu_template.file_exists %}
+    <form method="post" action="/manufacture-orders/{{ order.order_id }}/yu/open-template"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="button button-quiet" type="submit">Open template in Excel</button></form>
+    {% endif %}
+    {% if yu_template.file_exists and order.lines %}<a class="button button-primary" href="/manufacture-orders/{{ order.order_id }}/yu/validate">Validate YU order</a>{% endif %}
+  </div>
+  {% endif %}
+</section>
+{% endif %}
+
 {% if principal.can_change_operations and order.status not in ['closed', 'cancelled'] %}
 <section class="form-card add-line-card">
   <div class="section-heading"><div><h2>Add item line</h2><p>The expected-ready date uses the item/supplier manufacturing override first, then the supplier default.</p></div></div>
   <form method="post" action="/manufacture-orders/{{ order.order_id }}/lines" class="form-grid line-entry-form" data-manufacture-line-form>
     <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
     <input type="hidden" name="version" value="{{ order.version }}">
-    <label class="field-wide"><span>Item</span><select name="item_id" required><option value="">Select item</option>{% for item in items %}<option value="{{ item.value }}">{{ item.label }}</option>{% endfor %}</select></label>
+    <label class="field-wide"><span>Item</span>
+      <div class="smart-combobox" data-smart-combobox>
+        <input type="search" data-smart-input autocomplete="off" required placeholder="Type an item number or description" aria-label="Item">
+        <input type="hidden" name="item_id" data-smart-value>
+        <div class="smart-combobox-menu" data-smart-menu hidden>
+          {% for item in items %}<button type="button" data-smart-option data-value="{{ item.value }}" data-label="{{ item.label }}">{{ item.label }}</button>{% endfor %}
+        </div>
+      </div>
+      <small>Matches anywhere in the item number or description.</small>
+    </label>
     <label><span>Ordered quantity</span><input type="number" step="0.000001" min="0.000001" name="ordered_quantity" required></label>
     <label><span>Expected ready override</span><input type="date" name="expected_ready_date"><small>Blank uses configured manufacturing lead time.</small></label>
     <label><span>Unit cost</span><input type="number" step="0.000001" min="0" name="unit_cost"></label>

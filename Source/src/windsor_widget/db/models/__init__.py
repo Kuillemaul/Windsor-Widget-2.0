@@ -38,6 +38,8 @@ from windsor_widget.db.models.operations import (
     ManufactureOrderLine,
 )
 
+from windsor_widget.db.models.supplier_documents import SupplierOrderTemplate
+
 __all__ = [
     "AppUser",
     "AuditEvent",
@@ -66,4 +68,5 @@ __all__ = [
     "ManufactureOrderLine",
     "ManufactureLineAllocation",
     "BringInRequest",
+    "SupplierOrderTemplate",
 ]

@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block title %}Validate {{ order.order_number }} · YU Order{% endblock %}
+{% block content %}
+<section class="page-heading order-detail-heading">
+  <div>
+    <p class="eyebrow">YU order validation</p>
+    <h1>{{ order.order_number }}</h1>
+    <p>Validate the current Sheet1 Column A mappings before creating the supplier order.</p>
+  </div>
+  <div class="heading-actions">
+    <a class="button button-quiet" href="/manufacture-orders/{{ order.order_id }}">Back to manufacture order</a>
+  </div>
+</section>
+
+{% if mapped %}<div class="notice notice-success">The master workbook mapping was updated, backed up and revalidated.</div>{% endif %}
+
+<section class="yu-validation-summary">
+  <article><span>Order lines</span><strong>{{ report.lines | length }}</strong></article>
+  <article class="summary-resolved"><span>Resolved</span><strong>{{ report.resolved_count }}</strong></article>
+  <article class="summary-missing"><span>Need mapping</span><strong>{{ report.missing_count }}</strong></article>
+  <article class="summary-duplicate"><span>Duplicates</span><strong>{{ report.duplicate_count }}</strong></article>
+</section>
+
+<section class="form-card yu-workbook-summary">
+  <div class="section-heading">
+    <div><h2>Current master workbook</h2><p>Mappings are read from the workbook each time; stored row numbers are never trusted.</p></div>
+    {% if report.ready %}<span class="template-state template-ready">Ready to export</span>{% else %}<span class="template-state template-required">Review required</span>{% endif %}
+  </div>
+  <dl class="template-details">
+    <dt>File</dt><dd>{{ report.template_path }}</dd>
+    <dt>Worksheet</dt><dd>{{ report.worksheet_name }}</dd>
+    <dt>Last modified</dt><dd>{{ report.workbook_modified_at.strftime('%d/%m/%Y %H:%M:%S') }}</dd>
+    <dt>Product rows</dt><dd>{{ report.header_end_row + 1 }} to {{ report.footer_start_row - 1 }}</dd>
+  </dl>
+  {% if principal.can_change_operations %}
+  <div class="yu-template-actions">
+    <form method="post" action="/manufacture-orders/{{ order.order_id }}/yu/open-template"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="button button-quiet" type="submit">Open master workbook in Excel</button></form>
+    {% if report.ready %}
+    <form method="post" action="/manufacture-orders/{{ order.order_id }}/yu/export" data-yu-export-form>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <input type="hidden" name="version" value="{{ order.version }}">
+      <input type="hidden" name="workbook_mtime_ns" value="{{ report.workbook_mtime_ns }}">
+      <button class="button button-primary" type="submit">Export order to YU</button>
+    </form>
+    {% else %}
+    <button class="button button-primary" type="button" disabled>Resolve mappings before export</button>
+    {% endif %}
+  </div>
+  {% endif %}
+</section>
+
+<section class="yu-validation-lines">
+{% for line in report.lines %}
+  <article class="yu-validation-line validation-{{ line.status }}">
+    <header>
+      <div><span class="validation-status status-{{ line.status }}">{{ line.status_label }}</span><h2>{{ line.item_number }}</h2><p>{{ line.item_name }}</p></div>
+      <div class="validation-quantity"><strong>{{ line.quantity | qty }}</strong><span>ordered</span></div>
+    </header>
+
+    {% if line.status == 'resolved' %}
+      {% set row = line.mapped_rows[0] %}
+      <div class="yu-row-preview resolved-row">
+        <span class="row-number">Row {{ row.row_number }}</span>
+        <div><strong>{{ row.item }}</strong><span>{{ row.size }}</span><span>{{ row.colour }}</span><span>{{ row.pack_type }} {{ row.unit_quantity }}</span><small>{{ row.labelled_as }}</small></div>
+        <div><span>Current mapping</span><strong>{{ row.mapped_item_number }}</strong></div>
+      </div>
+    {% else %}
+      <div class="mapping-explanation">
+        {% if line.status == 'duplicate' %}
+        This item appears in more than one current Column A row. Choose the correct row; the other duplicate mapping(s) will be cleared.
+        {% else %}
+        Choose the YU product row that represents this Windsor item. The Widget will back up the master workbook, write the item number into Sheet1 column A and rescan it.
+        {% endif %}
+      </div>
+
+      {% if line.candidates %}
+      <div class="yu-candidate-grid">
+      {% for candidate in line.candidates %}
+        <article class="yu-candidate {% if candidate.row.mapped_item_number and line.status != 'duplicate' %}candidate-occupied{% endif %}">
+          <div class="candidate-heading"><strong>Row {{ candidate.row.row_number }}</strong><span>{{ candidate.source }}{% if candidate.score is not none %} · {{ '%.0f' | format(candidate.score * 100) }}%{% endif %}</span></div>
+          <dl>
+            <dt>Item</dt><dd>{{ candidate.row.item or '—' }}</dd>
+            <dt>Size</dt><dd>{{ candidate.row.size or '—' }}</dd>
+            <dt>Colour</dt><dd>{{ candidate.row.colour or '—' }}</dd>
+            <dt>Pack</dt><dd>{{ candidate.row.pack_type or '—' }}{% if candidate.row.unit_quantity %} · {{ candidate.row.unit_quantity }}{% endif %}</dd>
+            <dt>Label</dt><dd>{{ candidate.row.labelled_as or '—' }}</dd>
+            <dt>Price</dt><dd>{{ candidate.row.unit_price or '—' }}</dd>
+            <dt>Column A</dt><dd>{{ candidate.row.mapped_item_number or 'Blank' }}</dd>
+          </dl>
+          {% if principal.can_change_operations %}
+            {% if line.status == 'duplicate' or not candidate.row.mapped_item_number %}
+            <form method="post" action="/manufacture-orders/{{ order.order_id }}/yu/mapping" data-yu-mapping-form>
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+              <input type="hidden" name="line_id" value="{{ line.line_id }}">
+              <input type="hidden" name="source_row" value="{{ candidate.row.row_number }}">
+              <input type="hidden" name="workbook_mtime_ns" value="{{ report.workbook_mtime_ns }}">
+              {% if line.status == 'duplicate' %}<input type="hidden" name="clear_other_item_rows" value="true">{% endif %}
+              <button class="button button-small button-primary" type="submit">{% if line.status == 'duplicate' %}Keep this row{% else %}Use this row{% endif %}</button>
+            </form>
+            {% else %}
+            <span class="candidate-blocked">Already mapped to another item</span>
+            {% endif %}
+          {% endif %}
+        </article>
+      {% endfor %}
+      </div>
+      {% else %}
+      <div class="notice notice-info">No useful Match_Review or description candidates were found. Open the workbook and enter the correct row number below.</div>
+      {% endif %}
+
+      {% if principal.can_change_operations and line.status == 'missing' %}
+      <form method="post" action="/manufacture-orders/{{ order.order_id }}/yu/mapping" class="manual-row-form" data-yu-mapping-form>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <input type="hidden" name="line_id" value="{{ line.line_id }}">
+        <input type="hidden" name="workbook_mtime_ns" value="{{ report.workbook_mtime_ns }}">
+        <label><span>Use a specific current Sheet1 row</span><input type="number" min="{{ report.header_end_row + 1 }}" max="{{ report.footer_start_row - 1 }}" name="source_row" required placeholder="Row number from Excel"></label>
+        <button class="button button-small button-quiet" type="submit">Validate and apply row</button>
+      </form>
+      {% endif %}
+    {% endif %}
+  </article>
+{% else %}
+  <div class="empty-state empty-card">There are no positive manufacture-order quantities to validate.</div>
+{% endfor %}
+</section>
+{% endblock %}
